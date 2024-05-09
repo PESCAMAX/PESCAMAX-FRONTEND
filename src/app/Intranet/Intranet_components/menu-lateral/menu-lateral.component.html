@@ -1,29 +1,31 @@
+
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 
 <div class="menu-lateral">
   <!-- Sección del logo -->
   <div class="logo-container">
     <!-- Imagen pequeña encima del logo de la empresa -->
-    <img class="imagen-pequena" src="/PESCAMAX/src/assets/RobloxScreenShot20231012_161935417.png" alt="">
+    <img class="imagen-pequena" src="././././../../../../assets/Logopescamax.png" alt="IMG">
+    
     <!-- Logo de la empresa -->
     <div class="logo">
       <strong>
-      <span class="logo-texto">PESCA<span class="azul">MAX</span><span class="negro"></span></span>
+      <span class="logo-texto"><span class="azul">PESCA</span><span class="negro">MAX</span></span>
       </strong>
     </div>
   </div>
   <!-- Opciones de menú -->
   <ul class="opciones-menu">
     <li>
-      <a href="#" class="azul" (click)="toggleSubMenu(0)">Dashboard</a>
+      <a href="#" class="azul" (click)="toggleSubMenu(0)">Dashboard <img src="../../../../assets/icons8-flecha-ampliar-16.png" alt=""></a>  
       <ul class="submenu" [ngClass]="{'activo': subMenuVisible === 0}">
-        <li><a href="#" class="azul">Gráfica de Temperatura</a></li>
+        <li><a href="#" class="azul">Gráfica de Temperatura </a></li>
         <li><a href="#" class="azul">Gráfica de TDS</a></li>
         <li><a href="#" class="azul">Gráfica de Ph</a></li>
       </ul>
     </li>
     <li>
-      <a href="#" class="azul" (click)="toggleSubMenu(1)">Gestión de parámetros</a>
+      <a href="#" class="azul" (click)="toggleSubMenu(1)">Gestión de parámetros <img src="../../../../assets/icons8-flecha-ampliar-16.png" alt=""></a>
       <ul class="submenu" [ngClass]="{'activo': subMenuVisible === 1}">
         <li><a href="#" class="azul">Crear Especie</a></li>
         <li><a href="#" class="azul">Modificar Especie</a></li>
@@ -31,7 +33,7 @@
       </ul>
     </li>
     <li>
-      <a href="#" class="azul" (click)="toggleSubMenu(2)">Sistema de alerta</a>
+      <a href="#" class="azul" (click)="toggleSubMenu(2)">Sistema de alerta <img src="../../../../assets/icons8-flecha-ampliar-16.png" alt=""></a>
       <ul class="submenu" [ngClass]="{'activo': subMenuVisible === 2}">
         <li><a href="#" class="azul">Alertas recientes</a></li>
         <li><a href="#" class="azul">Historial de alertas</a></li>
@@ -40,3 +42,4 @@
     <!-- Agrega más opciones de menú según sea necesario -->
   </ul>
 </div>
+
