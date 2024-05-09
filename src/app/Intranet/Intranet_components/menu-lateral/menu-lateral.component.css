@@ -1,3 +1,78 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+
+.menu-lateral {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 300px;
+    background-color: #f4f4f4;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* Para agregar un scroll si el contenido es muy largo */
+}
+
+.logo-container {
+    position: relative;
+}
+
+.logo {
+    margin-bottom: 20px;
+    font-size: 24px; /* Tamaño del texto del logo */
+    font-weight: bold;
+}
+
+.logo-texto {
+    font-size: 28px; /* Ajusta el tamaño de la letra según sea necesario */
+}
+
+.logo-texto .azul {
+    color: #007bff; /* Color azul para el texto */
+}
+
+.logo-texto .negro {
+    color: #000; /* Color negro para el texto */
+}
+
+.azul {
+    color: #007bff; /* Color azul para enlaces */
+}
+
+.imagen-pequena {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px; /* Tamaño de la imagen */
+    height: auto;
+}
+
+.opciones-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0; /* Elimina el margen para que los cuadros de menú estén pegados */
+}
+
+.opciones-menu > li {
+    border-top: 1px solid #333; /* Borde superior gris oscuro */
+    border-bottom: 1px solid #333; /* Borde inferior gris oscuro */
+    margin-bottom: -1px; /* Ajusta la distancia entre los cuadros de menú */
+    padding: 15px; /* Ajusta el espacio alrededor de los elementos de menú principal */
+    transition: border-width 0.3s; /* Agrega una transición suave para la propiedad del borde */
+}
+
+.opciones-menu > li:hover {
+    border-color: #007bff; /* Cambia el color del borde al azul cuando se pasa el ratón por encima */
+}
+
+.submenu {
+    display: none;
+
+    border-top: none; /* Elimina el borde superior */
+    padding: 10px; /* Ajusta el espacio interior del submenú */
+}
+
+.opciones-menu > li .submenu.activo {
+    display: block; /* Muestra el submenú activo */
+    border-top: 1px solid #007bff; /* Añade un borde superior al submenú */
+    padding-top: 10px; /* Ajusta el padding superior del submenú para dejar espacio para el borde */
+}
