@@ -32,7 +32,8 @@
 }
 
 .logo-texto .negro {
-    color: #000; /* Color negro para el texto */
+    color: #b36868; /* Color negro para el texto */
+    font-weight: 20px;
 }
 
 .azul {
@@ -58,9 +59,10 @@
 
 .opciones-menu > li {
   
-    border-top: 1px solid #333; /* Borde superior gris oscuro */
+    border-top: 0px solid #333; /* Borde superior gris oscuro */
     border-bottom: 0px solid #333; /* Borde inferior gris oscuro */
     margin-bottom: 7px; /* Ajusta la distancia entre los cuadros de menú */
+    border-left:  1px solid #333 ;
     padding: 15px; /* Ajusta el espacio alrededor de los elementos de menú principal */
     transition: border-width 0.3s; /* Agrega una transición suave para la propiedad del borde */
 }
