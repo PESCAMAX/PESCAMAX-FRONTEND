@@ -23,10 +23,12 @@
 
 .logo-texto {
     font-size: 28px; /* Ajusta el tamaño de la letra según sea necesario */
+    font-weight: bold;
 }
 
 .logo-texto .azul {
     color: #007bff; /* Color azul para el texto */
+
 }
 
 .logo-texto .negro {
@@ -35,6 +37,7 @@
 
 .azul {
     color: #007bff; /* Color azul para enlaces */
+    text-decoration: none;
 }
 
 .imagen-pequena {
@@ -49,13 +52,15 @@
 .opciones-menu {
     list-style: none;
     padding: 0;
-    margin: 0; /* Elimina el margen para que los cuadros de menú estén pegados */
+    margin: 7; /* Elimina el margen para que los cuadros de menú estén pegados */
+    text-decoration: none;
 }
 
 .opciones-menu > li {
+  
     border-top: 1px solid #333; /* Borde superior gris oscuro */
-    border-bottom: 1px solid #333; /* Borde inferior gris oscuro */
-    margin-bottom: -1px; /* Ajusta la distancia entre los cuadros de menú */
+    border-bottom: 0px solid #333; /* Borde inferior gris oscuro */
+    margin-bottom: 7px; /* Ajusta la distancia entre los cuadros de menú */
     padding: 15px; /* Ajusta el espacio alrededor de los elementos de menú principal */
     transition: border-width 0.3s; /* Agrega una transición suave para la propiedad del borde */
 }
@@ -73,6 +78,5 @@
 
 .opciones-menu > li .submenu.activo {
     display: block; /* Muestra el submenú activo */
-    border-top: 1px solid #007bff; /* Añade un borde superior al submenú */
     padding-top: 10px; /* Ajusta el padding superior del submenú para dejar espacio para el borde */
 }

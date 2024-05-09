@@ -6,14 +6,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./menu-lateral.component.css']
 })
 export class MenuLateralComponent {
-  subMenuVisible: number = -1; // Inicializamos en -1 para indicar que no hay ningún submenú abierto
+  subMenuVisible: number | null = null; // Inicializamos en null para indicar que no hay ningún submenú abierto
 
   constructor() { }
 
   toggleSubMenu(index: number): void {
     if (this.subMenuVisible === index) {
       // Si el submenú clicado está abierto, lo cerramos
-      this.subMenuVisible = -1;
+      this.subMenuVisible = null;
     } else {
       // Si el submenú clicado está cerrado, lo abrimos
       this.subMenuVisible = index;
