@@ -21,7 +21,7 @@
   <!-- Opciones de menú -->
   <ul class="opciones-menu">
     <li>
-      <a href="#" class="azul" (click)="toggleSubMenu(0)">Dashboard <img src="../../../../assets/icons8-flecha-ampliar-16.png" alt=""></a>  
+      <a href="#" class="menu_p" (click)="toggleSubMenu(0)">Dashboard <img src="../../../../assets/icons8-flecha-ampliar-16.png" alt=""></a>  
       <ul class="submenu" [ngClass]="{'activo': subMenuVisible === 0}">
         <li class="lista-opciones"><a href="#" class="opciones">Gráfica de Temperatura </a></li>
         <li class="lista-opciones"><a href="#" class="opciones">Gráfica de TDS</a></li>
@@ -29,7 +29,7 @@
       </ul>
     </li>
     <li>
-      <a href="#" class="azul" (click)="toggleSubMenu(1)">Gestión de parámetros <img src="../../../../assets/icons8-flecha-ampliar-16.png" alt=""></a>
+      <a href="#" class="menu_p" (click)="toggleSubMenu(1)">Gestión de parámetros <img src="../../../../assets/icons8-flecha-ampliar-16.png" alt=""></a>
       <ul class="submenu" [ngClass]="{'activo': subMenuVisible === 1}">
         <li class="lista-opciones"><a href="#" class="opciones">Crear Especie</a></li>
         <li class="lista-opciones"><a href="#" class="opciones">Modificar Especie</a></li>
@@ -37,7 +37,7 @@
       </ul>
     </li>
     <li>
-      <a href="#" class="azul" (click)="toggleSubMenu(2)">Sistema de alerta <img src="../../../../assets/icons8-flecha-ampliar-16.png" alt=""></a>
+      <a href="#" class="menu_p" (click)="toggleSubMenu(2)">Sistema de alerta <img src="../../../../assets/icons8-flecha-ampliar-16.png" alt=""></a>
       <ul class="submenu" [ngClass]="{'activo': subMenuVisible === 2}">
         <li class="lista-opciones"><a href="#" class="opciones">Alertas recientes</a></li>
         <li class="lista-opciones"><a href="#" class="opciones">Historial de alertas</a></li>
