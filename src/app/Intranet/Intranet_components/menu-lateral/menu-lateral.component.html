@@ -5,41 +5,48 @@
   <!-- Sección del logo -->
   <div class="logo-container">
     <!-- Imagen pequeña encima del logo de la empresa -->
-    <img class="imagen-pequena" src="././././../../../../assets/Logopescamax.png" alt="IMG">
+   
     
     <!-- Logo de la empresa -->
     <div class="logo">
       <strong>
+        <img class="imagen-pequena" src="././././../../../../assets/Logopescamax.png" alt="IMG">
       <span class="logo-texto"><span class="azul">PESCA</span><span class="negro">MAX</span></span>
       </strong>
     </div>
+  </div>
+
+  <div class="barra">
   </div>
   <!-- Opciones de menú -->
   <ul class="opciones-menu">
     <li>
       <a href="#" class="azul" (click)="toggleSubMenu(0)">Dashboard <img src="../../../../assets/icons8-flecha-ampliar-16.png" alt=""></a>  
       <ul class="submenu" [ngClass]="{'activo': subMenuVisible === 0}">
-        <li><a href="#" class="azul">Gráfica de Temperatura </a></li>
-        <li><a href="#" class="azul">Gráfica de TDS</a></li>
-        <li><a href="#" class="azul">Gráfica de Ph</a></li>
+        <li class="lista-opciones"><a href="#" class="opciones">Gráfica de Temperatura </a></li>
+        <li class="lista-opciones"><a href="#" class="opciones">Gráfica de TDS</a></li>
+        <li class="lista-opciones"><a href="#" class="opciones">Gráfica de Ph</a></li>
       </ul>
     </li>
     <li>
       <a href="#" class="azul" (click)="toggleSubMenu(1)">Gestión de parámetros <img src="../../../../assets/icons8-flecha-ampliar-16.png" alt=""></a>
       <ul class="submenu" [ngClass]="{'activo': subMenuVisible === 1}">
-        <li><a href="#" class="azul">Crear Especie</a></li>
-        <li><a href="#" class="azul">Modificar Especie</a></li>
-        <li><a href="#" class="azul">Seleccionar Especie</a></li>
+        <li class="lista-opciones"><a href="#" class="opciones">Crear Especie</a></li>
+        <li class="lista-opciones"><a href="#" class="opciones">Modificar Especie</a></li>
+        <li class="lista-opciones"><a href="#" class="opciones">Seleccionar Especie</a></li>
       </ul>
     </li>
     <li>
       <a href="#" class="azul" (click)="toggleSubMenu(2)">Sistema de alerta <img src="../../../../assets/icons8-flecha-ampliar-16.png" alt=""></a>
       <ul class="submenu" [ngClass]="{'activo': subMenuVisible === 2}">
-        <li><a href="#" class="azul">Alertas recientes</a></li>
-        <li><a href="#" class="azul">Historial de alertas</a></li>
+        <li class="lista-opciones"><a href="#" class="opciones">Alertas recientes</a></li>
+        <li class="lista-opciones"><a href="#" class="opciones">Historial de alertas</a></li>
       </ul>
     </li>
+
+  
     <!-- Agrega más opciones de menú según sea necesario -->
   </ul>
 </div>
+
 

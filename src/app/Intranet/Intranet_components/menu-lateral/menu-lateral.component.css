@@ -9,6 +9,22 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     overflow-y: auto; /* Para agregar un scroll si el contenido es muy largo */
 }
+.lista-opciones{
+    list-style: none;
+    padding-top: 10px;
+    
+
+
+
+}
+
+.opciones{
+text-decoration: none;
+color: #333;
+padding: 10px; 
+
+
+}
 
 .logo-container {
     position: relative;
@@ -18,11 +34,17 @@
     margin-bottom: 20px;
     font-size: 24px; /* Tamaño del texto del logo */
     font-weight: bold;
+    display: flex;
 }
 
 .logo-texto {
-    font-size: 28px; /* Ajusta el tamaño de la letra según sea necesario */
+    font-size: 35px; /* Ajusta el tamaño de la letra según sea necesario */
     font-weight: bold;
+    float: right 30px;
+   flex: auto;
+   text-align: right;
+   font-family: Verdana, Geneva, Tahoma, sans-serif;
+
 }
 
 .logo-texto .azul {
@@ -38,15 +60,16 @@
 .azul {
     color: #007bff; /* Color azul para enlaces */
     text-decoration: none;
+    
 }
 
 .imagen-pequena {
-    position: absolute;
-    top: 8px;
-    left: 62%;
-    transform: translateX(-50%);
-    width: 50px; /* Tamaño de la imagen */
+    flex: auto;
+    
+    width: 31px; /* Tamaño de la imagen */
     height: auto;
+    align-items: center;
+    margin: auto;
 }
 
 .opciones-menu {
@@ -54,15 +77,26 @@
     padding: 0;
     margin: 7; /* Elimina el margen para que los cuadros de menú estén pegados */
     text-decoration: none;
+    list-style: none;
+    margin-bottom: 20px ;
+   
+    margin: 0;
+}
+
+.barra{
+
+border-top: 1px solid #333;
+margin: 80px 0 10px -20px;
+padding-top: 20px;
+
 }
 
 .opciones-menu > li {
   
-    border-top: 0px solid #333; /* Borde superior gris oscuro */
-    border-bottom: 0px solid #333; /* Borde inferior gris oscuro */
+    
     margin-bottom: 7px; /* Ajusta la distancia entre los cuadros de menú */
-    border-left:  1px solid #333 ;
-    padding: 15px; /* Ajusta el espacio alrededor de los elementos de menú principal */
+    border-left:  3px solid #333 ;
+    padding: 12px; /* Ajusta el espacio alrededor de los elementos de menú principal */
     transition: border-width 0.3s; /* Agrega una transición suave para la propiedad del borde */
 }
 
