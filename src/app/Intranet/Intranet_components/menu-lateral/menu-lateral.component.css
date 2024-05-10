@@ -49,7 +49,7 @@ font-size: 17px;
 }
 
 .logo-texto .azul {
-    color: #007bff; /* Color azul para el texto */
+    color:  	#2C88D9; /* Color azul para el texto */
 
 }
 
@@ -59,15 +59,21 @@ font-size: 17px;
 }
 
 .azul {
-    color: #007bff; /* Color azul para enlaces */
+    color:  	#2C88D9; /* Color azul para enlaces */
     text-decoration: none;
     
 }
 
+.logoSUB {
+    height: 15px;
+
+}
+
+
 .imagen-pequena {
     flex: auto;
     
-    width: 31px; /* Tamaño de la imagen */
+    width: 35px; /* Tamaño de la imagen */
     height: auto;
     align-items: center;
     margin: auto;
@@ -102,7 +108,7 @@ padding-top: 20px;
 }
 
 .opciones-menu > li:hover {
-    border-color: #007bff; /* Cambia el color del borde al azul cuando se pasa el ratón por encima */
+    border-color:  	#2C88D9; /* Cambia el color del borde al azul cuando se pasa el ratón por encima */
 }
 
 .submenu {
