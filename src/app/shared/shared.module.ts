@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
-
+import { ButtonEnviarComponent } from './components/atoms/button-enviar/button-enviar.component';
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule
+  declarations: [
+    ButtonEnviarComponent
+  ],
+  exports: [
+    ButtonEnviarComponent
   ]
 })
 export class SharedModule { }
