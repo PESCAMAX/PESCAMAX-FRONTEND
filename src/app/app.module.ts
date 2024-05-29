@@ -1,20 +1,15 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
+import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
-import { MenuLateralComponent } from './Intranet/Intranet_components/menu-lateral/menu-lateral.component';
-import { ContenidoPrincipalComponent } from './Intranet/Intranet_components/contenido-principal/contenido-principal.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    MenuLateralComponent,
-    ContenidoPrincipalComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
