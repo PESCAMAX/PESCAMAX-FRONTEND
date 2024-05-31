@@ -7,4 +7,13 @@ import { Component, Input } from '@angular/core';
 })
 export class ButtonViewMoreComponent {
   @Input() label: string = 'View More';
+  @Input() type: 'info' | 'danger' | 'warning' = 'warning';
+
+  get alertClasses() {
+    return {
+      info: this.type === 'info',
+      danger: this.type === 'danger',
+      warning: this.type === 'warning'
+    };
+  }
 }
