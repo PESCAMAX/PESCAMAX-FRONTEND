@@ -8,6 +8,7 @@ import { ButtonViewMoreComponent } from './components/atoms/button-view-more/but
 import { ButtonDismissComponent } from './components/atoms/button-dismiss/button-dismiss.component';
 import { ButtonContainerComponent } from './components/molecules/button-container/button-container.component';
 import { AlertComponent } from './components/organisms/alert/alert.component';
+import { MenuLateralComponent } from './components/molecules/menu-lateral/menu-lateral.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,9 @@ import { AlertComponent } from './components/organisms/alert/alert.component';
     ButtonViewMoreComponent,
     ButtonDismissComponent,
     ButtonContainerComponent,
-    AlertComponent
+    AlertComponent,
+    MenuLateralComponent
+
   ],
   imports: [
     CommonModule
@@ -28,7 +31,11 @@ import { AlertComponent } from './components/organisms/alert/alert.component';
     FlechaDespliegueComponent,
     TablaEspecieComponent,
     CardAlertsComponent,
-    AlertComponent
+    ButtonViewMoreComponent,
+    ButtonDismissComponent,
+    ButtonContainerComponent,
+    AlertComponent,
+    MenuLateralComponent
   ]
 })
 export class SharedModule { }
