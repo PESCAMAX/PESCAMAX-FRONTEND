@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-
+const getStyles = (...args: string[]) => ['button', ...args].filter(Boolean)
 @Component({
   selector: 'app-button-dismiss',
   templateUrl: './button-dismiss.component.html',
@@ -9,11 +9,7 @@ export class ButtonDismissComponent {
   @Input() label: string = 'Dismiss';
   @Input() type: 'info' | 'danger' | 'warning' = 'warning';
 
-  get alertClasses() {
-    return {
-      info: this.type === 'info',
-      danger: this.type === 'danger',
-      warning: this.type === 'warning'
-    };
+  public get alertClasses(): string[]{
+    return getStyles(this.type)
   }
 }
