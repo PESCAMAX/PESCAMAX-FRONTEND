@@ -1,0 +1,88 @@
+<link rel="icon" type="image/x-icon" href="../../../../../assets/icons/Favicon.png">
+
+<div class="menu-lateral">
+  <!-- Sección del logo -->
+  <div class="logo-container">
+    <!-- Imagen pequeña encima del logo de la empresa -->
+   
+    
+    <!-- Logo de la empresa -->
+    <div class="logo">
+      <strong>
+        <img class="imagen-pequena" src="../../../../../assets/icons/Logo_pescamax.png" alt="IMG">
+      <span class="logo-texto"><span class="azul">PESCA</span><span class="negro">MAX</span></span>
+      </strong>
+    </div>
+  </div>
+
+  <div class="barra">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+  </div>
+  <!-- Opciones de menú -->
+  <ul class="opciones-menu">
+    <li>
+        <a href="#" class="menu_p" (click)="toggleSubMenu(0)">
+            Dashboard 
+            <img [src]="subMenuVisible === 0 ? '/assets/icons/icons8-flecha-contraer-16.png' : '/assets/icons/icons8-flecha-ampliar-16.png'" alt="">
+        </a>  
+        <ul class="submenu" [ngClass]="{'activo': subMenuVisible === 0}">
+          <li class="lista-opciones">
+            <img class="logoSUB" src="../../../../../assets/icons/icons8-temperatura-50.png">
+            <a href="#" class="opciones">Gráfica de Temperatura</a>
+          </li>
+          <li class="lista-opciones">
+            <img class="logoSUB" src="../../../../../assets/icons/icons8-termometro-50.png">
+            <a href="#" class="opciones">Gráfica de TDS</a>
+          </li>
+          <li class="lista-opciones">
+            <img class="logoSUB" src="../../../../../assets/icons/icons8-ph-50.png">
+            <a href="#" class="opciones">Gráfica de Ph</a>
+          </li>          
+        <li class="lista-opciones">
+            <img  class="logoSUB" src="../../../../../assets/icons/icons8-crear-nuevo-30.png"> 
+            <a href="#" class="opciones">Tablas</a>
+          </li>
+        </ul> 
+    </li>
+    <li>
+      <a href="#" class="menu_p" (click)="toggleSubMenu(1)">
+        Gestión de parámetros
+        <img [src]="subMenuVisible === 1 ? '/assets/icons/icons8-flecha-contraer-16.png' : '/assets/icons/icons8-flecha-ampliar-16.png'" alt="">
+      </a>
+      <ul class="submenu" [ngClass]="{'activo': subMenuVisible === 1}">
+        <li class="lista-opciones">
+          <img  class="logoSUB" src="../../../../../assets/icons/icons8-crear-nuevo-30.png"> 
+          <a href="#" class="opciones">Crear Especie</a>
+        </li>
+        <li class="lista-opciones">
+          <img  class="logoSUB" src="../../../../../assets/icons/icons8-editar-archivo-30.png">
+           <a href="#" class="opciones">Modificar Especie</a>
+          </li>
+        <li class="lista-opciones">
+          <img  class="logoSUB" src="../../../../assets/../../assets/icons/icons8-natural-user-interface-2-26.png"> 
+          <a href="#" class="opciones">Seleccionar Especie</a>
+        </li>
+      </ul>
+  </li>
+  
+  <li>
+    <a href="#" class="menu_p" (click)="toggleSubMenu(2)">
+        Sistema de alerta 
+        <img [src]="subMenuVisible === 2 ? '/assets/icons/icons8-flecha-contraer-16.png' : '/assets/icons/icons8-flecha-ampliar-16.png'" alt="">
+    </a>
+    <ul class="submenu" [ngClass]="{'activo': subMenuVisible === 2}">
+      <li class="lista-opciones">
+        <img  class="logoSUB" src="../../../../../assets/icons/advertencia.png">
+        <a href="#" class="opciones">Alertas recientes</a>
+      </li>
+      <li class="lista-opciones">
+        <img  class="logoSUB" src="../../../../../assets/icons/icons8-historia-de-la-actividad-50.png">
+        <a href="#" class="opciones">Historial de alertas</a>
+      </li>
+    </ul>
+</li>
+
+
+  
+    <!-- Agrega más opciones de menú según sea necesario -->
+  </ul>
+</div>
