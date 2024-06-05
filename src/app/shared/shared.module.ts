@@ -4,6 +4,10 @@ import { ButtonEnviarComponent } from './components/atoms/button-enviar/button-e
 import { FlechaDespliegueComponent } from './components/atoms/flecha-despliegue/flecha-despliegue.component';
 import { TablaEspecieComponent } from './components/molecules/tabla-especie/tabla-especie.component';
 import { CardAlertsComponent } from './components/molecules/card-alerts/card-alerts.component';
+import { ButtonViewMoreComponent } from './components/atoms/button-view-more/button-view-more.component';
+import { ButtonDismissComponent } from './components/atoms/button-dismiss/button-dismiss.component';
+import { ButtonContainerComponent } from './components/molecules/button-container/button-container.component';
+import { AlertComponent } from './components/organisms/alert/alert.component';
 import { MenuLateralComponent } from './components/molecules/menu-lateral/menu-lateral.component';
 
 @NgModule({
@@ -12,6 +16,10 @@ import { MenuLateralComponent } from './components/molecules/menu-lateral/menu-l
     FlechaDespliegueComponent,
     TablaEspecieComponent,
     CardAlertsComponent,
+    ButtonViewMoreComponent,
+    ButtonDismissComponent,
+    ButtonContainerComponent,
+    AlertComponent,
     MenuLateralComponent
   ],
   imports: [
@@ -22,6 +30,7 @@ import { MenuLateralComponent } from './components/molecules/menu-lateral/menu-l
     FlechaDespliegueComponent,
     TablaEspecieComponent,
     CardAlertsComponent,
+    AlertComponent,
     MenuLateralComponent
   ]
 })
