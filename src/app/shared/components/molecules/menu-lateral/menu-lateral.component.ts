@@ -11,12 +11,6 @@ export class MenuLateralComponent {
   constructor() { }
 
   toggleSubMenu(index: number): void {
-    if (this.subMenuVisible === index) {
-      // Si el submenú clicado está abierto, lo cerramos
-      this.subMenuVisible = null;
-    } else {
-      // Si el submenú clicado está cerrado, lo abrimos
-      this.subMenuVisible = index;
-    }
+    this.subMenuVisible = this.subMenuVisible === index ? null : index;
   }
 }
