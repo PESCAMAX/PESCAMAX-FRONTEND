@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { SharedModule } from '../../../../shared/shared.module'; // Asegúrate de que la ruta sea correcta
+
 import { TdsComponent } from './tds.component';
 
 describe('TdsComponent', () => {
@@ -8,7 +8,6 @@ describe('TdsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SharedModule], // Importa SharedModule aquí
       declarations: [TdsComponent]
     })
     .compileComponents();
@@ -22,4 +21,3 @@ describe('TdsComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-

@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-tds',
   templateUrl: './tds.component.html',
-  styleUrls: ['./tds.component.css']
+  styleUrl: './tds.component.css'
 })
-export class TdsComponent { }
+export class TdsComponent {
+
+}
