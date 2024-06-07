@@ -4,6 +4,10 @@ import { TablaEspecieComponent } from './shared/components/molecules/tabla-espec
 import { SeleccionarEspecieComponent } from './features/monitoreo/pages/gestion-de-parametros/seleccionar-especie/seleccionar-especie.component';
 import { CrearEspecieComponent } from './features/monitoreo/pages/gestion-de-parametros/crear-especie/crear-especie.component';
 import { ModificarEspecieComponent } from './features/monitoreo/pages/gestion-de-parametros/modificar-especie/modificar-especie.component';
+import { GraficaTemperaturaComponent } from './features/monitoreo/pages/dashboard/grafica-temperatura/grafica-temperatura.component';
+import { GraficaTdsComponent } from './features/monitoreo/pages/dashboard/grafica-tds/grafica-tds.component';
+import { GraficaPhComponent } from './features/monitoreo/pages/dashboard/grafica-ph/grafica-ph.component';
+import { TablaDatosComponent } from './features/monitoreo/pages/dashboard/tabla-datos/tabla-datos.component';
 
 const routes: Routes = [
   {
@@ -21,6 +25,27 @@ const routes: Routes = [
   {
     path: 'seleccionar-especie',
     component: SeleccionarEspecieComponent
+  },
+  {
+    path: 'grafica-temperatura',
+    component: GraficaTemperaturaComponent
+
+  },
+  
+  {
+    path: 'grafica-tds',
+    component: GraficaTdsComponent
+
+  },
+  {
+    path: 'grafica-ph',
+    component: GraficaPhComponent
+
+  },
+  {
+    path: 'tabla-datos',
+    component: TablaDatosComponent
+
   },
   {
     path: '',
