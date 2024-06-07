@@ -1,18 +1,36 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TdsComponent } from './features/monitoreo/components/tds/tds.component';
-import { CardAlertsComponent } from './shared/components/molecules/card-alerts/card-alerts.component';
 import { TablaEspecieComponent } from './shared/components/molecules/tabla-especie/tabla-especie.component';
-
+import { SeleccionarEspecieComponent } from './features/monitoreo/pages/gestion-de-parametros/seleccionar-especie/seleccionar-especie.component';
+import { CrearEspecieComponent } from './features/monitoreo/pages/gestion-de-parametros/crear-especie/crear-especie.component';
+import { ModificarEspecieComponent } from './features/monitoreo/pages/gestion-de-parametros/modificar-especie/modificar-especie.component';
 
 const routes: Routes = [
   {
-    path: 'Tds',
-    component: CardAlertsComponent
+    path: 'gestion-de-parametros',
+    loadChildren: () => import('./features/monitoreo/pages/gestion-de-parametros/gestion-de-parametros.module').then(m => m.GestionDeParametrosModule)
   },
   {
-    path: 'Tabla',
-    component: TablaEspecieComponent
+    path: 'crear-especie',
+    component: CrearEspecieComponent
+  },
+  {
+    path: 'modificar-especie',
+    component: ModificarEspecieComponent
+  },
+  {
+    path: 'seleccionar-especie',
+    component: SeleccionarEspecieComponent
+  },
+  {
+    path: '',
+    redirectTo: 'Tabla',
+    pathMatch: 'full'
+  },
+  {
+    path: '**',
+    redirectTo: 'Tabla',
+    pathMatch: 'full'
   }
 ];
 

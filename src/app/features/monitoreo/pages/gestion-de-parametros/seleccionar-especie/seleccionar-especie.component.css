@@ -1,0 +1,14 @@
+.menu-lateral {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 250px;
+    background-color: #1f2937; /* bg-gray-800 */
+    z-index: 1000;
+}
+
+.content {
+    margin-left: 250px;
+    padding: 16px;
+}
