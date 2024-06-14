@@ -1,16 +1,21 @@
 import { Component } from '@angular/core';
+import { MenuStateService } from '../../../../features/monitoreo/services/menu-state/menu-state.service';
 
 @Component({
   selector: 'app-menu-lateral',
   templateUrl: './menu-lateral.component.html',
-  styleUrl: './menu-lateral.component.css'
+  styleUrls: ['./menu-lateral.component.css']
 })
 export class MenuLateralComponent {
-  subMenuVisible: number | null = null; // Inicializamos en null para indicar que no hay ningún submenú abierto
+  subMenuVisible: number | null = null;
 
-  constructor() { }
-
+  constructor(private menuStateService: MenuStateService) {
+    this.subMenuVisible = this.menuStateService.getSubMenuVisible();
+  }
+  
   toggleSubMenu(index: number): void {
     this.subMenuVisible = this.subMenuVisible === index ? null : index;
+    this.menuStateService.setSubMenuVisible(this.subMenuVisible);
   }
+  
 }
