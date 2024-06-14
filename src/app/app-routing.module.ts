@@ -8,6 +8,11 @@ import { GraficaTemperaturaComponent } from './features/monitoreo/pages/dashboar
 import { GraficaTdsComponent } from './features/monitoreo/pages/dashboard/grafica-tds/grafica-tds.component';
 import { GraficaPhComponent } from './features/monitoreo/pages/dashboard/grafica-ph/grafica-ph.component';
 import { TablaDatosComponent } from './features/monitoreo/pages/dashboard/tabla-datos/tabla-datos.component';
+import { AlertasRecientesComponent } from './features/monitoreo/pages/sistema-de-alertas/alertas-recientes/alertas-recientes.component';
+import { HistorialDeAlertasComponent } from './features/monitoreo/pages/sistema-de-alertas/historial-de-alertas/historial-de-alertas.component';
+import { CardAlertsComponent } from './shared/components/molecules/card-alerts/card-alerts.component';
+
+
 
 const routes: Routes = [
   {
@@ -48,14 +53,18 @@ const routes: Routes = [
 
   },
   {
-    path: '',
-    redirectTo: 'Tabla',
-    pathMatch: 'full'
+    path: 'alertas-recientes',
+    component: AlertasRecientesComponent
+
   },
   {
-    path: '**',
-    redirectTo: 'Tabla',
-    pathMatch: 'full'
+    path: 'historial-alertas',
+    component: HistorialDeAlertasComponent
+
+  },
+  {
+    path: '',
+    component : CrearEspecieComponent
   }
 ];
 
