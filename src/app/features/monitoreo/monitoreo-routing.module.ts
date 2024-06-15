@@ -11,10 +11,10 @@ const routes: Routes = [
   //   path: 'cards',
   //   component: CardAlertsComponent
   // },
-  // {
-  //   path: 'tabla',
-  //   component: TablaEspecieComponent
-  // },
+   {
+    path: 'tabla',
+    component: TablaEspecieComponent
+   },
   // {
   //   path: 'tds',
   //   component: SeleccionarEspecieComponent
