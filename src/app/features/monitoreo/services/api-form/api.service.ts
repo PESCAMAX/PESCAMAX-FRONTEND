@@ -14,5 +14,15 @@ export class ApiService {
     return this.http.post(`${this.baseUrl}/CrearEspecie/Crear`, data);
   }
 
-  // Aquí puedes añadir otros métodos para interactuar con tu backend
+  listarEspecies(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/CrearEspecie/Listar`);
+  }
+
+  eliminarEspecie(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/CrearEspecie/Eliminar/${id}`);
+  }
+
+  modificarEspecie(id: number, data: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/CrearEspecie/Modificar/${id}`, data);
+  }
 }

@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module'; // Ajusta la ruta según corresponda
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms'; // Importa FormsModule
 // Importa tus módulos específicos
 import { SistemaDeAlertasModule } from './features/monitoreo/pages/sistema-de-alertas/sistema-de-alertas.module'; // Ajusta la ruta según corresponda
 import { DashboardModule } from './features/monitoreo/pages/dashboard/dashboard.module';
@@ -22,7 +23,8 @@ import { DashboardModule } from './features/monitoreo/pages/dashboard/dashboard.
     SistemaDeAlertasModule, // Importa el módulo del sistema de alertas
     DashboardModule,
     HttpClientModule,
-    ReactiveFormsModule // Importa el módulo del dashboard
+    ReactiveFormsModule,
+    FormsModule // Importa el módulo del dashboard
   ],
   providers: [],
   bootstrap: [AppComponent]
