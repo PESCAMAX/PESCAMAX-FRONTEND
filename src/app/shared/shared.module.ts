@@ -12,10 +12,10 @@ import { MenuLateralComponent } from './components/molecules/menu-lateral/menu-l
 import { TablaSeleccionarComponent } from './components/molecules/tabla-seleccionar/tabla-seleccionar.component';
 import { EspecieFormComponent } from './components/molecules/form-especie/form-especie.component';
 import { DatapickerComponent } from './components/molecules/datapicker/datapicker.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms'
 import { AlertFormComponent } from './components/organisms/alert-form/alert-form.component';
 
-
+import { PageNotFoundComponent } from '../features/monitoreo/pages/home/page-not-found/page-not-found.component'
 
 @NgModule({
   declarations: [
@@ -29,9 +29,10 @@ import { AlertFormComponent } from './components/organisms/alert-form/alert-form
     AlertComponent,
     MenuLateralComponent,
     TablaSeleccionarComponent,
-   EspecieFormComponent,
+    EspecieFormComponent,
     DatapickerComponent,
-    AlertFormComponent
+    AlertFormComponent,
+    PageNotFoundComponent
   
   ],
   imports: [
@@ -48,7 +49,8 @@ import { AlertFormComponent } from './components/organisms/alert-form/alert-form
     TablaSeleccionarComponent,
     EspecieFormComponent,
     DatapickerComponent,
-    AlertFormComponent
+    AlertFormComponent,
+    PageNotFoundComponent
   ]
 })
 export class SharedModule { }
