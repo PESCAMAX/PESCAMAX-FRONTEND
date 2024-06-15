@@ -1,64 +1,61 @@
 <h2 class="text-2xl font-bold text-[#4295e2] mb-8 text-center">Formulario de Registro de Especies</h2>
-
 <div class="flex items-center justify-center p-12">
-    <!-- Author: FormBold Team -->
-    <div class="mx-auto w-full max-w-[550px] bg-white">
-        <form>
-            <div class="mb-5">
-                <label for="name" class="mb-3 block text-base font-medium text-[#07074D]">
-                    Nombre de la especie
-                </label>
-                <input type="text" name="name" id="name" placeholder="Full Name"
-                    class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
-            </div>
-            <div class="mb-5">
-                <label for="phone" class="mb-3 block text-base font-medium text-[#07074D]">
-                    TDS ideal
-                </label>
-                <input type="text" name="phone" id="phone" placeholder="Enter the value"
-                    class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
-            </div>
-            <div class="mb-5">
-                <label for="email" class="mb-3 block text-base font-medium text-[#07074D]">
-                   TDS no seguro
-                </label>
-                <input type="email" name="email" id="email" placeholder="Enter the value"
-                    class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
-            </div>
-            <div class="mb-5">
-                <label for="email" class="mb-3 block text-base font-medium text-[#07074D]">
-                   Temperatura ideal 
-                </label>
-                <input type="email" name="email" id="email" placeholder="Enter the value"
-                    class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
-            </div>
-            <div class="mb-5">
-                <label for="email" class="mb-3 block text-base font-medium text-[#07074D]">
-                   Temperatura no segura
-                </label>
-                <input type="email" name="email" id="email" placeholder="Enter the value"
-                    class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
-            </div>
-            <div class="mb-5">
-                <label for="email" class="mb-3 block text-base font-medium text-[#07074D]">
-                   PH del agua ideal
-                </label>
-                <input type="email" name="email" id="email" placeholder="Enter the value"
-                    class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
-            </div>
-            <div class="mb-5">
-                <label for="email" class="mb-3 block text-base font-medium text-[#07074D]">
-                   PH del agua no seguro
-                </label>
-                <input type="email" name="email" id="email" placeholder="Enter the value"
-                    class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
-            </div>
-            <div>
-                <button
-                    class="hover:shadow-form w-full rounded-md bg-[#4295e2] py-3 px-8 text-center text-base font-semibold text-white outline-none">
-                    Guardar
-                </button> 
-            </div>
-        </form>
-    </div>
+  <div class="mx-auto w-full max-w-[550px] bg-white">
+    <form [formGroup]="especieForm" (ngSubmit)="onSubmit()">
+      <div class="mb-5">
+        <label for="nombreEspecie" class="mb-3 block text-base font-medium text-[#07074D]">
+          Nombre de la especie
+        </label>
+        <input formControlName="nombreEspecie" type="text" id="nombreEspecie" placeholder="Nombre de la especie"
+               class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+      </div>
+      <div class="mb-5">
+        <label for="tdsSeguro" class="mb-3 block text-base font-medium text-[#07074D]">
+          TDS ideal
+        </label>
+        <input formControlName="tdsSeguro" type="text" id="tdsSeguro" placeholder="TDS ideal"
+               class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+      </div>
+      <div class="mb-5">
+        <label for="tdsPeligroso" class="mb-3 block text-base font-medium text-[#07074D]">
+          TDS no seguro
+        </label>
+        <input formControlName="tdsPeligroso" type="text" id="tdsPeligroso" placeholder="TDS no seguro"
+               class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+      </div>
+      <div class="mb-5">
+        <label for="temperaturaSeguro" class="mb-3 block text-base font-medium text-[#07074D]">
+          Temperatura ideal
+        </label>
+        <input formControlName="temperaturaSeguro" type="text" id="temperaturaSeguro" placeholder="Temperatura ideal"
+               class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+      </div>
+      <div class="mb-5">
+        <label for="temperaturaPeligroso" class="mb-3 block text-base font-medium text-[#07074D]">
+          Temperatura no segura
+        </label>
+        <input formControlName="temperaturaPeligroso" type="text" id="temperaturaPeligroso" placeholder="Temperatura no segura"
+               class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+      </div>
+      <div class="mb-5">
+        <label for="phSeguro" class="mb-3 block text-base font-medium text-[#07074D]">
+          PH del agua ideal
+        </label>
+        <input formControlName="phSeguro" type="text" id="phSeguro" placeholder="PH del agua ideal"
+               class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+      </div>
+      <div class="mb-5">
+        <label for="phPeligroso" class="mb-3 block text-base font-medium text-[#07074D]">
+          PH del agua no seguro
+        </label>
+        <input formControlName="phPeligroso" type="text" id="phPeligroso" placeholder="PH del agua no seguro"
+               class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+      </div>
+      <div>
+        <button type="submit" class="hover:shadow-form w-full rounded-md bg-[#4295e2] py-3 px-8 text-center text-base font-semibold text-white outline-none">
+          Guardar
+        </button>
+      </div>
+    </form>
+  </div>
 </div>
