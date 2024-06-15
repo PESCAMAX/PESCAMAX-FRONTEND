@@ -12,6 +12,8 @@ import { MenuLateralComponent } from './components/molecules/menu-lateral/menu-l
 import { TablaSeleccionarComponent } from './components/molecules/tabla-seleccionar/tabla-seleccionar.component';
 import { FormEspecieComponent } from './components/molecules/form-especie/form-especie.component';
 import { DatapickerComponent } from './components/molecules/datapicker/datapicker.component';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 
 @NgModule({
@@ -28,9 +30,11 @@ import { DatapickerComponent } from './components/molecules/datapicker/datapicke
     TablaSeleccionarComponent,
     FormEspecieComponent,
     DatapickerComponent
+  
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ],
   exports: [
     ButtonEnviarComponent,
