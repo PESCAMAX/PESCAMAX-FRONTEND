@@ -11,7 +11,7 @@ export class EspecieFormComponent implements OnInit {
   especieForm: FormGroup;
   successMessage: string = '';
   errorMessage: string = '';
-
+  especies: any[] = [];
   constructor(private fb: FormBuilder, private apiService: ApiService) {
     this.especieForm = this.fb.group({
       nombreEspecie: ['', Validators.required],

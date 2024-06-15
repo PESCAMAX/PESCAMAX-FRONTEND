@@ -29,12 +29,12 @@
       <tr class="bg-gray-100 border border-grey-500 md:border-none block md:table-row" *ngFor="let especie of especiesFiltradas">
         <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.id }}</td>
         <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.nombreEspecie }}</td>
-        <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.tdsseguro }}</td>
-        <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.tdspeligroso }}</td>
-        <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.temperaturaseguro }}</td>
-        <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.temperaturapeligroso }}</td>
-        <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.phseguro }}</td>
-        <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.phpeligroso }}</td>
+        <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.tdsSeguro }}</td>
+        <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.tdsPeligroso }}</td>
+        <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.temperaturaSeguro }}</td>
+        <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.temperaturaPeligroso }}</td>
+        <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.phSeguro }}</td>
+        <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.phPeligroso }}</td>
         <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">
           <button (click)="eliminarEspecie(especie.id)" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
             Eliminar
