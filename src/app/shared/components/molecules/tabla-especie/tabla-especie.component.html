@@ -1,60 +1,52 @@
 <div class="container mx-auto p-4">
-    <h2 class="text-2xl font-bold mb-4">MODIFICAR ESPECIE</h2>
-    <div class="mb-4">
-      <label for="search" class="mr-2">Buscar:</label>
-      <input
-        type="text"
-        id="search"
-        class="border rounded px-2 py-1"
-        (input)="filtrarEspecies()"
-      />
-    </div>
-    <table class="min-w-full border-collapse block md:table">
-      <thead class="block md:table-header-group">
-        <tr class="border border-grey-500 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto md:relative">
-          <th class="bg-gray-200 p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">ID</th>
-          <th class="bg-gray-200 p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">Nombre</th>
-          <th class="bg-gray-200 p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">TDS SEGURO</th>
-          <th class="bg-gray-200 p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">TDS PELIGROSO</th>
-          <th class="bg-gray-200 p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">TEMPERATURA SEGURO</th>
-          <th class="bg-gray-200 p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">TEMPERATURA PELIGROSA</th>
-          <th class="bg-gray-200 p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">PH SEGURO</th>
-          <th class="bg-gray-200 p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">PH PELIGROSA</th>
-          <!-- Agrega las demás columnas de la tabla según sea necesario -->
-  
-          <!-- Celdas de botones de eliminar y editar -->
-          <th class="bg-gray-200 p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">Eliminar</th>
-          <th class="bg-gray-200 p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">Editar</th>
-        </tr>
-      </thead>
-      <tbody class="block md:table-row-group">
-        <tr class="bg-gray-100 border border-grey-500 md:border-none block md:table-row" *ngFor="let especie of especiesFiltradas">
-          <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.id }}</td>
-          <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.nombreEspecie }}</td>
-          <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.tdsseguro }}</td>
-          <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.tdspeligroso }}</td>
-          <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.temperaturaseguro }}</td>
-          <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.temperaturapeligroso }}</td>
-          <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.phseguro }}</td>
-          <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.phpeligroso }}</td>
-
-          <!-- Agrega el resto de las celdas de la tabla según sea necesario -->
-  
-          <!-- Botón de eliminar -->
-          <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">
-            <button (click)="eliminarEspecie(especie.id)" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-              Eliminar
-            </button>
-          </td>
-  
-          <!-- Botón de editar -->
-          <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">
-            <button (click)="editarEspecie(especie.id)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-              Editar
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <button class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" (click)="actualizarEspecies()">ACTUALIZAR</button>
+  <h2 class="text-2xl font-bold mb-4">MODIFICAR ESPECIE</h2>
+  <div class="mb-4">
+    <label for="search" class="mr-2">Buscar:</label>
+    <input
+      type="text"
+      id="search"
+      class="border rounded px-2 py-1"
+      
+      (input)="filtrarEspecies()"
+    />
+  </div>
+  <table class="min-w-full border-collapse block md:table">
+    <thead class="block md:table-header-group">
+      <tr class="border border-grey-500 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto md:relative">
+        <th class="bg-gray-200 p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">ID</th>
+        <th class="bg-gray-200 p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">Nombre</th>
+        <th class="bg-gray-200 p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">TDS SEGURO</th>
+        <th class="bg-gray-200 p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">TDS PELIGROSO</th>
+        <th class="bg-gray-200 p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">TEMPERATURA SEGURO</th>
+        <th class="bg-gray-200 p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">TEMPERATURA PELIGROSA</th>
+        <th class="bg-gray-200 p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">PH SEGURO</th>
+        <th class="bg-gray-200 p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">PH PELIGROSA</th>
+        <th class="bg-gray-200 p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">Eliminar</th>
+        <th class="bg-gray-200 p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">Editar</th>
+      </tr>
+    </thead>
+    <tbody class="block md:table-row-group">
+      <tr class="bg-gray-100 border border-grey-500 md:border-none block md:table-row" *ngFor="let especie of especiesFiltradas">
+        <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.id }}</td>
+        <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.nombreEspecie }}</td>
+        <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.tdsseguro }}</td>
+        <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.tdspeligroso }}</td>
+        <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.temperaturaseguro }}</td>
+        <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.temperaturapeligroso }}</td>
+        <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.phseguro }}</td>
+        <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.phpeligroso }}</td>
+        <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">
+          <button (click)="eliminarEspecie(especie.id)" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+            Eliminar
+          </button>
+        </td>
+        <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">
+          <button (click)="editarEspecie(especie)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Editar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" (click)="actualizarEspecies()">ACTUALIZAR</button>
 </div>

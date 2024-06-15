@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { ApiService } from '../../../../features/monitoreo/services/api-form/api.service';
 
 interface Especie {
-  id: any;
+  id: number;
   nombreEspecie: string;
-  tdsseguro: Int32Array;
+  tdsseguro: number;
   tdspeligroso: number;
-  temperaturaseguro: Float64Array;
+  temperaturaseguro: number;
   temperaturapeligroso: number;
   phseguro: number;
   phpeligroso: number;
@@ -23,29 +22,29 @@ export class TablaEspecieComponent implements OnInit {
   especiesFiltradas: Especie[] = [];
   searchText: string = '';
 
-  constructor(private http: HttpClient, private apiService: ApiService) {}
+  constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
     this.obtenerEspecies();
   }
+
   actualizarEspecies(): void {
     this.obtenerEspecies();
   }
-  
+
   obtenerEspecies(): void {
-    this.http.get<any>('http://localhost:6754/CrearEspecie/Listar').subscribe(
-      (response) => {
-        // Convertir las cadenas a números
-        response.forEach((especie: any) => {
-            especie.tdsseguro = especie.tdsseguro !== null && especie.tdsseguro !== '' ? parseFloat(especie.tdsseguro) : 0;
-            especie.tdspeligroso = especie.tdspeligroso !== null && especie.tdspeligroso !== '' ? parseFloat(especie.tdspeligroso) : 0;
-            especie.temperaturaseguro = especie.temperaturaseguro !== null && especie.temperaturaseguro !== '' ? parseFloat(especie.temperaturaseguro) : 0;
-            especie.temperaturapeligroso = especie.temperaturapeligroso !== null && especie.temperaturapeligroso !== '' ? parseFloat(especie.temperaturapeligroso) : 0;
-            especie.phseguro = especie.phseguro !== null && especie.phseguro !== '' ? parseFloat(especie.phseguro) : 0;
-            especie.phpeligroso = especie.phpeligroso !== null && especie.phpeligroso !== '' ? parseFloat(especie.phpeligroso) : 0;
-          });
-    
-        this.especies = response; // Suponiendo que la respuesta de tu API es un array de especies
+    this.apiService.listarEspecies().subscribe(
+      (response: Especie[]) => {
+        this.especies = response.map(especie => ({
+          id: especie.id,
+          nombreEspecie: especie.nombreEspecie,
+          tdsseguro: especie.tdsseguro !== undefined && especie.tdsseguro !== null ? parseFloat(especie.tdsseguro.toString()) : 0,
+          tdspeligroso: especie.tdspeligroso !== undefined && especie.tdspeligroso !== null ? parseFloat(especie.tdspeligroso.toString()) : 0,
+          temperaturaseguro: especie.temperaturaseguro !== undefined && especie.temperaturaseguro !== null ? parseFloat(especie.temperaturaseguro.toString()) : 0,
+          temperaturapeligroso: especie.temperaturapeligroso !== undefined && especie.temperaturapeligroso !== null ? parseFloat(especie.temperaturapeligroso.toString()) : 0,
+          phseguro: especie.phseguro !== undefined && especie.phseguro !== null ? parseFloat(especie.phseguro.toString()) : 0,
+          phpeligroso: especie.phpeligroso !== undefined && especie.phpeligroso !== null ? parseFloat(especie.phpeligroso.toString()) : 0,
+        }));
         this.filtrarEspecies(); // Filtra las especies una vez que se obtienen
       },
       (error) => {
@@ -55,7 +54,6 @@ export class TablaEspecieComponent implements OnInit {
   }
 
   filtrarEspecies(): void {
-    // Implementa la lógica para filtrar las especies según el valor de searchText
     if (this.searchText) {
       this.especiesFiltradas = this.especies.filter(especie =>
         especie.nombreEspecie.toLowerCase().includes(this.searchText.toLowerCase())
@@ -66,27 +64,30 @@ export class TablaEspecieComponent implements OnInit {
   }
 
   eliminarEspecie(id: number): void {
-    this.http.delete(`http://localhost:6754/CrearEspecie/Eliminar/${id}`).subscribe(
+    this.apiService.eliminarEspecie(id).subscribe(
       () => {
         console.log('Especie eliminada correctamente');
         this.obtenerEspecies(); // Vuelve a cargar las especies después de eliminar una
+        alert('Especie eliminada correctamente'); // Alerta de éxito
       },
       (error) => {
         console.error('Error al eliminar la especie:', error);
+        alert('Error al eliminar la especie'); // Alerta de error
       }
     );
   }
 
   editarEspecie(especie: Especie): void {
-    this.http.put(`http://localhost:6754/CrearEspecie/Modificar/${especie.id}`, especie).subscribe(
+    this.apiService.modificarEspecie(especie.id, especie).subscribe(
       () => {
         console.log('Especie modificada correctamente');
-        // Puedes actualizar la lista de especies o realizar otras acciones después de editar
+        alert('Especie modificada correctamente'); // Alerta de éxito
+        this.obtenerEspecies(); // Vuelve a cargar las especies después de modificar una
       },
       (error) => {
         console.error('Error al modificar la especie:', error);
+        alert('Error al modificar la especie'); // Alerta de error
       }
     );
   }
-  
 }
