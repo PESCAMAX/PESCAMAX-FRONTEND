@@ -10,9 +10,10 @@ import { ButtonContainerComponent } from './components/molecules/button-containe
 import { AlertComponent } from './components/organisms/alert/alert.component';
 import { MenuLateralComponent } from './components/molecules/menu-lateral/menu-lateral.component';
 import { TablaSeleccionarComponent } from './components/molecules/tabla-seleccionar/tabla-seleccionar.component';
-import { FormEspecieComponent } from './components/molecules/form-especie/form-especie.component';
+import { EspecieFormComponent } from './components/molecules/form-especie/form-especie.component';
 import { DatapickerComponent } from './components/molecules/datapicker/datapicker.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AlertFormComponent } from './components/organisms/alert-form/alert-form.component';
 
 
 
@@ -28,8 +29,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     AlertComponent,
     MenuLateralComponent,
     TablaSeleccionarComponent,
-    FormEspecieComponent,
-    DatapickerComponent
+   EspecieFormComponent,
+    DatapickerComponent,
+    AlertFormComponent
   
   ],
   imports: [
@@ -44,8 +46,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     AlertComponent,
     MenuLateralComponent,
     TablaSeleccionarComponent,
-    FormEspecieComponent,
-    DatapickerComponent
+    EspecieFormComponent,
+    DatapickerComponent,
+    AlertFormComponent
   ]
 })
 export class SharedModule { }

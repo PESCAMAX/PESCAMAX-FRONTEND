@@ -7,12 +7,12 @@ import { ApiService } from '../../../../features/monitoreo/services/api-form/api
   templateUrl: './form-especie.component.html',
   styleUrls: ['./form-especie.component.css']
 })
-export class FormEspecieComponent implements OnInit {
-  especieForm!: FormGroup;
+export class EspecieFormComponent implements OnInit {
+  especieForm: FormGroup;
+  successMessage: string = '';
+  errorMessage: string = '';
 
-  constructor(private fb: FormBuilder, private apiService: ApiService) { }
-
-  ngOnInit(): void {
+  constructor(private fb: FormBuilder, private apiService: ApiService) {
     this.especieForm = this.fb.group({
       nombreEspecie: ['', Validators.required],
       tdsSeguro: ['', Validators.required],
@@ -20,20 +20,36 @@ export class FormEspecieComponent implements OnInit {
       temperaturaSeguro: ['', Validators.required],
       temperaturaPeligroso: ['', Validators.required],
       phSeguro: ['', Validators.required],
-      phPeligroso: ['', Validators.required]
+      phPeligroso: ['', Validators.required],
     });
   }
+
+  ngOnInit(): void {}
 
   onSubmit(): void {
     if (this.especieForm.valid) {
       this.apiService.crearEspecie(this.especieForm.value).subscribe(
         response => {
-          console.log('Especie creada', response);
+          this.showSuccess('Especie guardada exitosamente');
         },
         error => {
-          console.error('Error al crear la especie', error);
+          this.showError('Error al guardar la especie');
         }
       );
     }
+  }
+
+  showSuccess(message: string): void {
+    this.successMessage = message;
+    setTimeout(() => {
+      this.successMessage = '';
+    }, 3000);
+  }
+
+  showError(message: string): void {
+    this.errorMessage = message;
+    setTimeout(() => {
+      this.errorMessage = '';
+    }, 3000);
   }
 }
