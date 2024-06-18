@@ -15,6 +15,10 @@ import { MenuLateralComponent } from './components/molecules/menu-lateral/menu-l
 import { TablaSeleccionarComponent } from './components/molecules/tabla-seleccionar/tabla-seleccionar.component';
 import { FormEspecieComponent } from './components/molecules/form-especie/form-especie.component';
 import { DatapickerComponent } from './components/molecules/datapicker/datapicker.component';
+import { GraficasComponent } from './components/molecules/graficas/graficas.component';
+import { ModificarEspecieComponent } from './components/molecules/modificar-especie/modificar-especie.component';
+
+import { PageNotFontComponent } from '../features/monitoreo/pages/home/page-not-font/PageNotFontComponent';
 
 @NgModule({
   declarations: [
@@ -31,6 +35,9 @@ import { DatapickerComponent } from './components/molecules/datapicker/datapicke
     TablaSeleccionarComponent,
     FormEspecieComponent,
     DatapickerComponent,
+    GraficasComponent,
+    ModificarEspecieComponent,
+    PageNotFontComponent
   
   ],
   imports: [
@@ -45,7 +52,11 @@ import { DatapickerComponent } from './components/molecules/datapicker/datapicke
     MenuLateralComponent,
     TablaSeleccionarComponent,
     FormEspecieComponent,
-    DatapickerComponent
+    DatapickerComponent,
+    GraficasComponent,
+    ModificarEspecieComponent,
+    PageNotFontComponent
+
   ]
 })
 export class SharedModule { }

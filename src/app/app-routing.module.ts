@@ -9,6 +9,7 @@ import { GraficaTdsComponent } from './features/monitoreo/pages/dashboard/grafic
 import { GraficaPhComponent } from './features/monitoreo/pages/dashboard/grafica-ph/grafica-ph.component';
 import { TablaDatosComponent } from './features/monitoreo/pages/dashboard/tabla-datos/tabla-datos.component';
 
+
 const routes: Routes = [
   {
     path: 'gestion-de-parametros',
@@ -44,9 +45,11 @@ const routes: Routes = [
   },
   {
     path: 'tabla-datos',
-    component: TablaDatosComponent
+    component: TablaEspecieComponent
 
   },
+
+
   {
     path: '',
     redirectTo: 'Tabla',
