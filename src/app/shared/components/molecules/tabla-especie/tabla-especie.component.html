@@ -6,7 +6,6 @@
       type="text"
       id="search"
       class="border rounded px-2 py-1"
-      
       (input)="filtrarEspecies()"
     />
   </div>
@@ -15,12 +14,12 @@
       <tr class="border border-grey-500 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto md:relative">
         <th class="bg-gray-200 p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">ID</th>
         <th class="bg-gray-200 p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">Nombre</th>
-        <th class="bg-gray-200 p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">TDS SEGURO</th>
-        <th class="bg-gray-200 p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">TDS PELIGROSO</th>
-        <th class="bg-gray-200 p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">TEMPERATURA SEGURO</th>
-        <th class="bg-gray-200 p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">TEMPERATURA PELIGROSA</th>
-        <th class="bg-gray-200 p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">PH SEGURO</th>
-        <th class="bg-gray-200 p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">PH PELIGROSA</th>
+        <th class="bg-gray-200 p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">TDS Mínimo</th>
+        <th class="bg-gray-200 p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">TDS Máximo</th>
+        <th class="bg-gray-200 p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">Temperatura Mínima</th>
+        <th class="bg-gray-200 p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">Temperatura Máxima</th>
+        <th class="bg-gray-200 p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">PH Mínimo</th>
+        <th class="bg-gray-200 p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">PH Máximo</th>
         <th class="bg-gray-200 p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">Eliminar</th>
         <th class="bg-gray-200 p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">Editar</th>
       </tr>
@@ -29,12 +28,12 @@
       <tr class="bg-gray-100 border border-grey-500 md:border-none block md:table-row" *ngFor="let especie of especiesFiltradas">
         <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.id }}</td>
         <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.nombreEspecie }}</td>
-        <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.tdsSeguro }}</td>
-        <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.tdsPeligroso }}</td>
-        <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.temperaturaSeguro }}</td>
-        <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.temperaturaPeligroso }}</td>
-        <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.phSeguro }}</td>
-        <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.phPeligroso }}</td>
+        <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.tdsMinimo }}</td>
+        <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.tdsMaximo }}</td>
+        <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.temperaturaMinimo }}</td>
+        <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.temperaturaMaximo }}</td>
+        <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.phMinimo }}</td>
+        <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">{{ especie.phMaximo }}</td>
         <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">
           <button (click)="eliminarEspecie(especie.id)" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
             Eliminar

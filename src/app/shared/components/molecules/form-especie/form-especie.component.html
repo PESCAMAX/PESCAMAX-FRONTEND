@@ -9,49 +9,74 @@
         </label>
         <input formControlName="nombreEspecie" type="text" id="nombreEspecie" placeholder="Nombre de la especie"
                class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+        <div *ngIf="especieForm.get('nombreEspecie')?.invalid && especieForm.get('nombreEspecie')?.touched" class="text-red-500 text-sm">
+          {{ getErrorMessage('nombreEspecie') }}
+        </div>
+      </div>
+
+      <div class="mb-5">
+        <label for="tdsMinimo" class="mb-3 block text-base font-medium text-[#07074D]">
+          TDS ideal mínimo
+        </label>
+        <input formControlName="tdsMinimo" type="text" id="tdsMinimo" placeholder="TDS ideal mínimo"
+               class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+        <div *ngIf="especieForm.get('tdsMinimo')?.invalid && especieForm.get('tdsMinimo')?.touched" class="text-red-500 text-sm">
+          {{ getErrorMessage('tdsMinimo') }}
+        </div>
       </div>
       <div class="mb-5">
-        <label for="tdsSeguro" class="mb-3 block text-base font-medium text-[#07074D]">
-          TDS ideal
+        <label for="tdsMaximo" class="mb-3 block text-base font-medium text-[#07074D]">
+          TDS ideal máximo
         </label>
-        <input formControlName="tdsSeguro" type="text" id="tdsSeguro" placeholder="TDS ideal"
+        <input formControlName="tdsMaximo" type="text" id="tdsMaximo" placeholder="TDS ideal máximo"
                class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+        <div *ngIf="especieForm.get('tdsMaximo')?.invalid && especieForm.get('tdsMaximo')?.touched" class="text-red-500 text-sm">
+          {{ getErrorMessage('tdsMaximo') }}
+        </div>
+      </div>
+
+      <div class="mb-5">
+        <label for="temperaturaMinimo" class="mb-3 block text-base font-medium text-[#07074D]">
+          Temperatura ideal mínima
+        </label>
+        <input formControlName="temperaturaMinimo" type="text" id="temperaturaMinimo" placeholder="Temperatura ideal mínima"
+               class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+        <div *ngIf="especieForm.get('temperaturaMinimo')?.invalid && especieForm.get('temperaturaMinimo')?.touched" class="text-red-500 text-sm">
+          {{ getErrorMessage('temperaturaMinimo') }}
+        </div>
       </div>
       <div class="mb-5">
-        <label for="tdsPeligroso" class="mb-3 block text-base font-medium text-[#07074D]">
-          TDS no seguro
+        <label for="temperaturaMaximo" class="mb-3 block text-base font-medium text-[#07074D]">
+          Temperatura ideal máxima
         </label>
-        <input formControlName="tdsPeligroso" type="text" id="tdsPeligroso" placeholder="TDS no seguro"
+        <input formControlName="temperaturaMaximo" type="text" id="temperaturaMaximo" placeholder="Temperatura ideal máxima"
                class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+        <div *ngIf="especieForm.get('temperaturaMaximo')?.invalid && especieForm.get('temperaturaMaximo')?.touched" class="text-red-500 text-sm">
+          {{ getErrorMessage('temperaturaMaximo') }}
+        </div>
+      </div>
+
+      <div class="mb-5">
+        <label for="phMinimo" class="mb-3 block text-base font-medium text-[#07074D]">
+          PH del agua mínimo
+        </label>
+        <input formControlName="phMinimo" type="text" id="phMinimo" placeholder="PH del agua mínimo"
+               class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+        <div *ngIf="especieForm.get('phMinimo')?.invalid && especieForm.get('phMinimo')?.touched" class="text-red-500 text-sm">
+          {{ getErrorMessage('phMinimo') }}
+        </div>
       </div>
       <div class="mb-5">
-        <label for="temperaturaSeguro" class="mb-3 block text-base font-medium text-[#07074D]">
-          Temperatura ideal
+        <label for="phMaximo" class="mb-3 block text-base font-medium text-[#07074D]">
+          PH del agua máximo
         </label>
-        <input formControlName="temperaturaSeguro" type="text" id="temperaturaSeguro" placeholder="Temperatura ideal"
+        <input formControlName="phMaximo" type="text" id="phMaximo" placeholder="PH del agua máximo"
                class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+        <div *ngIf="especieForm.get('phMaximo')?.invalid && especieForm.get('phMaximo')?.touched" class="text-red-500 text-sm">
+          {{ getErrorMessage('phMaximo') }}
+        </div>
       </div>
-      <div class="mb-5">
-        <label for="temperaturaPeligroso" class="mb-3 block text-base font-medium text-[#07074D]">
-          Temperatura no segura
-        </label>
-        <input formControlName="temperaturaPeligroso" type="text" id="temperaturaPeligroso" placeholder="Temperatura no segura"
-               class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
-      </div>
-      <div class="mb-5">
-        <label for="phSeguro" class="mb-3 block text-base font-medium text-[#07074D]">
-          PH del agua ideal
-        </label>
-        <input formControlName="phSeguro" type="text" id="phSeguro" placeholder="PH del agua ideal"
-               class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
-      </div>
-      <div class="mb-5">
-        <label for="phPeligroso" class="mb-3 block text-base font-medium text-[#07074D]">
-          PH del agua no seguro
-        </label>
-        <input formControlName="phPeligroso" type="text" id="phPeligroso" placeholder="PH del agua no seguro"
-               class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
-      </div>
+
       <div>
         <button type="submit" class="hover:shadow-form w-full rounded-md bg-[#4295e2] py-3 px-8 text-center text-base font-semibold text-white outline-none">
           Guardar

@@ -3,12 +3,12 @@ import { ApiService } from '../../../../features/monitoreo/services/api-form/api
 interface Especie {
   id: number;
   nombreEspecie: string;
-  tdsSeguro: number;
-  tdsPeligroso: number;
-  temperaturaSeguro: number;
-  temperaturaPeligroso: number;
-  phSeguro: number;
-  phPeligroso: number;
+  tdsMinimo: number;
+  tdsMaximo: number;
+  temperaturaMinimo: number;
+  temperaturaMaximo: number;
+  phMinimo: number;
+  phMaximo: number;
 }
 @Component({
   selector: 'app-tabla-especie',
@@ -19,7 +19,7 @@ export class TablaEspecieComponent implements OnInit {
   especies: Especie[] = [];
   especiesFiltradas: Especie[] = [];
   searchText: string = '';
- 
+
   constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
@@ -29,18 +29,19 @@ export class TablaEspecieComponent implements OnInit {
   actualizarEspecies(): void {
     this.obtenerEspecies();
   }
+
   obtenerEspecies(): void {
     this.apiService.listarEspecies().subscribe(
       (response: Especie[]) => {
         this.especies = response.map(especie => ({
           id: especie.id,
           nombreEspecie: especie.nombreEspecie,
-          tdsSeguro: especie.tdsSeguro,
-          tdsPeligroso: especie.tdsPeligroso,
-          temperaturaSeguro: especie.temperaturaSeguro,
-          temperaturaPeligroso: especie.temperaturaPeligroso,
-          phSeguro: especie.phSeguro,
-          phPeligroso: especie.phPeligroso,
+          tdsMinimo: especie.tdsMinimo,
+          tdsMaximo: especie.tdsMaximo,
+          temperaturaMinimo: especie.temperaturaMinimo,
+          temperaturaMaximo: especie.temperaturaMaximo,
+          phMinimo: especie.phMinimo,
+          phMaximo: especie.phMaximo,
         }));
         this.filtrarEspecies(); // Filtra las especies una vez que se obtienen
       },
