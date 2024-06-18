@@ -1,10 +1,87 @@
+// import { Component, OnInit } from '@angular/core';
+// import { BubbleController, Chart } from 'chart.js/auto';
+
+// @Component({
+//   selector: 'app-graficas',
+//   templateUrl: './graficas.component.html',
+//   styleUrl: './graficas.component.css'
+// })
+// export class GraficasComponent implements OnInit {
+//   public Chart: Chart | undefined;
+
+//   ngOnInit(): void {
+    
+//     const data = {
+//       labels: ['Lunes', 'Martes',  'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
+//       datasets: [
+//         {
+//           label: 'Estadísticas',
+//           data: [70, 100, 80, 50, 40, 34],
+//           fill: false,
+//           borderColor: '#ff0000',
+//           tension: 0.4
+//         },
+//         {
+//           label: 'Estadísticas',
+//           data: [],
+//           fill: false,
+//           borderColor: '##ff0000',
+//           tension: 0.1
+//         },
+//         {
+//           label: 'Estadísticas',
+//           data: [0, 2, 1, 0, 6, 10, 0],
+//           fill: false,
+//           borderColor: '#ff0000',
+//           tension: 0.1
+//         }   
+//       ]
+//     };
+
+//     const options = {
+//       scales: {
+//         x: {
+//           ticks: {
+//             font: {
+//               size: 10 // Tamaño de fuente para las etiquetas del eje x
+//             }
+//           }
+//         },
+//         y: {
+//           ticks: {
+//             font: {
+//               size: 10 // Tamaño de fuente para las etiquetas del eje y
+//             }
+//           }
+//         }
+//       },
+//       plugins: {
+//         legend: {
+//           labels: {
+//             font: {
+//               size: 16 // Tamaño de fuente para las etiquetas de la leyenda
+//             }
+//           }
+//         }
+//       }
+//     };
+    
+//     this.Chart = new Chart("chart", {
+//       type: 'bar',
+//       data: data,
+//       options: options
+//     })
+//   }
+
+// }
+
 import { Component, OnInit } from '@angular/core';
-import { BubbleController, Chart } from 'chart.js/auto';
+import { Chart } from 'chart.js/auto';
 
 @Component({
   selector: 'app-graficas',
   templateUrl: './graficas.component.html',
-  styleUrl: './graficas.component.css'
+  styleUrls: ['./graficas.component.css']
 })
 export class GraficasComponent implements OnInit {
   public Chart: Chart | undefined;
@@ -12,27 +89,20 @@ export class GraficasComponent implements OnInit {
   ngOnInit(): void {
     
     const data = {
-      labels: ['Lunes', 'Martes',  'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
+      labels: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
       datasets: [
         {
-          label: 'Estadísticas',
-          data: [70, 100, 80, 50, 40, 34],
-          fill: false,
+          label: 'Estadísticas 1',
+          data: [70, 100, 80, 50, 40, 34, 20],
+          backgroundColor: '#ff9999', // Change bar color
           borderColor: '#ff0000',
           tension: 0.4
         },
         {
-          label: 'Estadísticas',
-          data: [],
-          fill: false,
-          borderColor: '##ff0000',
-          tension: 0.1
-        },
-        {
-          label: 'Estadísticas',
+          label: 'Estadísticas 2',
           data: [0, 2, 1, 0, 6, 10, 0],
-          fill: false,
-          borderColor: '#ff0000',
+          backgroundColor: '#9999ff', // Change bar color
+          borderColor: '#0000ff',
           tension: 0.1
         }   
       ]
@@ -43,14 +113,14 @@ export class GraficasComponent implements OnInit {
         x: {
           ticks: {
             font: {
-              size: 10 // Tamaño de fuente para las etiquetas del eje x
+              size: 25 // Font size for x-axis labels
             }
           }
         },
         y: {
           ticks: {
             font: {
-              size: 10 // Tamaño de fuente para las etiquetas del eje y
+              size: 25 // Font size for y-axis labels
             }
           }
         }
@@ -59,7 +129,7 @@ export class GraficasComponent implements OnInit {
         legend: {
           labels: {
             font: {
-              size: 16 // Tamaño de fuente para las etiquetas de la leyenda
+              size: 25 // Font size for legend labels
             }
           }
         }
