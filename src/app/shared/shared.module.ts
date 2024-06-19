@@ -14,6 +14,9 @@ import { EspecieFormComponent } from './components/molecules/form-especie/form-e
 import { DatapickerComponent } from './components/molecules/datapicker/datapicker.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AlertFormComponent } from './components/organisms/alert-form/alert-form.component';
+import { TablaSensorComponent } from './components/molecules/tabla-sensor/tabla-sensor.component';
+
+
 
 
 
@@ -31,7 +34,9 @@ import { AlertFormComponent } from './components/organisms/alert-form/alert-form
     TablaSeleccionarComponent,
    EspecieFormComponent,
     DatapickerComponent,
-    AlertFormComponent
+    AlertFormComponent,
+    TablaSensorComponent
+
   
   ],
   imports: [
