@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+
+// Componentes
 import { ButtonEnviarComponent } from './components/atoms/button-enviar/button-enviar.component';
 import { FlechaDespliegueComponent } from './components/atoms/flecha-despliegue/flecha-despliegue.component';
 import { TablaEspecieComponent } from './components/molecules/tabla-especie/tabla-especie.component';
@@ -12,13 +15,8 @@ import { MenuLateralComponent } from './components/molecules/menu-lateral/menu-l
 import { TablaSeleccionarComponent } from './components/molecules/tabla-seleccionar/tabla-seleccionar.component';
 import { EspecieFormComponent } from './components/molecules/form-especie/form-especie.component';
 import { DatapickerComponent } from './components/molecules/datapicker/datapicker.component';
-import { ReactiveFormsModule } from '@angular/forms';
 import { AlertFormComponent } from './components/organisms/alert-form/alert-form.component';
 import { TablaSensorComponent } from './components/molecules/tabla-sensor/tabla-sensor.component';
-
-
-
-
 
 @NgModule({
   declarations: [
@@ -32,12 +30,10 @@ import { TablaSensorComponent } from './components/molecules/tabla-sensor/tabla-
     AlertComponent,
     MenuLateralComponent,
     TablaSeleccionarComponent,
-   EspecieFormComponent,
+    EspecieFormComponent,
     DatapickerComponent,
     AlertFormComponent,
-    TablaSensorComponent
-
-  
+    TablaSensorComponent  // Asegúrate de que este componente está declarado aquí
   ],
   imports: [
     CommonModule,
@@ -53,7 +49,8 @@ import { TablaSensorComponent } from './components/molecules/tabla-sensor/tabla-
     TablaSeleccionarComponent,
     EspecieFormComponent,
     DatapickerComponent,
-    AlertFormComponent
+    AlertFormComponent,
+    TablaSensorComponent  // Y exportado aquí
   ]
 })
 export class SharedModule { }

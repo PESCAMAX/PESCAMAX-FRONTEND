@@ -21,7 +21,6 @@ import { DashboardModule } from './features/monitoreo/pages/dashboard/dashboard.
     AppRoutingModule,
     SharedModule,
     SistemaDeAlertasModule, // Importa el módulo del sistema de alertas
-    DashboardModule,
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule // Importa el módulo del dashboard

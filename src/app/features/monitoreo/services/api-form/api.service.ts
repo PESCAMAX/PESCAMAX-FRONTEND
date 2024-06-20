@@ -25,4 +25,18 @@ export class ApiService {
   modificarEspecie(id: number, data: any): Observable<any> {
     return this.http.put(`${this.baseUrl}/CrearEspecie/Modificar/${id}`, data);
   }
+
+  
+  listarMonitoreo(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/api/Monitoreo/Leer`);
+  }
+}
+
+export interface Monitoreo {
+  ID_M: number;
+  tds: Float32Array;
+  Temperatura: Float32Array;
+  PH: Float32Array;
+  FechaHora: Date;
+  LoteID: number;
 }
