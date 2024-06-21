@@ -11,6 +11,8 @@ import { TablaDatosComponent } from './features/monitoreo/pages/dashboard/tabla-
 import { AlertasRecientesComponent } from './features/monitoreo/pages/sistema-de-alertas/alertas-recientes/alertas-recientes.component';
 import { HistorialDeAlertasComponent } from './features/monitoreo/pages/sistema-de-alertas/historial-de-alertas/historial-de-alertas.component';
 import { CardAlertsComponent } from './shared/components/molecules/card-alerts/card-alerts.component';
+import { LoginComponent } from './shared/components/molecules/login/login.component';
+import { RegisterComponent } from './shared/components/molecules/register/register.component';
 
 
 
@@ -65,6 +67,14 @@ const routes: Routes = [
   {
     path: '',
     component : CrearEspecieComponent
+  },
+  {
+    path: 'login',
+    component : LoginComponent
+  },
+  {
+    path: 'register',
+    component : RegisterComponent
   }
 ];
 

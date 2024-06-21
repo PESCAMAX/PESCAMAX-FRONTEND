@@ -17,6 +17,9 @@ import { EspecieFormComponent } from './components/molecules/form-especie/form-e
 import { DatapickerComponent } from './components/molecules/datapicker/datapicker.component';
 import { AlertFormComponent } from './components/organisms/alert-form/alert-form.component';
 import { TablaSensorComponent } from './components/molecules/tabla-sensor/tabla-sensor.component';
+import { RegisterComponent } from './components/molecules/register/register.component';
+import { LoginComponent } from './components/molecules/login/login.component';
+
 
 @NgModule({
   declarations: [
@@ -33,7 +36,9 @@ import { TablaSensorComponent } from './components/molecules/tabla-sensor/tabla-
     EspecieFormComponent,
     DatapickerComponent,
     AlertFormComponent,
-    TablaSensorComponent  // Asegúrate de que este componente está declarado aquí
+    TablaSensorComponent,
+    RegisterComponent,
+    LoginComponent // Asegúrate de que este componente está declarado aquí
   ],
   imports: [
     CommonModule,
