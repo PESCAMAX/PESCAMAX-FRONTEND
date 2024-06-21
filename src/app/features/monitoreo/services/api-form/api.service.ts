@@ -34,9 +34,9 @@ export class ApiService {
 
 export interface Monitoreo {
   ID_M: number;
-  tds: Float32Array;
-  Temperatura: Float32Array;
-  PH: Float32Array;
+  tds: number;
+  Temperatura: number;
+  PH: number;
   FechaHora: Date;
   LoteID: number;
 }
