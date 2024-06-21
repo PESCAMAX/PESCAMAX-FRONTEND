@@ -1,0 +1,26 @@
+.border-success-600 {
+    border-color: #28a745;
+    margin: 10px;
+  }
+  
+  .text-success-600 {
+    color: #28a745;
+  }
+  
+  .border-danger-600 {
+    border-color: #dc3545;
+    margin: 10px;
+  }
+  
+  .text-danger-600 {
+    color: #dc3545;
+  }
+  
+  .border-warning-600 {
+    border-color:#F2F5F7;
+    margin: 10px;
+  }
+  
+  .text-warning-600 {
+    color: #F2F5F7;
+  }

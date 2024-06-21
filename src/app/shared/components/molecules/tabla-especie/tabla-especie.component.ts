@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../../../features/monitoreo/services/api-form/api.service';
+
 interface Especie {
   id: number;
   nombreEspecie: string;
@@ -10,6 +11,7 @@ interface Especie {
   phMinimo: number;
   phMaximo: number;
 }
+
 @Component({
   selector: 'app-tabla-especie',
   templateUrl: './tabla-especie.component.html',
@@ -19,6 +21,13 @@ export class TablaEspecieComponent implements OnInit {
   especies: Especie[] = [];
   especiesFiltradas: Especie[] = [];
   searchText: string = '';
+
+  showAlert: boolean = false;
+  alertType: 'success' | 'danger' | 'warning' = 'success';
+  alertTitle: string = '';
+  alertContent: string = '';
+  alertConfirmAction: (() => void) | null = null;
+  alertCancelAction: (() => void) | null = null;
 
   constructor(private apiService: ApiService) {}
 
@@ -33,20 +42,12 @@ export class TablaEspecieComponent implements OnInit {
   obtenerEspecies(): void {
     this.apiService.listarEspecies().subscribe(
       (response: Especie[]) => {
-        this.especies = response.map(especie => ({
-          id: especie.id,
-          nombreEspecie: especie.nombreEspecie,
-          tdsMinimo: especie.tdsMinimo,
-          tdsMaximo: especie.tdsMaximo,
-          temperaturaMinimo: especie.temperaturaMinimo,
-          temperaturaMaximo: especie.temperaturaMaximo,
-          phMinimo: especie.phMinimo,
-          phMaximo: especie.phMaximo,
-        }));
-        this.filtrarEspecies(); // Filtra las especies una vez que se obtienen
+        this.especies = response;
+        this.filtrarEspecies();
       },
       (error) => {
         console.error('Error al obtener las especies:', error);
+        this.mostrarAlerta('danger', 'Error', 'Error al obtener las especies');
       }
     );
   }
@@ -62,30 +63,49 @@ export class TablaEspecieComponent implements OnInit {
   }
 
   eliminarEspecie(id: number): void {
+    this.mostrarAlertaConfirmacion(id);
+  }
+
+  mostrarAlertaConfirmacion(id: number): void {
+    this.showAlert = true;
+    this.alertType = 'warning';
+    this.alertTitle = 'Confirmar eliminación';
+    this.alertContent = '¿Estás seguro de que deseas eliminar esta especie?';
+    this.alertConfirmAction = () => this.confirmarEliminacion(id);
+    this.alertCancelAction = () => this.cancelarEliminacion();
+  }
+
+  confirmarEliminacion(id: number): void {
     this.apiService.eliminarEspecie(id).subscribe(
       () => {
-        console.log('Especie eliminada correctamente');
-        this.obtenerEspecies(); // Vuelve a cargar las especies después de eliminar una
-        alert('Especie eliminada correctamente'); // Alerta de éxito
+        this.obtenerEspecies();
+        this.mostrarAlerta('success', 'Éxito', 'Especie eliminada correctamente');
       },
       (error) => {
         console.error('Error al eliminar la especie:', error);
-        alert('Error al eliminar la especie'); // Alerta de error
+        this.mostrarAlerta('danger', 'Error', 'Error al eliminar la especie');
       }
     );
   }
 
-  editarEspecie(especie: Especie): void {
-    this.apiService.modificarEspecie(especie.id, especie).subscribe(
-      () => {
-        console.log('Especie modificada correctamente');
-        alert('Especie modificada correctamente'); // Alerta de éxito
-        this.obtenerEspecies(); // Vuelve a cargar las especies después de modificar una
-      },
-      (error) => {
-        console.error('Error al modificar la especie:', error);
-        alert('Error al modificar la especie'); // Alerta de error
-      }
-    );
+  cancelarEliminacion(): void {
+    this.mostrarAlerta('danger', 'Cancelado', 'La eliminación de la especie ha sido cancelada');
+  }
+
+  mostrarAlerta(type: 'success' | 'danger' | 'warning', title: string, content: string): void {
+    this.showAlert = true;
+    this.alertType = type;
+    this.alertTitle = title;
+    this.alertContent = content;
+    this.alertConfirmAction = null;
+    this.alertCancelAction = null;
+
+    setTimeout(() => {
+      this.cerrarAlerta();
+    }, 5000);
+  }
+
+  cerrarAlerta(): void {
+    this.showAlert = false;
   }
 }
