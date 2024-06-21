@@ -1,55 +1,27 @@
-<div class="menu-lateral fixed left-0 top-0 h-full w-[250px] bg-gray-800 text-white">
-  <app-menu-lateral></app-menu-lateral>
-</div>
-
-<div class="content ml-[250px] p-4">
-  <div class="flex justify-center mb-4">
-    <div class="card bg-blue-500">
-      <div class="border-b-2 border-neutral-100 px-6 py-3 text-surface dark:border-white-400/10 dark:text-black">
-        Header
-      </div>
-      <div class="p-6">
-        <h5 class="mb-2 text-xl font-medium leading-tight text-primary">
-          Primary card title
-        </h5>
-        <p class="text-base text-primary ">
-          Some quick example text to build on the card title and make up
-          the bulk of the card's content.
-        </p>
-      </div>
+<div class="flex justify-center">
+  <div [ngClass]="{
+      'border-success-600 text-success-600': type === 'success',
+      'border-danger-600 text-danger-600': type === 'danger',
+      'border-warning-600 text-warning-600': type === 'warning'
+    }"
+    class="block max-w-[18rem] rounded-lg border bg-white shadow-secondary-1 dark:bg-surface-dark">
+    <div class="border-b-2 border-neutral-100 px-6 py-3 text-surface dark:border-white/10 dark:text-white">
+      {{ header }}
     </div>
-  </div>
-
-  <div class="flex justify-start mb-4">
-    <div class="card bg-red-500">
-      <div class="border-b-2 border-neutral-100 px-6 py-3 text-surface dark:border-white-400/10 dark:text-black">
-        Header
-      </div>
-      <div class="p-6">
-        <h5 class="mb-2 text-xl font-medium leading-tight text-primary">
-          Primary card title
-        </h5>
-        <p class="text-base text-primary ">
-          Some quick example text to build on the card title and make up
-          the bulk of the card's content.
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <div class="flex justify-end">
-    <div class="card bg-yellow-500">
-      <div class="border-b-2 border-neutral-100 px-6 py-3 text-surface dark:border-white-400/10 dark:text-black">
-        Header
-      </div>
-      <div class="p-6">
-        <h5 class="mb-2 text-xl font-medium leading-tight text-primary">
-          Primary card title
-        </h5>
-        <p class="text-base text-primary ">
-          Some quick example text to build on the card title and make up
-          the bulk of the card's content.
-        </p>
+    <div class="p-6">
+      <h5 class="mb-2 text-xl font-medium leading-tight">
+        {{ title }}
+      </h5>
+      <p class="text-base">
+        {{ content }}
+      </p>
+      <div *ngIf="showConfirmButtons" class="mt-4 flex justify-end">
+        <button (click)="onConfirm()" class="mr-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          Confirmar
+        </button>
+        <button (click)="onCancel()" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+          Cancelar
+        </button>
       </div>
     </div>
   </div>
