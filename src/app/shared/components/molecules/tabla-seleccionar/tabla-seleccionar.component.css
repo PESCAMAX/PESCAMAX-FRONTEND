@@ -1,0 +1,104 @@
+/* src/app/shared/components/molecules/tabla-seleccionar/tabla-seleccionar.component.css */
+.text-gray-900 {
+    color: #1a202c;
+  }
+  
+  .bg-gray-200 {
+    background-color: #edf2f7;
+  }
+  
+  .p-4 {
+    padding: 1rem;
+  }
+  
+  .flex {
+    display: flex;
+  }
+  
+  .justify-center {
+    justify-content: center;
+  }
+  
+  .w-full {
+    width: 100%;
+  }
+  
+  .text-md {
+    font-size: 1rem;
+  }
+  
+  .bg-white {
+    background-color: #fff;
+  }
+  
+  .shadow-md {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .rounded {
+    border-radius: 0.25rem;
+  }
+  
+  .mb-4 {
+    margin-bottom: 1rem;
+  }
+  
+  .border-b {
+    border-bottom: 1px solid #e2e8f0;
+  }
+  
+  .px-5 {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+  
+  .hover\:bg-orange-100:hover {
+    background-color: #fffaf0;
+  }
+  
+  .bg-transparent {
+    background-color: transparent;
+  }
+  
+  .mr-3 {
+    margin-right: 0.75rem;
+  }
+  
+  .text-sm {
+    font-size: 0.875rem;
+  }
+  
+  .bg-blue-500 {
+    background-color: #4299e1;
+  }
+  
+  .hover\:bg-blue-700:hover {
+    background-color: #2b6cb0;
+  }
+  
+  .text-white {
+    color: #fff;
+  }
+  
+  .py-1 {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+  }
+  
+  .px-2 {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  
+  .rounded {
+    border-radius: 0.25rem;
+  }
+  
+  .focus\:outline-none:focus {
+    outline: 0;
+  }
+  
+  .focus\:shadow-outline:focus {
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+  }
+  

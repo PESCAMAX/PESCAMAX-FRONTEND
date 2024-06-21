@@ -10,7 +10,7 @@ import { CardAlertsComponent } from './components/molecules/card-alerts/card-ale
 import { ButtonViewMoreComponent } from './components/atoms/button-view-more/button-view-more.component';
 import { ButtonDismissComponent } from './components/atoms/button-dismiss/button-dismiss.component';
 import { ButtonContainerComponent } from './components/molecules/button-container/button-container.component';
-import { AlertComponent } from './components/organisms/alert/alert.component';
+import {AlertComponent } from './components/organisms/alert/alert.component';
 import { MenuLateralComponent } from './components/molecules/menu-lateral/menu-lateral.component';
 import { TablaSeleccionarComponent } from './components/molecules/tabla-seleccionar/tabla-seleccionar.component';
 import { EspecieFormComponent } from './components/molecules/form-especie/form-especie.component';

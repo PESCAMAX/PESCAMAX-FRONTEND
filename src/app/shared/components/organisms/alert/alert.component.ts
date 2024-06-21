@@ -1,5 +1,4 @@
-// alert.component.ts
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-alert',
@@ -9,6 +8,10 @@ import { Component, Input } from '@angular/core';
 export class AlertComponent {
   @Input() label: string = '';
   @Input() type: 'info' | 'danger' | 'warning' = 'warning';
+  @Input() message: string = '';
+
+  @Output() viewMore = new EventEmitter<void>();
+  @Output() dismiss = new EventEmitter<void>();
 
   get alertClasses() {
     return {
@@ -16,5 +19,13 @@ export class AlertComponent {
       danger: this.type === 'danger',
       warning: this.type === 'warning'
     };
+  }
+
+  onViewMore(): void {
+    this.viewMore.emit();
+  }
+
+  onDismiss(): void {
+    this.dismiss.emit();
   }
 }

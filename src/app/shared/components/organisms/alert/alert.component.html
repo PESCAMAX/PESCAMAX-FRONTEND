@@ -1,18 +1,18 @@
 <!-- alert.component.html -->
-<div [ngClass]="alertClasses" role="alert" class="p-4 mb-4 ">
+<div [ngClass]="alertClasses" role="alert" class="p-4 mb-4">
   <div class="flex items-center">
-    <svg class="flex-shrink-0 w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+    <svg class="flex-shrink-0 w-4 h-4 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
       <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
     </svg>
     <span class="sr-only">{{ type }}</span>
     <h3 class="text-lg font-medium">{{ label }}</h3>
   </div>
   <div class="mt-2 mb-4 text-sm">
-    More info about this {{ type }} alert goes here. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.
+    {{ message }}
   </div>
   
   <div class="flex">
-    <app-button-view-more [label]="'View more'" [type]="type"></app-button-view-more>
-    <app-button-dismiss [label]="'Dismiss'" [type]="type"></app-button-dismiss>
+    <button (click)="onViewMore()" class="mr-2 px-4 py-2 bg-blue-500 text-white rounded">View more</button>
+    <button (click)="onDismiss()" class="px-4 py-2 bg-gray-500 text-white rounded">Dismiss</button>
   </div>
 </div>
