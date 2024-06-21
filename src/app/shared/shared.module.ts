@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 // Componentes
 import { ButtonEnviarComponent } from './components/atoms/button-enviar/button-enviar.component';
@@ -10,7 +10,7 @@ import { CardAlertsComponent } from './components/molecules/card-alerts/card-ale
 import { ButtonViewMoreComponent } from './components/atoms/button-view-more/button-view-more.component';
 import { ButtonDismissComponent } from './components/atoms/button-dismiss/button-dismiss.component';
 import { ButtonContainerComponent } from './components/molecules/button-container/button-container.component';
-import {AlertComponent } from './components/organisms/alert/alert.component';
+import { AlertComponent } from './components/organisms/alert/alert.component';
 import { MenuLateralComponent } from './components/molecules/menu-lateral/menu-lateral.component';
 import { TablaSeleccionarComponent } from './components/molecules/tabla-seleccionar/tabla-seleccionar.component';
 import { EspecieFormComponent } from './components/molecules/form-especie/form-especie.component';
@@ -19,7 +19,6 @@ import { AlertFormComponent } from './components/organisms/alert-form/alert-form
 import { TablaSensorComponent } from './components/molecules/tabla-sensor/tabla-sensor.component';
 import { RegisterComponent } from './components/molecules/register/register.component';
 import { LoginComponent } from './components/molecules/login/login.component';
-
 
 @NgModule({
   declarations: [
@@ -42,7 +41,8 @@ import { LoginComponent } from './components/molecules/login/login.component';
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule, // Asegúrate de importar FormsModule aquí también
   ],
   exports: [
     ButtonEnviarComponent,
@@ -55,7 +55,9 @@ import { LoginComponent } from './components/molecules/login/login.component';
     EspecieFormComponent,
     DatapickerComponent,
     AlertFormComponent,
-    TablaSensorComponent  // Y exportado aquí
+    TablaSensorComponent,
+    RegisterComponent, // Exporta tus componentes aquí si los necesitas en otros módulos
+    LoginComponent
   ]
 })
 export class SharedModule { }

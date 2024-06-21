@@ -7,27 +7,28 @@ import { AuthService } from '../../../../features/monitoreo/services/api-login/a
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  username = '';
-  email = '';
-  password = '';
-
+  Username = '';
+  Email = '';
+  Password = '';
   successMessage = '';
   errorMessage = '';
 
   constructor(private authService: AuthService) { }
 
   register() {
-    const user = { username: this.username, email: this.email, password: this.password };
+    const user = { Username: this.Username, Email: this.Email, Password: this.Password };
     this.authService.register(user).subscribe(
       response => {
         this.successMessage = 'User registered successfully';
         this.errorMessage = '';
+        console.log('User registered successfully', response);
       },
       error => {
+        this.errorMessage = 'Error registering user';
         this.successMessage = '';
-        this.errorMessage = 'Error registering user. Please try again.';
         console.error('Error registering user', error);
       }
     );
   }
 }
+
