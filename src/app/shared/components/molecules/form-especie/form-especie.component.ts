@@ -65,23 +65,21 @@ export class EspecieFormComponent implements OnInit {
       const otherControl = formGroup.controls[otherControlName];
       if (!otherControl) return null;
 
-      if (control.value === otherControl.value) {
-        return { notEqual: 'Los valores no pueden ser iguales.' };
-      }
+      const controlValue = control.value;
+      const otherControlValue = otherControl.value;
 
-      if (otherControlName === 'tdsMaximo' &&  otherControl.value < control.value ) {
-        return { notGreater: 'El TDS mínimo no puede ser mayor que el TDS máximo.' };
-      }
-
-      if (otherControlName === 'temperaturaMaximo' && otherControl.value > control.value ) {
-        return { notGreater: 'La temperatura mínima no puede ser mayor que la temperatura máxima.' };
-      }
-
-      if (otherControlName === 'phMaximo' && otherControl.value < control.value ) {
-        return { notGreater: 'El pH mínimo no puede ser mayor que el pH máximo.' };
-      }
-
-      return null;
+      // Asegurarse de que ambos valores estén presentes antes de realizar la validación
+      return (controlValue == null || otherControlValue == null)
+        ? null
+        : controlValue === otherControlValue
+        ? { notEqual: 'Los valores no pueden ser iguales.' }
+        : otherControlName === 'tdsMinimo' && controlValue < otherControlValue
+        ? { notGreater: 'El TDS máximo no puede ser menor que el TDS mínimo.' }
+        : otherControlName === 'temperaturaMinimo' && controlValue < otherControlValue
+        ? { notGreater: 'La temperatura máxima no puede ser menor que la temperatura mínima.' }
+        : otherControlName === 'phMinimo' && controlValue < otherControlValue
+        ? { notGreater: 'El pH máximo no puede ser menor que el pH mínimo.' }
+        : null;
     };
   }
 
