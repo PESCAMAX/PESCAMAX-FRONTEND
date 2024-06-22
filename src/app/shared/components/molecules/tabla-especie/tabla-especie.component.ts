@@ -123,10 +123,17 @@ export class TablaEspecieComponent implements OnInit {
   cerrarAlerta(): void {
     this.showAlert = false;
   }
-
-  editarEspecie(especie: Especie): void {
+  editarEspecie(especie: Especie) {
     this.especieSeleccionada = especie;
     this.especieForm.patchValue(especie);
+    
+    // Añade este código para desplazarse al formulario
+    setTimeout(() => {
+      const element = document.getElementById('editarEspecieForm');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100);
   }
 
   onSubmit(): void {

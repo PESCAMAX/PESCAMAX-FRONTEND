@@ -69,15 +69,15 @@ export class EspecieFormComponent implements OnInit {
         return { notEqual: 'Los valores no pueden ser iguales.' };
       }
 
-      if (otherControlName === 'tdsMaximo' && control.value < otherControl.value) {
+      if (otherControlName === 'tdsMaximo' &&  otherControl.value < control.value ) {
         return { notGreater: 'El TDS mínimo no puede ser mayor que el TDS máximo.' };
       }
 
-      if (otherControlName === 'temperaturaMaximo' && control.value < otherControl.value) {
+      if (otherControlName === 'temperaturaMaximo' && otherControl.value > control.value ) {
         return { notGreater: 'La temperatura mínima no puede ser mayor que la temperatura máxima.' };
       }
 
-      if (otherControlName === 'phMaximo' && control.value < otherControl.value) {
+      if (otherControlName === 'phMaximo' && otherControl.value < control.value ) {
         return { notGreater: 'El pH mínimo no puede ser mayor que el pH máximo.' };
       }
 

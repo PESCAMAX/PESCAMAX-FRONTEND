@@ -10,7 +10,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ApiService {
-  private baseUrl = 'http://localhost:6754'; // URL base de tu backend
+  private baseUrl = 'http://localhost:5026'; // URL base de tu backend
 
   constructor(private http: HttpClient) { }
 
