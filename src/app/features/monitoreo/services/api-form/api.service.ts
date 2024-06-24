@@ -1,4 +1,3 @@
-// src/app/features/monitoreo/services/api-form/api.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -9,34 +8,34 @@ import { Observable } from 'rxjs';
 export class ApiService {
   private baseUrl = 'http://localhost:6754'; // URL base de tu backend
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   crearEspecie(data: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/CrearEspecie/Crear`, data);
+    return this.http.post<any>(`${this.baseUrl}/CrearEspecie/Crear`, data);
   }
 
-  listarEspecies(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/CrearEspecie/Listar`);
+  listarEspecies(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/CrearEspecie/Listar`);
   }
 
-  eliminarEspecie(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/CrearEspecie/Eliminar/${id}`);
+  eliminarEspecie(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/CrearEspecie/Eliminar/${id}`);
   }
 
   modificarEspecie(id: number, data: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}/CrearEspecie/Modificar/${id}`, data);
+    return this.http.put<any>(`${this.baseUrl}/CrearEspecie/Modificar/${id}`, data);
   }
 
-  listarMonitoreo(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/api/Monitoreo/Leer`);
+  listarMonitoreo(): Observable<{ response: any[] }> {
+    return this.http.get<{ response: any[] }>(`${this.baseUrl}/api/Monitoreo/Leer`);
   }
 }
 
 export interface Monitoreo {
   ID_M: number;
   tds: number;
-  Temperatura: number;
-  PH: number;
-  FechaHora: Date;
-  LoteID: number;
+  temperatura: number;
+  ph: number;
+  fechaHora: Date;
+  loteID: number;
 }

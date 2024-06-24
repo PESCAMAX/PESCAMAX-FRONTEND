@@ -1,6 +1,5 @@
-// src/app/shared/components/organisms/alert/alert.component.ts
 import { Component, OnInit } from '@angular/core';
-import { AlertService } from './alert.service';
+import { AlertService } from '../../../../features/monitoreo/services/api-alert/alert.service';
 
 @Component({
   selector: 'app-alert',
@@ -16,9 +15,11 @@ export class AlertComponent implements OnInit {
 
   ngOnInit(): void {
     this.alertService.getAlert().subscribe(alert => {
-      this.type = alert.type;
-      this.label = alert.label;
-      this.message = alert.message;
+      if (alert) {
+        this.type = alert.type;
+        this.label = alert.label;
+        this.message = alert.message;
+      }
     });
   }
 
