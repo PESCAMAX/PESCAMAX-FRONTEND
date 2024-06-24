@@ -1,17 +1,35 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AlertService } from '../../../../features/monitoreo/services/api-alert/alert.service';
 
 @Component({
   selector: 'app-alert',
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.css']
 })
-export class AlertComponent {
-  @Input() label: string = '';
-  @Input() type: 'info' | 'danger' | 'warning' = 'warning';
-  @Input() message: string = '';
+export class AlertComponent implements OnInit {
+  label: string = '';
+  type: 'info' | 'danger' | 'warning' = 'warning';
+  message: string = '';
 
-  @Output() viewMore = new EventEmitter<void>();
-  @Output() dismiss = new EventEmitter<void>();
+  constructor(private alertService: AlertService) {}
+
+  ngOnInit(): void {
+    this.alertService.getAlert().subscribe(alert => {
+      if (alert) {
+        this.type = alert.type;
+        this.label = alert.label;
+        this.message = alert.message;
+      }
+    });
+  }
+
+  onViewMore(): void {
+    // Logic for view more
+  }
+
+  onDismiss(): void {
+    this.message = '';
+  }
 
   get alertClasses() {
     return {
@@ -19,13 +37,5 @@ export class AlertComponent {
       danger: this.type === 'danger',
       warning: this.type === 'warning'
     };
-  }
-
-  onViewMore(): void {
-    this.viewMore.emit();
-  }
-
-  onDismiss(): void {
-    this.dismiss.emit();
   }
 }

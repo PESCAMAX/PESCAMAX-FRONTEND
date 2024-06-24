@@ -1,80 +1,78 @@
-<!-- src/app/shared/components/molecules/tabla-sensor/tabla-sensor.component.html -->
 <style>
-    .table {
-      border-spacing: 0 15px;
-    }
+  .table {
+    border-spacing: 0 15px;
+  }
   
-    i {
-      font-size: 1rem !important;
-    }
+  i {
+    font-size: 1rem !important;
+  }
   
-    .table tr {
-      border-radius: 20px;
-    }
+  .table tr {
+    border-radius: 20px;
+  }
   
-    tr td:nth-child(n + 6),
-    tr th:nth-child(n + 6) {
-      border-radius: 0 0.625rem 0.625rem 0;
-    }
+  tr td:nth-child(n + 6),
+  tr th:nth-child(n + 6) {
+    border-radius: 0 0.625rem 0.625rem 0;
+  }
   
-    tr td:nth-child(1),
-    tr th:nth-child(1) {
-      border-radius: 0.625rem 0 0 0.625rem;
-    }
-  </style>
-  
-  <!-- component -->
-  <link
-    href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
-    rel="stylesheet"
-  />
-  <div class="flex items-center justify-center min-h-screen bg-white">
-    <div class="col-span-12">
-      <div class="overflow-auto lg:overflow-visible">
-        <div class="flex lg:justify-between border-b-2 border-fuchsia-900 pb-1">
-          <h2 class="text-2xl text-gray-500 font-bold">Monitoreo Datos</h2>
-          <div class="text-center flex-auto">
-            
-          </div>
-          <div>
-            <a href="#">
-              <button
-                class="
-                  bg-blue-500
-                  hover:bg-blue-700
-                  text-white
-                  py-1
-                  px-3
-                  sm
-                  rounded-full
-                "
-              >
-                All
-              </button>
-            </a>
-          </div>
+  tr td:nth-child(1),
+  tr th:nth-child(1) {
+    border-radius: 0.625rem 0 0 0.625rem;
+  }
+</style>
+
+<!-- component -->
+<link
+  href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+  rel="stylesheet"
+/>
+<div class="flex items-center justify-center min-h-screen bg-white">
+  <div class="col-span-12">
+    <div class="overflow-auto lg:overflow-visible">
+      <div class="flex lg:justify-between border-b-2 border-fuchsia-900 pb-1">
+        <h2 class="text-2xl text-gray-500 font-bold">Monitoreo Datos</h2>
+        <div class="text-center flex-auto">
+          
         </div>
-        <table class="table text-gray-400 border-separate space-y-6 text-sm">
-          <thead class="bg-blue-500 text-white">
-            <tr>
-              <th class="p-3">Geomenbrana</th>
-              <th class="p-3 text-left">Tds</th>
-              <th class="p-3 text-left">Temperatura</th>
-              <th class="p-3 text-left">Ph</th>
-              <th class="p-3 text-left">Fecha</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of monitoreoData" class="bg-blue-200 lg:text-black">
-              <td class="p-3 font-medium capitalize">{{ item.loteID }}</td>
-              <td class="p-3">{{ item.tds }}</td>
-              <td class="p-3">{{ item.temperatura }}</td>
-              <td class="p-3">{{ item.ph }}</td>
-              <td class="p-3">{{ item.fechaHora | date:'short' }}</td>
-            </tr>
-          </tbody>
-        </table>
+        <div>
+          <a href="#">
+            <button
+              class="
+                bg-blue-500
+                hover:bg-blue-700
+                text-white
+                py-1
+                px-3
+                sm
+                rounded-full
+              "
+            >
+              All
+            </button>
+          </a>
+        </div>
       </div>
+      <table class="table text-gray-400 border-separate space-y-6 text-sm">
+        <thead class="bg-blue-500 text-white">
+          <tr>
+            <th class="p-3">Geomenbrana</th>
+            <th class="p-3 text-left">Tds</th>
+            <th class="p-3 text-left">Temperatura</th>
+            <th class="p-3 text-left">Ph</th>
+            <th class="p-3 text-left">Fecha</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of monitoreoData" class="bg-blue-200 lg:text-black">
+            <td class="p-3 font-medium capitalize">{{ item.loteID }}</td>
+            <td class="p-3">{{ item.tds }}</td>
+            <td class="p-3">{{ item.temperatura }}</td>
+            <td class="p-3">{{ item.ph }}</td>
+            <td class="p-3">{{ item.fechaHora | date:'short' }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
-  
+</div>

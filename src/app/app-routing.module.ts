@@ -13,7 +13,7 @@ import { HistorialDeAlertasComponent } from './features/monitoreo/pages/sistema-
 import { CardAlertsComponent } from './shared/components/molecules/card-alerts/card-alerts.component';
 import { LoginComponent } from './shared/components/molecules/login/login.component';
 import { RegisterComponent } from './shared/components/molecules/register/register.component';
-
+import { AppComponent } from './app.component';
 
 
 const routes: Routes = [

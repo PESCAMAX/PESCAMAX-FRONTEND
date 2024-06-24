@@ -1,10 +1,7 @@
-// src/app/features/monitoreo/services/api-form/api.service.ts
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -12,26 +9,32 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class ApiService {
   private baseUrl = 'http://localhost:5026'; // URL base de tu backend
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   crearEspecie(data: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/CrearEspecie/Crear`, data);
+    return this.http.post<any>(`${this.baseUrl}/CrearEspecie/Crear`, data)
+      .pipe(catchError(this.handleError));
   }
 
-  listarEspecies(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/CrearEspecie/Listar`);
+  listarEspecies(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/CrearEspecie/Listar`)
+      .pipe(catchError(this.handleError));
   }
 
-  eliminarEspecie(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/CrearEspecie/Eliminar/${id}`);
+  eliminarEspecie(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/CrearEspecie/Eliminar/${id}`)
+      .pipe(catchError(this.handleError));
   }
 
   modificarEspecie(especie: Especie): Observable<void> {
     return this.http.put<void>(`${this.baseUrl}/CrearEspecie/Modificar`, especie)
-      .pipe(
-        catchError(this.handleError)
-      );
-    }
+      .pipe(catchError(this.handleError));
+  }
+
+  listarMonitoreo(): Observable<{ response: any[] }> {
+    return this.http.get<{ response: any[] }>(`${this.baseUrl}/api/Monitoreo/Leer`)
+      .pipe(catchError(this.handleError));
+  }
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -46,21 +49,18 @@ export class ApiService {
     // Retorna un observable con un mensaje de error orientado al usuario
     return throwError('Algo malo sucedió; por favor, inténtalo de nuevo más tarde.');
   }
-  listarMonitoreo(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/api/Monitoreo/Leer`);
-  }
 }
 
 export interface Monitoreo {
   ID_M: number;
-  tds: Float32Array;
-  Temperatura: Float32Array;
-  PH: Float32Array;
-  FechaHora: Date;
-  LoteID: number;
+  tds: number;
+  temperatura: number;
+  ph: number;
+  fechaHora: Date;
+  loteID: number;
 }
 
- export interface Especie {
+export interface Especie {
   id: number;
   nombreEspecie: string;
   tdsMinimo: number;
