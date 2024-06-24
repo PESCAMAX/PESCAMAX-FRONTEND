@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../../../features/monitoreo/services/api-form/api.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
 
 interface Especie {
   id: number;
@@ -29,7 +31,20 @@ export class TablaEspecieComponent implements OnInit {
   alertConfirmAction: (() => void) | null = null;
   alertCancelAction: (() => void) | null = null;
 
-  constructor(private apiService: ApiService) {}
+  especieForm: FormGroup;
+  especieSeleccionada: Especie | null = null;
+
+  constructor(private apiService: ApiService, private fb: FormBuilder) {
+    this.especieForm = this.fb.group({
+      nombreEspecie: ['', Validators.required],
+      tdsMinimo: ['', Validators.required],
+      tdsMaximo: ['', Validators.required],
+      temperaturaMinimo: ['', Validators.required],
+      temperaturaMaximo: ['', Validators.required],
+      phMinimo: ['', Validators.required],
+      phMaximo: ['', Validators.required],
+    });
+  }
 
   ngOnInit(): void {
     this.obtenerEspecies();
@@ -107,5 +122,57 @@ export class TablaEspecieComponent implements OnInit {
 
   cerrarAlerta(): void {
     this.showAlert = false;
+  }
+  editarEspecie(especie: Especie) {
+    this.especieSeleccionada = especie;
+    this.especieForm.patchValue(especie);
+    
+    // Añade este código para desplazarse al formulario
+    setTimeout(() => {
+      const element = document.getElementById('editarEspecieForm');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100);
+  }
+
+  onSubmit(): void {
+    if (this.especieForm.valid) {
+      if (this.especieSeleccionada) {
+        this.modificarEspecie();
+      } else {
+        // Código para crear especie
+      }
+    }
+  }
+
+  modificarEspecie(): void {
+    if (this.especieSeleccionada) {
+      const especieModificada: Especie = {
+        ...this.especieSeleccionada,
+        ...this.especieForm.value
+      };
+      console.log('Datos de la especie a modificar:', especieModificada);
+      this.apiService.modificarEspecie(especieModificada).subscribe(
+        () => {
+          this.obtenerEspecies();
+          this.mostrarAlerta('success', 'Éxito', 'Especie modificada correctamente');
+          this.especieSeleccionada = null;
+          this.especieForm.reset();
+        },
+        (error: HttpErrorResponse) => {
+          console.error('Error al modificar la especie:', error);
+          let mensajeError = 'Error al modificar la especie';
+          if (error.error instanceof ErrorEvent) {
+            // Error del lado del cliente
+            mensajeError += `: ${error.error.message}`;
+          } else {
+            // El backend retornó un código de error
+            mensajeError += `: ${error.status}, ${error.error}`;
+          }
+          this.mostrarAlerta('danger', 'Error', mensajeError);
+        }
+      );
+    }
   }
 }

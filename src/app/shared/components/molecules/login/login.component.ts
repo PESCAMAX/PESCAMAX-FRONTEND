@@ -2,26 +2,36 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../../../features/monitoreo/services/api-login/auth.service';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  username = '';
-  password = '';
+  username: string = '';
+  password: string = '';
+  successMessage: string = '';
+  errorMessage: string = '';
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) {}
 
-  login() {
+  onLogin() {
     const user = { username: this.username, password: this.password };
     this.authService.login(user).subscribe(
-      response => {
-        localStorage.setItem('token', response.token);
-        this.router.navigate(['/']);
+      (response) => {
+        if (response.success) {
+          this.successMessage = response.message || 'Login successful!';
+          setTimeout(() => {
+            this.router.navigate(['/crear-especie']);
+          }, 2000);
+        } else {
+          this.errorMessage = response.message || 'Invalid username or password.';
+        }
       },
-      error => console.error('Error logging in', error)
+      (error) => {
+        this.errorMessage = 'An error occurred during login.';
+      }
     );
   }
 }
-

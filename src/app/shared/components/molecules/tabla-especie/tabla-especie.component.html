@@ -1,15 +1,19 @@
 <div class="container mx-auto p-4">
   <h2 class="text-2xl font-bold mb-4">MODIFICAR ESPECIE</h2>
+  
+  <!-- Buscador -->
   <div class="mb-4">
     <label for="search" class="mr-2">Buscar:</label>
     <input
       type="text"
       id="search"
       class="border rounded px-2 py-1"
-      
+      [(ngModel)]="searchText"
       (input)="filtrarEspecies()"
     />
   </div>
+
+  <!-- Tabla de especies -->
   <table class="min-w-full border-collapse block md:table">
     <thead class="block md:table-header-group">
       <tr class="border border-grey-500 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto md:relative">
@@ -41,13 +45,55 @@
           </button>
         </td>
         <td class="p-2 md:border md:border-grey-500 text-left block md:table-cell">
-          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          <button (click)="editarEspecie(especie)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
             Editar
           </button>
         </td>
       </tr>
     </tbody>
   </table>
+  
+  <!-- Formulario de edición -->
+  <form [formGroup]="especieForm" (ngSubmit)="onSubmit()" id="editarEspecieForm">
+    <div *ngIf="especieSeleccionada" class="mt-4">
+      <h3 class="text-xl font-bold mb-2">Editar Especie</h3>
+      <div class="grid grid-cols-2 gap-4">
+        <div class="col-span-1">
+          <label for="nombreEspecie" class="block text-sm font-medium text-gray-700">Nombre</label>
+          <input type="text" id="nombreEspecie" formControlName="nombreEspecie" class="mt-1 p-2 border border-gray-300 rounded w-full" />
+        </div>
+        <div class="col-span-1">
+          <label for="tdsMinimo" class="block text-sm font-medium text-gray-700">TDS Mínimo</label>
+          <input type="number" id="tdsMinimo" formControlName="tdsMinimo" class="mt-1 p-2 border border-gray-300 rounded w-full" />
+        </div>
+        <div class="col-span-1">
+          <label for="tdsMaximo" class="block text-sm font-medium text-gray-700">TDS Máximo</label>
+          <input type="number" id="tdsMaximo" formControlName="tdsMaximo" class="mt-1 p-2 border border-gray-300 rounded w-full" />
+        </div>
+        <div class="col-span-1">
+          <label for="temperaturaMinimo" class="block text-sm font-medium text-gray-700">Temperatura Mínima</label>
+          <input type="number" id="temperaturaMinimo" formControlName="temperaturaMinimo" class="mt-1 p-2 border border-gray-300 rounded w-full" />
+        </div>
+        <div class="col-span-1">
+          <label for="temperaturaMaximo" class="block text-sm font-medium text-gray-700">Temperatura Máxima</label>
+          <input type="number" id="temperaturaMaximo" formControlName="temperaturaMaximo" class="mt-1 p-2 border border-gray-300 rounded w-full" />
+        </div>
+        <div class="col-span-1">
+          <label for="phMinimo" class="block text-sm font-medium text-gray-700">PH Mínimo</label>
+          <input type="number" id="phMinimo" formControlName="phMinimo" class="mt-1 p-2 border border-gray-300 rounded w-full" />
+        </div>
+        <div class="col-span-1">
+          <label for="phMaximo" class="block text-sm font-medium text-gray-700">PH Máximo</label>
+          <input type="number" id="phMaximo" formControlName="phMaximo" class="mt-1 p-2 border border-gray-300 rounded w-full" />
+        </div>
+      </div>
+      <div class="mt-4">
+        <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+          Guardar Cambios
+        </button>
+      </div>
+    </div>
+  </form>
   
   <div *ngIf="showAlert" class="fixed z-10 inset-0 overflow-y-auto">
     <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
