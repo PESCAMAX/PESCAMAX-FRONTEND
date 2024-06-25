@@ -2,20 +2,20 @@
   .table {
     border-spacing: 0 15px;
   }
-  
+
   i {
     font-size: 1rem !important;
   }
-  
+
   .table tr {
     border-radius: 20px;
   }
-  
+
   tr td:nth-child(n + 6),
   tr th:nth-child(n + 6) {
     border-radius: 0 0.625rem 0.625rem 0;
   }
-  
+
   tr td:nth-child(1),
   tr th:nth-child(1) {
     border-radius: 0.625rem 0 0 0.625rem;
@@ -27,52 +27,46 @@
   href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
   rel="stylesheet"
 />
-<div class="flex items-center justify-center min-h-screen bg-white">
-  <div class="col-span-12">
-    <div class="overflow-auto lg:overflow-visible">
-      <div class="flex lg:justify-between border-b-2 border-fuchsia-900 pb-1">
-        <h2 class="text-2xl text-gray-500 font-bold">Monitoreo Datos</h2>
-        <div class="text-center flex-auto">
-          
+<div class="flex">
+  <!-- Menu Lateral -->
+  <div class="menu-lateral fixed left-0 top-0 h-full w-[250px] bg-gray-800">
+    <app-menu-lateral></app-menu-lateral>
+  </div>
+
+  <!-- Contenido Principal -->
+  <div class="ml-[250px] flex-1 p-4">
+    <div class="text-gray-900 bg-gray-200 p-4 rounded shadow-md">
+      <div class="overflow-auto lg:overflow-visible">
+        <div class="flex lg:justify-between border-b-2 border-blue-600 pb-1">
+          <h2 class="text-3xl text-gray-500 font-bold">Monitoreo Datos</h2>
+          <div class="text-center flex-auto"></div>
+          <div>
+            <a href="#">
+              <button class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-full">All</button>
+            </a>
+          </div>
         </div>
-        <div>
-          <a href="#">
-            <button
-              class="
-                bg-blue-500
-                hover:bg-blue-700
-                text-white
-                py-1
-                px-3
-                sm
-                rounded-full
-              "
-            >
-              All
-            </button>
-          </a>
-        </div>
+        <table class="w-full text-md bg-white shadow-md rounded mb-4 mt-4">
+          <thead>
+            <tr class="border-b bg-gray-200">
+              <th class="text-left p-3 px-5">Geomenbrana</th>
+              <th class="text-left p-3 px-5">Tds</th>
+              <th class="text-left p-3 px-5">Temperatura</th>
+              <th class="text-left p-3 px-5">Ph</th>
+              <th class="text-left p-3 px-5">Fecha</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of monitoreoData" class="border-b hover:bg-orange-100">
+              <td class="p-3 px-5">{{ item.loteID }}</td>
+              <td class="p-3 px-5">{{ item.tds }}</td>
+              <td class="p-3 px-5">{{ item.temperatura }}</td>
+              <td class="p-3 px-5">{{ item.ph }}</td>
+              <td class="p-3 px-5">{{ item.fechaHora | date:'short' }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <table class="table text-gray-400 border-separate space-y-6 text-sm">
-        <thead class="bg-blue-500 text-white">
-          <tr>
-            <th class="p-3">Geomenbrana</th>
-            <th class="p-3 text-left">Tds</th>
-            <th class="p-3 text-left">Temperatura</th>
-            <th class="p-3 text-left">Ph</th>
-            <th class="p-3 text-left">Fecha</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of monitoreoData" class="bg-blue-200 lg:text-black">
-            <td class="p-3 font-medium capitalize">{{ item.loteID }}</td>
-            <td class="p-3">{{ item.tds }}</td>
-            <td class="p-3">{{ item.temperatura }}</td>
-            <td class="p-3">{{ item.ph }}</td>
-            <td class="p-3">{{ item.fechaHora | date:'short' }}</td>
-          </tr>
-        </tbody>
-      </table>
     </div>
   </div>
 </div>
