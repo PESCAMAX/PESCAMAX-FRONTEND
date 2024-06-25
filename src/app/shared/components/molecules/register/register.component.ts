@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../../../features/monitoreo/services/api-login/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +14,7 @@ export class RegisterComponent {
   successMessage = '';
   errorMessage = '';
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   register() {
     const user = { Username: this.Username, Email: this.Email, Password: this.Password };
@@ -22,6 +23,8 @@ export class RegisterComponent {
         this.successMessage = 'User registered successfully';
         this.errorMessage = '';
         console.log('User registered successfully', response);
+        // Redirigir al usuario al login después del registro exitoso
+        this.router.navigate(['/login']);
       },
       error => {
         this.errorMessage = 'Error registering user';
@@ -31,4 +34,3 @@ export class RegisterComponent {
     );
   }
 }
-

@@ -19,6 +19,8 @@ import { AlertFormComponent } from './components/organisms/alert-form/alert-form
 import { TablaSensorComponent } from './components/molecules/tabla-sensor/tabla-sensor.component';
 import { RegisterComponent } from './components/molecules/register/register.component';
 import { LoginComponent } from './components/molecules/login/login.component';
+import { ForgotPasswordComponent } from './components/molecules/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './components/molecules/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { LoginComponent } from './components/molecules/login/login.component';
     AlertFormComponent,
     TablaSensorComponent,
     RegisterComponent,
-    LoginComponent // Asegúrate de que este componente está declarado aquí
+    LoginComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent // Asegúrate de que este componente está declarado aquí
   ],
   imports: [
     CommonModule,
