@@ -36,6 +36,16 @@ export class ApiService {
       .pipe(catchError(this.handleError));
   }
 
+  crearAlerta(alerta: Alerta): Observable<Alerta> {
+    return this.http.post<Alerta>(`${this.baseUrl}/api/Alerta`, alerta)
+      .pipe(catchError(this.handleError));
+  }
+
+  obtenerAlertas(): Observable<Alerta[]> {
+    return this.http.get<Alerta[]>(`${this.baseUrl}/api/Alerta`)
+      .pipe(catchError(this.handleError));
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // Error del lado del cliente o de red.
@@ -69,4 +79,12 @@ export interface Especie {
   temperaturaMaximo: number;
   phMinimo: number;
   phMaximo: number;
+}
+
+export interface Alerta {
+  id?: number;
+  especieID: number;
+  loteID: number;
+  descripcion: string;
+  fecha?: Date;
 }

@@ -1,0 +1,27 @@
+<!-- historial-alertas.component.html -->
+
+<div class="text-gray-900 bg-gray-200">
+    <div class="p-4 flex">
+      <h1 class="text-3xl">Historial de Alertas</h1>
+    </div>
+    <div class="px-3 py-4 flex justify-center">
+      <table class="w-full text-md bg-white shadow-md rounded mb-4">
+        <thead>
+          <tr class="border-b">
+            <th class="text-left p-3 px-5">Especie ID</th>
+            <th class="text-left p-3 px-5">Lote ID</th>
+            <th class="text-left p-3 px-5">Descripción</th>
+            <th class="text-left p-3 px-5">Fecha</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let alerta of alertas" class="border-b hover:bg-orange-100">
+            <td class="p-3 px-5">{{ alerta.especieID }}</td>
+            <td class="p-3 px-5">{{ alerta.loteID }}</td>
+            <td class="p-3 px-5">{{ alerta.descripcion }}</td>
+            <td class="p-3 px-5">{{ alerta.fecha | date:'medium' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

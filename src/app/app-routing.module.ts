@@ -14,6 +14,7 @@ import { CardAlertsComponent } from './shared/components/molecules/card-alerts/c
 import { LoginComponent } from './shared/components/molecules/login/login.component';
 import { RegisterComponent } from './shared/components/molecules/register/register.component';
 import { AppComponent } from './app.component';
+import { HistorialAlertasComponent } from './shared/components/molecules/historial-alertas/historial-alertas.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,12 @@ const routes: Routes = [
     path: 'gestion-de-parametros',
     loadChildren: () => import('./features/monitoreo/pages/gestion-de-parametros/gestion-de-parametros.module').then(m => m.GestionDeParametrosModule)
   },
+  {
+    path: 'historial',
+    component: HistorialAlertasComponent
+  },
+
+
   {
     path: 'crear-especie',
     component: CrearEspecieComponent
