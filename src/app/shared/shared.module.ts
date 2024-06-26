@@ -19,6 +19,8 @@ import { AlertFormComponent } from './components/organisms/alert-form/alert-form
 import { TablaSensorComponent } from './components/molecules/tabla-sensor/tabla-sensor.component';
 import { RegisterComponent } from './components/molecules/register/register.component';
 import { LoginComponent } from './components/molecules/login/login.component';
+import { ForgotPasswordComponent } from './components/molecules/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './components/molecules/reset-password/reset-password.component';
 import { HistorialAlertasComponent } from './components/molecules/historial-alertas/historial-alertas.component';
 
 @NgModule({
@@ -39,7 +41,10 @@ import { HistorialAlertasComponent } from './components/molecules/historial-aler
     TablaSensorComponent,
     RegisterComponent,
     LoginComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent, // Asegúrate de que este componente está declarado aquí
     HistorialAlertasComponent // Asegúrate de que este componente está declarado aquí
+
   ],
   imports: [
     CommonModule,

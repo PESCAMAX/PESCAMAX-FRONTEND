@@ -14,7 +14,11 @@ import { CardAlertsComponent } from './shared/components/molecules/card-alerts/c
 import { LoginComponent } from './shared/components/molecules/login/login.component';
 import { RegisterComponent } from './shared/components/molecules/register/register.component';
 import { AppComponent } from './app.component';
+import { ForgotPasswordComponent } from './shared/components/molecules/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './shared/components/molecules/reset-password/reset-password.component';
+
 import { HistorialAlertasComponent } from './shared/components/molecules/historial-alertas/historial-alertas.component';
+
 
 
 const routes: Routes = [
@@ -82,7 +86,13 @@ const routes: Routes = [
   {
     path: 'register',
     component : RegisterComponent
-  }
+  },
+  { path: 'forgot-password', 
+    component: ForgotPasswordComponent
+  },
+  { path: 'reset-password',
+    component: ResetPasswordComponent 
+  },
 ];
 
 @NgModule({
