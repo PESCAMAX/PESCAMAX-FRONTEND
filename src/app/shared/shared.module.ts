@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-
 // Componentes
 import { ButtonEnviarComponent } from './components/atoms/button-enviar/button-enviar.component';
 import { FlechaDespliegueComponent } from './components/atoms/flecha-despliegue/flecha-despliegue.component';
@@ -20,7 +19,6 @@ import { TablaSensorComponent } from './components/molecules/tabla-sensor/tabla-
 import { RegisterComponent } from './components/molecules/register/register.component';
 import { LoginComponent } from './components/molecules/login/login.component';
 import { HistorialAlertasComponent } from './components/molecules/historial-alertas/historial-alertas.component';
-
 @NgModule({
   declarations: [
     ButtonEnviarComponent,
@@ -59,7 +57,8 @@ import { HistorialAlertasComponent } from './components/molecules/historial-aler
     AlertFormComponent,
     TablaSensorComponent,
     RegisterComponent, // Exporta tus componentes aquí si los necesitas en otros módulos
-    LoginComponent
+    LoginComponent,
+    HistorialAlertasComponent
   ]
 })
 export class SharedModule { }
