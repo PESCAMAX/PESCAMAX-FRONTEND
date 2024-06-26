@@ -7,7 +7,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ApiService {
-  private baseUrl = 'http://localhost:5026'; // URL base de tu backend
+  private baseUrl = 'http://localhost:6754'; // URL base de tu backend
 
   constructor(private http: HttpClient) {}
 
@@ -33,6 +33,16 @@ export class ApiService {
 
   listarMonitoreo(): Observable<{ response: any[] }> {
     return this.http.get<{ response: any[] }>(`${this.baseUrl}/api/Monitoreo/Leer`)
+      .pipe(catchError(this.handleError));
+  }
+
+  crearAlerta(alerta: Alerta): Observable<Alerta> {
+    return this.http.post<Alerta>(`${this.baseUrl}/api/Alerta`, alerta)
+      .pipe(catchError(this.handleError));
+  }
+
+  obtenerAlertas(): Observable<Alerta[]> {
+    return this.http.get<Alerta[]>(`${this.baseUrl}/api/Alerta`)
       .pipe(catchError(this.handleError));
   }
 
@@ -69,4 +79,12 @@ export interface Especie {
   temperaturaMaximo: number;
   phMinimo: number;
   phMaximo: number;
+}
+
+export interface Alerta {
+  id?: number;
+  especieID: number;
+  loteID: number;
+  descripcion: string;
+  fecha?: Date;
 }

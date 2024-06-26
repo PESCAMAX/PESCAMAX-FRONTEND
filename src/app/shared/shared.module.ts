@@ -21,6 +21,7 @@ import { RegisterComponent } from './components/molecules/register/register.comp
 import { LoginComponent } from './components/molecules/login/login.component';
 import { ForgotPasswordComponent } from './components/molecules/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './components/molecules/reset-password/reset-password.component';
+import { HistorialAlertasComponent } from './components/molecules/historial-alertas/historial-alertas.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,9 @@ import { ResetPasswordComponent } from './components/molecules/reset-password/re
     RegisterComponent,
     LoginComponent,
     ForgotPasswordComponent,
-    ResetPasswordComponent // Asegúrate de que este componente está declarado aquí
+    ResetPasswordComponent, // Asegúrate de que este componente está declarado aquí
+    HistorialAlertasComponent // Asegúrate de que este componente está declarado aquí
+
   ],
   imports: [
     CommonModule,
@@ -61,7 +64,8 @@ import { ResetPasswordComponent } from './components/molecules/reset-password/re
     AlertFormComponent,
     TablaSensorComponent,
     RegisterComponent, // Exporta tus componentes aquí si los necesitas en otros módulos
-    LoginComponent
+    LoginComponent,
+    HistorialAlertasComponent
   ]
 })
 export class SharedModule { }

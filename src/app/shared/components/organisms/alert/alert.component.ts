@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertService } from '../../../../features/monitoreo/services/api-alert/alert.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-alert',
@@ -23,8 +24,10 @@ export class AlertComponent implements OnInit {
     });
   }
 
+
   onViewMore(): void {
-    // Logic for view more
+    // Redirigir al historial de alertas
+
   }
 
   onDismiss(): void {

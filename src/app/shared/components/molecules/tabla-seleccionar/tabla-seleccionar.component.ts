@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../../../features/monitoreo/services/api-form/api.service';
+import { Alerta, ApiService } from '../../../../features/monitoreo/services/api-form/api.service';
 import { AlertService } from '../../../../features/monitoreo/services/api-alert/alert.service';
+
 
 @Component({
   selector: 'app-tabla-seleccionar',
@@ -74,10 +75,21 @@ export class TablaSeleccionarComponent implements OnInit {
     }
   
     const problemas = this.obtenerProblemas(especie, lote);
-  
+
     if (problemas.length > 0) {
       console.log('Problemas detectados:', problemas.join(', '));
       this.alertService.showAlert('danger', 'Parámetros fuera del rango seguro', problemas.join(', '));
+      
+      // Crear alerta
+      const alerta:Alerta = {
+        especieID: especie.id,
+        loteID: parseInt(loteId),
+        descripcion: problemas.join(', ')
+      };
+      this.apiService.crearAlerta(alerta).subscribe({
+        next: (response) => console.log('Alerta creada:', response),
+        error: (error) => console.error('Error al crear alerta:', error)
+      });
     } else {
       console.log('Todos los parámetros están dentro del rango seguro.');
       this.alertService.showAlert('info', 'Validación exitosa', 'Todos los parámetros están dentro del rango seguro.');
