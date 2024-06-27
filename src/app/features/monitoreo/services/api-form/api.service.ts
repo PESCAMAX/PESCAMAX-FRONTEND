@@ -84,6 +84,7 @@ export interface Especie {
 export interface Alerta {
   id?: number;
   especieID: number;
+  nombre: string;
   loteID: number;
   descripcion: string;
   fecha?: Date;

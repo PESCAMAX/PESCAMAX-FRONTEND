@@ -83,6 +83,7 @@ export class TablaSeleccionarComponent implements OnInit {
       // Crear alerta
       const alerta:Alerta = {
         especieID: especie.id,
+        nombre: especie.nombreEspecie,
         loteID: parseInt(loteId),
         descripcion: problemas.join(', ')
       };
