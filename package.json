@@ -21,6 +21,7 @@
     "@auth0/angular-jwt": "^5.2.0",
     "flowbite": "^2.3.0",
     "flowbite-datepicker": "^1.2.6",
+    "powerbi-client": "^2.23.1",
     "rxjs": "~7.8.0",
     "zone.js": "~0.14.3"
   },
