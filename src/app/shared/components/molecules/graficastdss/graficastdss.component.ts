@@ -1,19 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 
-import Chart from 'chart.js/auto';
+import { Chart } from 'chart.js/auto';
 
 @Component({
-  selector: 'app-grafica',
-  templateUrl: './grafica.component.html',
-  styleUrl: './grafica.component.css'
+  selector: 'app-graficastdss',
+  templateUrl: './graficastdss.component.html',
+  styleUrl: './graficastdss.component.css'
 })
-export class GraficaComponent implements OnInit {
+export class GraficastdssComponent implements OnInit {
 
   public chart: any;
+
   ngOnInit(): void {
     this.createChart();
-
   }
+
+
   createChart(){
   
     this.chart = new Chart("MyChart", {
@@ -38,7 +40,7 @@ export class GraficaComponent implements OnInit {
           {
             label: "Profit",
             data: ['542', '542', '536', '327', '17','0.00', '538', '541'],
-            backgroundColor: 'purple'
+            backgroundColor: 'yellow'
           }  
         ]
       },

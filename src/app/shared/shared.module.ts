@@ -23,6 +23,9 @@ import { ForgotPasswordComponent } from './components/molecules/forgot-password/
 import { ResetPasswordComponent } from './components/molecules/reset-password/reset-password.component';
 import { HistorialAlertasComponent } from './components/molecules/historial-alertas/historial-alertas.component';
 import { GraficaComponent } from './components/molecules/grafica/grafica.component';
+import { GraficastdssComponent } from './components/molecules/graficastdss/graficastdss.component';
+import { GraficasTemperaturaComponent } from './components/molecules/graficas-temperatura/graficas-temperatura.component';
+
 
 @NgModule({
   declarations: [
@@ -45,7 +48,9 @@ import { GraficaComponent } from './components/molecules/grafica/grafica.compone
     ForgotPasswordComponent,
     ResetPasswordComponent, // Asegúrate de que este componente está declarado aquí
     HistorialAlertasComponent,
-    GraficaComponent // Asegúrate de que este componente está declarado aquí
+    GraficaComponent,
+    GraficastdssComponent,
+    GraficasTemperaturaComponent, // Asegúrate de que este componente está declarado aquí
 
   ],
   imports: [
@@ -68,7 +73,9 @@ import { GraficaComponent } from './components/molecules/grafica/grafica.compone
     RegisterComponent, // Exporta tus componentes aquí si los necesitas en otros módulos
     LoginComponent,
     HistorialAlertasComponent,
-    GraficaComponent
+    GraficaComponent,
+    GraficastdssComponent,
+    GraficasTemperaturaComponent
   ]
 })
 export class SharedModule { }
