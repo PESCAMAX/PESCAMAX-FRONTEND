@@ -1,53 +1,72 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Chart } from 'chart.js/auto';
+import { ApiService } from '../../../../features/monitoreo/services/api-form/api.service';
 
 @Component({
   selector: 'app-graficastdss',
   templateUrl: './graficastdss.component.html',
-  styleUrl: './graficastdss.component.css'
+  styleUrls: ['./graficastdss.component.css']
 })
 export class GraficastdssComponent implements OnInit {
 
   public chart: any;
 
+  constructor(private apiService: ApiService) {}
+
   ngOnInit(): void {
-    this.createChart();
+    this.loadDataAndCreateChart();
   }
 
+  loadDataAndCreateChart() {
+    this.apiService.listarMonitoreo().subscribe(
+      (data) => {
+        const labels = data.response.map(item => new Date(item.fechaHora).toLocaleDateString());
+        const tdsData = data.response.map(item => item.tds);
+        const temperaturaData = data.response.map(item => item.temperatura);
+        const phData = data.response.map(item => item.ph);
 
-  createChart(){
-  
+        this.createChart(labels, tdsData, temperaturaData, phData);
+      },
+      (error) => {
+        console.error('Error loading data', error);
+      }
+    );
+  }
+
+  createChart(labels: string[], tdsData: number[], temperaturaData: number[], phData: number[]) {
     this.chart = new Chart("MyChart", {
-      type: 'line', //this denotes tha type of chart
-
-      data: {// values on X-Axis
-        labels: ['2022-05-10', 
-                 '2022-05-11', 
-                 '2022-05-12',
-                 '2022-05-13',
-								 '2022-05-14',
-                 '2022-05-15', 
-                 '2022-05-16',
-                 '2022-05-17', 
-                ], 
-	       datasets: [
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
           {
-            label: "Sales",
-            data: ['467','576', '572', '79', '92','574', '573', '576'],
-            backgroundColor: 'red'
-          },
-          {
-            label: "Profit",
-            data: ['542', '542', '536', '327', '17','0.00', '538', '541'],
-            backgroundColor: 'yellow'
-          }  
+            label: "TDS",
+            data: tdsData,
+            backgroundColor: 'blue',
+            borderColor: 'blue',
+            fill: false
+          }
         ]
       },
       options: {
-        aspectRatio:2.5
+        aspectRatio: 2.5,
+        scales: {
+          x: {
+            display: true,
+            title: {
+              display: true,
+              text: 'Fecha'
+            }
+          },
+          y: {
+            display: true,
+            title: {
+              display: true,
+              text: 'Valor'
+            }
+          }
+        }
       }
-      
     });
   }
 }

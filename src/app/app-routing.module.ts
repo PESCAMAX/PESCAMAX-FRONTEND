@@ -16,10 +16,9 @@ import { RegisterComponent } from './shared/components/molecules/register/regist
 import { AppComponent } from './app.component';
 import { ForgotPasswordComponent } from './shared/components/molecules/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './shared/components/molecules/reset-password/reset-password.component';
-
 import { HistorialAlertasComponent } from './shared/components/molecules/historial-alertas/historial-alertas.component';
-
-
+import { GraficasTemperaturaComponent } from './shared/components/molecules/graficas-temperatura/graficas-temperatura.component';
+import { GraficaComponent } from './shared/components/molecules/grafica/grafica.component';
 
 const routes: Routes = [
   {
@@ -45,8 +44,13 @@ const routes: Routes = [
     component: SeleccionarEspecieComponent
   },
   {
-    path: 'grafica-temperatura',
-    component: GraficaTemperaturaComponent
+    path: 'temperatura',
+    component: GraficasTemperaturaComponent
+
+  },
+  {
+    path: 'home',
+    component: GraficaComponent
 
   },
   

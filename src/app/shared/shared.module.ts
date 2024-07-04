@@ -25,6 +25,9 @@ import { HistorialAlertasComponent } from './components/molecules/historial-aler
 import { GraficaComponent } from './components/molecules/grafica/grafica.component';
 import { GraficastdssComponent } from './components/molecules/graficastdss/graficastdss.component';
 import { GraficasTemperaturaComponent } from './components/molecules/graficas-temperatura/graficas-temperatura.component';
+import { GraphPhComponent } from './components/molecules/graph-ph/graph-ph.component';
+
+
 
 
 @NgModule({
@@ -50,7 +53,8 @@ import { GraficasTemperaturaComponent } from './components/molecules/graficas-te
     HistorialAlertasComponent,
     GraficaComponent,
     GraficastdssComponent,
-    GraficasTemperaturaComponent, // Asegúrate de que este componente está declarado aquí
+    GraficasTemperaturaComponent,
+    GraphPhComponent// Asegúrate de que este componente está declarado aquí
 
   ],
   imports: [
@@ -75,7 +79,9 @@ import { GraficasTemperaturaComponent } from './components/molecules/graficas-te
     HistorialAlertasComponent,
     GraficaComponent,
     GraficastdssComponent,
-    GraficasTemperaturaComponent
+    GraficasTemperaturaComponent,
+    GraphPhComponent
+
   ]
 })
 export class SharedModule { }

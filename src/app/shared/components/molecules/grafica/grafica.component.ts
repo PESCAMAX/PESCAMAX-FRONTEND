@@ -1,51 +1,65 @@
 import { Component, OnInit } from '@angular/core';
-
-import Chart from 'chart.js/auto';
+import { Chart } from 'chart.js/auto';
+import { ApiService } from '../../../../features/monitoreo/services/api-form/api.service'; // Asegúrate de importar tu servicio
 
 @Component({
   selector: 'app-grafica',
   templateUrl: './grafica.component.html',
-  styleUrl: './grafica.component.css'
+  styleUrls: ['./grafica.component.css']
 })
 export class GraficaComponent implements OnInit {
 
   public chart: any;
+
+  constructor(private apiService: ApiService) {}
+
   ngOnInit(): void {
-    this.createChart();
-
+    this.apiService.listarMonitoreo().subscribe(data => {
+      const fechas = data.response.map(item => item.fechaHora);
+      const temperaturas = data.response.map(item => item.temperatura);
+      const phs = data.response.map(item => item.ph);
+      const tdss = data.response.map(item => item.tds); // Actualizamos para TDS
+      this.createChart(fechas, temperaturas, phs, tdss);
+    });
   }
-  createChart(){
-  
-    this.chart = new Chart("MyChart", {
-      type: 'line', //this denotes tha type of chart
 
-      data: {// values on X-Axis
-        labels: ['2022-05-10', 
-                 '2022-05-11', 
-                 '2022-05-12',
-                 '2022-05-13',
-								 '2022-05-14',
-                 '2022-05-15', 
-                 '2022-05-16',
-                 '2022-05-17', 
-                ], 
-	       datasets: [
+  createChart(labels: string[], tempData: number[], phData: number[], tdsData: number[]) {
+    this.chart = new Chart("MyChart", {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
           {
-            label: "Sales",
-            data: ['467','576', '572', '79', '92','574', '573', '576'],
-            backgroundColor: 'red'
+            label: "Temperatura",
+            data: tempData,
+            backgroundColor: 'red',
+            borderColor: 'red',
+            fill: false
           },
           {
-            label: "Profit",
-            data: ['542', '542', '536', '327', '17','0.00', '538', '541'],
-            backgroundColor: 'purple'
-          }  
+            label: "pH",
+            data: phData,
+            backgroundColor: 'green',
+            borderColor: 'green',
+            fill: false
+          },
+          {
+            label: "TDS",
+            data: tdsData,
+            backgroundColor: 'blue',
+            borderColor: 'blue',
+            fill: false
+          }
         ]
       },
       options: {
-        aspectRatio:2.5
+        aspectRatio: 2.5,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
       }
-      
     });
   }
 }

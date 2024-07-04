@@ -1,67 +1,42 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Chart } from 'chart.js/auto';
+import { ApiService } from '../../../../features/monitoreo/services/api-form/api.service';// Importar el servicio
 
 @Component({
-  selector: 'app-graficas-temperatura',
+  selector: 'app-grafica-temperatura',
   templateUrl: './graficas-temperatura.component.html',
-  styleUrl: './graficas-temperatura.component.css'
+  styleUrls: ['./graficas-temperatura.component.css']
 })
 export class GraficasTemperaturaComponent implements OnInit {
 
-
-  
   public chart: any;
 
+  constructor(private apiService: ApiService) {} // Inyectar el servicio
+
   ngOnInit(): void {
-    this.createChart();
+    this.apiService.listarMonitoreo().subscribe(data => {
+      const labels = data.response.map(item => item.fechaHora);
+      const temperaturas = data.response.map(item => item.temperatura);
+      this.createChart(labels, temperaturas);
+    });
   }
 
-
-  createChart(){
-  
+  createChart(labels: string[], temperaturas: number[]) {
     this.chart = new Chart("MyChart", {
-      type: 'line', //this denotes tha type of chart
-
-      data: {// values on X-Axis
-        labels: ['2022-05-10', 
-                 '2022-05-11', 
-                 '2022-05-12',
-                 '2022-05-13',
-								 '2022-05-14',
-                 '2022-05-15', 
-                 '2022-05-16',
-                 '2022-05-17', 
-                 '2024-06-27',
-                 
-                ], 
-	       datasets: [
+      type: 'line', //this denotes the type of chart
+      data: {
+        labels: labels,
+        datasets: [
           {
-            label: "Sales",
-            data: ['467','576', '572', '79', '92','574', '573', '576'],
+            label: "Temperatura",
+            data: temperaturas,
             backgroundColor: 'pink'
-          },
-          {
-            label: "Profit",
-            data: ['542', '542', '536', '327', '17','0.00', '538', '541'],
-            backgroundColor: 'black'
-          },
-          {
-            label: "Profit",
-            data: ['542', '542', '536', '327', '17','0.00', '538', '541'],
-            backgroundColor: 'blue'
-          },
-          {
-            label: "Sales",
-            data: ['467','576', '572', '79', '92','574', '573', '576'],
-            backgroundColor: 'yellow'
           }
         ]
       },
       options: {
-        aspectRatio:2.5
+        aspectRatio: 2.5
       }
-      
     });
   }
 }
