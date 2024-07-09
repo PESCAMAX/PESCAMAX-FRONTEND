@@ -10,7 +10,6 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { SistemaDeAlertasModule } from './features/monitoreo/pages/sistema-de-alertas/sistema-de-alertas.module'; // Ajusta la ruta según corresponda
 import { DashboardModule } from './features/monitoreo/pages/dashboard/dashboard.module';
 import { HistorialAlertasComponent } from './shared/components/molecules/historial-alertas/historial-alertas.component';
-import { TiendaComponent } from './features/tienda/tienda.component';
 
 
 export function tokenGetter() {
@@ -20,7 +19,7 @@ export function tokenGetter() {
 @NgModule({
   declarations: [
     AppComponent,
-    TiendaComponent,
+   
     // otros componentes
   ],
   imports: [

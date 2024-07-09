@@ -19,7 +19,7 @@ import { ResetPasswordComponent } from './shared/components/molecules/reset-pass
 import { HistorialAlertasComponent } from './shared/components/molecules/historial-alertas/historial-alertas.component';
 import { GraficasTemperaturaComponent } from './shared/components/molecules/graficas-temperatura/graficas-temperatura.component';
 import { GraficaComponent } from './shared/components/molecules/grafica/grafica.component';
-
+import { ProductosComponent } from './features/tienda/components-tienda/moleculas-tienda/productos/productos.component';
 const routes: Routes = [
   {
     path: 'gestion-de-parametros',
@@ -28,6 +28,10 @@ const routes: Routes = [
   {
     path: 'historial',
     component: HistorialAlertasComponent
+  },
+  {
+    path: 'productos',
+    component: ProductosComponent
   },
 
 
