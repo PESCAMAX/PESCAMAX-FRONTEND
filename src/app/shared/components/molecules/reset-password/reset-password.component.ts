@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../../features/monitoreo/services/api-login/auth.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-reset-password',
@@ -8,39 +9,57 @@ import { AuthService } from '../../../../features/monitoreo/services/api-login/a
   styleUrls: ['./reset-password.component.css']
 })
 export class ResetPasswordComponent implements OnInit {
-  email: string = '';
-  token: string = '';
-  password: string = '';
-  successMessage: string = '';
-  errorMessage: string = '';
+  resetPasswordForm: FormGroup;
+  token: string | null = null;
+  email: string | null = null;
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
-    private authService: AuthService
-  ) {}
-
-  ngOnInit(): void {
-    this.email = this.route.snapshot.queryParamMap.get('email') || '';
-    this.token = this.route.snapshot.queryParamMap.get('token') || '';
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {
+    this.resetPasswordForm = this.fb.group({
+      email: [{ value: '', disabled: true }, [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', Validators.required]
+    });
   }
 
-  onSubmit() {
-    this.authService.resetPassword(this.email, this.token, this.password).subscribe(
-      response => {
-        this.successMessage = response.message;
-        this.errorMessage = ''; // Limpiar cualquier mensaje de error previo
-        // Redirigir al usuario a la página de inicio de sesión después de unos segundos
-        setTimeout(() => this.router.navigate(['/login']), 3000);
-      },
-      error => {
-        if (error.error && error.error.message) {
-          this.errorMessage = error.error.message;
-        } else {
-          this.errorMessage = 'Error al restablecer la contraseña.';
-        }
-        this.successMessage = ''; // Limpiar cualquier mensaje de éxito previo
+  ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      this.token = params['token'];
+      this.email = params['email'];
+      console.log("Token:", this.token);
+      console.log("Email:", this.email);
+      this.resetPasswordForm.get('email')?.setValue(this.email);
+    });
+  }
+
+  onSubmit(): void {
+    if (this.resetPasswordForm.valid && this.token && this.email) {
+      const password = this.resetPasswordForm.get('password')?.value;
+      const confirmPassword = this.resetPasswordForm.get('confirmPassword')?.value;
+
+      if (password !== confirmPassword) {
+        alert("Las contraseñas no coinciden.");
+        return;
       }
-    );
+
+      console.log("Enviando solicitud de restablecimiento de contraseña con token:", this.token);
+
+      this.authService.resetPassword(this.email, this.token, password).subscribe(
+        response => {
+          alert("Contraseña restablecida exitosamente.");
+          this.router.navigate(['/login']);
+        },
+        error => {
+          alert("Error al restablecer la contraseña.");
+          console.error(error);
+        }
+      );
+    } else {
+      alert("Por favor complete el formulario correctamente.");
+    }
   }
 }
