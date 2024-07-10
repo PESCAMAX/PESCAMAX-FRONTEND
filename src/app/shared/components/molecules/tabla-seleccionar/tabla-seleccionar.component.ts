@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Alerta, ApiService } from '../../../../features/monitoreo/services/api-form/api.service';
+import { Alerta, ApiService, Especie, Monitoreo } from '../../../../features/monitoreo/services/api-form/api.service';
 import { AlertService } from '../../../../features/monitoreo/services/api-alert/alert.service';
-
 
 @Component({
   selector: 'app-tabla-seleccionar',
@@ -9,16 +8,16 @@ import { AlertService } from '../../../../features/monitoreo/services/api-alert/
   styleUrls: ['./tabla-seleccionar.component.css']
 })
 export class TablaSeleccionarComponent implements OnInit {
-  especies: any[] = [];
-  lotes: any[] = [];
-  selectedLote: { [key: string]: string } = {};
+  especies: Especie[] = [];
+  lotes: Monitoreo[] = [];
+  selectedLote: { [key: number]: number } = {};
 
   constructor(private apiService: ApiService, private alertService: AlertService) {}
 
   ngOnInit(): void {
     this.apiService.listarEspecies().subscribe({
       next: (response) => {
-        console.log('Especies:', response);  // Verifica aquí los datos de las especies
+        console.log('Especies:', response);
         this.especies = response;
       },
       error: (error) => {
@@ -38,13 +37,13 @@ export class TablaSeleccionarComponent implements OnInit {
     });
   }
 
-  onLoteChange(event: Event, especieId: string): void {
+  onLoteChange(event: Event, especieId: number): void {
     const selectElement = event.target as HTMLSelectElement;
-    this.selectedLote[especieId] = selectElement.value;
+    this.selectedLote[especieId] = parseInt(selectElement.value, 10);
     console.log(`Lote seleccionado para especie ${especieId}: ${selectElement.value}`);
   }
 
-  guardarSeleccion(especieId: string): void {
+  guardarSeleccion(especieId: number): void {
     const loteId = this.selectedLote[especieId];
   
     if (!loteId) {
@@ -56,10 +55,11 @@ export class TablaSeleccionarComponent implements OnInit {
     console.log(`Especie ID: ${especieId}, Lote ID: ${loteId}`);
     this.verificarValores(especieId, loteId);
   }
-  verificarValores(especieId: string, loteId: string): void {
+
+  verificarValores(especieId: number, loteId: number): void {
     console.log('Verificando valores para especie ID:', especieId, 'y lote ID:', loteId);
-    const especie = this.especies.find(e => e.id === parseInt(especieId, 10));
-    const lote = this.lotes.find(l => l.iD_M.toString() === loteId);
+    const especie = this.especies.find(e => e.Id === especieId);
+    const lote = this.lotes.find(l => l.ID_M === loteId);
   
     if (!especie) {
       console.error('No se encontró la especie correspondiente con ID:', especieId);
@@ -81,11 +81,11 @@ export class TablaSeleccionarComponent implements OnInit {
       this.alertService.showAlert('danger', 'Parámetros fuera del rango seguro', problemas.join(', '));
       
       // Crear alerta
-      const alerta:Alerta = {
-        especieID: especie.id,
-        nombre: especie.nombreEspecie,
-        loteID: parseInt(loteId),
-        descripcion: problemas.join(', ')
+      const alerta: Alerta = {
+        EspecieID: especie.Id,
+        Nombre: especie.NombreEspecie,
+        LoteID: loteId,
+        Descripcion: problemas.join(', ')
       };
       this.apiService.crearAlerta(alerta).subscribe({
         next: (response) => console.log('Alerta creada:', response),
@@ -96,21 +96,23 @@ export class TablaSeleccionarComponent implements OnInit {
       this.alertService.showAlert('info', 'Validación exitosa', 'Todos los parámetros están dentro del rango seguro.');
     }
   }
-  
 
-  obtenerProblemas(especie: any, lote: any): string[] {
+  obtenerProblemas(especie: Especie, lote: Monitoreo): string[] {
     const problemas = [];
   
-    if (lote.tds < especie.tdsMinimo || lote.tds > especie.tdsMaximo) {
-      problemas.push(`TDS está fuera del rango seguro (${especie.tdsMinimo}-${especie.tdsMaximo}). Actual: ${lote.tds}`);
+    // Validación de TDS
+    if (lote.tds < especie.TdsMinimo || lote.tds > especie.TdsMaximo) {
+      problemas.push(`TDS está fuera del rango seguro (${especie.TdsMinimo}-${especie.TdsMaximo}). Actual: ${lote.tds}`);
     }
   
-    if (lote.temperatura < especie.temperaturaMinimo || lote.temperatura > especie.temperaturaMaximo) {
-      problemas.push(`Temperatura está fuera del rango seguro (${especie.temperaturaMinimo}-${especie.temperaturaMaximo}). Actual: ${lote.temperatura}`);
+    // Validación de Temperatura
+    if (lote.Temperatura < especie.TemperaturaMinimo || lote.Temperatura > especie.TemperaturaMaximo) {
+      problemas.push(`Temperatura está fuera del rango seguro (${especie.TemperaturaMinimo}-${especie.TemperaturaMaximo}). Actual: ${lote.Temperatura}`);
     }
   
-    if (lote.ph < especie.phMinimo || lote.ph > especie.phMaximo) {
-      problemas.push(`pH está fuera del rango seguro (${especie.phMinimo}-${especie.phMaximo}). Actual: ${lote.ph}`);
+    // Validación de pH
+    if (lote.PH < especie.PhMinimo || lote.PH > especie.PhMaximo) {
+      problemas.push(`pH está fuera del rango seguro (${especie.PhMinimo}-${especie.PhMaximo}). Actual: ${lote.PH}`);
     }
   
     return problemas;

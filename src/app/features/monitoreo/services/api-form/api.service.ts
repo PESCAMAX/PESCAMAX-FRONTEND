@@ -64,28 +64,28 @@ export class ApiService {
 export interface Monitoreo {
   ID_M: number;
   tds: number;
-  temperatura: number;
-  ph: number;
-  fechaHora: Date;
-  loteID: number;
+  Temperatura: number;
+  PH: number;
+  FechaHora: Date;
+  LoteID: number;
 }
 
 export interface Especie {
-  id: number;
-  nombreEspecie: string;
-  tdsMinimo: number;
-  tdsMaximo: number;
-  temperaturaMinimo: number;
-  temperaturaMaximo: number;
-  phMinimo: number;
-  phMaximo: number;
+  Id: number;
+  NombreEspecie: string;
+  TdsMinimo: number;
+  TdsMaximo: number;
+  TemperaturaMinimo: number;
+  TemperaturaMaximo: number;
+  PhMinimo: number;
+  PhMaximo: number;
 }
 
 export interface Alerta {
-  id?: number;
-  especieID: number;
-  nombre: string;
-  loteID: number;
-  descripcion: string;
-  fecha?: Date;
+  Id?: number;
+  EspecieID: number;
+  Nombre: string;
+  LoteID: number;
+  Descripcion: string;
+  Fecha?: Date;
 }

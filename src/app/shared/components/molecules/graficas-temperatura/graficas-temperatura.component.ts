@@ -15,8 +15,8 @@ export class GraficasTemperaturaComponent implements OnInit {
 
   ngOnInit(): void {
     this.apiService.listarMonitoreo().subscribe(data => {
-      const labels = data.response.map(item => item.fechaHora);
-      const temperaturas = data.response.map(item => item.temperatura);
+      const labels = data.response.map(item => item.FechaHora);
+      const temperaturas = data.response.map(item => item.Temperatura);
       this.createChart(labels, temperaturas);
     });
   }

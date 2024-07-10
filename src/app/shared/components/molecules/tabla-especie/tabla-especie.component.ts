@@ -4,14 +4,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 
 interface Especie {
-  id: number;
-  nombreEspecie: string;
-  tdsMinimo: number;
-  tdsMaximo: number;
-  temperaturaMinimo: number;
-  temperaturaMaximo: number;
-  phMinimo: number;
-  phMaximo: number;
+  Id: number;
+  NombreEspecie: string;
+  TdsMinimo: number;
+  TdsMaximo: number;
+  TemperaturaMinimo: number;
+  TemperaturaMaximo: number;
+  PhMinimo: number;
+  PhMaximo: number;
 }
 
 @Component({
@@ -36,13 +36,13 @@ export class TablaEspecieComponent implements OnInit {
 
   constructor(private apiService: ApiService, private fb: FormBuilder) {
     this.especieForm = this.fb.group({
-      nombreEspecie: ['', Validators.required],
-      tdsMinimo: ['', Validators.required],
-      tdsMaximo: ['', Validators.required],
-      temperaturaMinimo: ['', Validators.required],
-      temperaturaMaximo: ['', Validators.required],
-      phMinimo: ['', Validators.required],
-      phMaximo: ['', Validators.required],
+      NombreEspecie: ['', Validators.required],
+      TdsMinimo: ['', Validators.required],
+      TdsMaximo: ['', Validators.required],
+      TemperaturaMinimo: ['', Validators.required],
+      TemperaturaMaximo: ['', Validators.required],
+      PhMinimo: ['', Validators.required],
+      PhMaximo: ['', Validators.required],
     });
   }
 
@@ -70,7 +70,7 @@ export class TablaEspecieComponent implements OnInit {
   filtrarEspecies(): void {
     if (this.searchText) {
       this.especiesFiltradas = this.especies.filter(especie =>
-        especie.nombreEspecie.toLowerCase().includes(this.searchText.toLowerCase())
+        especie.NombreEspecie.toLowerCase().includes(this.searchText.toLowerCase())
       );
     } else {
       this.especiesFiltradas = this.especies;

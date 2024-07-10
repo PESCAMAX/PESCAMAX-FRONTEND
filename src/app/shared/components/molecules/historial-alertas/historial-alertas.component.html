@@ -14,12 +14,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let alerta of alertas" class="border-b hover:bg-orange-100">
-          <td class="p-3 px-5">{{ alerta.especieID }}</td>
-          <td class="p-3 px-5">{{ alerta.nombre }}</td>
-          <td class="p-3 px-5">{{ alerta.loteID }}</td>
-          <td class="p-3 px-5">{{ alerta.descripcion }}</td>
-          <td class="p-3 px-5">{{ alerta.fecha | date:'medium' }}</td>
+        <tr *ngFor="let Alerta of alertas" class="border-b hover:bg-orange-100">
+          <td class="p-3 px-5">{{ Alerta.EspecieID }}</td>
+          <td class="p-3 px-5">{{ Alerta.Nombre }}</td>
+          <td class="p-3 px-5">{{ Alerta.LoteID }}</td>
+          <td class="p-3 px-5">{{ Alerta.Descripcion }}</td>
+          <td class="p-3 px-5">{{ Alerta.Fecha | date:'medium' }}</td>
         </tr>
       </tbody>
     </table>

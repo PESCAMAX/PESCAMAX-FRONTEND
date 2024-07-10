@@ -15,8 +15,8 @@ export class GraphPhComponent implements OnInit {
 
   ngOnInit(): void {
     this.apiService.listarMonitoreo().subscribe(data => {
-      const phValues = data.response.map(item => item.ph);
-      const fechas = data.response.map(item => item.fechaHora);
+      const phValues = data.response.map(item => item.PH);
+      const fechas = data.response.map(item => item.FechaHora);
       this.createChart(fechas, phValues);
     });
   }
@@ -28,7 +28,7 @@ export class GraphPhComponent implements OnInit {
         labels: labels,
         datasets: [
           {
-            label: "pH",
+            label: "PH",
             data: data,
             backgroundColor: 'green'
           }

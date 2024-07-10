@@ -1,0 +1,6 @@
+.sticky {
+    position: sticky; /* Fijar al hacer scroll */
+    top: 0; /* Posición superior */
+    z-index: 10; /* Asegura que esté sobre el contenido */
+  }
+  

@@ -20,7 +20,7 @@ export class GraficastdssComponent implements OnInit {
   loadDataAndCreateChart() {
     this.apiService.listarMonitoreo().subscribe(
       (data) => {
-        const labels = data.response.map(item => new Date(item.fechaHora).toLocaleDateString());
+        const labels = data.response.map(item => new Date(item.FechaHora).toLocaleDateString());
         const tdsData = data.response.map(item => item.tds);
         const temperaturaData = data.response.map(item => item.temperatura);
         const phData = data.response.map(item => item.ph);

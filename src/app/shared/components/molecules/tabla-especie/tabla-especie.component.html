@@ -31,16 +31,16 @@
     </thead>
     <tbody class="block md:table-row-group">
       <tr class="bg-gray-100 border border-grey-500 md:border-none block md:table-row" *ngFor="let especie of especiesFiltradas">
-        <td class="p-2 md:border md:bg-white text-left block md:table-cell">{{ especie.id }}</td>
-        <td class="p-2 md:border md:bg-white text-left block md:table-cell">{{ especie.nombreEspecie }}</td>
-        <td class="p-2 md:border md:bg-white text-left block md:table-cell">{{ especie.tdsMinimo }}</td>
-        <td class="p-2 md:border md:bg-white text-left block md:table-cell">{{ especie.tdsMaximo }}</td>
-        <td class="p-2 md:border md:bg-white text-left block md:table-cell">{{ especie.temperaturaMinimo }}</td>
-        <td class="p-2 md:border md:bg-white text-left block md:table-cell">{{ especie.temperaturaMaximo }}</td>
-        <td class="p-2 md:border md:bg-white text-left block md:table-cell">{{ especie.phMinimo }}</td>
-        <td class="p-2 md:border md:bg-white text-left block md:table-cell">{{ especie.phMaximo }}</td>
+        <td class="p-2 md:border md:bg-white text-left block md:table-cell">{{ especie.Id }}</td>
+        <td class="p-2 md:border md:bg-white text-left block md:table-cell">{{ especie.NombreEspecie }}</td>
+        <td class="p-2 md:border md:bg-white text-left block md:table-cell">{{ especie.TdsMinimo }}</td>
+        <td class="p-2 md:border md:bg-white text-left block md:table-cell">{{ especie.TdsMaximo }}</td>
+        <td class="p-2 md:border md:bg-white text-left block md:table-cell">{{ especie.TemperaturaMinimo }}</td>
+        <td class="p-2 md:border md:bg-white text-left block md:table-cell">{{ especie.TemperaturaMaximo }}</td>
+        <td class="p-2 md:border md:bg-white text-left block md:table-cell">{{ especie.PhMinimo }}</td>
+        <td class="p-2 md:border md:bg-white text-left block md:table-cell">{{ especie.PhMaximo }}</td>
         <td class="p-2 md:border md:bg-white text-left block md:table-cell">
-          <button (click)="eliminarEspecie(especie.id)" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+          <button (click)="eliminarEspecie(especie.Id)" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
             Eliminar
           </button>
         </td>
@@ -60,31 +60,31 @@
       <div class="grid grid-cols-2 gap-4">
         <div class="col-span-1">
           <label for="nombreEspecie" class="block text-sm font-medium text-gray-700">Nombre</label>
-          <input type="text" id="nombreEspecie" formControlName="nombreEspecie" class="mt-1 p-2 border border-gray-300 rounded w-full" />
+          <input type="text" id="nombreEspecie" formControlName="NombreEspecie" class="mt-1 p-2 border border-gray-300 rounded w-full" />
         </div>
         <div class="col-span-1">
           <label for="tdsMinimo" class="block text-sm font-medium text-gray-700">TDS Mínimo</label>
-          <input type="number" id="tdsMinimo" formControlName="tdsMinimo" class="mt-1 p-2 border border-gray-300 rounded w-full" />
+          <input type="number" id="tdsMinimo" formControlName="TdsMinimo" class="mt-1 p-2 border border-gray-300 rounded w-full" />
         </div>
         <div class="col-span-1">
           <label for="tdsMaximo" class="block text-sm font-medium text-gray-700">TDS Máximo</label>
-          <input type="number" id="tdsMaximo" formControlName="tdsMaximo" class="mt-1 p-2 border border-gray-300 rounded w-full" />
+          <input type="number" id="tdsMaximo" formControlName="TdsMaximo" class="mt-1 p-2 border border-gray-300 rounded w-full" />
         </div>
         <div class="col-span-1">
           <label for="temperaturaMinimo" class="block text-sm font-medium text-gray-700">Temperatura Mínima</label>
-          <input type="number" id="temperaturaMinimo" formControlName="temperaturaMinimo" class="mt-1 p-2 border border-gray-300 rounded w-full" />
+          <input type="number" id="TemperaturaMinimo" formControlName="TemperaturaMinimo" class="mt-1 p-2 border border-gray-300 rounded w-full" />
         </div>
         <div class="col-span-1">
           <label for="temperaturaMaximo" class="block text-sm font-medium text-gray-700">Temperatura Máxima</label>
-          <input type="number" id="temperaturaMaximo" formControlName="temperaturaMaximo" class="mt-1 p-2 border border-gray-300 rounded w-full" />
+          <input type="number" id="TemperaturaMaximo" formControlName="TemperaturaMaximo" class="mt-1 p-2 border border-gray-300 rounded w-full" />
         </div>
         <div class="col-span-1">
-          <label for="phMinimo" class="block text-sm font-medium text-gray-700">PH Mínimo</label>
-          <input type="number" id="phMinimo" formControlName="phMinimo" class="mt-1 p-2 border border-gray-300 rounded w-full" />
+          <label for="PhMinimo" class="block text-sm font-medium text-gray-700">PH Mínimo</label>
+          <input type="number" id="PhMinimo" formControlName="PhMinimo" class="mt-1 p-2 border border-gray-300 rounded w-full" />
         </div>
         <div class="col-span-1">
-          <label for="phMaximo" class="block text-sm font-medium text-gray-700">PH Máximo</label>
-          <input type="number" id="phMaximo" formControlName="phMaximo" class="mt-1 p-2 border border-gray-300 rounded w-full" />
+          <label for="PhMaximo" class="block text-sm font-medium text-gray-700">PH Máximo</label>
+          <input type="number" id="PhMaximo" formControlName="PhMaximo" class="mt-1 p-2 border border-gray-300 rounded w-full" />
         </div>
       </div>
       <div class="mt-4">
