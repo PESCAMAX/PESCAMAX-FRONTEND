@@ -16,7 +16,7 @@
           <td class="p-3 px-5">{{ especie.NombreEspecie }}</td>
           <td class="p-3 px-5">
             <select (change)="onLoteChange($event, especie.Id)" class="bg-transparent">
-              <option *ngFor="let lote of lotes" [value]="lote.ID_M">{{ lote.ID_M }}</option>
+              <option *ngFor="let loteId of uniqueLotes" [value]="loteId">{{ loteId }}</option>
             </select>
           </td>
           <td class="p-3 px-5 flex justify-end">
