@@ -1,3 +1,19 @@
-<div class="chart-container">
-    <canvas  id="MyChart" >{{ chart }}</canvas>
-</div>
+<div>
+    <label for="loteSelector">Seleccionar Lote: </label>
+    <select id="loteSelector" (change)="onLoteChange($event)">
+      <option *ngFor="let lote of lotes" [value]="lote">Lote {{ lote }}</option>
+    </select>
+  </div>
+  <div class="chart-container">
+    <canvas id="MyChart">{{ chart }}</canvas>
+  </div>
+
+  <!-- <div *ngIf="lotes.length > 0">
+    <label for="loteSelector">Seleccionar Lote: </label>
+    <select id="loteSelector" (change)="onLoteChange($event)">
+      <option *ngFor="let lote of lotes" [value]="lote">Lote {{ lote }}</option>
+    </select>
+  </div>
+  <div class="chart-container" *ngIf="chart">
+    <canvas id="MyChart">{{ chart }}</canvas>
+  </div> -->
