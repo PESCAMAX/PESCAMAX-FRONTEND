@@ -8,32 +8,58 @@ import { ApiService } from '../../../../features/monitoreo/services/api-form/api
   styleUrls: ['./graficastdss.component.css']
 })
 export class GraficastdssComponent implements OnInit {
-
   public chart: any;
+  public lotes: number[] = [];
+  public selectedLote: number | null = null;
 
   constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
-    this.loadDataAndCreateChart();
+    this.loadLotes();
   }
 
-  loadDataAndCreateChart() {
+  loadLotes() {
     this.apiService.listarMonitoreo().subscribe(
-      (data) => {
-        const labels = data.response.map(item => new Date(item.FechaHora).toLocaleDateString());
-        const tdsData = data.response.map(item => item.tds);
-        const temperaturaData = data.response.map(item => item.temperatura);
-        const phData = data.response.map(item => item.ph);
-
-        this.createChart(labels, tdsData, temperaturaData, phData);
+      data => {
+        this.lotes = [...new Set(data.response.map(item => item.LoteID))];
+        if (this.lotes.length > 0) {
+          this.selectedLote = this.lotes[0];
+          this.loadDataAndCreateChart();
+        }
       },
-      (error) => {
-        console.error('Error loading data', error);
+      error => {
+        console.error('Error al cargar los lotes:', error);
       }
     );
   }
 
-  createChart(labels: string[], tdsData: number[], temperaturaData: number[], phData: number[]) {
+  onLoteChange(event: Event) {
+    const selectElement = event.target as HTMLSelectElement;
+    this.selectedLote = parseInt(selectElement.value, 10);
+    this.loadDataAndCreateChart();
+  }
+
+  loadDataAndCreateChart() {
+    if (this.selectedLote === null) return;
+
+    this.apiService.listarMonitoreo().subscribe(
+      data => {
+        const filteredData = data.response.filter(item => item.LoteID === this.selectedLote);
+        const labels = filteredData.map(item => new Date(item.FechaHora).toLocaleDateString());
+        const tdsData = filteredData.map(item => item.tds);
+        this.createChart(labels, tdsData);
+      },
+      error => {
+        console.error('Error al cargar los datos:', error);
+      }
+    );
+  }
+
+  createChart(labels: string[], tdsData: number[]) {
+    if (this.chart) {
+      this.chart.destroy();
+    }
+
     this.chart = new Chart("MyChart", {
       type: 'line',
       data: {
@@ -62,8 +88,9 @@ export class GraficastdssComponent implements OnInit {
             display: true,
             title: {
               display: true,
-              text: 'Valor'
-            }
+              text: 'TDS'
+            },
+            beginAtZero: true
           }
         }
       }

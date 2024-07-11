@@ -10,6 +10,7 @@ import { AlertService } from '../../../../features/monitoreo/services/api-alert/
 export class TablaSeleccionarComponent implements OnInit {
   especies: Especie[] = [];
   lotes: Monitoreo[] = [];
+  uniqueLotes: number[] = [];
   selectedLote: { [key: number]: number } = {};
 
   constructor(private apiService: ApiService, private alertService: AlertService) {}
@@ -29,7 +30,8 @@ export class TablaSeleccionarComponent implements OnInit {
       next: (response) => {
         console.log('Lotes:', response);
         this.lotes = response.response;
-        console.log('Lotes después de asignar:', this.lotes);
+        this.uniqueLotes = [...new Set(this.lotes.map(lote => lote.LoteID))];
+        console.log('Lotes únicos:', this.uniqueLotes);
       },
       error: (error) => {
         console.error('Error al listar lotes:', error);
@@ -59,7 +61,10 @@ export class TablaSeleccionarComponent implements OnInit {
   verificarValores(especieId: number, loteId: number): void {
     console.log('Verificando valores para especie ID:', especieId, 'y lote ID:', loteId);
     const especie = this.especies.find(e => e.Id === especieId);
-    const lote = this.lotes.find(l => l.ID_M === loteId);
+    const lotesFiltrados = this.lotes.filter(l => l.LoteID === loteId);
+    const ultimoLote = lotesFiltrados.reduce((prev, current) => 
+      (new Date(prev.FechaHora) > new Date(current.FechaHora)) ? prev : current
+    );
   
     if (!especie) {
       console.error('No se encontró la especie correspondiente con ID:', especieId);
@@ -67,14 +72,14 @@ export class TablaSeleccionarComponent implements OnInit {
       return;
     }
   
-    if (!lote) {
+    if (!ultimoLote) {
       console.error('No se encontró el lote correspondiente con ID:', loteId);
       console.log('Lotes disponibles:', this.lotes);
       this.alertService.showAlert('danger', 'Error de datos', 'No se encontró el lote correspondiente.');
       return;
     }
   
-    const problemas = this.obtenerProblemas(especie, lote);
+    const problemas = this.obtenerProblemas(especie, ultimoLote);
 
     if (problemas.length > 0) {
       console.log('Problemas detectados:', problemas.join(', '));
@@ -100,17 +105,14 @@ export class TablaSeleccionarComponent implements OnInit {
   obtenerProblemas(especie: Especie, lote: Monitoreo): string[] {
     const problemas = [];
   
-    // Validación de TDS
     if (lote.tds < especie.TdsMinimo || lote.tds > especie.TdsMaximo) {
       problemas.push(`TDS está fuera del rango seguro (${especie.TdsMinimo}-${especie.TdsMaximo}). Actual: ${lote.tds}`);
     }
   
-    // Validación de Temperatura
     if (lote.Temperatura < especie.TemperaturaMinimo || lote.Temperatura > especie.TemperaturaMaximo) {
       problemas.push(`Temperatura está fuera del rango seguro (${especie.TemperaturaMinimo}-${especie.TemperaturaMaximo}). Actual: ${lote.Temperatura}`);
     }
   
-    // Validación de pH
     if (lote.PH < especie.PhMinimo || lote.PH > especie.PhMaximo) {
       problemas.push(`pH está fuera del rango seguro (${especie.PhMinimo}-${especie.PhMaximo}). Actual: ${lote.PH}`);
     }
