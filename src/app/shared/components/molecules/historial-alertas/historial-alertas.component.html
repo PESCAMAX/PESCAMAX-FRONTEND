@@ -1,27 +1,33 @@
 <div class="text-gray-900 bg-gray-200">
   <div class="p-4 flex">
     <h1 class="text-3xl">Historial de Alertas</h1>
-  </div>
-  <app-datapicker (dateRangeSelected)="onDateRangeSelected($event)"></app-datapicker>
+    <app-datapicker (dateRangeSelected)="onDateRangeSelected($event)"></app-datapicker>
 
-<div *ngIf="mensajeAlerta" class="alerta">{{ mensajeAlerta }}</div>
 
-<table *ngIf="alertasFiltradas.length > 0">
-  <!-- Encabezados de la tabla -->
-  <tr>
-    <th>Especie ID</th>
-    <th>Nombre Especie</th>
-    <th>Lote ID</th>
-    <th>Descripción</th>
-    <th>Fecha</th>
-  </tr>
-  <!-- Filas de la tabla -->
-  <tr *ngFor="let alerta of alertasFiltradas">
-    <td>{{ alerta.EspecieID }}</td>
-    <td>{{ alerta.Nombre }}</td>
-    <td>{{ alerta.LoteID }}</td>
-    <td>{{ alerta.Descripcion }}</td>
-    <td>{{ alerta.Fecha | date:'medium' }}</td>
-  </tr>
-   </table>
   </div>
+  <div class="px-3 py-4 flex justify-center">
+    
+    <table class="w-full text-md bg-white shadow-md rounded mb-4">
+      <thead>
+        <tr class="border-b">
+          <th class="text-left p-3 px-5">Especie ID</th>
+          <th class="text-left p-3 px-5">Nombre Especie</th>
+          <th class="text-left p-3 px-5">Lote ID</th>
+          <th class="text-left p-3 px-5">Descripción</th>
+          <th class="text-left p-3 px-5">Fecha</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let Alertas of alertasFiltradas" class="border-b hover:bg-orange-100">
+          <td class="p-3 px-5">{{ Alertas.EspecieID }}</td>
+          <td class="p-3 px-5">{{ Alertas.Nombre }}</td>
+          <td class="p-3 px-5">{{ Alertas.LoteID }}</td>
+          <td class="p-3 px-5">{{ Alertas.Descripcion }}</td>
+          <td class="p-3 px-5">{{ Alertas.Fecha | date:'medium' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<tr *ngFor="let alerta of alertasFiltradas">

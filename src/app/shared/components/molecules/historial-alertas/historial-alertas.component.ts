@@ -35,9 +35,13 @@ export class HistorialAlertasComponent implements OnInit {
   filtrarPorFecha(fechaInicio: Date, fechaFin: Date): void {
     this.alertasFiltradas = this.alertas.filter(alerta => {
       const fechaAlerta = new Date(alerta.Fecha!);
-      return fechaAlerta >= fechaInicio && fechaAlerta <= fechaFin;
+      const finDelDia = new Date(fechaFin);
+      finDelDia.setHours(23, 59, 59, 999);
+      
+      // Luego use finDelDia en lugar de fechaFin en su filtro
+      return fechaAlerta >= fechaInicio && fechaAlerta <= finDelDia;
     });
-
+  
     if (this.alertasFiltradas.length === 0) {
       this.mensajeAlerta = "No hay datos disponibles para el rango de fechas seleccionado.";
     } else {
