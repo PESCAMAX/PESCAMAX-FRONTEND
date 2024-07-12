@@ -1,8 +1,12 @@
 <div class="text-gray-900 bg-gray-200">
   <div class="p-4 flex">
     <h1 class="text-3xl">Historial de Alertas</h1>
+    <app-datapicker (dateRangeSelected)="onDateRangeSelected($event)"></app-datapicker>
+
+
   </div>
   <div class="px-3 py-4 flex justify-center">
+    
     <table class="w-full text-md bg-white shadow-md rounded mb-4">
       <thead>
         <tr class="border-b">
@@ -14,14 +18,16 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let Alerta of alertas" class="border-b hover:bg-orange-100">
-          <td class="p-3 px-5">{{ Alerta.EspecieID }}</td>
-          <td class="p-3 px-5">{{ Alerta.Nombre }}</td>
-          <td class="p-3 px-5">{{ Alerta.LoteID }}</td>
-          <td class="p-3 px-5">{{ Alerta.Descripcion }}</td>
-          <td class="p-3 px-5">{{ Alerta.Fecha | date:'medium' }}</td>
+        <tr *ngFor="let Alertas of alertasFiltradas" class="border-b hover:bg-orange-100">
+          <td class="p-3 px-5">{{ Alertas.EspecieID }}</td>
+          <td class="p-3 px-5">{{ Alertas.Nombre }}</td>
+          <td class="p-3 px-5">{{ Alertas.LoteID }}</td>
+          <td class="p-3 px-5">{{ Alertas.Descripcion }}</td>
+          <td class="p-3 px-5">{{ Alertas.Fecha | date:'medium' }}</td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
+
+<tr *ngFor="let alerta of alertasFiltradas">

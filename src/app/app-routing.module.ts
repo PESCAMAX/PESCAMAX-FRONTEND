@@ -20,6 +20,7 @@ import { HistorialAlertasComponent } from './shared/components/molecules/histori
 import { GraficasTemperaturaComponent } from './shared/components/molecules/graficas-temperatura/graficas-temperatura.component';
 import { GraficaComponent } from './shared/components/molecules/grafica/grafica.component';
 import { ProductosComponent } from './features/tienda/components-tienda/moleculas-tienda/productos/productos.component';
+import { DatapickerComponent } from './shared/components/molecules/datapicker/datapicker.component';
 const routes: Routes = [
   {
     path: 'gestion-de-parametros',
@@ -32,6 +33,10 @@ const routes: Routes = [
   {
     path: 'productos',
     component: ProductosComponent
+  },
+  {
+    path: 'data',
+    component: DatapickerComponent
   },
 
 
