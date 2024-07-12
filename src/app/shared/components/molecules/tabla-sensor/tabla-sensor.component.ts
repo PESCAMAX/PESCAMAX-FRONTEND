@@ -1,6 +1,6 @@
 // src/app/shared/components/molecules/tabla-sensor/tabla-sensor.component.ts
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../../../features/monitoreo/services/api-form/api.service';
+import { ApiService, Monitoreo } from '../../../../features/monitoreo/services/api-form/api.service';
 
 @Component({
   selector: 'app-tabla-sensor',
@@ -8,23 +8,55 @@ import { ApiService } from '../../../../features/monitoreo/services/api-form/api
   styleUrls: ['./tabla-sensor.component.css']
 })
 export class TablaSensorComponent implements OnInit {
-  monitoreoData: any[] = [];
+  monitoreoData: Monitoreo[] = [];
+  filteredData: Monitoreo[] = [];
+  lotes: number[] = [];
+  loteSeleccionado: number | null = null;
 
   constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
+    this.cargarDatos();
+  }
+
+  cargarDatos(): void {
     this.apiService.listarMonitoreo().subscribe(
-      (response: any) => {
-        console.log(response); // Añade este log para depurar
-        if (response.mensaje === 'ok') {
-          this.monitoreoData = response.response;
-        } else {
-          console.error('Error al obtener los datos de monitoreo:', response.mensaje);
-        }
+      (response: { response: Monitoreo[] }) => {
+        console.log(response); // Log para depuración
+        this.monitoreoData = response.response;
+        this.filteredData = [...this.monitoreoData];
+        this.extraerLotes();
       },
       (error) => {
         console.error('Error al obtener los datos de monitoreo:', error);
       }
     );
+  }
+
+  extraerLotes(): void {
+    this.lotes = [...new Set(this.monitoreoData.map(item => item.LoteID))];
+  }
+
+  filtrarTodos(): void {
+    this.filteredData = [...this.monitoreoData];
+    this.loteSeleccionado = null;
+  }
+
+  filtrarMasRecientes(): void {
+    this.filteredData = [...this.monitoreoData]
+      .sort((a, b) => new Date(b.FechaHora).getTime() - new Date(a.FechaHora).getTime())
+      .slice(0, 10); // Muestra los 10 más recientes
+    this.loteSeleccionado = null;
+  }
+
+  filtrarPorLote(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    const lote = Number(selectElement.value);
+    if (lote) {
+      this.loteSeleccionado = lote;
+      this.filteredData = this.monitoreoData.filter(item => item.LoteID === lote);
+    } else {
+      this.filtrarTodos(); // Si no se selecciona un lote, muestra todos
+    }
   }
 }

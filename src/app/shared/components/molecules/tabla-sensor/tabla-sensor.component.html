@@ -6,22 +6,19 @@
   <div class="menu-lateral fixed left-0 top-0 h-full w-[250px] bg-gray-800">
     <app-menu-lateral></app-menu-lateral>
   </div>
-
   <div class="ml-[250px] flex-1 p-4">
     <div class="text-gray-900 bg-gray-200 p-4 rounded shadow-md">
-      <div class="h-[400px] overflow-auto"> <div class="flex lg:justify-between border-b-2 border-blue-600 pb-1">
+      <div class="h-[400px] overflow-auto">
+        <div class="flex lg:justify-between border-b-2 border-blue-600 pb-1">
           <h2 class="text-3xl text-gray-500 font-bold">Monitoreo Datos</h2>
           <div class="text-center flex-auto"></div>
           <div>
-            <a href="#">
-              <button class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-lg ">Todos</button>
-            </a>
-            <a href="#">
-              <button class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-lg">Mas Recientes</button>
-            </a>
-            <a href="#">
-              <button class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-lg">Lote</button>
-            </a>
+            <button (click)="filtrarTodos()" class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-lg">Todos</button>
+            <button (click)="filtrarMasRecientes()" class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-lg">Mas Recientes</button>
+            <select (change)="filtrarPorLote($event)" class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-lg">
+              <option value="">Seleccionar Lote</option>
+              <option *ngFor="let lote of lotes" [value]="lote">Lote {{ lote }}</option>
+            </select>
           </div>
         </div>
         <table class="w-full text-md bg-white shadow-md rounded mb-4 mt-4">
@@ -35,7 +32,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of monitoreoData" class="border-b hover:bg-orange-100">
+            <tr *ngFor="let item of filteredData" class="border-b hover:bg-orange-100">
               <td class="p-3 px-5">{{ item.LoteID }}</td>
               <td class="p-3 px-5">{{ item.tds }}</td>
               <td class="p-3 px-5">{{ item.Temperatura }}</td>
