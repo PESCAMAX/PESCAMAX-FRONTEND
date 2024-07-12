@@ -2,6 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
+
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatNativeDateModule } from '@angular/material/core';
+
 // Componentes
 import { ButtonEnviarComponent } from './components/atoms/button-enviar/button-enviar.component';
 import { FlechaDespliegueComponent } from './components/atoms/flecha-despliegue/flecha-despliegue.component';
@@ -14,7 +19,6 @@ import { AlertComponent } from './components/organisms/alert/alert.component';
 import { MenuLateralComponent } from './components/molecules/menu-lateral/menu-lateral.component';
 import { TablaSeleccionarComponent } from './components/molecules/tabla-seleccionar/tabla-seleccionar.component';
 import { EspecieFormComponent } from './components/molecules/form-especie/form-especie.component';
-import { DatapickerComponent } from './components/molecules/datapicker/datapicker.component';
 import { AlertFormComponent } from './components/organisms/alert-form/alert-form.component';
 import { TablaSensorComponent } from './components/molecules/tabla-sensor/tabla-sensor.component';
 import { RegisterComponent } from './components/molecules/register/register.component';
@@ -26,8 +30,6 @@ import { GraficaComponent } from './components/molecules/grafica/grafica.compone
 import { GraficastdssComponent } from './components/molecules/graficastdss/graficastdss.component';
 import { GraficasTemperaturaComponent } from './components/molecules/graficas-temperatura/graficas-temperatura.component';
 import { GraphPhComponent } from './components/molecules/graph-ph/graph-ph.component';
-
-
 
 
 @NgModule({
@@ -43,24 +45,26 @@ import { GraphPhComponent } from './components/molecules/graph-ph/graph-ph.compo
     MenuLateralComponent,
     TablaSeleccionarComponent,
     EspecieFormComponent,
-    DatapickerComponent,
     AlertFormComponent,
     TablaSensorComponent,
     RegisterComponent,
     LoginComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent, // Asegúrate de que este componente está declarado aquí
-    HistorialAlertasComponent,
-    GraficaComponent,
-    GraficastdssComponent,
-    GraficasTemperaturaComponent,
-    GraphPhComponent// Asegúrate de que este componente está declarado aquí
+    HistorialAlertasComponent// Asegúrate de que este componente está declarado aquí
+
+ 
+
+  
 
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    FormsModule, // Asegúrate de importar FormsModule aquí también
+    FormsModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatNativeDateModule // Asegúrate de importar FormsModule aquí también
   ],
   exports: [
     ButtonEnviarComponent,
@@ -71,7 +75,6 @@ import { GraphPhComponent } from './components/molecules/graph-ph/graph-ph.compo
     MenuLateralComponent,
     TablaSeleccionarComponent,
     EspecieFormComponent,
-    DatapickerComponent,
     AlertFormComponent,
     TablaSensorComponent,
     RegisterComponent, // Exporta tus componentes aquí si los necesitas en otros módulos
@@ -81,6 +84,9 @@ import { GraphPhComponent } from './components/molecules/graph-ph/graph-ph.compo
     GraficastdssComponent,
     GraficasTemperaturaComponent,
     GraphPhComponent
+ 
+
+
 
   ]
 })

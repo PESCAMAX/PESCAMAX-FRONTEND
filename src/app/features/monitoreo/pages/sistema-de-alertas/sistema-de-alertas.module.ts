@@ -13,7 +13,8 @@ import { HistorialDeAlertasComponent } from './historial-de-alertas/historial-de
   imports: [
     CommonModule,
     SistemaDeAlertasRoutingModule,
-    SharedModule
+    SharedModule,
+   
   ]
 })
 export class SistemaDeAlertasModule { }
