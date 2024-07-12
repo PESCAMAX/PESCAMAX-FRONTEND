@@ -1,13 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
-
 @Component({
-  selector: 'app-datepicker',
-  templateUrl: './datepicker.component.html',
-  styleUrls: ['./datepicker.component.css']
+  selector: 'app-datapicker',
+  templateUrl: './datapicker.component.html',
+  styleUrls: ['./datapicker.component.css']
 })
 export class DatapickerComponent implements OnInit {
+  @Input() minDate!: Date;
+  @Input() maxDate!: Date;
+  @Output() dateRangeSelected = new EventEmitter<{startDate: Date, endDate: Date}>();
+
   dateRange!: FormGroup;
 
   constructor(private fb: FormBuilder) {}
@@ -19,7 +22,12 @@ export class DatapickerComponent implements OnInit {
     });
 
     this.dateRange.valueChanges.subscribe(val => {
-      console.log('Date Range:', val);
+      if (val.startDate && val.endDate) {
+        this.dateRangeSelected.emit({
+          startDate: val.startDate,
+          endDate: val.endDate
+        });
+      }
     });
   }
 }

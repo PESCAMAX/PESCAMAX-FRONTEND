@@ -30,7 +30,7 @@ import { GraficaComponent } from './components/molecules/grafica/grafica.compone
 import { GraficastdssComponent } from './components/molecules/graficastdss/graficastdss.component';
 import { GraficasTemperaturaComponent } from './components/molecules/graficas-temperatura/graficas-temperatura.component';
 import { GraphPhComponent } from './components/molecules/graph-ph/graph-ph.component';
-
+import { DatapickerComponent } from './components/molecules/datapicker/datapicker.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +51,12 @@ import { GraphPhComponent } from './components/molecules/graph-ph/graph-ph.compo
     LoginComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent, // Asegúrate de que este componente está declarado aquí
-    HistorialAlertasComponent// Asegúrate de que este componente está declarado aquí
+    HistorialAlertasComponent,
+    GraficaComponent,
+    GraficastdssComponent,
+    GraficasTemperaturaComponent,
+    GraphPhComponent,
+    DatapickerComponent// Asegúrate de que este componente está declarado aquí
 
  
 
@@ -83,7 +88,9 @@ import { GraphPhComponent } from './components/molecules/graph-ph/graph-ph.compo
     GraficaComponent,
     GraficastdssComponent,
     GraficasTemperaturaComponent,
-    GraphPhComponent
+    GraphPhComponent,
+    DatapickerComponent
+
  
 
 

@@ -10,11 +10,12 @@ import { HistorialDeAlertasComponent } from './historial-de-alertas/historial-de
     AlertasRecientesComponent,
     HistorialDeAlertasComponent
   ],
+
+  //aqui solo van las paginas esto es paralas rutas
   imports: [
     CommonModule,
     SistemaDeAlertasRoutingModule,
-    SharedModule,
-   
+    SharedModule
   ]
 })
 export class SistemaDeAlertasModule { }
