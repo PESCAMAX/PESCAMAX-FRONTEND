@@ -31,8 +31,10 @@ export class DatapickerComponent implements OnInit {
     });
   }
 
+
   // Método para deshabilitar fechas
   disableDates = (date: Date): boolean => {
     return date > this.maxDate || date < this.minDate;
   }
 }
+
