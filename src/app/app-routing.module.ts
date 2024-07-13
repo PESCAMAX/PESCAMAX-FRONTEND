@@ -54,7 +54,7 @@ const routes: Routes = [
   },
   {
     path: 'temperatura',
-    component: GraficasTemperaturaComponent
+    component: GraficaTemperaturaComponent
 
   },
   {
