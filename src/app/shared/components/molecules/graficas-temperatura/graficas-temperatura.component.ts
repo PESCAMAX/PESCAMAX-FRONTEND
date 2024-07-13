@@ -3,7 +3,7 @@ import { Chart } from 'chart.js/auto';
 import { ApiService } from '../../../../features/monitoreo/services/api-form/api.service';
 
 @Component({
-  selector: 'app-grafica-temperatura',
+  selector: 'app-temperatura',
   templateUrl: './graficas-temperatura.component.html',
   styleUrls: ['./graficas-temperatura.component.css']
 })

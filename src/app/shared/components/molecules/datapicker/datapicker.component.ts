@@ -8,7 +8,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 })
 export class DatapickerComponent implements OnInit {
   @Input() minDate!: Date;
-  @Input() maxDate!: Date;
+  @Input() maxDate: Date = new Date(); // Por defecto, la fecha actual
   @Output() dateRangeSelected = new EventEmitter<{startDate: Date, endDate: Date}>();
 
   dateRange!: FormGroup;
@@ -29,5 +29,10 @@ export class DatapickerComponent implements OnInit {
         });
       }
     });
+  }
+
+  // Método para deshabilitar fechas
+  disableDates = (date: Date): boolean => {
+    return date > this.maxDate || date < this.minDate;
   }
 }

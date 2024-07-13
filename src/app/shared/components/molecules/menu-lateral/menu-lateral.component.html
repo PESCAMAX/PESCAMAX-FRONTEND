@@ -4,7 +4,9 @@
   </svg>
 </ng-template>
 
+
 <div id="Main" class="xl:rounded-r transform xl:translate-x-0 ease-in-out transition duration-500 flex justify-start items-start h-full w-full sm:w-64 bg-[#F2F5F7] flex-col">
+
 
   <div class="hidden xl:flex justify-start p-6 items-center" style="width: 100%; height: 100px;">
     <img src="../../../../../assets/icons/Logo_pescamax.png" alt="Miimagen" class="w-6 h-6">
@@ -12,6 +14,7 @@
       <span class="text-blue-500 font-bold">PESCA</span><span class="text-black font-bold">MAX</span>
     </p>
   </div>
+
 
   <div class="flex flex-col justify-start w-70 items-center px-6 border-b border-#A6B3BF w-full">
   </div>
@@ -44,6 +47,12 @@
         <img src="../../../../../assets/icons/icons8-crear-nuevo-30.png" alt="Miimagen" width="20" height="50">
         <p class="text-base leading-4">Tablas</p>
       </a>
+      
+      <a href="/home" class="flex justify-start items-center space-x-6 hover:text-white focus:bg-blue-400 focus:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
+        <img src="../../../../../assets/icons/icons8-crear-nuevo-30.png" alt="Miimagen" width="20" height="50" viewBox="0 0 10 10" fill="">
+        <p class="text-base leading-4  ">Grafica General</p>
+      </a>
+
     </div>
   </div>
 
@@ -54,6 +63,7 @@
         <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z" />
       </svg>
     </button>
+
 
     <div *ngIf="subMenuVisible === 2" class="flex flex-col justify-start items-center px-6 border-b border-white w-full">
       <a href="http://localhost:4200/crear-especie" class="flex justify-start items-center space-x-6 hover:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
@@ -71,6 +81,47 @@
         <p class="text-base leading-4">Modificar especie</p>
       </a>
     </div>
+
+    <div  *ngIf="subMenuVisible === 2" class="flex flex-col justify-start items-center px-6 border-b border-white w-full">
+      <a
+      href="http://localhost:4200/crear-especie"
+      class="flex justify-start items-center space-x-6 hover:text-white focus:bg-blue-400 focus:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
+      <img src="../../../../../assets/icons/icons8-crear-nuevo-30.png" alt="Miimagen" width="20" height="50" viewBox="0 0 10 10" fill="">
+      <p class="text-base leading-4">Crear especie</p>
+    </a>
+    <div  class="flex flex-col justify-start items-center px-6 border-b border-white w-full">
+      <a
+      href="http://localhost:4200/seleccionar-especie"
+      class="flex justify-start items-center space-x-6 hover:text-white focus:bg-blue-400 focus:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
+      <img src="../../../../../assets/icons/icons8-natural-user-interface-2-26.png" alt="Miimagen" width="20" height="50" viewBox="0 0 10 10" fill="">
+      <p class="text-base leading-4">Seleccionar especie</p>
+    </a>
+     <div class="flex flex-col justify-start items-center px-6 border-b border-white w-full">
+      <a
+      href="http://localhost:4200/modificar-especie"
+      class="flex justify-start items-center space-x-6 hover:text-white focus:bg-blue-400 focus:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
+      <img src="../../../../../assets/icons/icons8-editar-archivo-30.png" alt="Miimagen" width="20" height="50" viewBox="0 0 10 10" fill="">
+      <p class="text-base leading-4">Modificar especie</p>
+    </a>
+  </div>
+    </div>
+    </div>
+</div>
+<div class="flex flex-col justify-start items-center px-6  w-full">
+  <button (click)="toggleSubMenu(3)" class="focus:outline-none focus:text-indigo-400 text-left text-white flex justify-between items-center w-full py-5 space-x-14">
+    <p class="text-sm leading-5 uppercase" style="color: black;">Sistema<br>de Alertas</p>
+    <app-flecha-despliegue></app-flecha-despliegue>
+  </button>
+  <div *ngIf="subMenuVisible === 3" class="flex flex-col justify-start w-full items-start pb-1">
+    <a href="http://localhost:4200/alertas-recientes" class="flex justify-start items-center space-x-6 hover:text-white focus:bg-blue-400 focus:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
+      <img src="../../../../../assets/icons/advertencia.png" alt="Miimagen" width="20" height="50">
+      <p class="text-base leading-4">Alertas recientes</p>
+    </a>
+    <a href="http://localhost:4200/historial-alertas" class="flex justify-start items-center space-x-6 hover:text-white focus:bg-blue-400 focus:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
+      <img src="../../../../../assets/icons/icons8-historia-de-la-actividad-50.png" alt="Miimagen" width="20" height="50">
+      <p class="text-base leading-4">Historial de alertas</p>
+    </a>
+
   </div>
 
   <div class="flex flex-col justify-start items-center px-6 w-full">

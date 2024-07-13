@@ -7,12 +7,14 @@ import { GraficaTemperaturaComponent } from './grafica-temperatura/grafica-tempe
 import { GraficaPhComponent } from './grafica-ph/grafica-ph.component';
 import { GraficaTdsComponent } from './grafica-tds/grafica-tds.component';
 import { TablaDatosComponent } from './tabla-datos/tabla-datos.component';
+import { GraficaGeneralComponent } from './grafica-general/grafica-general.component';
 @NgModule({
   declarations: [
     GraficaTemperaturaComponent,
     GraficaTdsComponent,
     GraficaPhComponent,
-    TablaDatosComponent
+    TablaDatosComponent,
+    GraficaGeneralComponent
   ],
   imports: [
     CommonModule,

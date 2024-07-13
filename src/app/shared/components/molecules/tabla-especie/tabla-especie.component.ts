@@ -14,20 +14,38 @@ interface Especie {
   PhMaximo: number;
 }
 
+interface AlertState {
+  show: boolean;
+  type: 'success' | 'danger' | 'warning';
+  title: string;
+  content: string;
+  iconColor: 'red' | 'green';
+}
+
 @Component({
   selector: 'app-tabla-especie',
   templateUrl: './tabla-especie.component.html',
   styleUrls: ['./tabla-especie.component.css']
 })
+
 export class TablaEspecieComponent implements OnInit {
   especies: Especie[] = [];
   especiesFiltradas: Especie[] = [];
   searchText: string = '';
 
-  showAlert: boolean = false;
-  alertType: 'success' | 'danger' | 'warning' = 'success';
-  alertTitle: string = '';
-  alertContent: string = '';
+  alertState: AlertState = {
+    show: false,
+    type: 'warning',
+    title: '',
+    content: '',
+    iconColor: 'red'
+  };
+  
+  cerrarModal(): void {
+    this.especieSeleccionada = null;
+    this.especieForm.reset();
+  }
+
   alertConfirmAction: (() => void) | null = null;
   alertCancelAction: (() => void) | null = null;
 
@@ -50,10 +68,6 @@ export class TablaEspecieComponent implements OnInit {
     this.obtenerEspecies();
   }
 
-  actualizarEspecies(): void {
-    this.obtenerEspecies();
-  }
-
   obtenerEspecies(): void {
     this.apiService.listarEspecies().subscribe(
       (response: Especie[]) => {
@@ -62,7 +76,7 @@ export class TablaEspecieComponent implements OnInit {
       },
       (error) => {
         console.error('Error al obtener las especies:', error);
-        this.mostrarAlerta('danger', 'Error', 'Error al obtener las especies');
+        this.mostrarAlerta('danger', 'Error', 'Error al obtener las especies', 'red');
       }
     );
   }
@@ -82,10 +96,13 @@ export class TablaEspecieComponent implements OnInit {
   }
 
   mostrarAlertaConfirmacion(id: number): void {
-    this.showAlert = true;
-    this.alertType = 'warning';
-    this.alertTitle = 'Confirmar eliminación';
-    this.alertContent = '¿Estás seguro de que deseas eliminar esta especie?';
+    this.alertState = {
+      show: true,
+      type: 'warning',
+      title: 'Confirmar eliminación',
+      content: '¿Estás seguro de eliminar la especie?',
+      iconColor: 'red'
+    };
     this.alertConfirmAction = () => this.confirmarEliminacion(id);
     this.alertCancelAction = () => this.cancelarEliminacion();
   }
@@ -94,40 +111,41 @@ export class TablaEspecieComponent implements OnInit {
     this.apiService.eliminarEspecie(id).subscribe(
       () => {
         this.obtenerEspecies();
-        this.mostrarAlerta('success', 'Éxito', 'Especie eliminada correctamente');
+        this.mostrarAlerta('success', 'Éxito', 'La especie fue borrada exitosamente', 'green');
       },
       (error) => {
         console.error('Error al eliminar la especie:', error);
-        this.mostrarAlerta('danger', 'Error', 'Error al eliminar la especie');
+        this.mostrarAlerta('danger', 'Error', 'Error al eliminar la especie', 'red');
       }
     );
   }
 
   cancelarEliminacion(): void {
-    this.mostrarAlerta('danger', 'Cancelado', 'La eliminación de la especie ha sido cancelada');
+    this.mostrarAlerta('danger', 'Cancelado', 'Has cancelado la eliminación', 'red');
   }
 
-  mostrarAlerta(type: 'success' | 'danger' | 'warning', title: string, content: string): void {
-    this.showAlert = true;
-    this.alertType = type;
-    this.alertTitle = title;
-    this.alertContent = content;
-    this.alertConfirmAction = null;
-    this.alertCancelAction = null;
+  mostrarAlerta(type: 'success' | 'danger' | 'warning', title: string, content: string, iconColor: 'red' | 'green'): void {
+    this.alertState = {
+      show: true,
+      type,
+      title,
+      content,
+      iconColor
+    };
 
     setTimeout(() => {
       this.cerrarAlerta();
-    }, 5000);
+    }, 1000);
   }
 
   cerrarAlerta(): void {
-    this.showAlert = false;
+    this.alertState.show = false;
   }
+
   editarEspecie(especie: Especie) {
     this.especieSeleccionada = especie;
     this.especieForm.patchValue(especie);
     
-    // Añade este código para desplazarse al formulario
     setTimeout(() => {
       const element = document.getElementById('editarEspecieForm');
       if (element) {
@@ -137,12 +155,8 @@ export class TablaEspecieComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.especieForm.valid) {
-      if (this.especieSeleccionada) {
-        this.modificarEspecie();
-      } else {
-        // Código para crear especie
-      }
+    if (this.especieForm.valid && this.especieSeleccionada) {
+      this.modificarEspecie();
     }
   }
 
@@ -156,7 +170,7 @@ export class TablaEspecieComponent implements OnInit {
       this.apiService.modificarEspecie(especieModificada).subscribe(
         () => {
           this.obtenerEspecies();
-          this.mostrarAlerta('success', 'Éxito', 'Especie modificada correctamente');
+          this.mostrarAlerta('success', 'Éxito', 'Especie modificada correctamente', 'green');
           this.especieSeleccionada = null;
           this.especieForm.reset();
         },
@@ -164,13 +178,11 @@ export class TablaEspecieComponent implements OnInit {
           console.error('Error al modificar la especie:', error);
           let mensajeError = 'Error al modificar la especie';
           if (error.error instanceof ErrorEvent) {
-            // Error del lado del cliente
             mensajeError += `: ${error.error.message}`;
           } else {
-            // El backend retornó un código de error
             mensajeError += `: ${error.status}, ${error.error}`;
           }
-          this.mostrarAlerta('danger', 'Error', mensajeError);
+          this.mostrarAlerta('danger', 'Error', mensajeError, 'red');
         }
       );
     }
