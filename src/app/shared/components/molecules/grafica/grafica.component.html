@@ -1,9 +1,30 @@
+<!-- grafica.component.html -->
 <div>
-    <label for="loteSelector">Seleccionar Lote: </label>
-    <select id="loteSelector" (change)="onLoteChange($event)">
-      <option *ngFor="let lote of lotes" [value]="lote">Lote {{ lote }}</option>
-    </select>
-  </div>
-  <div class="chart-container">
-    <canvas id="MyChart">{{ chart }}</canvas>
-  </div>
+  <app-datapicker 
+    (dateRangeSelected)="onDateRangeSelected($event)"
+    [minDate]="fechaMasAntigua"
+    [maxDate]="fechaActual">
+  </app-datapicker>
+  <label for="loteSelector">Seleccionar Lote: </label>
+  <select id="loteSelector" (change)="onLoteChange($event)">
+    <option *ngFor="let lote of lotes" [value]="lote">Lote {{ lote }}</option>
+  </select>
+</div>
+
+<!-- ... resto del HTML ... -->
+<div *ngIf="mensajeAlerta" class="alert-message">
+  {{ mensajeAlerta }}
+</div>
+
+<div *ngIf="alertasFiltradas.length > 0">
+  <h3>Alertas Filtradas:</h3>
+  <ul>
+    <li *ngFor="let alerta of alertasFiltradas">
+      {{ alerta.Fecha | date:'medium' }} - {{ alerta.Mensaje }}
+    </li>
+  </ul>
+</div>
+
+<div class="chart-container">
+  <canvas id="MyChart"></canvas>
+</div>

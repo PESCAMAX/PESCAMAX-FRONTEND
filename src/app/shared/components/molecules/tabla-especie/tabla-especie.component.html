@@ -12,8 +12,54 @@
       (input)="filtrarEspecies()"
     />
   </div>
+ <!-- Tabla de especies con scroll -->
+ <div class="overflow-x-auto">
+  <table class="w-full border-collapse bg-gray-500">
+    <thead class="bg-white">
+      <tr>
+        <th class="w-1/12 p-2 text-left font-bold border border-grey-500 text-sm">ID</th>
+        <th class="w-2/12 p-2 text-left font-bold border border-grey-500 text-sm">Nombre</th>
+        <th class="w-1/12 p-2 text-left font-bold border border-grey-500 text-sm">TDS Mínimo</th>
+        <th class="w-1/12 p-2 text-left font-bold border border-grey-500 text-sm">TDS Máximo</th>
+        <th class="w-1/12 p-2 text-left font-bold border border-grey-500 text-sm">Temp. Mínima</th>
+        <th class="w-1/12 p-2 text-left font-bold border border-grey-500 text-sm">Temp. Máxima</th>
+        <th class="w-1/12 p-2 text-left font-bold border border-grey-500 text-sm">PH Mínimo</th>
+        <th class="w-1/12 p-2 text-left font-bold border border-grey-500 text-sm">PH Máximo</th>
+        <th class="w-1/12 p-2 text-left font-bold border border-grey-500 text-sm">Eliminar</th>
+        <th class="w-1/12 p-2 text-left font-bold border border-grey-500 text-sm">Editar</th>
 
-  <!-- Tabla de especies -->
+      </tr>
+    </thead>
+  </table>
+</div>
+<div class="overflow-y-auto" style="max-height: 600px;">
+  <table class="w-full border-collapse bg-gray-500">
+    <tbody>
+      <tr class="bg-gray-100 border border-grey-500" *ngFor="let especie of especiesFiltradas">
+        <td class="w-1/12 p-2 border bg-white text-left">{{ especie.Id }}</td>
+        <td class="w-2/12 p-2 border bg-white text-left">{{ especie.NombreEspecie }}</td>
+        <td class="w-1/12 p-2 border bg-white text-left">{{ especie.TdsMinimo }}</td>
+        <td class="w-1/12 p-2 border bg-white text-left">{{ especie.TdsMaximo }}</td>
+        <td class="w-1/12 p-2 border bg-white text-left">{{ especie.TemperaturaMinimo }}</td>
+        <td class="w-1/12 p-2 border bg-white text-left">{{ especie.TemperaturaMaximo }}</td>
+        <td class="w-1/12 p-2 border bg-white text-left">{{ especie.PhMinimo }}</td>
+        <td class="w-1/12 p-2 border bg-white text-left">{{ especie.PhMaximo }}</td>
+        <td class="w-1/12 p-2 border bg-white text-left">
+          <button (click)="eliminarEspecie(especie.Id)" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded text-xs">
+            Eliminar
+          </button>
+        </td>
+        <td class="w-1/12 p-2 border bg-white text-left">
+          <button (click)="editarEspecie(especie)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded text-xs">
+            Editar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+  <!-- Tabla de especies 
   <table class="min-w-full border-collapse block md:table bg-gray-500">
     <thead class="block md:table-header-group">
       <tr class="border border-grey-500 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto md:relative">
@@ -52,67 +98,77 @@
       </tr>
     </tbody>
   </table>
-  
   <!-- Formulario de edición -->
-  <form [formGroup]="especieForm" (ngSubmit)="onSubmit()" id="editarEspecieForm">
-    <div *ngIf="especieSeleccionada" class="mt-4">
-      <h3 class="text-xl font-bold mb-2">Editar Especie</h3>
-      <div class="grid grid-cols-2 gap-4">
-        <div class="col-span-1">
+   
+  <!-- Modal de edición -->
+<div *ngIf="especieSeleccionada" class="fixed inset-0 z-50 overflow-auto bg-smoke-light flex">
+  <div class="relative p-8 bg-white w-full max-w-md m-auto flex-col flex rounded-lg">
+    <h3 class="text-xl font-bold mb-4">Editar Especie</h3>
+    <form [formGroup]="especieForm" (ngSubmit)="onSubmit()" id="editarEspecieForm">
+      <div class="grid grid-cols-1 gap-4">
+        <div>
           <label for="nombreEspecie" class="block text-sm font-medium text-gray-700">Nombre</label>
           <input type="text" id="nombreEspecie" formControlName="NombreEspecie" class="mt-1 p-2 border border-gray-300 rounded w-full" />
         </div>
-        <div class="col-span-1">
+        <div>
           <label for="tdsMinimo" class="block text-sm font-medium text-gray-700">TDS Mínimo</label>
           <input type="number" id="tdsMinimo" formControlName="TdsMinimo" class="mt-1 p-2 border border-gray-300 rounded w-full" />
         </div>
-        <div class="col-span-1">
+        <div>
           <label for="tdsMaximo" class="block text-sm font-medium text-gray-700">TDS Máximo</label>
           <input type="number" id="tdsMaximo" formControlName="TdsMaximo" class="mt-1 p-2 border border-gray-300 rounded w-full" />
         </div>
-        <div class="col-span-1">
+        <div>
           <label for="temperaturaMinimo" class="block text-sm font-medium text-gray-700">Temperatura Mínima</label>
           <input type="number" id="TemperaturaMinimo" formControlName="TemperaturaMinimo" class="mt-1 p-2 border border-gray-300 rounded w-full" />
         </div>
-        <div class="col-span-1">
+        <div>
           <label for="temperaturaMaximo" class="block text-sm font-medium text-gray-700">Temperatura Máxima</label>
           <input type="number" id="TemperaturaMaximo" formControlName="TemperaturaMaximo" class="mt-1 p-2 border border-gray-300 rounded w-full" />
         </div>
-        <div class="col-span-1">
+        <div>
           <label for="PhMinimo" class="block text-sm font-medium text-gray-700">PH Mínimo</label>
           <input type="number" id="PhMinimo" formControlName="PhMinimo" class="mt-1 p-2 border border-gray-300 rounded w-full" />
         </div>
-        <div class="col-span-1">
-          <label for="PhMaximo" class="block text-sm font-medium text-gray-700">PH Máximo</label>
-          <input type="number" id="PhMaximo" formControlName="PhMaximo" class="mt-1 p-2 border border-gray-300 rounded w-full" />
+        <div>
+          <label for="PhMaximo" class="block text-sm font-medium text-gray-700"></label>
+          <input type="number" id="" formControlName="PhMaximo" class="mt-1 p-2 border border-gray-300 rounded w-full" />
         </div>
       </div>
-      <div class="mt-4">
-        <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+      <div class="mt-4 flex justify-end">
+        <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2">
           Guardar Cambios
         </button>
+        <button type="button" (click)="cerrarModal()" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+          Cancelar
+        </button>
       </div>
-    </div>
-  </form>
+    </form>
+  </div>
+</div>
   
-  <div *ngIf="showAlert" class="fixed z-10 inset-0 overflow-y-auto">
+  <div *ngIf="alertState.show" class="fixed z-10 inset-0 overflow-y-auto">
     <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
       <div class="fixed inset-0 transition-opacity" aria-hidden="true">
         <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
       </div>
       <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-      <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-          <div class="sm:flex sm:items-start">
-            <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-              <svg class="h-6 w-6 text-red-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm-2-9a1 1 0 112-0 1 1 0 01-2 0zM8 6a1 1 0 100-2 1 1 0 000 2zm4 0a1 1 0 100-2 1 1 0 000 2zM8 10a1 1 0 100-2 1 1 0 000 2zm4 0a1 1 0 100-2 1 1 0 000 2zM8 14a1 1 0 100-2 1 1 0 000 2zm4 0a1 1 0 100-2 1 1 0 000 2zM10 12a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1z" clip-rule="evenodd"></path>
-              </svg>
-            </div>
-            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-              <h3 class="text-lg leading-6 font-medium text-gray-900">{{ alertTitle }}</h3>
-              <div class="mt-2">
-                <p class="text-sm text-gray-500">{{ alertContent }}</p>
+      <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+      [ngClass]="">
+   <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+     <div class="sm:flex sm:items-start">
+       <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full sm:mx-0 sm:h-10 sm:w-10"
+            [ngClass]="{'bg-green-100': alertState.iconColor === 'green', 'bg-red-100': alertState.iconColor === 'red'}">
+         <svg class="h-6 w-6" [ngClass]="{'text-green-600': alertState.iconColor === 'green', 'text-red-600': alertState.iconColor === 'red'}" 
+              fill="none" viewBox="0 0 24 24" stroke="currentColor">
+           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                 d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+         </svg>
+       </div>
+       <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+         <h3 class="text-lg leading-6 font-medium text-gray-900">{{ alertState.title }}</h3>
+         <div class="mt-2">
+           <p class="text-sm text-gray-500">{{ alertState.content }}</p>
               </div>
             </div>
           </div>
@@ -138,4 +194,4 @@
       </div>
     </div>
   </div>
-</div>
+

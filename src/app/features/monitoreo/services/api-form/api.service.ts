@@ -11,6 +11,7 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
+  // Métodos para Especie
   crearEspecie(data: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/CrearEspecie/Crear`, data)
       .pipe(catchError(this.handleError));
@@ -31,11 +32,12 @@ export class ApiService {
       .pipe(catchError(this.handleError));
   }
 
+  // Métodos para Monitoreo
   listarMonitoreo(): Observable<{ response: any[] }> {
     return this.http.get<{ response: any[] }>(`${this.baseUrl}/api/Monitoreo/Leer`)
       .pipe(catchError(this.handleError));
   }
-
+  // Métodos para Alerta
   crearAlerta(alerta: Alerta): Observable<Alerta> {
     return this.http.post<Alerta>(`${this.baseUrl}/api/Alerta`, alerta)
       .pipe(catchError(this.handleError));
@@ -45,7 +47,7 @@ export class ApiService {
     return this.http.get<Alerta[]>(`${this.baseUrl}/api/Alerta`)
       .pipe(catchError(this.handleError));
   }
-
+  // Manejo de errores
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // Error del lado del cliente o de red.
@@ -61,6 +63,7 @@ export class ApiService {
   }
 }
 
+// Interfaces
 export interface Monitoreo {
   ID_M: number;
   tds: number;
@@ -87,5 +90,6 @@ export interface Alerta {
   Nombre: string;
   LoteID: number;
   Descripcion: string;
-  Fecha?: Date;
+  Fecha?: string | Date; // Make sure it can be either string or Date
+  Mensaje?: string; // Add this if it's not already there
 }
