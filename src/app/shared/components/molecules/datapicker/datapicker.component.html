@@ -1,5 +1,5 @@
 <mat-form-field>
-  <mat-label>Seleccione un rango de fechas</mat-label>
+  <mat-label><span class="label-text">Seleccione un rango de fechas </span></mat-label>
   <mat-date-range-input [formGroup]="dateRange" [rangePicker]="picker" [min]="minDate" [max]="maxDate">
     <input matStartDate formControlName="startDate" placeholder="Fecha inicial">
     <input matEndDate formControlName="endDate" placeholder="Fecha final">
