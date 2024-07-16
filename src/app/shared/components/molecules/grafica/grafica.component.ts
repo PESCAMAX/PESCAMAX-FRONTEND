@@ -79,8 +79,8 @@ export class GraficaComponent implements OnInit {
         const fechas = filteredData.map(item => new Date(item.FechaHora).toLocaleString());
         const temperaturas = filteredData.map(item => item.Temperatura);
         const phs = filteredData.map(item => item.PH);
-        const tdss = filteredData.map(item => item.TDS);
-        this.createChart(fechas, temperaturas, phs, tdss);
+        const tds = filteredData.map(item => item.tds);
+        this.createChart(fechas, temperaturas, phs, tds);
       },
       error => {
         console.error('Error al cargar los datos:', error);
