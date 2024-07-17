@@ -47,6 +47,7 @@ export class ApiService {
     return this.http.get<Alerta[]>(`${this.baseUrl}/api/Alerta`)
       .pipe(catchError(this.handleError));
   }
+  
   // Manejo de errores
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

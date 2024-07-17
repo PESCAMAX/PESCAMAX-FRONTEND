@@ -31,6 +31,7 @@ import { GraficastdssComponent } from './components/molecules/graficastdss/grafi
 import { GraficasTemperaturaComponent } from './components/molecules/graficas-temperatura/graficas-temperatura.component';
 import { GraphPhComponent } from './components/molecules/graph-ph/graph-ph.component';
 import { DatapickerComponent } from './components/molecules/datapicker/datapicker.component';
+import { RelojcComponent } from './components/atoms/relojc/relojc.component';
 
 import { InicioComponent } from '../features/monitoreo/pages/inicio/inicio.component';
 import { ExitComponent } from './components/atoms/exit/exit.component';
@@ -62,8 +63,10 @@ import { ExitComponent } from './components/atoms/exit/exit.component';
     GraficastdssComponent,
     GraficasTemperaturaComponent,
     GraphPhComponent,
+    RelojcComponent// Asegúrate de que este componente está declarado aquí
     DatapickerComponent,// Asegúrate de que este componente está declarado aquí
     InicioComponent, ExitComponent
+
 
 
   ],
@@ -95,6 +98,7 @@ import { ExitComponent } from './components/atoms/exit/exit.component';
     GraphPhComponent,
     DatapickerComponent,
     InicioComponent
+
   ]
 })
 export class SharedModule { }
