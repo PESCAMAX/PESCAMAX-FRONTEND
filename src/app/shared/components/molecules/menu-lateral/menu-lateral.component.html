@@ -6,11 +6,15 @@
 
 <div id="Main" class="xl:rounded-r transform xl:translate-x-0 ease-in-out transition duration-500 flex justify-start items-start h-full w-full sm:w-64 bg-[#F2F5F7] flex-col">
 
-  <div class="hidden xl:flex justify-start p-6 items-center" style="width: 100%; height: 100px;">
-    <img src="../../../../../assets/icons/Logo_pescamax.png" alt="Miimagen" class="w-6 h-6">
-    <p class="text-2xl leading-8 flex items-center">
-      <span class="text-blue-500 font-bold">PESCA</span><span class="text-black font-bold">MAX</span>
-    </p>
+  <div class="hidden xl:flex items-start p-6" style="width: 100%; height: 100px;">
+    <div class="flex items-center">
+      <div class="w-8 flex justify-end mr-1"> <!-- Añadido un contenedor con margen derecho -->
+        <img src="../../../../../assets/icons/Logo_pescamax.png" alt="Miimagen" class="w-6 h-6" style="margin-top: -15px;">
+      </div>
+      <p class="text-2xl flex items-center">
+        <span class="text-blue-500 font-bold">PESCA</span><span class="text-black font-bold">MAX</span>
+      </p>
+    </div>
   </div>
 
   <div class="flex flex-col justify-start w-70 items-center px-6 border-b border-#A6B3BF w-full">
@@ -22,7 +26,7 @@
       <svg [ngClass]="{'transform rotate-180': subMenuVisible === 1, 'transform rotate-0': subMenuVisible !== 1}" class="w-4 h-8 fill-current transition-transform duration-300" viewBox="0 0 24 24">
         <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z" />
       </svg>
-    </button>  
+    </button>
 
     <div *ngIf="subMenuVisible === 1" class="flex flex-col justify-start w-full items-start pb-1">
       <a href="http://localhost:4200/grafica-temperatura" class="flex justify-start items-center space-x-6 hover:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
@@ -43,6 +47,10 @@
       <a href="/tabla-datos" class="flex justify-start items-center space-x-6 hover:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
         <img src="../../../../../assets/icons/icons8-crear-nuevo-30.png" alt="Miimagen" width="20" height="50">
         <p class="text-base leading-4">Tablas</p>
+      </a>
+      <a href="/home" class="flex justify-start items-center space-x-6 hover:text-white focus:bg-blue-400 focus:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
+        <img src="../../../../../assets/icons/crecimiento.png" alt="Miimagen" width="20" height="50" viewBox="0 0 10 10" fill="">
+        <p class="text-base leading-4  ">Grafica General</p>
       </a>
     </div>
   </div>
