@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./card-alerts.component.css']
 })
 export class CardAlertsComponent {
+
   modalOpen = false;
   numHoursToMonitor: number | null = null; // Inicialmente null para verificar si se ha ingresado un número
   hours: number[] = Array.from({ length: 12 }, (_, i) => i + 1); // Horas del día (de 1 a 12)
@@ -70,6 +71,7 @@ export class CardAlertsComponent {
     } else {
       return `${hour - 12}:00 pm`;
     }
+
   }
 
   // Función para verificar si el reloj está habilitado

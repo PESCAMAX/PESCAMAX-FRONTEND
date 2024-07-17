@@ -33,6 +33,12 @@ import { GraphPhComponent } from './components/molecules/graph-ph/graph-ph.compo
 import { DatapickerComponent } from './components/molecules/datapicker/datapicker.component';
 import { RelojcComponent } from './components/atoms/relojc/relojc.component';
 
+import { InicioComponent } from '../features/monitoreo/pages/inicio/inicio.component';
+import { ExitComponent } from './components/atoms/exit/exit.component';
+
+
+
+
 @NgModule({
   declarations: [
     ButtonEnviarComponent,
@@ -57,8 +63,10 @@ import { RelojcComponent } from './components/atoms/relojc/relojc.component';
     GraficastdssComponent,
     GraficasTemperaturaComponent,
     GraphPhComponent,
-    DatapickerComponent,
     RelojcComponent// Asegúrate de que este componente está declarado aquí
+    DatapickerComponent,// Asegúrate de que este componente está declarado aquí
+    InicioComponent, ExitComponent
+
 
 
   ],
@@ -89,11 +97,7 @@ import { RelojcComponent } from './components/atoms/relojc/relojc.component';
     GraficasTemperaturaComponent,
     GraphPhComponent,
     DatapickerComponent,
-    
-
- 
-
-
+    InicioComponent
 
   ]
 })
