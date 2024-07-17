@@ -24,10 +24,20 @@ export class AlertComponent implements OnInit {
     });
   }
 
+  get iconPath(): string {
+    switch(this.type) {
+      case 'danger':
+        return 'assets/icons/Logo_pescamax.png';
+      case 'warning':
+        return 'assets/icons/Logo_pescamax.png';
+      case 'info':
+      default:
+        return 'assets/icons/Logo_pescamax.png';
+    }
+  }
 
   onViewMore(): void {
     // Redirigir al historial de alertas
-
   }
 
   onDismiss(): void {
