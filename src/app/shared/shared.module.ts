@@ -31,7 +31,12 @@ import { GraficastdssComponent } from './components/molecules/graficastdss/grafi
 import { GraficasTemperaturaComponent } from './components/molecules/graficas-temperatura/graficas-temperatura.component';
 import { GraphPhComponent } from './components/molecules/graph-ph/graph-ph.component';
 import { DatapickerComponent } from './components/molecules/datapicker/datapicker.component';
-import { SeleccionarComponent } from './components/atoms/seleccionar/seleccionar.component';
+
+import { InicioComponent } from '../features/monitoreo/pages/inicio/inicio.component';
+import { ExitComponent } from './components/atoms/exit/exit.component';
+
+
+
 
 @NgModule({
   declarations: [
@@ -57,12 +62,9 @@ import { SeleccionarComponent } from './components/atoms/seleccionar/seleccionar
     GraficastdssComponent,
     GraficasTemperaturaComponent,
     GraphPhComponent,
-    DatapickerComponent,
-    SeleccionarComponent// Asegúrate de que este componente está declarado aquí
+    DatapickerComponent,// Asegúrate de que este componente está declarado aquí
+    InicioComponent, ExitComponent
 
- 
-
-  
 
   ],
   imports: [
@@ -91,12 +93,8 @@ import { SeleccionarComponent } from './components/atoms/seleccionar/seleccionar
     GraficastdssComponent,
     GraficasTemperaturaComponent,
     GraphPhComponent,
-    DatapickerComponent
-
- 
-
-
-
+    DatapickerComponent,
+    InicioComponent
   ]
 })
 export class SharedModule { }

@@ -22,6 +22,7 @@ import { GraficaComponent } from './shared/components/molecules/grafica/grafica.
 import { ProductosComponent } from './features/tienda/components-tienda/moleculas-tienda/productos/productos.component';
 import { DatapickerComponent } from './shared/components/molecules/datapicker/datapicker.component';
 import { GraficaGeneralComponent } from './features/monitoreo/pages/dashboard/grafica-general/grafica-general.component';
+import { InicioComponent } from './features/monitoreo/pages/inicio/inicio.component';
 const routes: Routes = [
   {
     path: 'gestion-de-parametros',
@@ -35,11 +36,18 @@ const routes: Routes = [
     path: 'productos',
     component: ProductosComponent
   },
+
   {
     path: 'data',
     component: DatapickerComponent
   },
 
+
+
+  {
+    path: 'Inicio',
+    component: InicioComponent
+  },
 
   {
     path: 'crear-especie',
