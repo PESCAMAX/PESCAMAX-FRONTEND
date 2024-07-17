@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Alerta, ApiService, Especie, Monitoreo } from '../../../../features/monitoreo/services/api-form/api.service';
 import { AlertService } from '../../../../features/monitoreo/services/api-alert/alert.service';
 
+
 @Component({
   selector: 'app-tabla-seleccionar',
   templateUrl: './tabla-seleccionar.component.html',

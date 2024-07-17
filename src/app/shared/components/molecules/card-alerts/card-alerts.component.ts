@@ -14,6 +14,7 @@ export class CardAlertsComponent {
   @Output() confirm = new EventEmitter<void>();
   @Output() cancel = new EventEmitter<void>();
 
+
   onConfirm(): void {
     this.confirm.emit();
   }
