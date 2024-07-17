@@ -63,7 +63,7 @@ import { ExitComponent } from './components/atoms/exit/exit.component';
     GraficastdssComponent,
     GraficasTemperaturaComponent,
     GraphPhComponent,
-    RelojcComponent// Asegúrate de que este componente está declarado aquí
+    RelojcComponent,// Asegúrate de que este componente está declarado aquí
     DatapickerComponent,// Asegúrate de que este componente está declarado aquí
     InicioComponent, ExitComponent
 
