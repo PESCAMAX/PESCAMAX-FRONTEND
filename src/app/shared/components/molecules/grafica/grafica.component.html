@@ -18,11 +18,22 @@
 
 <div *ngIf="alertasFiltradas.length > 0">
   <h3>Alertas Filtradas:</h3>
-  <ul>
-    <li *ngFor="let alerta of alertasFiltradas">
-      {{ alerta.Fecha | date:'medium' }} - {{ alerta.Mensaje }}
-    </li>
-  </ul>
+  <div class="alertas-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Mensaje</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let alerta of alertasFiltradas">
+          <td>{{ alerta.Fecha | date:'medium' }}</td>
+          <td>{{ alerta.Descripcion }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 <div class="chart-container">
