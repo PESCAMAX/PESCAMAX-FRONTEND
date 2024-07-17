@@ -1,0 +1,134 @@
+/* Asegúrate de que estos estilos estén en tu archivo de estilo del componente o en tu archivo global de estilos */
+
+.date-range-field .mat-form-field-infix {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .date-range-field input {
+    width: calc(100% - 40px); /* Ajusta el tamaño del input para dejar espacio al icono */
+    margin-right: 8px; /* Espacio entre el input y el icono */
+  }
+  
+  /* Estilos adicionales para mejorar el diseño del formulario */
+  .flex {
+    display: flex;
+  }
+  
+  .items-center {
+    align-items: center;
+  }
+  
+  .justify-center {
+    justify-content: center;
+  }
+  
+  .p-12 {
+    padding: 3rem;
+  }
+  
+  .mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .w-full {
+    width: 100%;
+  }
+  
+
+  .bg-white {
+    background-color: white;
+  }
+  
+  .shadow-lg {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+  
+  .rounded-lg {
+    border-radius: 0.5rem;
+  }
+  
+  .p-8 {
+    padding: 2rem;
+  }
+  
+  .mb-5 {
+    margin-bottom: 1.25rem;
+  }
+  
+  .block {
+    display: block;
+  }
+  
+  .text-base {
+    font-size: 1rem;
+  }
+  
+  .font-medium {
+    font-weight: 500;
+  }
+  
+
+  .w-full {
+    width: 100%;
+  }
+  
+  .rounded-lg {
+    border-radius: 0.5rem;
+  }
+  
+  .border {
+    border-width: 1px;
+  }
+  
+
+  .bg-white {
+    background-color: white;
+  }
+  
+  .py-3 {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+  
+  .px-6 {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  
+
+  .outline-none {
+    outline: none;
+  }
+  
+
+  .focus\:shadow-md:focus {
+    box-shadow: 0 4px 6px -1px rgba(66, 149, 226, 0.1), 0 2px 4px -1px rgba(66, 149, 226, 0.06);
+  }
+  
+  .text-red-500 {
+    color: #f56565;
+  }
+  
+  .text-sm {
+    font-size: 0.875rem;
+  }
+  
+  .hover\:shadow-form:hover {
+    box-shadow: 0 10px 25px -3px rgba(66, 149, 226, 0.1), 0 4px 6px -2px rgba(66, 149, 226, 0.05);
+  }
+  
+
+  .text-white {
+    color: white;
+  }
+  
+  .font-semibold {
+    font-weight: 600;
+  }
+  
+  .outline-none {
+    outline: none;
+  }
+  

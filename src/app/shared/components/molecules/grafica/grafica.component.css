@@ -1,0 +1,22 @@
+/* styles.css o grafica.component.css */
+.alertas-container {
+    max-height: 200px; /* Ajusta la altura máxima según sea necesario */
+    overflow-y: auto;
+    margin-top: 10px;
+  }
+  
+  .alertas-container table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .alertas-container th, .alertas-container td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .alertas-container th {
+    background-color: #f2f2f2;
+    text-align: left;
+  }
+  

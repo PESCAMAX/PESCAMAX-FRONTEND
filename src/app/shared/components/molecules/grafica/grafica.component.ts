@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js/auto';
-import { ApiService } from '../../../../features/monitoreo/services/api-form/api.service';
+import { ApiService, Alerta } from '../../../../features/monitoreo/services/api-form/api.service';
 
 @Component({
   selector: 'app-grafica',
@@ -11,11 +11,35 @@ export class GraficaComponent implements OnInit {
   public chart: any;
   public lotes: number[] = [];
   public selectedLote: number | null = null;
+  alertas: Alerta[] = [];
+  alertasFiltradas: Alerta[] = [];
+  mensajeAlerta: string = '';
+  fechaInicio: Date | null = null;
+  fechaFin: Date | null = null;
+  fechaMasAntigua: Date = new Date();
+  fechaActual: Date = new Date();
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService) {
+    this.fechaActual.setHours(23, 59, 59, 999);
+  }
 
   ngOnInit(): void {
     this.loadLotes();
+    this.cargarAlertas();
+    this.obtenerFechaMasAntigua();
+   
+  }
+  obtenerFechaMasAntigua(): void {
+    this.apiService.listarMonitoreo().subscribe(
+      data => {
+        if (data.response && data.response.length > 0) {
+          this.fechaMasAntigua = new Date(Math.min(...data.response.map(item => new Date(item.FechaHora).getTime())));
+        }
+      },
+      error => {
+        console.error('Error al obtener la fecha más antigua:', error);
+      }
+    );
   }
 
   loadLotes() {
@@ -37,19 +61,26 @@ export class GraficaComponent implements OnInit {
     const selectElement = event.target as HTMLSelectElement;
     this.selectedLote = parseInt(selectElement.value, 10);
     this.loadDataAndCreateChart();
+    this.filtrarAlertas();
   }
 
   loadDataAndCreateChart() {
     if (this.selectedLote === null) return;
-
+  
     this.apiService.listarMonitoreo().subscribe(
       data => {
-        const filteredData = data.response.filter(item => item.LoteID === this.selectedLote);
+        let filteredData = data.response.filter(item => item.LoteID === this.selectedLote);
+        if (this.fechaInicio && this.fechaFin) {
+          filteredData = filteredData.filter(item => {
+            const fecha = new Date(item.FechaHora);
+            return fecha >= this.fechaInicio! && fecha <= this.fechaFin!;
+          });
+        }
         const fechas = filteredData.map(item => new Date(item.FechaHora).toLocaleString());
         const temperaturas = filteredData.map(item => item.Temperatura);
         const phs = filteredData.map(item => item.PH);
-        const tdss = filteredData.map(item => item.tds);
-        this.createChart(fechas, temperaturas, phs, tdss);
+        const tds = filteredData.map(item => item.tds);
+        this.createChart(fechas, temperaturas, phs, tds);
       },
       error => {
         console.error('Error al cargar los datos:', error);
@@ -112,4 +143,51 @@ export class GraficaComponent implements OnInit {
       }
     });
   }
+
+  cargarAlertas(): void {
+    this.apiService.obtenerAlertas().subscribe({
+      next: (alertas) => {
+        this.alertas = alertas;
+        this.filtrarAlertas();
+      },
+      error: (error) => console.error('Error al cargar alertas:', error)
+    });
+  }
+  filtrarAlertas(): void {
+    if (!this.selectedLote && !this.fechaInicio && !this.fechaFin) {
+      this.alertasFiltradas = this.alertas;
+      return;
+    }
+  
+    this.alertasFiltradas = this.alertas.filter(alerta => {
+      const perteneceLote = this.selectedLote ? alerta.LoteID === this.selectedLote : true;
+      
+      let fechaAlerta: Date | null = null;
+      if (alerta.Fecha) {
+        // Check if alerta.Fecha is a string (ISO date) or already a Date object
+        fechaAlerta = alerta.Fecha instanceof Date ? alerta.Fecha : new Date(alerta.Fecha);
+      }
+  
+      const estaEnRango = this.fechaInicio && this.fechaFin && fechaAlerta ? 
+        (fechaAlerta >= this.fechaInicio && fechaAlerta <= this.fechaFin) : true;
+  
+      return perteneceLote && estaEnRango;
+    });
+  
+    if (this.alertasFiltradas.length === 0) {
+      this.mensajeAlerta = "No hay datos disponibles para el rango de fechas y lote seleccionado.";
+    } else {
+      this.mensajeAlerta = '';
+    }
+  }
+  onDateRangeSelected(event: { startDate: Date, endDate: Date }): void {
+    this.fechaInicio = event.startDate;
+    this.fechaFin = event.endDate;
+    this.loadDataAndCreateChart();
+    this.filtrarAlertas();
+  }
+  disableDates = (date: Date): boolean => {
+    return date > this.fechaActual || (this.fechaMasAntigua !== null && date < this.fechaMasAntigua);
+  };
+  
 }

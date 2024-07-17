@@ -21,6 +21,7 @@ import { GraficasTemperaturaComponent } from './shared/components/molecules/graf
 import { GraficaComponent } from './shared/components/molecules/grafica/grafica.component';
 import { ProductosComponent } from './features/tienda/components-tienda/moleculas-tienda/productos/productos.component';
 import { DatapickerComponent } from './shared/components/molecules/datapicker/datapicker.component';
+import { GraficaGeneralComponent } from './features/monitoreo/pages/dashboard/grafica-general/grafica-general.component';
 const routes: Routes = [
   {
     path: 'gestion-de-parametros',
@@ -54,12 +55,12 @@ const routes: Routes = [
   },
   {
     path: 'temperatura',
-    component: GraficasTemperaturaComponent
+    component: GraficaTemperaturaComponent
 
   },
   {
     path: 'home',
-    component: GraficaComponent
+    component: GraficaGeneralComponent
 
   },
   
