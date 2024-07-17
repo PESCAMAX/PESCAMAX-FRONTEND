@@ -1,0 +1,23 @@
+<div class="mb-4">
+    <label for="numHours" class="mr-2">Número de horas a monitorear:</label>
+    <input type="number" id="numHours" [(ngModel)]="numHoursToMonitor" min="4" max="24" class="border rounded px-2 py-1">
+</div>
+<div class="clock relative w-64 h-64 rounded-full border-4 border-gray-800 shadow-lg mx-auto">
+  
+    <div *ngFor="let hour of hours; let i = index" 
+         class="hour absolute w-6 h-6 text-center"
+         [ngStyle]="getStyle(i)">
+      <button 
+        (click)="toggleHour(hour)" 
+        class="hour-button w-full h-full rounded-full focus:outline-none transition-colors duration-200 ease-in-out"
+        [ngClass]="{'bg-blue-500 text-white': selectedHours.includes(hour), 'bg-gray-200': !selectedHours.includes(hour)}">
+        {{ hour }}
+      </button>
+    </div>
+  </div>
+  <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+    <!-- Botones para limpiar y guardar selección --->
+<button type="button" class="inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm" (click)="clearSelection()">Limpiar Selección</button>
+<button type="button" class="inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm" (click)="saveHours()">Guardar horas seleccionadas</button>
+<button type="button" class="w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" (click)="toggleModal()">Cerrar</button>
+</div>
