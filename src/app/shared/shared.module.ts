@@ -31,6 +31,7 @@ import { GraficastdssComponent } from './components/molecules/graficastdss/grafi
 import { GraficasTemperaturaComponent } from './components/molecules/graficas-temperatura/graficas-temperatura.component';
 import { GraphPhComponent } from './components/molecules/graph-ph/graph-ph.component';
 import { DatapickerComponent } from './components/molecules/datapicker/datapicker.component';
+import { SeleccionarComponent } from './components/atoms/seleccionar/seleccionar.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { DatapickerComponent } from './components/molecules/datapicker/datapicke
     GraficastdssComponent,
     GraficasTemperaturaComponent,
     GraphPhComponent,
-    DatapickerComponent// Asegúrate de que este componente está declarado aquí
+    DatapickerComponent,
+    SeleccionarComponent// Asegúrate de que este componente está declarado aquí
 
  
 
