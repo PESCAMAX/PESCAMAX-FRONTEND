@@ -29,28 +29,30 @@
     </button>
 
     <div *ngIf="subMenuVisible === 1" class="flex flex-col justify-start w-full items-start pb-1">
-      <a href="http://localhost:4200/temperatura" class="flex justify-start items-center space-x-6 hover:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
-        <img src="../../../../../assets/icons/icons8-temperatura-50.png" alt="Miimagen" width="20" height="50">
-        <p class="text-sm leading-5 uppercase">Gráfica temperatura</p>
+
+      <a href="http://localhost:4200/temperatura" class="flex justify-start items-center space-x-6 hover:text-white focus:bg-blue-400 focus:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
+        <img src="../../../../../assets/icons/icons8-temperatura-50.png" alt="Miimagen" width="20" height="50" viewBox="0 0 10 10" fill="">
+        <h3 class="text-base leading-4 font-sans" style="color: black;">Grafica temperatura</h3>
       </a>
 
-      <a href="http://localhost:4200/grafica-tds" class="flex justify-start items-center space-x-6 hover:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
-        <img src="../../../../../assets/icons/icons8-termometro-50.png" alt="Miimagen" width="20" height="50">
-        <p class="text-base leading-4">Gráfica de TDS</p>
+      <a href="http://localhost:4200/grafica-tds" class="flex justify-start items-center space-x-6 hover:text-white focus:bg-blue-400 focus:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
+        <img src="../../../../../assets/icons/icons8-termometro-50.png" alt="Miimagen" width="20" height="50" viewBox="0 0 10 10" fill="">
+        <h3 class="text-base leading-4 font-sans" style="color: black;">Grafica de TDS</h3>
       </a>
 
-      <a href="http://localhost:4200/grafica-ph" class="flex justify-start items-center space-x-6 hover:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
-        <img src="../../../../../assets/icons/icons8-ph-50.png" alt="Miimagen" width="20" height="50">
-        <p class="text-base leading-4">Gráfica de Ph</p>
+      <a href="http://localhost:4200/grafica-ph" class="flex justify-start items-center space-x-6 hover:text-white focus:bg-blue-400 focus:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
+        <img src="../../../../../assets/icons/icons8-ph-50.png" alt="Miimagen" width="20" height="50" viewBox="0 0 10 10" fill="">
+        <h3 class="text-base leading-4 font-sans" style="color: black;">Grafica de Ph</h3>
       </a>
 
-      <a href="/tabla-datos" class="flex justify-start items-center space-x-6 hover:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
-        <img src="../../../../../assets/icons/icons8-crear-nuevo-30.png" alt="Miimagen" width="20" height="50">
-        <p class="text-base leading-4">Tablas</p>
+      <a href="/tabla-datos" class="flex justify-start items-center space-x-6 hover:text-white focus:bg-blue-400 focus:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
+        <img src="../../../../../assets/icons/icons8-crear-nuevo-30.png" alt="Miimagen" width="20" height="50" viewBox="0 0 10 10" fill="">
+        <h3 class="text-base leading-4 font-sans" style="color: black;">Tablas</h3>
+
       </a>
       <a href="/home" class="flex justify-start items-center space-x-6 hover:text-white focus:bg-blue-400 focus:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
         <img src="../../../../../assets/icons/crecimiento.png" alt="Miimagen" width="20" height="50" viewBox="0 0 10 10" fill="">
-        <p class="text-base leading-4  ">Grafica General</p>
+        <h3 class="text-base leading-4 font-sans" style="color: black;">Grafica General</h3>
       </a>
     </div>
   </div>
@@ -63,24 +65,46 @@
       </svg>
     </button>
 
-
-    <div *ngIf="subMenuVisible === 2" class="flex flex-col justify-start items-center px-6 border-b border-white w-full">
-      <a href="http://localhost:4200/crear-especie" class="flex justify-start items-center space-x-6 hover:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
-        <img src="../../../../../assets/icons/icons8-crear-nuevo-30.png" alt="Miimagen" width="20" height="50">
-        <p class="text-base leading-4">Crear especie</p>
-
-      </a>
-
-      <a href="http://localhost:4200/seleccionar-especie" class="flex justify-start items-center space-x-6 hover:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
-        <img src="../../../../../assets/icons/icons8-natural-user-interface-2-26.png" alt="Miimagen" width="20" height="50">
-        <p class="text-base leading-4">Seleccionar especie</p>
-      </a>
-
-      <a href="http://localhost:4200/modificar-especie" class="flex justify-start items-center space-x-6 hover:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
-        <img src="../../../../../assets/icons/icons8-editar-archivo-30.png" alt="Miimagen" width="20" height="50">
-        <p class="text-base leading-4">Modificar especie</p>
-      </a>
+    <div  *ngIf="subMenuVisible === 2" class="flex flex-col justify-start items-center px-6 border-b border-white w-full">
+      <a
+      href="http://localhost:4200/crear-especie"
+      class="flex justify-start items-center space-x-6 hover:text-white focus:bg-blue-400 focus:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
+      <img src="../../../../../assets/icons/icons8-crear-nuevo-30.png" alt="Miimagen" width="20" height="50" viewBox="0 0 10 10" fill="">
+      <h3 class="text-base leading-4 font-sans" style="color: black;">Crear especie</h3>
+    </a>
+    <div  class="flex flex-col justify-start items-center px-6 border-b border-white w-full">
+      <a
+      href="http://localhost:4200/seleccionar-especie"
+      class="flex justify-start items-center space-x-6 hover:text-white focus:bg-blue-400 focus:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
+      <img src="../../../../../assets/icons/icons8-natural-user-interface-2-26.png" alt="Miimagen" width="20" height="50" viewBox="0 0 10 10" fill="">
+      <h3 class="text-base leading-4 font-sans" style="color: black;">Seleccionar especie</h3>
+    </a>
+     <div class="flex flex-col justify-start items-center px-6 border-b border-white w-full">
+      <a
+      href="http://localhost:4200/modificar-especie"
+      class="flex justify-start items-center space-x-6 hover:text-white focus:bg-blue-400 focus:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
+      <img src="../../../../../assets/icons/icons8-editar-archivo-30.png" alt="Miimagen" width="20" height="50" viewBox="0 0 10 10" fill="">
+      <h3 class="text-base leading-4 font-sans" style="color: black;">Modificar especie</h3>
+    </a>
+  </div>
     </div>
+    </div>
+</div>
+<div class="flex flex-col justify-start items-center px-6  w-full">
+  <button (click)="toggleSubMenu(3)" class="focus:outline-none focus:text-indigo-400 text-left text-white flex justify-between items-center w-full py-5 space-x-14">
+    <p class="text-sm leading-5 uppercase" style="color: black;">Sistema<br>de Alertas</p>
+    <app-flecha-despliegue></app-flecha-despliegue>
+  </button>
+  <div *ngIf="subMenuVisible === 3" class="flex flex-col justify-start w-full items-start pb-1">
+    <a href="http://localhost:4200/alertas-recientes" class="flex justify-start items-center space-x-6 hover:text-white focus:bg-blue-400 focus:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
+      <img src="../../../../../assets/icons/advertencia.png" alt="Miimagen" width="20" height="50">
+      <h3 class="text-base leading-4 font-sans" style="color: black;">Alertas recientes</h3>
+    </a>
+    <a href="http://localhost:4200/historial-alertas" class="flex justify-start items-center space-x-6 hover:text-white focus:bg-blue-400 focus:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
+      <img src="../../../../../assets/icons/icons8-historia-de-la-actividad-50.png" alt="Miimagen" width="20" height="50">
+      <h3 class="text-base leading-4 font-sans" style="color: black;">Historial de alertas</h3>
+    </a>
+
   </div>
 
   <div class="flex flex-col justify-start items-center px-6 w-full">
