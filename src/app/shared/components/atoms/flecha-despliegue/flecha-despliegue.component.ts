@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-flecha-despliegue',
@@ -6,11 +6,11 @@ import { Component } from '@angular/core';
   styleUrl: './flecha-despliegue.component.css'
 })
 export class FlechaDespliegueComponent {
-  arrowImage: string = 'assets/icons/icons8-flecha-ampliar-16.png'; // Imagen inicial de la flecha
+  @Input() desplegado: boolean = false;
 
-  toggleArrow() {
-    this.arrowImage = this.arrowImage === 'assets/icons/icons8-flecha-ampliar-16.png' 
-      ? 'assets/icons/icons8-flecha-contraer-16.png' 
+  get arrowImage(): string {
+    return this.desplegado 
+      ? 'assets/icons/icons8-flecha-contraer-16.png'
       : 'assets/icons/icons8-flecha-ampliar-16.png';
   }
 }
