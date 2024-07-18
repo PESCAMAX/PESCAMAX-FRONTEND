@@ -68,7 +68,7 @@ export class CardAlertsComponent {
       return '12:00 pm';
     } else if (hour < 12) {
       return `${hour}:00 am`;
-    } else {
+    } else {      
       return `${hour - 12}:00 pm`;
     }
 

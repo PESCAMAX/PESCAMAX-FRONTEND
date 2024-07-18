@@ -1,4 +1,4 @@
-<div class="flex items-center justify-center min-h-screen bg-gray-200">
+<div class="flex items-center justify-center">
   <div class="bg-white p-8 rounded-md shadow-md w-full max-w-md">
     <div class="flex justify-between items-center mb-4">
       <h2 class="text-xl font-bold">Configuración de Parámetros</h2>
@@ -28,17 +28,27 @@
 
     <div class="mb-4 text-center">
       <p class="text-sm text-gray-600">Horas seleccionadas:</p>
-      <div *ngFor="let hour of selectedHours" class="flex justify-center items-center space-x-2 mb-1">
-        <span>{{ formatHour(hour) }}</span>
-        <label class="inline-flex items-center">
-          <input type="checkbox" [(ngModel)]="hour.am" (change)="toggleHour(hour.hour, 'am')" class="form-checkbox h-5 w-5 text-blue-600">
-          <span class="ml-2">AM</span>
-        </label>
-        <label class="inline-flex items-center">
-          <input type="checkbox" [(ngModel)]="hour.pm" (change)="toggleHour(hour.hour, 'pm')" class="form-checkbox h-5 w-5 text-blue-600">
-          <span class="ml-2">PM</span>
-        </label>
-      </div>
+      <table class="w-full border-collapse border border-gray-300">
+        <thead>
+          <tr>
+            <th class="border border-gray-300 p-2">Hora</th>
+            <th class="border border-gray-300 p-2">AM</th>
+            <th class="border border-gray-300 p-2">PM</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let hour of selectedHours">
+            <td class="border border-gray-300 p-2">{{ formatHour(hour) }}</td>
+            <td class="border border-gray-300 p-2 text-center">
+              <input type="checkbox" [(ngModel)]="hour.am" (change)="toggleHourCheckbox(hour.hour, 'am', $event)" class="form-checkbox h-5 w-5 text-blue-600">
+            </td>
+            <td class="border border-gray-300 p-2 text-center">
+              <input type="checkbox" [(ngModel)]="hour.pm" (change)="toggleHourCheckbox(hour.hour, 'pm', $event)" class="form-checkbox h-5 w-5 text-blue-600">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="mt-4 text-sm text-gray-600">Total de horas seleccionadas: {{ getTotalSelectedHours() }}</p>
     </div>
 
     <div class="flex justify-between">
