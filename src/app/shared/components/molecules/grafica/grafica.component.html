@@ -1,6 +1,5 @@
-<!-- grafica.component.html -->
 <div>
-  <app-datapicker 
+  <app-datapicker
     (dateRangeSelected)="onDateRangeSelected($event)"
     [minDate]="fechaMasAntigua"
     [maxDate]="fechaActual">
@@ -11,9 +10,31 @@
   </select>
 </div>
 
-<!-- ... resto del HTML ... -->
 <div *ngIf="mensajeAlerta" class="alert-message">
   {{ mensajeAlerta }}
+</div>
+
+
+<div class="alertas-dropdown">
+  <h3 class="alertas-trigger">Fecha y Mensajes</h3>
+  <div class="alertas-content" *ngIf="alertasFiltradas.length > 0">
+    <div class="alertas-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Mensaje</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let alerta of alertasFiltradas">
+            <td>{{ alerta.Fecha | date:'medium' }}</td>
+            <td>{{ alerta.Descripcion }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
 
 

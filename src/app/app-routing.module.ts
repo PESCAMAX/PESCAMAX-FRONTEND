@@ -23,6 +23,7 @@ import { ProductosComponent } from './features/tienda/components-tienda/molecula
 import { DatapickerComponent } from './shared/components/molecules/datapicker/datapicker.component';
 import { GraficaGeneralComponent } from './features/monitoreo/pages/dashboard/grafica-general/grafica-general.component';
 import { InicioComponent } from './features/monitoreo/pages/inicio/inicio.component';
+
 const routes: Routes = [
   {
     path: 'gestion-de-parametros',

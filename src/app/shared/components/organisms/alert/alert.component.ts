@@ -12,7 +12,10 @@ export class AlertComponent implements OnInit {
   type: 'info' | 'danger' | 'warning' = 'warning';
   message: string = '';
 
-  constructor(private alertService: AlertService) {}
+    constructor(
+    private alertService: AlertService,
+    private router: Router // Añade el Router aquí
+  ) {}
 
   ngOnInit(): void {
     this.alertService.getAlert().subscribe(alert => {
@@ -38,11 +41,13 @@ export class AlertComponent implements OnInit {
 
   onViewMore(): void {
     // Redirigir al historial de alertas
+    this.router.navigate(['/historial-alertas']);
   }
 
   onDismiss(): void {
     this.message = '';
   }
+  
 
   get alertClasses() {
     return {
