@@ -11,7 +11,7 @@ export class ApiService {
   private baseUrl = 'http://localhost:6754'; // Asegúrate de que la URL base sea correcta
 
   constructor(private http: HttpClient, private authService: AuthService) {}
-
+//se la clono? ya la clone ,, es mas ya hasta puse lo de brandon, vea
   private getUserId(): string | null {
     return this.authService.getUserId(); // Get the UserId from the AuthService
   }
