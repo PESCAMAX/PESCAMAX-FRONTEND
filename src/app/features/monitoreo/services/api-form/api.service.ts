@@ -1,70 +1,112 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
+import { AuthService } from '../api-login/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  private baseUrl = 'http://localhost:6754'; // URL base de tu backend
+  private baseUrl = 'http://localhost:6754/api'; // Asegúrate de que la URL base sea correcta
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
-  // Métodos para Especie
+  private getUserId(): string | null {
+    const userId = this.authService.getUserId();
+    return userId;
+  }
+
+  private getHeaders(): HttpHeaders {
+    const token = this.authService.getAuthToken();
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+  }
+  private handleError(error: HttpErrorResponse): Observable<never> {
+    console.error('Error occurred:', error);
+    let errorMsg = 'An unknown error occurred!';
+    if (error.error instanceof ErrorEvent) {
+      errorMsg = `Client-side error: ${error.error.message}`;
+    } else if (error.status) {
+      errorMsg = `Server-side error: ${error.status} - ${error.error}`;
+      if (error.status === 500) {
+        errorMsg = 'Internal server error. Please try again later.';
+      }
+    }
+    return throwError(errorMsg);
+  }
+
+
   crearEspecie(data: any): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/CrearEspecie/Crear`, data)
+    const userId = this.getUserId();
+    if (!userId) {
+      console.error('UserId not available');
+      return throwError('UserId not available');
+    }
+    data.UserId = userId;
+    return this.http.post<any>(`${this.baseUrl}/CrearEspecie/Crear`, data, { headers: this.getHeaders() })
       .pipe(catchError(this.handleError));
   }
 
-  listarEspecies(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/CrearEspecie/Listar`)
+  listarEspecies(): Observable<Especie[]> {
+    const userId = this.getUserId();
+    console.log('UserId being sent:', userId);
+    if (!userId) {
+      console.error('UserId not available');
+      return throwError('UserId not available');
+    }
+    return this.http.get<Especie[]>(`${this.baseUrl}/CrearEspecie/Listar`, {
+      headers: this.getHeaders()
+    }).pipe(
+      tap((response: Especie[]) => console.log('Response from listarEspecies:', response)),
+      catchError(this.handleError)
+    );
+  }
+
+  modificarEspecie(especie: any): Observable<any> {
+    return this.http.put<any>(`${this.baseUrl}/CrearEspecie/Modificar/${especie.Id}`, especie, { headers: this.getHeaders() })
       .pipe(catchError(this.handleError));
   }
 
-  eliminarEspecie(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/CrearEspecie/Eliminar/${id}`)
+  eliminarEspecie(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.baseUrl}/CrearEspecie/Eliminar/${id}`, { headers: this.getHeaders() })
       .pipe(catchError(this.handleError));
+  }
+  listarMonitoreo(): Observable<{ response: Monitoreo[] }> {
+    const userId = this.getUserId();
+    console.log('UserId siendo enviado:', userId);
+    if (!userId) {
+      console.error('UserId no disponible');
+      return throwError('UserId no disponible');
+    }
+    return this.http.get<{ response: Monitoreo[] }>(`${this.baseUrl}/Monitoreo/Leer?userId=${userId}`, { headers: this.getHeaders() })
+      .pipe(
+        tap(response => console.log('Datos de monitoreo recibidos:', response)),
+        catchError(this.handleError)
+      );
   }
 
-  modificarEspecie(especie: Especie): Observable<void> {
-    return this.http.put<void>(`${this.baseUrl}/CrearEspecie/Modificar`, especie)
-      .pipe(catchError(this.handleError));
-  }
-
-  // Métodos para Monitoreo
-  listarMonitoreo(): Observable<{ response: any[] }> {
-    return this.http.get<{ response: any[] }>(`${this.baseUrl}/api/Monitoreo/Leer`)
-      .pipe(catchError(this.handleError));
-  }
-  // Métodos para Alerta
   crearAlerta(alerta: Alerta): Observable<Alerta> {
-    return this.http.post<Alerta>(`${this.baseUrl}/api/Alerta`, alerta)
+    alerta.UserId = this.getUserId() || undefined;
+    return this.http.post<Alerta>(`${this.baseUrl}/Alerta`, alerta, { headers: this.getHeaders() })
       .pipe(catchError(this.handleError));
   }
 
   obtenerAlertas(): Observable<Alerta[]> {
-    return this.http.get<Alerta[]>(`${this.baseUrl}/api/Alerta`)
-      .pipe(catchError(this.handleError));
-  }
-  
-  // Manejo de errores
-  private handleError(error: HttpErrorResponse) {
-    if (error.error instanceof ErrorEvent) {
-      // Error del lado del cliente o de red.
-      console.error('Ocurrió un error:', error.error.message);
-    } else {
-      // El backend retornó un código de respuesta sin éxito.
-      console.error(
-        `Backend retornó código ${error.status}, ` +
-        `body was: ${error.error}`);
+    const userId = this.getUserId();
+    if (!userId) {
+      return throwError('UserId not available');
     }
-    // Retorna un observable con un mensaje de error orientado al usuario
-    return throwError('Algo malo sucedió; por favor, inténtalo de nuevo más tarde.');
+    return this.http.get<Alerta[]>(`${this.baseUrl}/Alerta?userId=${userId}`, { headers: this.getHeaders() })
+      .pipe(
+        tap(alertas => console.log('Alertas recibidas:', alertas)),
+        catchError(this.handleError)
+      );
   }
 }
 
-// Interfaces
 export interface Monitoreo {
   ID_M: number;
   tds: number;
@@ -72,6 +114,7 @@ export interface Monitoreo {
   PH: number;
   FechaHora: Date;
   LoteID: number;
+  UserId: string;
 }
 
 export interface Especie {
@@ -83,6 +126,7 @@ export interface Especie {
   TemperaturaMaximo: number;
   PhMinimo: number;
   PhMaximo: number;
+  UserId?: string; // Added UserId
 }
 
 export interface Alerta {
@@ -91,6 +135,6 @@ export interface Alerta {
   Nombre: string;
   LoteID: number;
   Descripcion: string;
-  Fecha?: string | Date; // Make sure it can be either string or Date
-  Mensaje?: string; // Add this if it's not already there
+  Fecha?: Date;
+  UserId?: string;
 }

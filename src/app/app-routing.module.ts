@@ -100,7 +100,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    component : CrearEspecieComponent
+    component : LoginComponent
   },
   {
     path: 'login',

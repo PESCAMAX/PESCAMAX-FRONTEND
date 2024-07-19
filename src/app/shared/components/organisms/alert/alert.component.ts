@@ -1,30 +1,52 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AlertService } from '../../../../features/monitoreo/services/api-alert/alert.service';
-import { Router } from '@angular/router';
+import { Router, NavigationStart } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-alert',
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.css']
 })
-export class AlertComponent implements OnInit {
+export class AlertComponent implements OnInit, OnDestroy {
   label: string = '';
   type: 'info' | 'danger' | 'warning' = 'warning';
   message: string = '';
+  private alertSubscription!: Subscription;
+  private routerSubscription!:Subscription; 
 
-    constructor(
+  constructor(
     private alertService: AlertService,
-    private router: Router // Añade el Router aquí
+    private router: Router,
+    
+  
   ) {}
 
   ngOnInit(): void {
-    this.alertService.getAlert().subscribe(alert => {
+    this.alertSubscription = this.alertService.getAlert().subscribe(alert => {
       if (alert) {
         this.type = alert.type;
         this.label = alert.label;
         this.message = alert.message;
+      } else {
+        this.message = '';
       }
     });
+    // Suscribirse a los eventos de navegación
+    this.routerSubscription = this.router.events.subscribe(event => {
+      if (event instanceof NavigationStart) {
+        this.clearAlert();
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.alertSubscription) {
+      this.alertSubscription.unsubscribe();
+    }
+    if (this.routerSubscription) {
+      this.routerSubscription.unsubscribe();
+    }
   }
 
   get iconPath(): string {
@@ -40,14 +62,18 @@ export class AlertComponent implements OnInit {
   }
 
   onViewMore(): void {
-    // Redirigir al historial de alertas
     this.router.navigate(['/historial-alertas']);
+    this.clearAlert();
   }
 
   onDismiss(): void {
-    this.message = '';
+    this.clearAlert();
   }
-  
+
+  clearAlert(): void {
+    this.message = '';
+    this.alertService.clearAlert();
+  }
 
   get alertClasses() {
     return {
