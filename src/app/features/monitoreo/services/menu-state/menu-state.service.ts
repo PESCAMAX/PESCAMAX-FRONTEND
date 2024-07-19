@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class MenuStateService {
+  [x: string]: any;
   private subMenuVisible: number | null = null;
 
   constructor() { }
