@@ -8,7 +8,7 @@ import { AuthService } from '../api-login/auth.service';
   providedIn: 'root'
 })
 export class ApiService {
-  private baseUrl = 'http://localhost:6754/api'; // Asegúrate de que la URL base sea correcta
+  private baseUrl = 'http://localhost:6754'; // Asegúrate de que la URL base sea correcta
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
