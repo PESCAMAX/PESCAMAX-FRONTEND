@@ -1,7 +1,7 @@
 // historial-alertas.component.ts
 import { Component, OnInit } from '@angular/core';
 import { ApiService, Alerta } from '../../../../features/monitoreo/services/api-form/api.service';
-
+import { AuthService } from '../../../../features/monitoreo/services/api-login/auth.service';
 @Component({
   selector: 'app-historial-alertas',
   templateUrl: './historial-alertas.component.html',
@@ -13,20 +13,23 @@ export class HistorialAlertasComponent implements OnInit {
   alertasFiltradas: Alerta[] = [];
   mensajeAlerta: string = '';
 
-  constructor(private apiService: ApiService) {
-   
-
-  }
+  constructor(private apiService: ApiService, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.cargarAlertas();
   }
 
   cargarAlertas(): void {
+    const userId = this.authService.getUserId();
+    if (!userId) {
+      console.error('Usuario no autenticado');
+      return;
+    }
+
     this.apiService.obtenerAlertas().subscribe({
       next: (alertas) => {
         this.alertas = alertas;
-        this.alertasFiltradas = alertas; // Inicialmente, mostramos todas las alertas
+        this.alertasFiltradas = alertas;
       },
       error: (error) => console.error('Error al cargar alertas:', error)
     });
@@ -37,11 +40,9 @@ export class HistorialAlertasComponent implements OnInit {
       const fechaAlerta = new Date(alerta.Fecha!);
       const finDelDia = new Date(fechaFin);
       finDelDia.setHours(23, 59, 59, 999);
-      
-      // Luego use finDelDia en lugar de fechaFin en su filtro
       return fechaAlerta >= fechaInicio && fechaAlerta <= finDelDia;
     });
-  
+
     if (this.alertasFiltradas.length === 0) {
       this.mensajeAlerta = "No hay datos disponibles para el rango de fechas seleccionado.";
     } else {
@@ -49,7 +50,7 @@ export class HistorialAlertasComponent implements OnInit {
     }
   }
 
-  onDateRangeSelected(event: {startDate: Date, endDate: Date}): void {
+  onDateRangeSelected(event: { startDate: Date, endDate: Date }): void {
     this.filtrarPorFecha(event.startDate, event.endDate);
   }
 }

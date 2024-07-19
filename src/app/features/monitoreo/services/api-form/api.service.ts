@@ -13,7 +13,8 @@ export class ApiService {
   constructor(private http: HttpClient, private authService: AuthService) {}
 //se la clono? ya la clone ,, es mas ya hasta puse lo de brandon, vea
   private getUserId(): string | null {
-    return this.authService.getUserId(); // Get the UserId from the AuthService
+    const userId = this.authService.getUserId();
+    return userId;
   }
 
   private getHeaders(): HttpHeaders {
@@ -23,7 +24,6 @@ export class ApiService {
       'Authorization': `Bearer ${token}`
     });
   }
-
   private handleError(error: HttpErrorResponse): Observable<never> {
     console.error('Error occurred:', error);
     let errorMsg = 'An unknown error occurred!';
@@ -37,6 +37,7 @@ export class ApiService {
     }
     return throwError(errorMsg);
   }
+
 
   crearEspecie(data: any): Observable<any> {
     const userId = this.getUserId();
@@ -95,8 +96,14 @@ export class ApiService {
 
   obtenerAlertas(): Observable<Alerta[]> {
     const userId = this.getUserId();
-    return this.http.get<Alerta[]>(`${this.baseUrl}/Alerta?UserId=${userId}`, { headers: this.getHeaders() })
-      .pipe(catchError(this.handleError));
+    if (!userId) {
+      return throwError('UserId not available');
+    }
+    return this.http.get<Alerta[]>(`${this.baseUrl}/Alerta?userId=${userId}`, { headers: this.getHeaders() })
+      .pipe(
+        tap(alertas => console.log('Alertas recibidas:', alertas)),
+        catchError(this.handleError)
+      );
   }
 }
 
@@ -129,5 +136,5 @@ export interface Alerta {
   LoteID: number;
   Descripcion: string;
   Fecha?: Date;
-  UserId?: string; // Added UserId
+  UserId?: string;
 }
