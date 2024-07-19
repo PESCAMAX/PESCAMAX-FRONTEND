@@ -20,10 +20,12 @@ export class TablaSensorComponent implements OnInit {
   }
 
   cargarDatos(): void {
+    console.log('Cargando datos de monitoreo...');
     this.apiService.listarMonitoreo().subscribe(
       (response: { response: Monitoreo[] }) => {
-        console.log(response); // Log para depuración
+        console.log('Respuesta completa:', response);
         this.monitoreoData = response.response;
+        console.log('Datos de monitoreo asignados:', this.monitoreoData);
         this.filteredData = [...this.monitoreoData];
         this.extraerLotes();
       },
@@ -32,7 +34,6 @@ export class TablaSensorComponent implements OnInit {
       }
     );
   }
-
   extraerLotes(): void {
     this.lotes = [...new Set(this.monitoreoData.map(item => item.LoteID))];
   }
