@@ -73,11 +73,18 @@ export class ApiService {
     return this.http.delete<any>(`${this.baseUrl}/CrearEspecie/Eliminar/${id}`, { headers: this.getHeaders() })
       .pipe(catchError(this.handleError));
   }
-
-  listarMonitoreo(): Observable<{ response: any[] }> {
+  listarMonitoreo(): Observable<{ response: Monitoreo[] }> {
     const userId = this.getUserId();
-    return this.http.get<{ response: any[] }>(`${this.baseUrl}/Monitoreo/Leer?UserId=${userId}`)
-      .pipe(catchError(this.handleError));
+    console.log('UserId siendo enviado:', userId);
+    if (!userId) {
+      console.error('UserId no disponible');
+      return throwError('UserId no disponible');
+    }
+    return this.http.get<{ response: Monitoreo[] }>(`${this.baseUrl}/Monitoreo/Leer?userId=${userId}`, { headers: this.getHeaders() })
+      .pipe(
+        tap(response => console.log('Datos de monitoreo recibidos:', response)),
+        catchError(this.handleError)
+      );
   }
 
   crearAlerta(alerta: Alerta): Observable<Alerta> {
@@ -100,7 +107,7 @@ export interface Monitoreo {
   PH: number;
   FechaHora: Date;
   LoteID: number;
-  UserId?: string; // Added UserId
+  UserId: string;
 }
 
 export interface Especie {
