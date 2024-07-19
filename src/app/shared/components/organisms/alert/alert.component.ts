@@ -32,11 +32,9 @@ export class AlertComponent implements OnInit, OnDestroy {
         this.message = '';
       }
     });
-
     // Suscribirse a los eventos de navegación
     this.routerSubscription = this.router.events.subscribe(event => {
       if (event instanceof NavigationStart) {
-        // Cerrar la alerta al iniciar la navegación
         this.clearAlert();
       }
     });
