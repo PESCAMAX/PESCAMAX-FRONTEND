@@ -65,7 +65,8 @@ import { ExitComponent } from './components/atoms/exit/exit.component';
     GraphPhComponent,
     RelojcComponent,// Asegúrate de que este componente está declarado aquí
     DatapickerComponent,// Asegúrate de que este componente está declarado aquí
-    InicioComponent, ExitComponent
+    InicioComponent,
+    ExitComponent
 
 
 
@@ -97,8 +98,11 @@ import { ExitComponent } from './components/atoms/exit/exit.component';
     GraficasTemperaturaComponent,
     GraphPhComponent,
     DatapickerComponent,
-    InicioComponent
+    InicioComponent,
+    ExitComponent
 
   ]
 })
-export class SharedModule { }
+export class SharedModule {
+  
+ }
