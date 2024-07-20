@@ -24,17 +24,17 @@ export class LoginComponent {
     this.authService.login(user).subscribe(
       (response) => {
         if (response.success) {
-          this.successMessage = response.message || 'Login successful!';
+          this.successMessage = response.message || '¡Inicio de sesión exitoso!';
           setTimeout(() => {
             this.successMessage = ''; // Limpiar el mensaje de éxito
             this.router.navigate(['/crear-especie']);
           }, 2000);
         } else {
-          this.errorMessage = response.message || 'Invalid username or password.';
+          this.errorMessage = response.message || 'Nombre de usuario o contraseña inválidos.';
         }
       },
       (error) => {
-        this.errorMessage = 'An error occurred during login.';
+        this.errorMessage = 'Ocurrió un error durante el inicio de sesión.';
       }
     );
   }
