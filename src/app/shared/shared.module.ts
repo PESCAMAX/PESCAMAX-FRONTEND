@@ -35,6 +35,7 @@ import { RelojcComponent } from './components/atoms/relojc/relojc.component';
 
 import { InicioComponent } from '../features/monitoreo/pages/inicio/inicio.component';
 import { ExitComponent } from './components/atoms/exit/exit.component';
+import { ViewPaswordComponent } from './components/atoms/view-pasword/view-pasword.component';
 
 
 
@@ -66,7 +67,8 @@ import { ExitComponent } from './components/atoms/exit/exit.component';
     RelojcComponent,// Asegúrate de que este componente está declarado aquí
     DatapickerComponent,// Asegúrate de que este componente está declarado aquí
     InicioComponent,
-    ExitComponent
+    ExitComponent,
+    ViewPaswordComponent
 
 
 
@@ -99,7 +101,8 @@ import { ExitComponent } from './components/atoms/exit/exit.component';
     GraphPhComponent,
     DatapickerComponent,
     InicioComponent,
-    ExitComponent
+    ExitComponent,
+    ViewPaswordComponent
 
   ]
 })

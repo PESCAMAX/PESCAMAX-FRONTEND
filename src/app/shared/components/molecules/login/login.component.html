@@ -1,29 +1,50 @@
-<div class="relative flex min-h-screen text-gray-800 antialiased flex-col justify-center overflow-hidden bg-gray-50 py-6 sm:py-12">
-  <div class="relative py-3 sm:w-96 mx-auto text-center">
-    <span class="text-2xl font-light ">Ingresa a tu cuenta</span>
-    <div class="mt-4 bg-white shadow-md rounded-lg text-left">
-      <div class="h-2 bg-blue-500 rounded-t-md"></div>
-      <div class="px-8 py-6">
-        <!-- Alertas -->
-        <app-alert-form [successMessage]="successMessage" [errorMessage]="errorMessage"></app-alert-form>
-        
-        <label class="block font-semibold"> Nombre de usuario </label>
-        <input type="text" [(ngModel)]="username" placeholder="Email" name="username" class="border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-indigo-500 focus:ring-1 rounded-md">
-        <label class="block mt-3 font-semibold"> Contraseña </label>
-        <input type="password" [(ngModel)]="password" placeholder="Password" name="password" class="border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-indigo-500 focus:ring-1 rounded-md">
-        <div class="flex justify-between items-baseline">
-          <button type="submit" (click)="onLogin()" class="mt-4 bg-blue-500 text-white py-2 px-6 rounded-md hover:bg-blue-900">Login</button>
-          <p class="text-sm hover:underline"> <a href="/forgot-password" class="text-cyan-600">¿Olvidaste tu Contraseña?</a></p>
+<div class="relative py-3 sm:w-96 mx-auto text-center">
+  <span class="text-2xl font-light">Ingresa a tu cuenta</span>
+  <div class="mt-4 bg-white shadow-md rounded-lg text-left">
+    <div class="h-2 bg-blue-500 rounded-t-md"></div>
+    <div class="px-8 py-6">
+      <!-- Alertas -->
+      <app-alert-form [successMessage]="successMessage" [errorMessage]="errorMessage"></app-alert-form>
 
+      <label class="block font-semibold">Nombre de usuario</label>
+      <input 
+        type="text" 
+        [(ngModel)]="username" 
+        placeholder="Email" 
+        name="username" 
+        class="border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-indigo-500 focus:ring-1 rounded-md"
+      />
 
-        </div>
+      <label class="block mt-3 font-semibold">Contraseña</label>
+      <div class="relative">
+        <input 
+          [type]="isPasswordVisible ? 'text' : 'password'" 
+          [(ngModel)]="password" 
+          placeholder="Password" 
+          name="password" 
+          class="border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-indigo-500 focus:ring-1 rounded-md"
+        />
+
+        <!-- Componente de visualización de la contraseña -->
+        <app-view-password [(ngModel)]="password"></app-view-password>
+
+        <button 
+          type="button" 
+          (click)="togglePassword()" 
+          class="absolute inset-y-0 right-0 flex items-center px-3"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path *ngIf="!isPasswordVisible" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.98 8.758A9.976 9.976 0 0112 4c4.233 0 7.943 2.447 9.02 6.261a9.975 9.975 0 01-9.02 6.261c-4.233 0-7.943-2.447-9.02-6.261zM12 6c-2.462 0-4.699 1.094-6.393 2.77a1.5 1.5 0 00-.252 1.684c.26.64.65 1.174 1.114 1.598a1.5 1.5 0 001.732.29C8.442 11.591 10.175 11 12 11c2.462 0 4.699-1.094 6.393-2.77a1.5 1.5 0 00.252-1.684A8.945 8.945 0 0012 6z" />
+            <path *ngIf="isPasswordVisible" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            <path *ngIf="isPasswordVisible" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.617 5 12 5s8.268 2.943 9.542 7c-1.274 4.057-5.159 7-9.542 7s-8.268-2.943-9.542-7z" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="flex justify-between items-baseline">
+        <button type="submit" (click)="onLogin()" class="mt-4 bg-blue-500 text-white py-2 px-6 rounded-md hover:bg-blue-900">Login</button>
+        <p class="text-sm hover:underline"> <a href="/forgot-password" class="text-cyan-600">¿Olvidaste tu Contraseña?</a></p>
       </div>
     </div>
-    
   </div>
-  
 </div>
-
-
-
-

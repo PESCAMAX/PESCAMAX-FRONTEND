@@ -9,6 +9,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+isPasswordVisible: any;
+togglePassword() {
+throw new Error('Method not implemented.');
+}
   username: string = '';
   password: string = '';
   successMessage: string = '';
@@ -35,3 +39,6 @@ export class LoginComponent {
     );
   }
 }
+
+
+
