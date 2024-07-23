@@ -30,9 +30,9 @@
           </label>
           <input formControlName="tdsMaximo" type="text" id="tdsMaximo" placeholder="TDS ideal máximo"
                  class="w-full rounded-lg border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#4295e2] focus:shadow-md" />
-          <div *ngIf="especieForm.get('tdsMaximo')?.invalid && especieForm.get('tdsMaximo')?.touched" class="text-red-500 text-sm">
-            {{ getErrorMessage('tdsMaximo') }}
-          </div>
+                 <div *ngIf="especieForm.get('tdsMaximo')?.errors?.['minMax']" class="text-red-500 text-sm">
+                  {{ especieForm.get('tdsMaximo')?.errors?.['minMax'] }}
+                </div>
         </div>
       </div>
 
