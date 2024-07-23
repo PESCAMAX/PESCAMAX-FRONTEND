@@ -23,7 +23,7 @@ import { ProductosComponent } from './features/tienda/components-tienda/molecula
 import { DatapickerComponent } from './shared/components/molecules/datapicker/datapicker.component';
 import { GraficaGeneralComponent } from './features/monitoreo/pages/dashboard/grafica-general/grafica-general.component';
 import { InicioComponent } from './features/monitoreo/pages/inicio/inicio.component';
-
+import { AuthGuard } from './features/monitoreo/services/auth-guard/auth-guard.service';
 const routes: Routes = [
   {
     path: 'gestion-de-parametros',
@@ -50,23 +50,16 @@ const routes: Routes = [
     component: InicioComponent
   },
 
-  {
-    path: 'crear-especie',
-    component: CrearEspecieComponent
-  },
-  {
-    path: 'modificar-especie',
-    component: ModificarEspecieComponent
-  },
-  {
-    path: 'seleccionar-especie',
-    component: SeleccionarEspecieComponent
-  },
-  {
-    path: 'temperatura',
-    component: GraficaTemperaturaComponent
+  { path: 'crear-especie/:userId', component: CrearEspecieComponent, canActivate: [AuthGuard] },
 
-  },
+  { path: 'modificar-especie/:userId', component: ModificarEspecieComponent, canActivate: [AuthGuard] },
+
+  { path: 'seleccionar-especie/:userId', component: SeleccionarEspecieComponent, canActivate: [AuthGuard] },
+  
+  { path: 'temperatura/:userId', component: GraficaTemperaturaComponent, canActivate: [AuthGuard] },
+   
+   
+  
   {
     path: 'home',
     component: GraficaGeneralComponent
@@ -75,27 +68,32 @@ const routes: Routes = [
   
   {
     path: 'grafica-tds',
-    component: GraficaTdsComponent
+    component: GraficaTdsComponent,
+    canActivate: [AuthGuard]
 
   },
   {
     path: 'grafica-ph',
-    component: GraficaPhComponent
+    component: GraficaPhComponent,
+    canActivate: [AuthGuard]
 
   },
   {
     path: 'tabla-datos',
-    component: TablaDatosComponent
+    component: TablaDatosComponent,
+    canActivate: [AuthGuard]
 
   },
   {
     path: 'alertas-recientes',
-    component: AlertasRecientesComponent
+    component: AlertasRecientesComponent,
+    canActivate: [AuthGuard]
 
   },
   {
     path: 'historial-alertas',
-    component: HistorialDeAlertasComponent
+    component: HistorialDeAlertasComponent,
+    canActivate: [AuthGuard]
 
   },
   {

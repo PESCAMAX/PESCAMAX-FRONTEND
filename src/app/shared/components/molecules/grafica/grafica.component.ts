@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js/auto';
 import { ApiService, Alerta } from '../../../../features/monitoreo/services/api-form/api.service';
-
+import { AuthService } from '../../../../features/monitoreo/services/api-login/auth.service';
 @Component({
   selector: 'app-grafica',
   templateUrl: './grafica.component.html',
@@ -19,7 +19,7 @@ export class GraficaComponent implements OnInit {
   fechaMasAntigua: Date = new Date();
   fechaActual: Date = new Date();
 
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService, private AuthService: AuthService) {
     this.fechaActual.setHours(23, 59, 59, 999);
   }
 
@@ -30,7 +30,7 @@ export class GraficaComponent implements OnInit {
    
   }
   obtenerFechaMasAntigua(): void {
-    this.apiService.listarMonitoreo().subscribe(
+    this.apiService.listarMonitoreo(this.AuthService.getUserId()).subscribe(
       data => {
         if (data.response && data.response.length > 0) {
           this.fechaMasAntigua = new Date(Math.min(...data.response.map(item => new Date(item.FechaHora).getTime())));
@@ -43,7 +43,7 @@ export class GraficaComponent implements OnInit {
   }
 
   loadLotes() {
-    this.apiService.listarMonitoreo().subscribe(
+    this.apiService.listarMonitoreo(this.AuthService.getUserId()).subscribe( 
       data => {
         this.lotes = [...new Set(data.response.map(item => item.LoteID))];
         if (this.lotes.length > 0) {
@@ -67,7 +67,7 @@ export class GraficaComponent implements OnInit {
   loadDataAndCreateChart() {
     if (this.selectedLote === null) return;
   
-    this.apiService.listarMonitoreo().subscribe(
+    this.apiService.listarMonitoreo(this.AuthService.getUserId()).subscribe( 
       data => {
         let filteredData = data.response.filter(item => item.LoteID === this.selectedLote);
         if (this.fechaInicio && this.fechaFin) {

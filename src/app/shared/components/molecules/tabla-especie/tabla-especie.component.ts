@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../../../features/monitoreo/services/api-form/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
-
+import { AuthService } from '../../../../features/monitoreo/services/api-login/auth.service';
 interface Especie {
   Id: number;
   NombreEspecie: string;
@@ -52,7 +52,7 @@ export class TablaEspecieComponent implements OnInit {
   especieForm: FormGroup;
   especieSeleccionada: Especie | null = null;
 
-  constructor(private apiService: ApiService, private fb: FormBuilder) {
+  constructor(private apiService: ApiService, private fb: FormBuilder,private AuthService:AuthService) {
     this.especieForm = this.fb.group({
       NombreEspecie: ['', Validators.required],
       TdsMinimo: ['', Validators.required],
@@ -69,7 +69,7 @@ export class TablaEspecieComponent implements OnInit {
   }
 
   obtenerEspecies(): void {
-    this.apiService.listarEspecies().subscribe(
+    this.apiService.listarEspecies(this.AuthService.getUserId()).subscribe( 
       (response: Especie[]) => {
         this.especies = response;
         this.filtrarEspecies();

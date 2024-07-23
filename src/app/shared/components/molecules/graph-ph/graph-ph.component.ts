@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js/auto';
 import { ApiService } from '../../../../features/monitoreo/services/api-form/api.service';
-
+import { AuthService } from '../../../../features/monitoreo/services/api-login/auth.service';
 @Component({
   selector: 'app-graph-ph',
   templateUrl: './graph-ph.component.html',
@@ -12,14 +12,14 @@ export class GraphPhComponent implements OnInit {
   public lotes: number[] = [];
   public selectedLote: number | null = null;
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private AuthService:AuthService) {}
 
   ngOnInit(): void {
     this.loadLotes();
   }
 
   loadLotes() {
-    this.apiService.listarMonitoreo().subscribe(data => {
+    this.apiService.listarMonitoreo(this.AuthService.getUserId()).subscribe(data => {
       this.lotes = [...new Set(data.response.map(item => item.LoteID))];
       if (this.lotes.length > 0) {
         this.selectedLote = this.lotes[0];
@@ -37,7 +37,7 @@ export class GraphPhComponent implements OnInit {
   loadDataAndCreateChart() {
     if (this.selectedLote === null) return;
 
-    this.apiService.listarMonitoreo().subscribe(data => {
+    this.apiService.listarMonitoreo(this.AuthService.getUserId()).subscribe(data => {
       const filteredData = data.response.filter(item => item.LoteID === this.selectedLote);
       const phValues = filteredData.map(item => item.PH);
       const fechas = filteredData.map(item => new Date(item.FechaHora).toLocaleString());

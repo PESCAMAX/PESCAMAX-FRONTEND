@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Alerta, ApiService, Especie, Monitoreo } from '../../../../features/monitoreo/services/api-form/api.service';
 import { AlertService } from '../../../../features/monitoreo/services/api-alert/alert.service';
-
-
+import { AuthService } from '../../../../features/monitoreo/services/api-login/auth.service';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-tabla-seleccionar',
   templateUrl: './tabla-seleccionar.component.html',
@@ -13,21 +13,24 @@ export class TablaSeleccionarComponent implements OnInit {
   lotes: Monitoreo[] = [];
   uniqueLotes: number[] = [];
   selectedLote: { [key: number]: number } = {};
+  userId: string;
 
-  constructor(private apiService: ApiService, private alertService: AlertService) {}
+  constructor(
+    private apiService: ApiService, 
+    private alertService: AlertService,
+    private authService: AuthService,
+    private route: ActivatedRoute
+  ) {
+    this.userId = this.authService.getUserId();
+  }
 
-  ngOnInit(): void {
-    this.apiService.listarEspecies().subscribe({
-      next: (response) => {
-        console.log('Especies:', response);
-        this.especies = response;
-      },
-      error: (error) => {
-        console.error('Error al listar especies:', error);
-      }
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.userId = params['userId'];
+      // Usa this.userId para las llamadas a la API
     });
 
-    this.apiService.listarMonitoreo().subscribe({
+    this.apiService.listarMonitoreo(this.userId).subscribe({
       next: (response) => {
         console.log('Lotes:', response);
         this.lotes = response.response;
@@ -58,7 +61,7 @@ export class TablaSeleccionarComponent implements OnInit {
     console.log(`Especie ID: ${especieId}, Lote ID: ${loteId}`);
     this.verificarValores(especieId, loteId);
   }
-
+  
   verificarValores(especieId: number, loteId: number): void {
     console.log('Verificando valores para especie ID:', especieId, 'y lote ID:', loteId);
     const especie = this.especies.find(e => e.Id === especieId);
@@ -93,7 +96,7 @@ export class TablaSeleccionarComponent implements OnInit {
         LoteID: loteId,
         Descripcion: problemas.join(', ')
       };
-      this.apiService.crearAlerta(alerta).subscribe({
+      this.apiService.crearAlerta(this.userId, alerta).subscribe({
         next: (response) => console.log('Alerta creada:', response),
         error: (error) => console.error('Error al crear alerta:', error)
       });
@@ -102,7 +105,7 @@ export class TablaSeleccionarComponent implements OnInit {
       this.alertService.showAlert('info', 'Validación exitosa', 'Todos los parámetros están dentro del rango seguro.');
     }
   }
-
+ 
   obtenerProblemas(especie: Especie, lote: Monitoreo): string[] {
     const problemas = [];
   
