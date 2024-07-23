@@ -30,33 +30,33 @@
 
     <div *ngIf="subMenuVisible === 1" class="flex flex-col justify-start w-full items-start pb-1">
 
-      <a href="http://localhost:4200/temperatura" class="flex justify-start items-center space-x-6 hover:text-white focus:bg-blue-400 focus:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
+      <a [href]="'http://localhost:4200/temperatura/' + userId" class="flex justify-start items-center space-x-6 hover:text-white focus:bg-blue-400 focus:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
         <img src="../../../../../assets/icons/icons8-temperatura-50.png" alt="Miimagen" width="20" height="50" viewBox="0 0 10 10" fill="">
 
         <h3 class="text-base leading-4 font-sans" style="color: black;">Grafica temperatura</h3>
 
       </a>
 
-      <a href="http://localhost:4200/grafica-tds" class="flex justify-start items-center space-x-6 hover:text-white focus:bg-blue-400 focus:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
+      <a [href]="'http://localhost:4200/grafica-tds/' + userId" class="flex justify-start items-center space-x-6 hover:text-white focus:bg-blue-400 focus:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
         <img src="../../../../../assets/icons/icons8-termometro-50.png" alt="Miimagen" width="20" height="50" viewBox="0 0 10 10" fill="">
 
         <h3 class="text-base leading-4 font-sans" style="color: black;">Grafica de TDS</h3>
 
       </a>
 
-      <a href="http://localhost:4200/grafica-ph" class="flex justify-start items-center space-x-6 hover:text-white focus:bg-blue-400 focus:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
+      <a [href]="'http://localhost:4200/grafica-ph/' + userId" class="flex justify-start items-center space-x-6 hover:text-white focus:bg-blue-400 focus:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
         <img src="../../../../../assets/icons/icons8-ph-50.png" alt="Miimagen" width="20" height="50" viewBox="0 0 10 10" fill="">
 
         <h3 class="text-base leading-4 font-sans" style="color: black;">Grafica de Ph</h3>
 
       </a>
 
-      <a href="/tabla-datos" class="flex justify-start items-center space-x-6 hover:text-white focus:bg-blue-400 focus:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
+      <a [href]="'/tabla-datos/' + userId" class="flex justify-start items-center space-x-6 hover:text-white focus:bg-blue-400 focus:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
         <img src="../../../../../assets/icons/icons8-crear-nuevo-30.png" alt="Miimagen" width="20" height="50" viewBox="0 0 10 10" fill="">
         <h3 class="text-base leading-4 font-sans" style="color: black;">Tablas</h3>
 
       </a>
-      <a href="/home" class="flex justify-start items-center space-x-6 hover:text-white focus:bg-blue-400 focus:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
+      <a [href]="'/home/' + userId" class="flex justify-start items-center space-x-6 hover:text-white focus:bg-blue-400 focus:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
         <img src="../../../../../assets/icons/crecimiento.png" alt="Miimagen" width="20" height="50" viewBox="0 0 10 10" fill="">
 
         <h3 class="text-base leading-4 font-sans" style="color: black;">Grafica General</h3>
@@ -103,12 +103,12 @@
     </button>
 
     <div *ngIf="subMenuVisible === 3" class="flex flex-col justify-start w-full items-start pb-1">
-      <a href="http://localhost:4200/alertas-recientes" class="flex justify-start items-center space-x-6 hover:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
+      <a [href]="'http://localhost:4200/alertas-recientes/' + userId" class="flex justify-start items-center space-x-6 hover:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
         <img src="../../../../../assets/icons/advertencia.png" alt="Miimagen" width="20" height="50">
         <p class="text-base leading-4">Alertas recientes</p>
       </a>
 
-      <a href="http://localhost:4200/historial-alertas" class="flex justify-start items-center space-x-6 hover:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
+      <a [href]="'http://localhost:4200/historial-alertas/' + userId" class="flex justify-start items-center space-x-6 hover:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
         <img src="../../../../../assets/icons/icons8-historia-de-la-actividad-50.png" alt="Miimagen" width="20" height="50">
         <p class="text-base leading-4">Historial de alertas</p>
       </a>

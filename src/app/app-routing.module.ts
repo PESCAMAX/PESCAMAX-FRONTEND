@@ -30,7 +30,7 @@ const routes: Routes = [
     loadChildren: () => import('./features/monitoreo/pages/gestion-de-parametros/gestion-de-parametros.module').then(m => m.GestionDeParametrosModule)
   },
   {
-    path: 'historial',
+    path: 'historial/:userId',
     component: HistorialAlertasComponent
   },
   {
@@ -55,43 +55,43 @@ const routes: Routes = [
   { path: 'modificar-especie/:userId', component: ModificarEspecieComponent, canActivate: [AuthGuard] },
 
   { path: 'seleccionar-especie/:userId', component: SeleccionarEspecieComponent, canActivate: [AuthGuard] },
-  
+
   { path: 'temperatura/:userId', component: GraficaTemperaturaComponent, canActivate: [AuthGuard] },
    
    
   
   {
-    path: 'home',
+    path: 'home/:userId',
     component: GraficaGeneralComponent
 
   },
   
   {
-    path: 'grafica-tds',
+    path: 'grafica-tds/:userId',
     component: GraficaTdsComponent,
     canActivate: [AuthGuard]
 
   },
   {
-    path: 'grafica-ph',
+    path: 'grafica-ph/:userId',
     component: GraficaPhComponent,
     canActivate: [AuthGuard]
 
   },
   {
-    path: 'tabla-datos',
+    path: 'tabla-datos/:userId',
     component: TablaDatosComponent,
     canActivate: [AuthGuard]
 
   },
   {
-    path: 'alertas-recientes',
+    path: 'alertas-recientes/:userId',
     component: AlertasRecientesComponent,
     canActivate: [AuthGuard]
 
   },
   {
-    path: 'historial-alertas',
+    path: 'historial-alertas/:userId',
     component: HistorialDeAlertasComponent,
     canActivate: [AuthGuard]
 
