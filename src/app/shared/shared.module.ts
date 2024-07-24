@@ -33,10 +33,9 @@ import { GraphPhComponent } from './components/molecules/graph-ph/graph-ph.compo
 import { DatapickerComponent } from './components/molecules/datapicker/datapicker.component';
 import { RelojcComponent } from './components/atoms/relojc/relojc.component';
 
-
+import { InicioComponent } from '../features/monitoreo/pages/inicio/inicio.component';
 import { ExitComponent } from './components/atoms/exit/exit.component';
 import { ChatbotComponent } from './components/atoms/chatbot/chatbot.component';
-
 
 
 
@@ -72,7 +71,6 @@ import { ChatbotComponent } from './components/atoms/chatbot/chatbot.component';
 
 
 
-
   ],
   imports: [
     CommonModule,
@@ -103,9 +101,6 @@ import { ChatbotComponent } from './components/atoms/chatbot/chatbot.component';
     DatapickerComponent,
     ChatbotComponent
 
-
   ]
 })
-export class SharedModule {
-  
- }
+export class SharedModule { }
