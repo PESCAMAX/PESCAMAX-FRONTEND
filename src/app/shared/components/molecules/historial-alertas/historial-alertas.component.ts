@@ -1,14 +1,14 @@
-// historial-alertas.component.ts
 import { Component, OnInit } from '@angular/core';
 import { ApiService, Alerta } from '../../../../features/monitoreo/services/api-form/api.service';
 import { AuthService } from '../../../../features/monitoreo/services/api-login/auth.service';
+
 @Component({
   selector: 'app-historial-alertas',
   templateUrl: './historial-alertas.component.html',
   styleUrls: ['./historial-alertas.component.css']
 })
 export class HistorialAlertasComponent implements OnInit {
- 
+
   alertas: Alerta[] = [];
   alertasFiltradas: Alerta[] = [];
   mensajeAlerta: string = '';
@@ -20,8 +20,7 @@ export class HistorialAlertasComponent implements OnInit {
   }
 
   cargarAlertas(): void {
-    const userId = this.authService.getUserId();
-    if (!userId) {
+    if (!this.authService.isAuthenticated()) {
       console.error('Usuario no autenticado');
       return;
     }
@@ -31,7 +30,10 @@ export class HistorialAlertasComponent implements OnInit {
         this.alertas = alertas;
         this.alertasFiltradas = alertas;
       },
-      error: (error) => console.error('Error al cargar alertas:', error)
+      error: (error) => {
+        console.error('Error al cargar alertas:', error);
+        this.mensajeAlerta = 'Error al cargar las alertas. Por favor, intente nuevamente.';
+      }
     });
   }
 

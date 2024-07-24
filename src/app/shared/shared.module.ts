@@ -35,7 +35,8 @@ import { RelojcComponent } from './components/atoms/relojc/relojc.component';
 
 
 import { ExitComponent } from './components/atoms/exit/exit.component';
-import { ViewPaswordComponent } from './components/atoms/view-pasword/view-pasword.component';
+import { ChatbotComponent } from './components/atoms/chatbot/chatbot.component';
+
 
 
 
@@ -66,8 +67,10 @@ import { ViewPaswordComponent } from './components/atoms/view-pasword/view-paswo
     GraphPhComponent,
     RelojcComponent,// Asegúrate de que este componente está declarado aquí
     DatapickerComponent,// Asegúrate de que este componente está declarado aquí
+    InicioComponent,
     ExitComponent,
-    ViewPaswordComponent
+    ChatbotComponent
+
 
 
 
@@ -99,8 +102,9 @@ import { ViewPaswordComponent } from './components/atoms/view-pasword/view-paswo
     GraficasTemperaturaComponent,
     GraphPhComponent,
     DatapickerComponent,
-    ExitComponent,
-    ViewPaswordComponent
+    InicioComponent,
+    ChatbotComponent
+
 
   ]
 })
