@@ -1,23 +1,31 @@
-<div class="relative flex min-h-screen text-gray-800 antialiased flex-col justify-center overflow-hidden bg-gray-50 py-6 sm:py-12">
-  <div class="relative py-3 sm:w-96 mx-auto text-center">
-    <span class="text-2xl font-light ">Ingresa a tu cuenta</span>
-    <div class="mt-4 bg-white shadow-md rounded-lg text-left">
-      <div class="h-2 bg-blue-500 rounded-t-md"></div>
-      <div class="px-8 py-6">
-        <!-- Alertas -->
-        <app-alert-form [successMessage]="successMessage" [errorMessage]="errorMessage"></app-alert-form>
-        
-        <label class="block font-semibold"> Nombre de usuario </label>
-        <input type="text" [(ngModel)]="username" placeholder="Email" name="username" class="border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-indigo-500 focus:ring-1 rounded-md">
-        <label class="block mt-3 font-semibold"> Contraseña </label>
-        <input type="password" [(ngModel)]="password" placeholder="Password" name="password" class="border w-full h-5 px-3 py-5 mt-2 hover:outline-none focus:outline-none focus:ring-indigo-500 focus:ring-1 rounded-md">
-        <div class="flex justify-between items-baseline">
-          <button type="submit" (click)="onLogin()" class="mt-4 bg-blue-500 text-white py-2 px-6 rounded-md hover:bg-blue-900">Login</button>
-          <p class="text-sm hover:underline"> <a href="/forgot-password" class="text-cyan-600">¿Olvidaste tu Contraseña?</a></p>
-        </div>
+<div class="bg-gray-100 flex items-center justify-center h-screen">
+  <div class="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
+    <div class="flex justify-center mb-6">
+      <img src="../../../../../assets/icons/Favicon.png" alt="Logo" class="w-16 h-16">
+    </div>
+    <h2 class="text-2xl font-semibold text-center mb-4">Ingresa a tu cuenta</h2>
+
+    <app-alert-form [successMessage]="successMessage" [errorMessage]="errorMessage"></app-alert-form>
+
+    <form (ngSubmit)="onLogin()">
+      <div class="mb-4">
+        <label for="username" class="block text-gray-700 text-sm font-semibold mb-2">Nombre de usuario</label>
+        <input type="text" id="username" [(ngModel)]="username" name="username" class="form-input w-full px-4 py-2 border rounded-lg text-gray-700 focus:ring-blue-500" placeholder="Escriba su usuario" required>
       </div>
+      <div class="mb-6">
+        <label for="password" class="block text-gray-700 text-sm font-semibold mb-2">Contraseña</label>
+        <input type="password" id="password" [(ngModel)]="password" name="password" class="form-input w-full px-4 py-2 border rounded-lg text-gray-700 focus:ring-blue-500" placeholder="Escriba su contraseña" required>
+      </div>
+      <button type="submit" class="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Ingresar</button>
+    </form>
+
+    <div class="mt-4 text-center">
+      <a href="/forgot-password" class="text-sm text-blue-500 hover:underline">¿Olvidaste tu Contraseña?</a>
+    </div>
+
+    <div class="mt-4 text-center">
+      <a href="http://localhost:4200/register" class="text-sm text-blue-500 hover:underline">Crear cuenta</a>
     </div>
   </div>
 </div>
-
 

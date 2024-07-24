@@ -30,7 +30,7 @@
           </label>
           <input formControlName="tdsMaximo" type="text" id="tdsMaximo" placeholder="TDS ideal máximo"
                  class="w-full rounded-lg border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#4295e2] focus:shadow-md" />
-          <div *ngIf="especieForm.get('tdsMaximo')?.invalid && especieForm.get('tdsMaximo')?.touched" class="text-red-500 text-sm">
+          <div *ngIf="especieForm.get('tdsMaximo')?.errors && especieForm.get('tdsMaximo')?.touched" class="text-red-500 text-sm">
             {{ getErrorMessage('tdsMaximo') }}
           </div>
         </div>
@@ -53,7 +53,7 @@
           </label>
           <input formControlName="temperaturaMaximo" type="text" id="temperaturaMaximo" placeholder="Temperatura ideal máxima"
                  class="w-full rounded-lg border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#4295e2] focus:shadow-md" />
-          <div *ngIf="especieForm.get('temperaturaMaximo')?.invalid && especieForm.get('temperaturaMaximo')?.touched" class="text-red-500 text-sm">
+          <div *ngIf="especieForm.get('temperaturaMaximo')?.errors && especieForm.get('temperaturaMaximo')?.touched" class="text-red-500 text-sm">
             {{ getErrorMessage('temperaturaMaximo') }}
           </div>
         </div>
@@ -76,7 +76,7 @@
           </label>
           <input formControlName="phMaximo" type="text" id="phMaximo" placeholder="PH del agua máximo"
                  class="w-full rounded-lg border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#4295e2] focus:shadow-md" />
-          <div *ngIf="especieForm.get('phMaximo')?.invalid && especieForm.get('phMaximo')?.touched" class="text-red-500 text-sm">
+          <div *ngIf="especieForm.get('phMaximo')?.errors && especieForm.get('phMaximo')?.touched" class="text-red-500 text-sm">
             {{ getErrorMessage('phMaximo') }}
           </div>
         </div>
