@@ -1,0 +1,113 @@
+.hero-container {
+    min-height: 100vh;
+    background-image: url('/assets/images/alice-mourou-RrvGuqx-bOQ-unsplash.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: (255, 255, 255, 0.8);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    width: 40px;
+    height: 36px;
+    margin-right: 0.75rem;
+}
+
+.logo-text {
+    font-size: 1.875rem;
+    font-weight: bold;
+}
+
+.text-blue {
+    color: #3b82f6;
+}
+
+.text-black {
+    color: #000000;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn {
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.btn-login {
+    background-color: #3b82f6;
+    color: white;
+}
+
+.btn-register {
+    background-color: white;
+    color: #3b82f6;
+    border: 1px solid #3b82f6;
+}
+
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+.main-title {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.main-subtitle {
+    font-size: 1.5rem;
+}
+
+.about-us {
+    display: flex;
+    background-color: white;
+    padding: 4rem 2rem;
+    flex-direction: column;
+    align-items: center;
+}
+
+.about-content {
+    flex: 1;
+    max-width: 800px;
+    padding: 2rem;
+}
+
+.about-content h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.about-image {
+    flex: 1;
+}
+
+.about-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+}
