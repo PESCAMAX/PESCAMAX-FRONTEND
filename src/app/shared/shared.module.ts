@@ -67,7 +67,6 @@ import { ChatbotComponent } from './components/atoms/chatbot/chatbot.component';
     GraphPhComponent,
     RelojcComponent,// Asegúrate de que este componente está declarado aquí
     DatapickerComponent,// Asegúrate de que este componente está declarado aquí
-    InicioComponent,
     ExitComponent,
     ChatbotComponent
 
@@ -102,7 +101,6 @@ import { ChatbotComponent } from './components/atoms/chatbot/chatbot.component';
     GraficasTemperaturaComponent,
     GraphPhComponent,
     DatapickerComponent,
-    InicioComponent,
     ChatbotComponent
 
 
