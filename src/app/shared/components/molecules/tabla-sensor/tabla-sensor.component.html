@@ -53,7 +53,7 @@
     <div class="text-gray-900 bg-gray-200 p-4 rounded shadow-md">
       <div class="overflow-auto lg:overflow-visible">
         <div class="flex lg:justify-between border-b-2 border-blue-600 pb-1">
-          <h2 class="text-3xl text-gray-500 font-bold">Monitoreo Datos</h2>
+          <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white" style="font-size: 7xl; font-weight: bold;">Monitoreo de datos</h1>
           <div class="text-center flex-auto"></div>
           <div>
             <button (click)="filtrarTodos()" class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-lg button-spacing">Todos</button>
@@ -76,7 +76,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of filteredData" class="border-b hover:bg-orange-100">
+              <tr *ngFor="let item of filteredData" class="border-b hover:bg-blue-200">
                 <td class="p-3 px-5">{{ item.LoteID }}</td>
                 <td class="p-3 px-5">{{ item.tds }}</td>
                 <td class="p-3 px-5">{{ item.Temperatura }}</td>
