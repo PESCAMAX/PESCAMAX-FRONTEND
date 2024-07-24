@@ -33,7 +33,7 @@ import { GraphPhComponent } from './components/molecules/graph-ph/graph-ph.compo
 import { DatapickerComponent } from './components/molecules/datapicker/datapicker.component';
 import { RelojcComponent } from './components/atoms/relojc/relojc.component';
 
-import { InicioComponent } from '../features/monitoreo/pages/inicio/inicio.component';
+
 import { ExitComponent } from './components/atoms/exit/exit.component';
 import { ViewPaswordComponent } from './components/atoms/view-pasword/view-pasword.component';
 
@@ -66,7 +66,6 @@ import { ViewPaswordComponent } from './components/atoms/view-pasword/view-paswo
     GraphPhComponent,
     RelojcComponent,// Asegúrate de que este componente está declarado aquí
     DatapickerComponent,// Asegúrate de que este componente está declarado aquí
-    InicioComponent,
     ExitComponent,
     ViewPaswordComponent
 
@@ -100,7 +99,6 @@ import { ViewPaswordComponent } from './components/atoms/view-pasword/view-paswo
     GraficasTemperaturaComponent,
     GraphPhComponent,
     DatapickerComponent,
-    InicioComponent,
     ExitComponent,
     ViewPaswordComponent
 
