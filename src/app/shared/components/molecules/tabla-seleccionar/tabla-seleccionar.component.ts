@@ -27,10 +27,34 @@ export class TablaSeleccionarComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.userId = params['userId'];
-      // Usa this.userId para las llamadas a la API
+      if (this.userId) {
+        this.loadMonitoreo();
+      } else {
+        console.error('No se proporcionó un ID de usuario');
+      }
     });
+  }
+  loadMonitoreo() {
+    this.apiService.listarMonitoreo(this.userId).subscribe({
+      next: (response) => {
+        console.log('Respuesta completa:', response);
+        if (response && response.response) {
+          this.lotes = response.response;
+          this.uniqueLotes = [...new Set(this.lotes.map(lote => lote.LoteID))];
+          console.log('Lotes únicos:', this.uniqueLotes);
+        } else {
+          console.error('La respuesta no tiene el formato esperado');
+        }
+      },
+      error: (error) => {
+        console.error('Error al listar lotes:', error);
+      }
+    });
+    
 
     this.apiService.listarMonitoreo(this.userId).subscribe({
+      // ...
+    
       next: (response) => {
         console.log('Lotes:', response);
         this.lotes = response.response;
