@@ -1,7 +1,7 @@
 // src/app/shared/components/molecules/tabla-sensor/tabla-sensor.component.ts
 import { Component, OnInit } from '@angular/core';
 import { ApiService, Monitoreo } from '../../../../features/monitoreo/services/api-form/api.service';
-
+import { AuthService } from '../../../../features/monitoreo/services/api-login/auth.service';
 @Component({
   selector: 'app-tabla-sensor',
   templateUrl: './tabla-sensor.component.html',
@@ -13,7 +13,7 @@ export class TablaSensorComponent implements OnInit {
   lotes: number[] = [];
   loteSeleccionado: number | null = null;
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private AuthService:AuthService) {}
 
   ngOnInit(): void {
     this.cargarDatos();
@@ -21,7 +21,7 @@ export class TablaSensorComponent implements OnInit {
 
   cargarDatos(): void {
     console.log('Cargando datos de monitoreo...');
-    this.apiService.listarMonitoreo().subscribe(
+    this.apiService.listarMonitoreo(this.AuthService.getUserId()).subscribe( 
       (response: { response: Monitoreo[] }) => {
         console.log('Respuesta completa:', response);
         this.monitoreoData = response.response;

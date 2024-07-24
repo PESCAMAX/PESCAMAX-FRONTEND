@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { ApiService } from '../../../../features/monitoreo/services/api-form/api.service';
+import { AuthService } from '../../../../features/monitoreo/services/api-login/auth.service';
 
 @Component({
   selector: 'app-form-especie',
@@ -12,7 +13,14 @@ export class EspecieFormComponent implements OnInit {
   successMessage: string = '';
   errorMessage: string = '';
 
-  constructor(private fb: FormBuilder, private apiService: ApiService) {
+  type: any;
+
+  constructor(
+    private fb: FormBuilder, 
+    private apiService: ApiService,
+    private authService: AuthService // Añade el AuthService al constructor
+  ) {
+
     this.especieForm = this.fb.group({
       nombreEspecie: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)]],
       tdsMinimo: ['', [Validators.required, this.numberValidator]],
@@ -29,21 +37,25 @@ export class EspecieFormComponent implements OnInit {
   onSubmit(): void {
     this.especieForm.updateValueAndValidity();
     if (this.especieForm.valid) {
-      this.apiService.crearEspecie(this.especieForm.value).subscribe(
-        response => {
+      const username = this.authService.getUserId(); // Usa el método del AuthService
+      if (!username) {
+        this.showError('No se pudo obtener el nombre de usuario. Por favor, inicie sesión nuevamente.');
+        return;
+      }
+      this.apiService.crearEspecie(username, this.especieForm.value).subscribe({
+        next: (response) => {
           this.showSuccess('Especie guardada exitosamente');
           this.especieForm.reset();
         },
-        error => {
-          this.showError(error.error.message || 'Error al guardar la especie');
+        error: (error) => {
+          this.showError(error.message || 'Error al guardar la especie');
         }
-      );
+      });
     } else {
       this.showError('Revise los datos del formulario. Algunos campos tienen errores.');
       this.validateAllFormFields(this.especieForm);
     }
   }
-
   showSuccess(message: string): void {
     this.successMessage = message;
     setTimeout(() => {

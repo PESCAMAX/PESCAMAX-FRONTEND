@@ -23,14 +23,14 @@ import { ProductosComponent } from './features/tienda/components-tienda/molecula
 import { DatapickerComponent } from './shared/components/molecules/datapicker/datapicker.component';
 import { GraficaGeneralComponent } from './features/monitoreo/pages/dashboard/grafica-general/grafica-general.component';
 import { InicioComponent } from './features/monitoreo/pages/inicio/inicio.component';
-
+import { AuthGuard } from './features/monitoreo/services/auth-guard/auth-guard.service';
 const routes: Routes = [
   {
     path: 'gestion-de-parametros',
     loadChildren: () => import('./features/monitoreo/pages/gestion-de-parametros/gestion-de-parametros.module').then(m => m.GestionDeParametrosModule)
   },
   {
-    path: 'historial',
+    path: 'historial/:userId',
     component: HistorialAlertasComponent
   },
   {
@@ -50,52 +50,50 @@ const routes: Routes = [
     component: InicioComponent
   },
 
-  {
-    path: 'crear-especie',
-    component: CrearEspecieComponent
-  },
-  {
-    path: 'modificar-especie',
-    component: ModificarEspecieComponent
-  },
-  {
-    path: 'seleccionar-especie',
-    component: SeleccionarEspecieComponent
-  },
-  {
-    path: 'temperatura',
-    component: GraficaTemperaturaComponent
+  { path: 'crear-especie/:userId', component: CrearEspecieComponent, canActivate: [AuthGuard] },
 
-  },
+  { path: 'modificar-especie/:userId', component: ModificarEspecieComponent, canActivate: [AuthGuard] },
+
+  { path: 'seleccionar-especie/:userId', component: SeleccionarEspecieComponent, canActivate: [AuthGuard] },
+
+  { path: 'temperatura/:userId', component: GraficaTemperaturaComponent, canActivate: [AuthGuard] },
+   
+   
+  
   {
-    path: 'home',
+    path: 'home/:userId',
     component: GraficaGeneralComponent
 
   },
   
   {
-    path: 'grafica-tds',
-    component: GraficaTdsComponent
+    path: 'grafica-tds/:userId',
+    component: GraficaTdsComponent,
+    canActivate: [AuthGuard]
 
   },
   {
-    path: 'grafica-ph',
-    component: GraficaPhComponent
+    path: 'grafica-ph/:userId',
+    component: GraficaPhComponent,
+    canActivate: [AuthGuard]
 
   },
   {
-    path: 'tabla-datos',
-    component: TablaDatosComponent
+    path: 'tabla-datos/:userId',
+    component: TablaDatosComponent,
+    canActivate: [AuthGuard]
 
   },
   {
-    path: 'alertas-recientes',
-    component: AlertasRecientesComponent
+    path: 'alertas-recientes/:userId',
+    component: AlertasRecientesComponent,
+    canActivate: [AuthGuard]
 
   },
   {
-    path: 'historial-alertas',
-    component: HistorialDeAlertasComponent
+    path: 'historial-alertas/:userId',
+    component: HistorialDeAlertasComponent,
+    canActivate: [AuthGuard]
 
   },
   {

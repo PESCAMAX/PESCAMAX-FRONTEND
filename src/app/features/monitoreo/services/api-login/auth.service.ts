@@ -1,32 +1,40 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { tap, catchError } from 'rxjs/operators';
+import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
-
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:6754/api/Auth';  // Cambia el puerto si es necesario
+  private apiUrl = 'http://localhost:6754/api/Auth';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) {}
+
+  login(credentials: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/login`, credentials).pipe(
+      tap((response: any) => {
+        if (response && response.token) {
+          localStorage.setItem('token', response.token);
+          localStorage.setItem('userId', response.userId);
+          
+          // Navigate to crear-especie with userId instead of username
+          this.router.navigate(['/crear-especie', response.userId]);
+        }
+      }),
+      catchError(error => {
+        console.error('Error en el inicio de sesión:', error);
+        return throwError(() => new Error(error.error?.message || 'Ocurrió un error desconocido'));
+      })
+    );
+  }
 
   register(user: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/register`, user);
-  }
-
-  login(user: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/login`, user).pipe(
-      tap((response: any) => {
-        if (response.success) {
-          localStorage.setItem('token', response.token);
-          const decodedToken = jwtDecode<any>(response.token);
-          localStorage.setItem('userId', decodedToken.nameid);
-        }
-      })
-    );
   }
 
   forgotPassword(email: string): Observable<any> {
@@ -38,10 +46,26 @@ export class AuthService {
   }
 
   getAuthToken(): string | null {
-    // Retorna el token de autenticación guardado en localStorage
     return localStorage.getItem('token');
   }
 
-  getUserId(): string | null {
-    return localStorage.getItem('userId');
-  }}
+  logout(): void {
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+    localStorage.removeItem('userId');
+    this.router.navigate(['/login']);
+  }
+
+  isAuthenticated(): boolean {
+    const token = this.getAuthToken();
+    if (!token) return false;
+
+    const decodedToken = jwtDecode<any>(token);
+    const currentTime = Date.now() / 1000;
+    return decodedToken.exp > currentTime;
+  }
+
+  getUserId(): string {
+    return localStorage.getItem('userId') || '';
+  }
+}

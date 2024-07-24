@@ -24,7 +24,12 @@ export class AppComponent {
 
   onSubmit(): void {
     if (this.especieForm.valid) {
-      this.apiService.crearEspecie(this.especieForm.value).subscribe(
+      const username = localStorage.getItem('username');
+      if (!username) {
+        console.error('No se encontró el nombre de usuario');
+        return;
+      }
+      this.apiService.crearEspecie(username, this.especieForm.value).subscribe(
         response => {
           console.log('Especie creada', response);
           // Aquí puedes manejar la respuesta como quieras, como mostrar un mensaje de éxito

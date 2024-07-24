@@ -8,17 +8,15 @@ import { AuthService } from '../api-login/auth.service';
   providedIn: 'root'
 })
 export class ApiService {
-  private baseUrl = 'http://localhost:6754/api'; // Asegúrate de que la URL base sea correcta
+  private baseUrl = 'http://localhost:6754/api';
 
-  constructor(private http: HttpClient, private authService: AuthService) {}
-
-  private getUserId(): string | null {
-    const userId = this.authService.getUserId();
-    return userId;
-  }
+  constructor(
+    private http: HttpClient, 
+    private authService: AuthService
+  ) {}
 
   private getHeaders(): HttpHeaders {
-    const token = this.authService.getAuthToken();
+    const token = localStorage.getItem('token');
     return new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
@@ -29,44 +27,24 @@ export class ApiService {
     let errorMsg = 'An unknown error occurred!';
     if (error.error instanceof ErrorEvent) {
       errorMsg = `Client-side error: ${error.error.message}`;
+    } else if (error.error && typeof error.error === 'object' && 'mensaje' in error.error) {
+      errorMsg = `Server-side error: ${error.status} - ${error.error.mensaje}`;
     } else if (error.status) {
-      errorMsg = `Server-side error: ${error.status} - ${error.error}`;
-      if (error.status === 500) {
-        errorMsg = 'Internal server error. Please try again later.';
-      }
+      errorMsg = `Server-side error: ${error.status} - ${error.statusText}`;
     }
-    return throwError(errorMsg);
+    return throwError(() => new Error(errorMsg));
   }
-
-
-  crearEspecie(data: any): Observable<any> {
-    const userId = this.getUserId();
-    if (!userId) {
-      console.error('UserId not available');
-      return throwError('UserId not available');
-    }
-    data.UserId = userId;
-    return this.http.post<any>(`${this.baseUrl}/CrearEspecie/Crear`, data, { headers: this.getHeaders() })
-      .pipe(catchError(this.handleError));
+  crearEspecie(userId: string, especieData: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/CrearEspecie/Crear/${userId}`, especieData, { headers: this.getHeaders() });
   }
-
-  listarEspecies(): Observable<Especie[]> {
-    const userId = this.getUserId();
-    console.log('UserId being sent:', userId);
-    if (!userId) {
-      console.error('UserId not available');
-      return throwError('UserId not available');
-    }
-    return this.http.get<Especie[]>(`${this.baseUrl}/CrearEspecie/Listar`, {
-      headers: this.getHeaders()
-    }).pipe(
-      tap((response: Especie[]) => console.log('Response from listarEspecies:', response)),
+  listarEspecies(userId: string): Observable<Especie[]> {
+    return this.http.get<Especie[]>(`${this.baseUrl}/CrearEspecie/Listar/${userId}`).pipe(
       catchError(this.handleError)
     );
   }
-
-  modificarEspecie(especie: any): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}/CrearEspecie/Modificar/${especie.Id}`, especie, { headers: this.getHeaders() })
+  modificarEspecie(especie: Especie): Observable<any> {
+    const url = `${this.baseUrl}/CrearEspecie/Modificar/${especie.UserId}`;
+    return this.http.put(url, especie, { headers: this.getHeaders() })
       .pipe(catchError(this.handleError));
   }
 
@@ -74,14 +52,9 @@ export class ApiService {
     return this.http.delete<any>(`${this.baseUrl}/CrearEspecie/Eliminar/${id}`, { headers: this.getHeaders() })
       .pipe(catchError(this.handleError));
   }
-  listarMonitoreo(): Observable<{ response: Monitoreo[] }> {
-    const userId = this.getUserId();
-    console.log('UserId siendo enviado:', userId);
-    if (!userId) {
-      console.error('UserId no disponible');
-      return throwError('UserId no disponible');
-    }
-    return this.http.get<{ response: Monitoreo[] }>(`${this.baseUrl}/Monitoreo/Leer?userId=${userId}`, { headers: this.getHeaders() })
+
+  listarMonitoreo(userId: string): Observable<{ response: Monitoreo[] }> {
+    return this.http.get<{ response: Monitoreo[] }>(`${this.baseUrl}/Monitoreo/Leer/${userId || ''}`, { headers: this.getHeaders() })
       .pipe(
         tap(response => console.log('Datos de monitoreo recibidos:', response)),
         catchError(this.handleError)
@@ -89,22 +62,18 @@ export class ApiService {
   }
 
   crearAlerta(alerta: Alerta): Observable<Alerta> {
-    alerta.UserId = this.getUserId() || undefined;
     return this.http.post<Alerta>(`${this.baseUrl}/Alerta`, alerta, { headers: this.getHeaders() })
       .pipe(catchError(this.handleError));
   }
 
   obtenerAlertas(): Observable<Alerta[]> {
-    const userId = this.getUserId();
-    if (!userId) {
-      return throwError('UserId not available');
-    }
-    return this.http.get<Alerta[]>(`${this.baseUrl}/Alerta?userId=${userId}`, { headers: this.getHeaders() })
+    return this.http.get<Alerta[]>(`${this.baseUrl}/Alerta`, { headers: this.getHeaders() })
       .pipe(
         tap(alertas => console.log('Alertas recibidas:', alertas)),
         catchError(this.handleError)
       );
   }
+
 }
 
 export interface Monitoreo {
@@ -114,7 +83,7 @@ export interface Monitoreo {
   PH: number;
   FechaHora: Date;
   LoteID: number;
-  UserId: string;
+  userId: string;
 }
 
 export interface Especie {
@@ -126,7 +95,7 @@ export interface Especie {
   TemperaturaMaximo: number;
   PhMinimo: number;
   PhMaximo: number;
-  UserId?: string; // Added UserId
+  UserId: string;  // Cambiado de userId a UserId
 }
 
 export interface Alerta {
@@ -136,5 +105,5 @@ export interface Alerta {
   LoteID: number;
   Descripcion: string;
   Fecha?: Date;
-  UserId?: string;
+  UserId: string; 
 }

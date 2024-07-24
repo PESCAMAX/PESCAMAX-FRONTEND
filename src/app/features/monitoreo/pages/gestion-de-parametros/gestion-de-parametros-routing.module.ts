@@ -5,9 +5,9 @@ import { ModificarEspecieComponent } from './modificar-especie/modificar-especie
 import { SeleccionarEspecieComponent } from './seleccionar-especie/seleccionar-especie.component';
 
 const routes: Routes = [
-  { path: 'crear-especie', component: CrearEspecieComponent },
-  { path: 'modificar-especie', component: ModificarEspecieComponent },
-  { path: 'seleccionar-especie', component: SeleccionarEspecieComponent },
+  { path: 'crear-especie/:userId', component: CrearEspecieComponent },
+  { path: 'modificar-especie/:userId', component: ModificarEspecieComponent },
+  { path: 'seleccionar-especie/:userId', component: SeleccionarEspecieComponent },
   { path: '', redirectTo: 'seleccionar-especie', pathMatch: 'full' }
 ];
 

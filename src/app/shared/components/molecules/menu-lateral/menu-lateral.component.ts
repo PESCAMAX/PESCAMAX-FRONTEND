@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MenuStateService } from '../../../../features/monitoreo/services/menu-state/menu-state.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { AuthService } from '../../../../features/monitoreo/services/api-login/auth.service';
 
 @Component({
   selector: 'app-menu-lateral',
@@ -10,11 +11,18 @@ import { filter } from 'rxjs/operators';
 })
 export class MenuLateralComponent implements OnInit {
   subMenuVisible: number | null = null;
+  userId: string = ''; // Inicializa con un string vacío
 
-  constructor(private menuStateService: MenuStateService, private router: Router) {}
+  constructor(
+    private menuStateService: MenuStateService,
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
     this.subMenuVisible = this.menuStateService.getSubMenuVisible();
+    const storedUserId = localStorage.getItem('userId');
+    this.userId = storedUserId ? storedUserId : ''; // Asigna un string vacío si es null
 
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
