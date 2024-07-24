@@ -1,23 +1,10 @@
-<ng-template #flecha>
-  <svg class="w-4 h-8 fill-current transition-transform duration-300" viewBox="0 0 24 24">
-    <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z" />
-  </svg>
-</ng-template>
-
-<div id="Main" class="xl:rounded-r transform xl:translate-x-0 ease-in-out transition duration-500 flex justify-start items-start h-full w-full sm:w-64 bg-[#F2F5F7] flex-col">
-
-  <div class="hidden xl:flex items-start p-6" style="width: 100%; height: 100px;">
-    <div class="flex items-center">
-      <div class="w-8 flex justify-end mr-1"> <!-- Añadido un contenedor con margen derecho -->
-        <img src="../../../../../assets/icons/Logo_pescamax.png" alt="Miimagen" class="w-6 h-6" style="margin-top: -15px;">
-      </div>
-      <p class="text-2xl flex items-center">
-        <span class="text-blue-500 font-bold">PESCA</span><span class="text-black font-bold">MAX</span>
-      </p>
-    </div>
-  </div>
-
-  <div class="flex flex-col justify-start w-70 items-center px-6 border-b border-#A6B3BF w-full">
+<div id="Main" class="xl:rounded-r transform xl:translate-x-0 ease-in-out transition duration-500 flex flex-col justify-start items-start h-full w-full sm:w-72 bg-[#F2F5F7]">
+  <!-- Logo -->
+  <div class="flex justify-start p-6 w-full h-25">
+    <img src="../../../../../assets/icons/Logo_pescamax.png" alt="Logo" class="w-10 h-9 mr-3">
+    <p class="text-3xl font-bold">
+      <span class="text-blue-500">PESCA</span><span class="text-black">MAX</span>
+    </p>
   </div>
 
   <div class="flex flex-col justify-start items-center px-6 w-full">
@@ -62,8 +49,9 @@
         <h3 class="text-base leading-4 font-sans" style="color: black;">Grafica General</h3>
 
       </a>
+
     </div>
-  </div>
+
 
   <div class="flex flex-col justify-start items-center px-6 w-full">
     <button (click)="toggleSubMenu(2)" class="focus:outline-none text-left text-black flex justify-between items-center w-full py-5 space-x-14 hover:text-blue-500">
@@ -112,10 +100,16 @@
         <img src="../../../../../assets/icons/icons8-historia-de-la-actividad-50.png" alt="Miimagen" width="20" height="50">
         <p class="text-base leading-4">Historial de alertas</p>
       </a>
+
     </div>
+  </nav>
+
+  <!-- Botón de cerrar sesión -->
+  <div class="mt-auto p-4 w-full">
+    <a href="http://localhost:4200/Inicio" class="w-full">
+      <button class="w-full py-2 px-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200">
+        Cerrar Sesión
+      </button>
+    </a>
   </div>
-
-  <app-exit></app-exit>
-
-</div>
-
+  

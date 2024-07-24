@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../../features/monitoreo/services/api-login/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
@@ -25,6 +27,7 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin() {
+
     if (this.loginForm.valid) {
       console.log('Intentando iniciar sesión con:', this.loginForm.value);
       this.authService.login(this.loginForm.value).subscribe(
@@ -44,5 +47,6 @@ export class LoginComponent implements OnInit {
     } else {
       console.log('El formulario es inválido', this.loginForm.errors);
     }
+
   }
 }
