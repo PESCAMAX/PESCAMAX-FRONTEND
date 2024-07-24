@@ -42,8 +42,9 @@ export class ApiService {
       catchError(this.handleError)
     );
   }
-  modificarEspecie(especie: any): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}/CrearEspecie/Modificar/${especie.Id}`, especie, { headers: this.getHeaders() })
+  modificarEspecie(especie: Especie): Observable<any> {
+    const url = `${this.baseUrl}/CrearEspecie/Modificar/${especie.UserId}`;
+    return this.http.put(url, especie, { headers: this.getHeaders() })
       .pipe(catchError(this.handleError));
   }
 
@@ -60,8 +61,8 @@ export class ApiService {
       );
   }
 
-  crearAlerta(userId: string, alerta: Alerta): Observable<Alerta> {
-    return this.http.post<Alerta>(`${this.baseUrl}/Alerta/${userId || ''}`, alerta, { headers: this.getHeaders() })
+  crearAlerta(alerta: Alerta): Observable<Alerta> {
+    return this.http.post<Alerta>(`${this.baseUrl}/Alerta`, alerta, { headers: this.getHeaders() })
       .pipe(catchError(this.handleError));
   }
 
@@ -72,6 +73,7 @@ export class ApiService {
         catchError(this.handleError)
       );
   }
+
 }
 
 export interface Monitoreo {
@@ -93,7 +95,7 @@ export interface Especie {
   TemperaturaMaximo: number;
   PhMinimo: number;
   PhMaximo: number;
-  userId: string;
+  UserId: string;  // Cambiado de userId a UserId
 }
 
 export interface Alerta {
@@ -103,4 +105,5 @@ export interface Alerta {
   LoteID: number;
   Descripcion: string;
   Fecha?: Date;
+  UserId: string; 
 }

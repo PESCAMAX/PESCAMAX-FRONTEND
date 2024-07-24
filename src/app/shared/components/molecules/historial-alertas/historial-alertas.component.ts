@@ -20,8 +20,7 @@ export class HistorialAlertasComponent implements OnInit {
   }
 
   cargarAlertas(): void {
-    const token = this.authService.getAuthToken();
-    if (!token) {
+    if (!this.authService.isAuthenticated()) {
       console.error('Usuario no autenticado');
       return;
     }
@@ -31,7 +30,10 @@ export class HistorialAlertasComponent implements OnInit {
         this.alertas = alertas;
         this.alertasFiltradas = alertas;
       },
-      error: (error) => console.error('Error al cargar alertas:', error)
+      error: (error) => {
+        console.error('Error al cargar alertas:', error);
+        this.mensajeAlerta = 'Error al cargar las alertas. Por favor, intente nuevamente.';
+      }
     });
   }
 

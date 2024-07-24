@@ -127,9 +127,10 @@ export class TablaSeleccionarComponent implements OnInit {
         EspecieID: especie.Id,
         Nombre: especie.NombreEspecie,
         LoteID: loteId,
-        Descripcion: problemas.join(', ')
+        Descripcion: problemas.join(', '),
+        UserId: this.userId  // Añadir el userId aquí
       };
-      this.apiService.crearAlerta(this.userId, alerta).subscribe({
+      this.apiService.crearAlerta(alerta).subscribe({
         next: (response) => console.log('Alerta creada:', response),
         error: (error) => console.error('Error al crear alerta:', error)
       });

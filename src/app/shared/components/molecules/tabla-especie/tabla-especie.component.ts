@@ -12,6 +12,7 @@ interface Especie {
   TemperaturaMaximo: number;
   PhMinimo: number;
   PhMaximo: number;
+  UserId: string;  // Añade esta línea si no estaba presente
 }
 
 interface AlertState {
@@ -164,7 +165,8 @@ export class TablaEspecieComponent implements OnInit {
     if (this.especieSeleccionada) {
       const especieModificada: Especie = {
         ...this.especieSeleccionada,
-        ...this.especieForm.value
+        ...this.especieForm.value,
+        UserId: this.AuthService.getUserId() // Asegúrate de que sea UserId
       };
       console.log('Datos de la especie a modificar:', especieModificada);
       this.apiService.modificarEspecie(especieModificada).subscribe(
