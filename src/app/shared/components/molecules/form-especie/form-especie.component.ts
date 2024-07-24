@@ -12,6 +12,7 @@ export class EspecieFormComponent implements OnInit {
   especieForm: FormGroup;
   successMessage: string = '';
   errorMessage: string = '';
+
   type: any;
 
   constructor(
@@ -19,20 +20,22 @@ export class EspecieFormComponent implements OnInit {
     private apiService: ApiService,
     private authService: AuthService // Añade el AuthService al constructor
   ) {
+
     this.especieForm = this.fb.group({
-      nombreEspecie: ['', Validators.required],
-      tdsMinimo: ['', [Validators.required, Validators.min(1), this.notEqualValidator('tdsMaximo')]],
-      tdsMaximo: ['', [Validators.required, Validators.min(1), this.notEqualValidator('tdsMinimo')]],
-      temperaturaMinimo: ['', [Validators.required, Validators.min(1), this.notEqualValidator('temperaturaMaximo')]],
-      temperaturaMaximo: ['', [Validators.required, Validators.min(1), this.notEqualValidator('temperaturaMinimo')]],
-      phMinimo: ['', [Validators.required, Validators.min(1), this.notEqualValidator('phMaximo')]],
-      phMaximo: ['', [Validators.required, Validators.min(1), this.notEqualValidator('phMinimo')]],
-    }, { validators: [this.formGroupNotEqualValidator] });
+      nombreEspecie: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)]],
+      tdsMinimo: ['', [Validators.required, this.numberValidator]],
+      tdsMaximo: ['', [Validators.required, this.numberValidator]],
+      temperaturaMinimo: ['', [Validators.required, this.numberValidator]],
+      temperaturaMaximo: ['', [Validators.required, this.numberValidator]],
+      phMinimo: ['', [Validators.required, this.numberValidator, Validators.min(0)]],
+      phMaximo: ['', [Validators.required, this.numberValidator, Validators.min(0)]],
+    }, { validators: [this.minMaxValidator] });
   }
 
   ngOnInit(): void {}
 
   onSubmit(): void {
+    this.especieForm.updateValueAndValidity();
     if (this.especieForm.valid) {
       const username = this.authService.getUserId(); // Usa el método del AuthService
       if (!username) {
@@ -67,43 +70,33 @@ export class EspecieFormComponent implements OnInit {
     }, 3000);
   }
 
-  notEqualValidator(otherControlName: string) {
-    return (control: AbstractControl): ValidationErrors | null => {
-      const formGroup = control.parent as FormGroup;
-      if (!formGroup) return null;
-
-      const otherControl = formGroup.controls[otherControlName];
-      if (!otherControl) return null;
-
-      const controlValue = control.value;
-      const otherControlValue = otherControl.value;
-
-      // Asegurarse de que ambos valores estén presentes antes de realizar la validación
-      return (controlValue == null || otherControlValue == null)
-        ? null
-        : controlValue === otherControlValue
-        ? { notEqual: 'Los valores no pueden ser iguales.' }
-        : otherControlName === 'tdsMinimo' && controlValue < otherControlValue
-        ? { notGreater: 'El TDS máximo no puede ser menor que el TDS mínimo.' }
-        : otherControlName === 'temperaturaMinimo' && controlValue < otherControlValue
-        ? { notGreater: 'La temperatura máxima no puede ser menor que la temperatura mínima.' }
-        : otherControlName === 'phMinimo' && controlValue < otherControlValue
-        ? { notGreater: 'El pH máximo no puede ser menor que el pH mínimo.' }
-        : null;
-    };
-  }
-
-  formGroupNotEqualValidator(group: FormGroup): ValidationErrors | null {
-    const controls = group.controls;
-    for (const name in controls) {
-      if (controls.hasOwnProperty(name)) {
-        const control = controls[name];
-        if (control.errors && (control.errors['notEqual'] || control.errors['notGreater'])) {
-          return { notEqualOrGreater: true };
-        }
-      }
+  numberValidator(control: AbstractControl): ValidationErrors | null {
+    if (isNaN(Number(control.value))) {
+      return { notANumber: true };
     }
     return null;
+  }
+
+  minMaxValidator(group: FormGroup): ValidationErrors | null {
+    const fields = ['tds', 'temperatura', 'ph'];
+    let hasError = false;
+
+    fields.forEach(field => {
+      const min = parseFloat(group.get(`${field}Minimo`)?.value);
+      const max = parseFloat(group.get(`${field}Maximo`)?.value);
+
+      if (min === max) {
+        group.get(`${field}Maximo`)?.setErrors({ equal: 'Los valores no pueden ser iguales' });
+        hasError = true;
+      } else if (max <= min) {
+        group.get(`${field}Maximo`)?.setErrors({ minMax: `El ${field} máximo debe ser mayor que el mínimo` });
+        hasError = true;
+      } else {
+        group.get(`${field}Maximo`)?.setErrors(null);
+      }
+    });
+
+    return hasError ? { minMaxError: true } : null;
   }
 
   getErrorMessage(controlName: string): string {
@@ -112,14 +105,20 @@ export class EspecieFormComponent implements OnInit {
       if (control.errors['required']) {
         return 'Este campo es requerido.';
       }
-      if (control.errors['notEqual']) {
-        return control.errors['notEqual'];
-      }
-      if (control.errors['notGreater']) {
-        return control.errors['notGreater'];
-      }
       if (control.errors['min']) {
         return 'El valor debe ser mayor que cero.';
+      }
+      if (control.errors['pattern']) {
+        return 'Solo se permiten letras en este campo.';
+      }
+      if (control.errors['notANumber']) {
+        return 'Este campo solo acepta números.';
+      }
+      if (control.errors['equal']) {
+        return control.errors['equal'];
+      }
+      if (control.errors['minMax']) {
+        return control.errors['minMax'];
       }
     }
     return '';
