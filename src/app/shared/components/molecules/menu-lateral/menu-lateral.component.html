@@ -7,100 +7,82 @@
     </p>
   </div>
 
-  <div class="flex flex-col justify-start items-center px-6 w-full">
-    <button (click)="toggleSubMenu(1)" class="focus:outline-none text-left text-black flex justify-between items-center w-full py-6 space-x-14 hover:text-blue-500">
-      <p class="text-sm leading-5 uppercase">Dashboard</p>
-      <svg [ngClass]="{'transform rotate-180': subMenuVisible === 1, 'transform rotate-0': subMenuVisible !== 1}" class="w-4 h-8 fill-current transition-transform duration-300" viewBox="0 0 24 24">
-        <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z" />
-      </svg>
-    </button>
-
-    <div *ngIf="subMenuVisible === 1" class="flex flex-col justify-start w-full items-start pb-1">
-
-      <a [href]="'http://localhost:4200/temperatura/' + userId" class="flex justify-start items-center space-x-6 hover:text-white focus:bg-blue-400 focus:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
-        <img src="../../../../../assets/icons/icons8-temperatura-50.png" alt="Miimagen" width="20" height="50" viewBox="0 0 10 10" fill="">
-
-        <h3 class="text-base leading-4 font-sans" style="color: black;">Grafica temperatura</h3>
-
-      </a>
-
-      <a [href]="'http://localhost:4200/grafica-tds/' + userId" class="flex justify-start items-center space-x-6 hover:text-white focus:bg-blue-400 focus:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
-        <img src="../../../../../assets/icons/icons8-termometro-50.png" alt="Miimagen" width="20" height="50" viewBox="0 0 10 10" fill="">
-
-        <h3 class="text-base leading-4 font-sans" style="color: black;">Grafica de TDS</h3>
-
-      </a>
-
-      <a [href]="'http://localhost:4200/grafica-ph/' + userId" class="flex justify-start items-center space-x-6 hover:text-white focus:bg-blue-400 focus:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
-        <img src="../../../../../assets/icons/icons8-ph-50.png" alt="Miimagen" width="20" height="50" viewBox="0 0 10 10" fill="">
-
-        <h3 class="text-base leading-4 font-sans" style="color: black;">Grafica de Ph</h3>
-
-      </a>
-
-      <a [href]="'/tabla-datos/' + userId" class="flex justify-start items-center space-x-6 hover:text-white focus:bg-blue-400 focus:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
-        <img src="../../../../../assets/icons/icons8-crear-nuevo-30.png" alt="Miimagen" width="20" height="50" viewBox="0 0 10 10" fill="">
-        <h3 class="text-base leading-4 font-sans" style="color: black;">Tablas</h3>
-
-      </a>
-      <a [href]="'/home/' + userId" class="flex justify-start items-center space-x-6 hover:text-white focus:bg-blue-400 focus:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
-        <img src="../../../../../assets/icons/crecimiento.png" alt="Miimagen" width="20" height="50" viewBox="0 0 10 10" fill="">
-
-        <h3 class="text-base leading-4 font-sans" style="color: black;">Grafica General</h3>
-
-      </a>
-
+  <!-- Menú principal -->
+  <nav class="flex flex-col w-full px-4 space-y-6">
+    <!-- Panel de control -->
+    <div>
+      <button (click)="toggleSubMenu(1)" class="flex justify-between items-center w-full py-3 px-4 text-left text-gray-700 hover:bg-blue-100 rounded-lg transition-colors duration-200">
+        <span class="text-sm font-medium uppercase">Panel de control</span>
+        <svg [ngClass]="{'transform rotate-180': subMenuVisible === 1}" class="w-5 h-5 transition-transform duration-200" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
+        </svg>
+      </button>
+      <div *ngIf="subMenuVisible === 1" class="mt-2 ml-4 space-y-2">
+        <a [href]="'http://localhost:4200/temperatura/' + userId" class="flex items-center py-2 px-4 text-sm text-gray-600 hover:bg-blue-50 rounded-lg">
+          <img src="../../../../../assets/icons/icons8-temperatura-50.png" alt="Temperatura" class="w-5 h-5 mr-3">
+          Gráfica temperatura
+        </a>
+        <a [href]="'http://localhost:4200/grafica-tds/' + userId" class="flex items-center py-2 px-4 text-sm text-gray-600 hover:bg-blue-50 rounded-lg">
+          <img src="../../../../../assets/icons/icons8-termometro-50.png" alt="TDS" class="w-5 h-5 mr-3">
+          Gráfica de TDS
+        </a>
+        <a [href]="'http://localhost:4200/grafica-ph/' + userId" class="flex items-center py-2 px-4 text-sm text-gray-600 hover:bg-blue-50 rounded-lg">
+          <img src="../../../../../assets/icons/icons8-ph-50.png" alt="PH" class="w-5 h-5 mr-3">
+          Gráfica de Ph
+        </a>
+        <a [href]="'/home/' + userId" class="flex items-center py-2 px-4 text-sm text-gray-600 hover:bg-blue-50 rounded-lg">
+          <img src="../../../../../assets/icons/crecimiento.png" alt="General" class="w-5 h-5 mr-3">
+          Gráfica General
+        </a>
+        <a [href]="'/tabla-datos/' + userId" class="flex items-center py-2 px-4 text-sm text-gray-600 hover:bg-blue-50 rounded-lg">
+          <img src="../../../../../assets/icons/icons8-crear-nuevo-30.png" alt="Tablas" class="w-5 h-5 mr-3">
+          Tablas
+        </a>
+      </div>
     </div>
 
-
-  <div class="flex flex-col justify-start items-center px-6 w-full">
-    <button (click)="toggleSubMenu(2)" class="focus:outline-none text-left text-black flex justify-between items-center w-full py-5 space-x-14 hover:text-blue-500">
-      <p class="text-sm leading-5 uppercase">Gestión<br>de parámetros</p>
-      <svg [ngClass]="{'transform rotate-180': subMenuVisible === 2, 'transform rotate-0': subMenuVisible !== 2}" class="w-4 h-8 fill-current transition-transform duration-300" viewBox="0 0 24 24">
-        <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z" />
-      </svg>
-    </button>
-
-    <div  *ngIf="subMenuVisible === 2" class="flex flex-col justify-start items-center px-6 border-b border-white w-full">
-      <a [href]="'http://localhost:4200/crear-especie/' + userId" class="flex justify-start items-center space-x-6 hover:text-white focus:bg-blue-400 focus:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
-        <img src="../../../../../assets/icons/icons8-crear-nuevo-30.png" alt="Miimagen" width="20" height="50" viewBox="0 0 10 10" fill="">
-        <h3 class="text-base leading-4 font-sans" style="color: black;">Crear especie</h3>
-      </a>
-    <div  class="flex flex-col justify-start items-center px-6 border-b border-white w-full">
-      <a [href]="'http://localhost:4200/seleccionar-especie/' + userId" class="flex justify-start items-center space-x-6 hover:text-white focus:bg-blue-400 focus:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
-        <img src="../../../../../assets/icons/icons8-natural-user-interface-2-26.png" alt="Miimagen" width="20" height="50" viewBox="0 0 10 10" fill="">
-        <h3 class="text-base leading-4 font-sans" style="color: black;">Seleccionar especie</h3>
-      </a>
-     <div class="flex flex-col justify-start items-center px-6 border-b border-white w-full">
-      <a [href]="'http://localhost:4200/modificar-especie/' + userId" class="flex justify-start items-center space-x-6 hover:text-white focus:bg-blue-400 focus:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
-        <img src="../../../../../assets/icons/icons8-editar-archivo-30.png" alt="Miimagen" width="20" height="50" viewBox="0 0 10 10" fill="">
-        <h3 class="text-base leading-4 font-sans" style="color: black;">Modificar especie</h3>
-      </a>
-  </div>
-    </div>
+    <!-- Gestión de parámetros -->
+    <div>
+      <button (click)="toggleSubMenu(2)" class="flex justify-between items-center w-full py-3 px-4 text-left text-gray-700 hover:bg-blue-100 rounded-lg transition-colors duration-200">
+        <span class="text-sm font-medium uppercase">Gestión de parámetros</span>
+        <svg [ngClass]="{'transform rotate-180': subMenuVisible === 2}" class="w-5 h-5 transition-transform duration-200" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
+        </svg>
+      </button>
+      <div *ngIf="subMenuVisible === 2" class="mt-2 ml-4 space-y-2">
+        <a [href]="'http://localhost:4200/crear-especie/' + userId" class="flex items-center py-2 px-4 text-sm text-gray-600 hover:bg-blue-50 rounded-lg">
+          <img src="../../../../../assets/icons/icons8-crear-nuevo-30.png" alt="Crear" class="w-5 h-5 mr-3">
+          Crear especie
+        </a>
+        <a [href]="'http://localhost:4200/modificar-especie/' + userId" class="flex items-center py-2 px-4 text-sm text-gray-600 hover:bg-blue-50 rounded-lg">
+          <img src="../../../../../assets/icons/icons8-editar-archivo-30.png" alt="Modificar" class="w-5 h-5 mr-3">
+          Modificar Especie
+        </a>
+        <a [href]="'http://localhost:4200/seleccionar-especie/' + userId" class="flex items-center py-2 px-4 text-sm text-gray-600 hover:bg-blue-50 rounded-lg">
+          <img src="../../../../../assets/icons/icons8-natural-user-interface-2-26.png" alt="Seleccionar" class="w-5 h-5 mr-3">
+          Seleccionar especie
+        </a>
+      </div>
     </div>
 
-
-</div>
-  <div class="flex flex-col justify-start items-center px-6 w-full">
-    <button (click)="toggleSubMenu(3)" class="focus:outline-none text-left text-black flex justify-between items-center w-full py-5 space-x-14 hover:text-blue-500">
-      <p class="text-sm leading-5 uppercase">Sistema<br>de alertas</p>
-      <svg [ngClass]="{'transform rotate-180': subMenuVisible === 3, 'transform rotate-0': subMenuVisible !== 3}" class="w-4 h-8 fill-current transition-transform duration-300" viewBox="0 0 24 24">
-        <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z" />
-      </svg>
-    </button>
-
-    <div *ngIf="subMenuVisible === 3" class="flex flex-col justify-start w-full items-start pb-1">
-      <a [href]="'http://localhost:4200/alertas-recientes/' + userId" class="flex justify-start items-center space-x-6 hover:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
-        <img src="../../../../../assets/icons/advertencia.png" alt="Miimagen" width="20" height="50">
-        <p class="text-base leading-4">Alertas recientes</p>
-      </a>
-
-      <a [href]="'http://localhost:4200/historial-alertas/' + userId" class="flex justify-start items-center space-x-6 hover:text-white hover:bg-blue-400 text-black rounded px-3 py-2 w-full md:w-52">
-        <img src="../../../../../assets/icons/icons8-historia-de-la-actividad-50.png" alt="Miimagen" width="20" height="50">
-        <p class="text-base leading-4">Historial de alertas</p>
-      </a>
-
+    <!-- Sistema de alertas -->
+    <div>
+      <button (click)="toggleSubMenu(3)" class="flex justify-between items-center w-full py-3 px-4 text-left text-gray-700 hover:bg-blue-100 rounded-lg transition-colors duration-200">
+        <span class="text-sm font-medium uppercase">Sistema de alertas</span>
+        <svg [ngClass]="{'transform rotate-180': subMenuVisible === 3}" class="w-5 h-5 transition-transform duration-200" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
+        </svg>
+      </button>
+      <div *ngIf="subMenuVisible === 3" class="mt-2 ml-4 space-y-2">
+        <a [href]="'http://localhost:4200/alertas-recientes/' + userId" class="flex items-center py-2 px-4 text-sm text-gray-600 hover:bg-blue-50 rounded-lg">
+          <img src="../../../../../assets/icons/advertencia.png" alt="Alertas recientes" class="w-5 h-5 mr-3">
+          Alertas recientes
+        </a>
+        <a [href]="'http://localhost:4200/historial-alertas/' + userId" class="flex items-center py-2 px-4 text-sm text-gray-600 hover:bg-blue-50 rounded-lg">
+          <img src="../../../../../assets/icons/icons8-historia-de-la-actividad-50.png" alt="Historial" class="w-5 h-5 mr-3">
+          Historial de alertas
+        </a>
+      </div>
     </div>
   </nav>
 
@@ -112,4 +94,4 @@
       </button>
     </a>
   </div>
-  
+</div>
