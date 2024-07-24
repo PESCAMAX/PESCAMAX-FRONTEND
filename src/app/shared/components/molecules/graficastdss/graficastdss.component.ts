@@ -11,6 +11,7 @@ export class GraficastdssComponent implements OnInit {
   public chart: any;
   public lotes: number[] = [];
   public selectedLote: number | null = null;
+onDateRangeSelected: any;
 
   constructor(private apiService: ApiService, private AuthService: AuthService) {}
 

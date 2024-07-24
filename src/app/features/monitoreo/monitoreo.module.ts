@@ -6,8 +6,6 @@ import { InicioComponent } from './pages/inicio/inicio.component';
 
 @NgModule({
   declarations: [
-
-  
     InicioComponent
   ],
   imports: [
