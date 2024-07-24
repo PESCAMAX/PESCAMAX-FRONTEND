@@ -24,15 +24,24 @@ export class TablaSeleccionarComponent implements OnInit {
     this.userId = this.authService.getUserId();
   }
 
+
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.userId = params['userId'];
-      if (this.userId) {
-        this.loadMonitoreo();
-      } else {
-        console.error('No se proporcionó un ID de usuario');
-      }
+      this.userId = params['userId'] || this.userId;
+      this.loadData();
     });
+    
+  }
+  loadData() {
+    // Load especies
+    this.apiService.listarEspecies(this.userId).subscribe({
+      next: (especies) => {
+        this.especies = especies;
+        this.loadMonitoreo();
+      },
+      error: (error) => console.error('Error al cargar especies:', error)
+    });
+    
   }
   loadMonitoreo() {
     this.apiService.listarMonitoreo(this.userId).subscribe({
