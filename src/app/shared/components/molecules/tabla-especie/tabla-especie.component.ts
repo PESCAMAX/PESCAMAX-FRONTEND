@@ -27,6 +27,7 @@ interface AlertState {
   templateUrl: './tabla-especie.component.html',
   styleUrls: ['./tabla-especie.component.css']
 })
+
 export class TablaEspecieComponent implements OnInit {
   especies: Especie[] = [];
   especiesFiltradas: Especie[] = [];
@@ -39,6 +40,11 @@ export class TablaEspecieComponent implements OnInit {
     content: '',
     iconColor: 'red'
   };
+  
+  cerrarModal(): void {
+    this.especieSeleccionada = null;
+    this.especieForm.reset();
+  }
 
   alertConfirmAction: (() => void) | null = null;
   alertCancelAction: (() => void) | null = null;
@@ -180,13 +186,5 @@ export class TablaEspecieComponent implements OnInit {
         }
       );
     }
-  }
-
-  cerrarModal(event?: MouseEvent): void {
-    if (event) {
-      event.stopPropagation();
-    }
-    this.especieSeleccionada = null;
-    this.especieForm.reset();
   }
 }
