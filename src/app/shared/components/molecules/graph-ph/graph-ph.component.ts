@@ -9,12 +9,7 @@ import { AuthService } from '../../../../features/monitoreo/services/api-login/a
   styleUrls: ['./graph-ph.component.css']
 })
 export class GraphPhComponent implements OnInit {
-
-onDateRangeSelected($event: { startDate: Date; endDate: Date; }) {
-throw new Error('Method not implemented.');
-}
-  public chart: any;
-
+  public chart: Chart | null = null;
   public lotes: number[] = [];
   public selectedLote: number | null = null;
 
