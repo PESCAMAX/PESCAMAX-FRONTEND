@@ -6,6 +6,7 @@
   </div>
   <div class="chart-container">
     <canvas id="MyChart">{{ chart }}</canvas>
+    <app-datapicker (dateRangeSelected)="onDateRangeSelected($event)"></app-datapicker>
   </div>
 
   <!-- <div *ngIf="lotes.length > 0">
