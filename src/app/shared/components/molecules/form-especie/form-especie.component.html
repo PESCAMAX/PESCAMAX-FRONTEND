@@ -1,4 +1,4 @@
-<div class="flex items-center justify-center p-12">
+<div class="container flex items-center mx-auto justify-center p-12">
   <div class="mx-auto w-full max-w-[550px] bg-white shadow-lg rounded-lg p-8">
     <app-alert-form [successMessage]="successMessage" [errorMessage]="errorMessage"></app-alert-form>
     <form [formGroup]="especieForm" (ngSubmit)="onSubmit()">

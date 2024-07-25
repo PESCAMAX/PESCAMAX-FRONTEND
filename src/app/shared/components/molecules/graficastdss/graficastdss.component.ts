@@ -11,6 +11,8 @@ export class GraficastdssComponent implements OnInit {
   public chart: any;
   public lotes: number[] = [];
   public selectedLote: number | null = null;
+  private startDate: Date | null = null;
+  private endDate: Date | null = null;
 
   constructor(private apiService: ApiService, private AuthService: AuthService) {}
 
@@ -36,6 +38,13 @@ export class GraficastdssComponent implements OnInit {
   onLoteChange(event: Event) {
     const selectElement = event.target as HTMLSelectElement;
     this.selectedLote = parseInt(selectElement.value, 10);
+    this.loadDataAndCreateChart();
+  }
+
+
+  onDateRangeSelected(event: { startDate: Date, endDate: Date }): void {
+    this.startDate = event.startDate;
+    this.endDate = event.endDate;
     this.loadDataAndCreateChart();
   }
 
