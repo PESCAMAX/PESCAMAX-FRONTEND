@@ -1,97 +1,91 @@
-<div id="Main" class="xl:rounded-r transform xl:translate-x-0 ease-in-out transition duration-500 flex flex-col justify-start items-start h-full w-full sm:w-72 bg-[#F2F5F7]">
-  <!-- Logo -->
-  <div class="flex justify-start p-6 w-full h-25">
-    <img src="../../../../../assets/icons/Logo_pescamax.png" alt="Logo" class="w-10 h-9 mr-3">
-    <p class="text-3xl font-bold">
-      <span class="text-blue-500">PESCA</span><span class="text-black">MAX</span>
-    </p>
+<!-- menu-lateral.component.html -->
+<div id="Main" class="fixed top-0 left-0 h-full bg-[#F2F5F7] transition-all duration-300 overflow-hidden"
+     [ngClass]="{'w-64': isMenuOpen, 'w-16': !isMenuOpen}">
+  <div class="flex items-center w-full py-4 text-gray-600 hover:bg-gray-100 rounded-lg p-4">
+    <button class="text-gray-500 focus:outline-none" (click)="toggleMenu()">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+    <div class="flex items-center ml-7" [ngClass]="{'hidden': !isMenuOpen}">
+      <img src="../../../../../assets/icons/Logo_pescamax.png" alt="PESCAMAX logo" class="w-8 h-8 mr-2">
+      <span class="text-lg font-semibold text-blue-500">PESCA<span class="text-black">MAX</span></span>
+    </div>
   </div>
 
-  <!-- Menú principal -->
-  <nav class="flex flex-col w-full px-4 space-y-6">
-    <!-- Panel de control -->
-    <div>
-      <button (click)="toggleSubMenu(1)" class="flex justify-between items-center w-full py-3 px-4 text-left text-gray-700 hover:bg-blue-100 rounded-lg transition-colors duration-200">
-        <span class="text-sm font-medium uppercase">Panel de control</span>
-        <svg [ngClass]="{'transform rotate-180': subMenuVisible === 1}" class="w-5 h-5 transition-transform duration-200" viewBox="0 0 24 24">
-          <path fill="currentColor" d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
-        </svg>
+  <nav class="mt-8">
+    <div class="px-2">
+      <button (click)="toggleSubMenu(1)" class="flex items-center w-full py-4 text-gray-600 hover:bg-gray-100 rounded-lg p-2">
+        <img src="../../../../../assets/icons/grafico-de-negocios.png" alt="Dashboard" class="w-8 h-8 mr-3">
+        <span class="text-sm font-medium" [ngClass]="{'hidden': !isMenuOpen}">Panel De Control</span>
       </button>
-      <div *ngIf="subMenuVisible === 1" class="mt-2 ml-4 space-y-2">
-        <a [href]="'http://localhost:4200/temperatura/' + userId" class="flex items-center py-2 px-4 text-sm text-gray-600 hover:bg-blue-50 rounded-lg">
-          <img src="../../../../../assets/icons/temple.png" alt="Temperatura" class="w-5 h-5 mr-3">
-          Gráfica temperatura
+
+     
+      <div *ngIf="subMenuVisible === 1 && isMenuOpen" class="ml-10 mt-2">
+        <a [href]="'/temperatura/' + userId" class="flex items-center py-2 text-sm text-gray-500 hover:text-blue-500">
+          <img src="../../../../../assets/icons/icons8-temperatura-50.png" alt="Temperatura" class="w-5 h-5 mr-2 ml-5">
+          <span>Gráfica temperatura</span>
         </a>
-        <a [href]="'http://localhost:4200/grafica-tds/' + userId" class="flex items-center py-2 px-4 text-sm text-gray-600 hover:bg-blue-50 rounded-lg">
-          <img src="../../../../../assets/icons/" alt="TDS" class="w-5 h-5 mr-3">
-          Gráfica de TDS
+        <a [href]="'/grafica-tds/' + userId" class="flex items-center py-2 text-sm text-gray-500 hover:text-blue-500">
+          <img src="../../../../../assets/icons/icons8-termometro-50.png" alt="TDS" class="w-5 h-5 mr-2 ml-5">
+          <span>Gráfica de TDS</span>
         </a>
-        <a [href]="'http://localhost:4200/grafica-ph/' + userId" class="flex items-center py-2 px-4 text-sm text-gray-600 hover:bg-blue-50 rounded-lg">
-          <img src="../../../../../assets/icons/ph.png" alt="PH" class="w-5 h-5 mr-3">
-          Gráfica de Ph
+        <a [href]="'/grafica-ph/' + userId" class="flex items-center py-2 text-sm text-gray-500 hover:text-blue-500">
+          <img src="../../../../../assets/icons/icons8-ph-50.png" alt="Ph" class="w-5 h-5 mr-2 ml-5">
+          <span>Gráfica de Ph</span>
         </a>
-        <a [href]="'/home/' + userId" class="flex items-center py-2 px-4 text-sm text-gray-600 hover:bg-blue-50 rounded-lg">
-          <img src="../../../../../assets/icons/demanda-de-mercado.png" alt="General" class="w-5 h-5 mr-3">
-          Gráfica General
+        <a [href]="'/home/' + userId" class="flex items-center py-2 text-sm text-gray-500 hover:text-blue-500">
+          <img src="../../../../../assets/icons/crecimiento.png" alt="Gráfica General" class="w-5 h-5 mr-2 ml-5">
+          <span>Gráfica General</span>
         </a>
-        <a [href]="'/tabla-datos/' + userId" class="flex items-center py-2 px-4 text-sm text-gray-600 hover:bg-blue-50 rounded-lg">
-          <img src="../../../../../assets/icons/tabla-de-base-de-datos.png" alt="Tablas" class="w-5 h-5 mr-3">
-          Tablas
+        <a [href]="'/tabla-datos/' + userId" class="flex items-center py-2 text-sm text-gray-500 hover:text-blue-500">
+          <img src="../../../../../assets/icons/icons8-crear-nuevo-30.png" alt="Tablas" class="w-5 h-5 mr-2 ml-5">
+          <span>Tablas</span>
+
         </a>
       </div>
     </div>
 
-    <!-- Gestión de parámetros -->
-    <div>
-      <button (click)="toggleSubMenu(2)" class="flex justify-between items-center w-full py-3 px-4 text-left text-gray-700 hover:bg-blue-100 rounded-lg transition-colors duration-200">
-        <span class="text-sm font-medium uppercase">Gestión de parámetros</span>
-        <svg [ngClass]="{'transform rotate-180': subMenuVisible === 2}" class="w-5 h-5 transition-transform duration-200" viewBox="0 0 24 24">
-          <path fill="currentColor" d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
-        </svg>
+    <div class="px-2 mt-4">
+      <button (click)="toggleSubMenu(2)" class="flex items-center w-full py-4 text-gray-600 hover:bg-gray-100 rounded-lg p-2">
+        <img src="../../../../../assets/icons/creador-de-contenido.png" alt="Gestión" class="w-8 h-8 mr-3">
+        <span class="text-sm font-medium" [ngClass]="{'hidden': !isMenuOpen}">Gestión de parámetros</span>
       </button>
-      <div *ngIf="subMenuVisible === 2" class="mt-2 ml-4 space-y-2">
-        <a [href]="'http://localhost:4200/crear-especie/' + userId" class="flex items-center py-2 px-4 text-sm text-gray-600 hover:bg-blue-50 rounded-lg">
-          <img src="../../../../../assets/icons/examen.png" alt="Crear" class="w-5 h-5 mr-3">
-          Crear especie
+      <div *ngIf="subMenuVisible === 2 && isMenuOpen" class="ml-10 mt-2">
+        <a [href]="'/crear-especie/' + userId" class="flex items-center py-2 text-sm text-gray-500 hover:text-blue-500">
+          <img src="../../../../../assets/icons/icons8-crear-nuevo-30.png" alt="Crear especie" class="w-5 h-5 mr-2 ml-5">
+          <span>Crear especie</span>
         </a>
-        <a [href]="'http://localhost:4200/modificar-especie/' + userId" class="flex items-center py-2 px-4 text-sm text-gray-600 hover:bg-blue-50 rounded-lg">
-          <img src="../../../../../assets/icons/editar.png" alt="Modificar" class="w-5 h-5 mr-3">
-          Modificar Especie
+        <a [href]="'/seleccionar-especie/' + userId" class="flex items-center py-2 text-sm text-gray-500 hover:text-blue-500">
+          <img src="../../../../../assets/icons/icons8-natural-user-interface-2-26.png" alt="Seleccionar especie" class="w-5 h-5 mr-2 ml-5">
+          <span>Seleccionar especie</span>
         </a>
-        <a [href]="'http://localhost:4200/seleccionar-especie/' + userId" class="flex items-center py-2 px-4 text-sm text-gray-600 hover:bg-blue-50 rounded-lg">
-          <img src="../../../../../assets/icons/seleccione.png" alt="Seleccionar" class="w-5 h-5 mr-3">
-          Seleccionar especie
+        <a [href]="'/modificar-especie/' + userId" class="flex items-center py-2 text-sm text-gray-500 hover:text-blue-500">
+          <img src="../../../../../assets/icons/icons8-editar-archivo-30.png" alt="Modificar especie" class="w-5 h-5 mr-2 ml-5">
+          <span>Modificar especie</span>
         </a>
       </div>
     </div>
 
-    <!-- Sistema de alertas -->
-    <div>
-      <button (click)="toggleSubMenu(3)" class="flex justify-between items-center w-full py-3 px-4 text-left text-gray-700 hover:bg-blue-100 rounded-lg transition-colors duration-200">
-        <span class="text-sm font-medium uppercase">Sistema de alertas</span>
-        <svg [ngClass]="{'transform rotate-180': subMenuVisible === 3}" class="w-5 h-5 transition-transform duration-200" viewBox="0 0 24 24">
-          <path fill="currentColor" d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
-        </svg>
+    <div class="px-2 mt-4">
+      <button (click)="toggleSubMenu(3)" class="flex items-center w-full py-4 text-gray-600 hover:bg-gray-100 rounded-lg p-2">
+        <img src="../../../../../assets/icons/advertencia.png" alt="Alertas" class="w-8 h-8 mr-3">
+        <span class="text-sm font-medium" [ngClass]="{'hidden': !isMenuOpen}">Sistema de alertas</span>
       </button>
-      <div *ngIf="subMenuVisible === 3" class="mt-2 ml-4 space-y-2">
-        <a [href]="'http://localhost:4200/alertas-recientes/' + userId" class="flex items-center py-2 px-4 text-sm text-gray-600 hover:bg-blue-50 rounded-lg">
-          <img src="../../../../../assets/icons/advertencia.png" alt="Alertas recientes" class="w-5 h-5 mr-3">
-          Alertas recientes
+      <div *ngIf="subMenuVisible === 3 && isMenuOpen" class="ml-10 mt-2">
+        <a [href]="'/alertas-recientes/' + userId" class="flex items-center py-2 text-sm text-gray-500 hover:text-blue-500">
+          <img src="../../../../../assets/icons/configuracion.png" alt="Configuracion De Alertas" class="w-5 h-5 mr-2 ml-5">
+          <span>Configuracion De Alertas</span>
         </a>
-        <a [href]="'http://localhost:4200/historial-alertas/' + userId" class="flex items-center py-2 px-4 text-sm text-gray-600 hover:bg-blue-50 rounded-lg">
-          <img src="../../../../../assets/icons/icons8-historia-de-la-actividad-50.png" alt="Historial" class="w-5 h-5 mr-3">
-          Historial de alertas
+        <a [href]="'/historial-alertas/' + userId" class="flex items-center py-2 text-sm text-gray-500 hover:text-blue-500">
+          <img src="../../../../../assets/icons/regulacion.png" alt="Historial de alertas" class="w-5 h-5 mr-2 ml-5">
+          <span>Historial de alertas</span>
         </a>
       </div>
     </div>
   </nav>
 
-  <!-- Botón de cerrar sesión -->
-  <div class="mt-auto p-4 w-full">
-    <a href="http://localhost:4200/Inicio" class="w-full">
-      <button class="w-full py-2 px-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200">
-        Cerrar Sesión
-      </button>
-    </a>
+  <div class="absolute bottom-4 left-4" [ngClass]="{'hidden': !isMenuOpen}">
+    <app-exit></app-exit>
   </div>
 </div>
