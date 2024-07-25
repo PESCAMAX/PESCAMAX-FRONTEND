@@ -24,6 +24,7 @@ import { DatapickerComponent } from './shared/components/molecules/datapicker/da
 import { GraficaGeneralComponent } from './features/monitoreo/pages/dashboard/grafica-general/grafica-general.component';
 import { InicioComponent } from './features/monitoreo/pages/inicio/inicio.component';
 import { AuthGuard } from './features/monitoreo/services/auth-guard/auth-guard.service';
+import { RegisterPageComponent } from './features/monitoreo/pages/home/register-page/register-page.component';
 const routes: Routes = [
   {
     path: 'gestion-de-parametros',

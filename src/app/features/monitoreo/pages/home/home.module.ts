@@ -31,6 +31,7 @@ import { ResetPasswordComponent } from '../../../../shared/components/molecules/
   imports: [
     CommonModule,
     HomeRoutingModule,
+    RegisterPageComponent,
 
   ]
 })
