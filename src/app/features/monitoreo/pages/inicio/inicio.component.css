@@ -1,8 +1,5 @@
 .hero-container {
-    min-height: 100vh;
-    background-image: url('/assets/images/alice-mourou-RrvGuqx-bOQ-unsplash.jpg');
-    background-size: cover;
-    background-position: center;
+    min-height: 85vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -31,6 +28,12 @@
 .logo-text {
     font-size: 1.875rem;
     font-weight: bold;
+}
+
+.producto,
+.noticias {
+    color: whitesmoke;
+    margin-bottom: 0.5rem; /* Ajusta este valor según sea necesario */
 }
 
 .text-blue {
@@ -67,34 +70,87 @@
 .main-content {
     flex-grow: 1;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     color: white;
+    padding: 0 2rem;
+}
+
+.left-content {
+    max-width: 50%;
+    text-align: left;
+}
+
+.right-content {
+    max-width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
 }
 
+.new-text {
+    font-size: 1.2em;
+    text-align: justify;
+    max-width: 500px; /* Ancho máximo del contenedor de texto */
+    padding: 1rem; /* Espaciado interno */
+    background-color: (); /* Fondo semi-transparente */
+    border-radius: 0.5rem; /* Bordes redondeados */
+    color: white; /* Color del texto */
+}
 .main-title {
-    font-size: 3rem;
+    font-size: 2.5rem;
     margin-bottom: 1rem;
 }
 
 .main-subtitle {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.start-text {
+    font-size: 1.125rem;
+    margin-bottom: 1rem;
+}
+
+.carousel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.carousel img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.carousel img.active {
+    opacity: 1;
 }
 
 .about-us {
     display: flex;
-    background-color: white;
-    padding: 4rem 2rem;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem; /* Ajustado para que ocupe menos espacio */
+    background-color: whitesmoke;
+    height: 40vh; /* Ajustado para que ocupe menos espacio */
 }
 
 .about-content {
     flex: 1;
     max-width: 800px;
-    padding: 2rem;
+    padding: 1rem;
 }
 
 .about-content h2 {
@@ -104,10 +160,28 @@
 
 .about-image {
     flex: 1;
+    background-image: url('/assets/images/claudio-guglieri-K2RH1QZdLF4-unsplash.jpg'); /* Ruta de la imagen */
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    border-radius: 50%; /* Hace la imagen redonda */
+    width: 100%; /* Asegura que la imagen mantenga proporciones */
+    max-width: 300px; /* Ajusta el tamaño máximo de la imagen */
+    max-height: 300px; /* Ajusta el tamaño máximo de la imagen */
 }
 
-.about-image img {
-    width: 100%;
-    height: auto;
-    border-radius: 0.5rem;
+.equipo-tra {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem; /* Ajustado para que ocupe menos espacio */
+    background-color: whitesmoke;
+    height: 40vh; /* Ajustado para que ocupe menos espacio */
+}
+
+.equipo-trabajo {
+    flex: 1;
+    max-width: 800px;
+    padding: 1rem;
 }
