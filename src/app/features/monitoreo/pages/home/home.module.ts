@@ -12,7 +12,7 @@ import { LoginComponent } from '../../../../shared/components/molecules/login/lo
 import { RegisterComponent } from '../../../../shared/components/molecules/register/register.component';
 import { ForgotPasswordComponent } from '../../../../shared/components/molecules/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from '../../../../shared/components/molecules/reset-password/reset-password.component';
-
+import { SharedModule } from '../../../../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +22,6 @@ import { ResetPasswordComponent } from '../../../../shared/components/molecules/
     RegisterPageComponent,
     RecuperarPageComponent,
     CambiarPageComponent,
-    LoginComponent,
     RegisterComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent
@@ -32,6 +31,7 @@ import { ResetPasswordComponent } from '../../../../shared/components/molecules/
     CommonModule,
     HomeRoutingModule,
     RegisterPageComponent,
+    SharedModule
 
   ]
 })

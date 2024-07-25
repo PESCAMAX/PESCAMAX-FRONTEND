@@ -25,6 +25,7 @@ import { GraficaGeneralComponent } from './features/monitoreo/pages/dashboard/gr
 import { InicioComponent } from './features/monitoreo/pages/inicio/inicio.component';
 import { AuthGuard } from './features/monitoreo/services/auth-guard/auth-guard.service';
 import { RegisterPageComponent } from './features/monitoreo/pages/home/register-page/register-page.component';
+import { LoginPageComponent } from './features/monitoreo/pages/home/login-page/login-page.component';
 const routes: Routes = [
   {
     path: 'gestion-de-parametros',
@@ -99,11 +100,11 @@ const routes: Routes = [
   },
   {
     path: '',
-    component : LoginComponent
+    component : LoginPageComponent
   },
   {
     path: 'login',
-    component : LoginComponent
+    component : LoginPageComponent
   },
   {
     path: 'register',

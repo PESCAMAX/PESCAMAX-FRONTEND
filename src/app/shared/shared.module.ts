@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
-
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -32,12 +31,10 @@ import { GraficasTemperaturaComponent } from './components/molecules/graficas-te
 import { GraphPhComponent } from './components/molecules/graph-ph/graph-ph.component';
 import { DatapickerComponent } from './components/molecules/datapicker/datapicker.component';
 import { RelojcComponent } from './components/atoms/relojc/relojc.component';
-
 import { InicioComponent } from '../features/monitoreo/pages/inicio/inicio.component';
 import { ExitComponent } from './components/atoms/exit/exit.component';
 import { ChatbotComponent } from './components/atoms/chatbot/chatbot.component';
-
-
+import { LoginPageComponent } from '../features/monitoreo/pages/home/login-page/login-page.component';
 
 @NgModule({
   declarations: [
@@ -57,19 +54,17 @@ import { ChatbotComponent } from './components/atoms/chatbot/chatbot.component';
     RegisterComponent,
     LoginComponent,
     ForgotPasswordComponent,
-    ResetPasswordComponent, // Asegúrate de que este componente está declarado aquí
+    ResetPasswordComponent,
     HistorialAlertasComponent,
     GraficaComponent,
     GraficastdssComponent,
     GraficasTemperaturaComponent,
     GraphPhComponent,
-    RelojcComponent,// Asegúrate de que este componente está declarado aquí
-    DatapickerComponent,// Asegúrate de que este componente está declarado aquí
+    RelojcComponent,
+    DatapickerComponent,
     ExitComponent,
     ChatbotComponent,
-    
-
-
+    LoginPageComponent
 
   ],
   imports: [
@@ -78,7 +73,7 @@ import { ChatbotComponent } from './components/atoms/chatbot/chatbot.component';
     FormsModule,
     MatDatepickerModule,
     MatFormFieldModule,
-    MatNativeDateModule // Asegúrate de importar FormsModule aquí también
+    MatNativeDateModule
   ],
   exports: [
     ButtonEnviarComponent,
@@ -91,7 +86,7 @@ import { ChatbotComponent } from './components/atoms/chatbot/chatbot.component';
     EspecieFormComponent,
     AlertFormComponent,
     TablaSensorComponent,
-    RegisterComponent, // Exporta tus componentes aquí si los necesitas en otros módulos
+    RegisterComponent,
     LoginComponent,
     HistorialAlertasComponent,
     GraficaComponent,
@@ -100,11 +95,10 @@ import { ChatbotComponent } from './components/atoms/chatbot/chatbot.component';
     GraphPhComponent,
     DatapickerComponent,
     ChatbotComponent,
-    LoginComponent,
     RegisterComponent,
     ForgotPasswordComponent,
-    ResetPasswordComponent
-
+    ResetPasswordComponent,
+    LoginPageComponent
   ]
 })
 export class SharedModule { }
