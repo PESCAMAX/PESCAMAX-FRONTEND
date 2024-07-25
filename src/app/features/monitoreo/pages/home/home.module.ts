@@ -8,8 +8,6 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { RecuperarPageComponent } from './recuperar-page/recuperar-page.component';
 import { CambiarPageComponent } from './cambiar-page/cambiar-page.component';
-import { LoginComponent } from '../../../../shared/components/molecules/login/login.component';
-import { RegisterComponent } from '../../../../shared/components/molecules/register/register.component';
 import { ForgotPasswordComponent } from '../../../../shared/components/molecules/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from '../../../../shared/components/molecules/reset-password/reset-password.component';
 import { SharedModule } from '../../../../shared/shared.module';
@@ -22,7 +20,6 @@ import { SharedModule } from '../../../../shared/shared.module';
     RegisterPageComponent,
     RecuperarPageComponent,
     CambiarPageComponent,
-    RegisterComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent
     
@@ -30,7 +27,6 @@ import { SharedModule } from '../../../../shared/shared.module';
   imports: [
     CommonModule,
     HomeRoutingModule,
-    RegisterPageComponent,
     SharedModule
 
   ]

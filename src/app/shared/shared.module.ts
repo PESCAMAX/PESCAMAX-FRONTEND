@@ -35,7 +35,7 @@ import { InicioComponent } from '../features/monitoreo/pages/inicio/inicio.compo
 import { ExitComponent } from './components/atoms/exit/exit.component';
 import { ChatbotComponent } from './components/atoms/chatbot/chatbot.component';
 import { LoginPageComponent } from '../features/monitoreo/pages/home/login-page/login-page.component';
-
+import { RegisterPageComponent } from '../features/monitoreo/pages/home/register-page/register-page.component';
 @NgModule({
   declarations: [
     ButtonEnviarComponent,
@@ -64,7 +64,8 @@ import { LoginPageComponent } from '../features/monitoreo/pages/home/login-page/
     DatapickerComponent,
     ExitComponent,
     ChatbotComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    RegisterPageComponent
 
   ],
   imports: [
@@ -95,10 +96,10 @@ import { LoginPageComponent } from '../features/monitoreo/pages/home/login-page/
     GraphPhComponent,
     DatapickerComponent,
     ChatbotComponent,
-    RegisterComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    RegisterPageComponent
   ]
 })
 export class SharedModule { }
