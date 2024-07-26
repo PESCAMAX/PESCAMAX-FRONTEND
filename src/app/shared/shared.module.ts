@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -67,6 +68,7 @@ import { CambiarPageComponent } from '../features/monitoreo/pages/home/cambiar-p
     ExitComponent,
     ChatbotComponent,
     LoginPageComponent,
+    InicioComponent,
     RegisterPageComponent,
     RecuperarPageComponent,
     CambiarPageComponent
@@ -103,9 +105,11 @@ import { CambiarPageComponent } from '../features/monitoreo/pages/home/cambiar-p
     ForgotPasswordComponent,
     ResetPasswordComponent,
     LoginPageComponent,
+    InicioComponent,
     RegisterPageComponent,
     RecuperarPageComponent,
     CambiarPageComponent
+
   ]
 })
 export class SharedModule { }
