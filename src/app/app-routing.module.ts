@@ -26,6 +26,8 @@ import { InicioComponent } from './features/monitoreo/pages/inicio/inicio.compon
 import { AuthGuard } from './features/monitoreo/services/auth-guard/auth-guard.service';
 import { RegisterPageComponent } from './features/monitoreo/pages/home/register-page/register-page.component';
 import { LoginPageComponent } from './features/monitoreo/pages/home/login-page/login-page.component';
+import { RecuperarPageComponent } from './features/monitoreo/pages/home/recuperar-page/recuperar-page.component';
+import { CambiarPageComponent } from './features/monitoreo/pages/home/cambiar-page/cambiar-page.component';
 const routes: Routes = [
   {
     path: 'gestion-de-parametros',
@@ -111,10 +113,10 @@ const routes: Routes = [
     component : RegisterPageComponent
   },
   { path: 'forgot-password', 
-    component: ForgotPasswordComponent
+    component: RecuperarPageComponent
   },
   { path: 'reset-password',
-    component: ResetPasswordComponent 
+    component: CambiarPageComponent 
   },
 ];
 
