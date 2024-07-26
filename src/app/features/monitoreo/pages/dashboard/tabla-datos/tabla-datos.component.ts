@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrl: './tabla-datos.component.css'
 })
 export class TablaDatosComponent {
+  isMenuOpen: boolean = true;
 
+  onMenuToggle(isOpen: boolean) {
+    this.isMenuOpen = isOpen;
+  }
 }

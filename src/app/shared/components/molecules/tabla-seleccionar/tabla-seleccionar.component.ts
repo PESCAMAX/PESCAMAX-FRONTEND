@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./tabla-seleccionar.component.css']
 })
 export class TablaSeleccionarComponent implements OnInit {
+  isMenuOpen: boolean = true;
   especies: Especie[] = [];
   lotes: Monitoreo[] = [];
   uniqueLotes: number[] = [];
@@ -32,6 +33,11 @@ export class TablaSeleccionarComponent implements OnInit {
     });
     
   }
+
+  onMenuToggle(isOpen: boolean) {
+    this.isMenuOpen = isOpen;
+  }
+  
   loadData() {
     // Load especies
     this.apiService.listarEspecies(this.userId).subscribe({

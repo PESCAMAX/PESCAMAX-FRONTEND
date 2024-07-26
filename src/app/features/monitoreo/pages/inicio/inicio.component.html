@@ -39,13 +39,13 @@
     </main>
 </div>
 
-<!-- Carrusel de imágenes de fondo -->
 <div class="carousel">
     <img *ngFor="let image of carouselImages; let i = index" 
          [src]="image" 
          [class.active]="i === activeImageIndex" 
          alt="Fondo {{i + 1}}">
-</div>
+  </div>
+  
 
 <!-- Sección Sobre Nosotros -->
 <section class="about-us">

@@ -3,13 +3,12 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 @Component({
   selector: 'app-inicio',
   templateUrl: './inicio.component.html',
-  styleUrl: './inicio.component.css'
+  styleUrls: ['./inicio.component.css']
 })
 export class InicioComponent implements OnInit, OnDestroy {
   carouselImages: string[] = [
-    '/assets/images/alice-mourou-RrvGuqx-bOQ-unsplash.jpg',
-    '/assets/images/tifenn-degornet-PpwK032gSao-unsplash.jpg',
-    
+    'assets/images/alice-mourou-RrvGuqx-bOQ-unsplash.jpg',
+    'assets/images/tifenn-degornet-PpwK032gSao-unsplash.jpg',
   ];
   activeImageIndex: number = 0;
   carouselInterval: any;

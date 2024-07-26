@@ -1,5 +1,5 @@
 // menu-lateral.component.ts
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MenuStateService } from '../../../../features/monitoreo/services/menu-state/menu-state.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
@@ -11,7 +11,8 @@ import { AuthService } from '../../../../features/monitoreo/services/api-login/a
   styleUrls: ['./menu-lateral.component.css']
 })
 export class MenuLateralComponent implements OnInit {
-  isMenuOpen: boolean = false;
+  @Output() menuToggled = new EventEmitter<boolean>();
+  isMenuOpen: boolean = true;
   subMenuVisible: number | null = null;
   userId: string = '';
 
@@ -31,20 +32,20 @@ export class MenuLateralComponent implements OnInit {
     });
   }
 
-  toggleMenu(): void {
+
+  toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
-    if (!this.isMenuOpen) {
-      this.closeMenu();
-    }
+    this.menuToggled.emit(this.isMenuOpen);
   }
 
-  closeMenu(): void {
+
+  closeMenu() {
     this.isMenuOpen = false;
     this.subMenuVisible = null;
     this.menuStateService.closeAllMenus();
   }
 
-  toggleSubMenu(index: number): void {
+  toggleSubMenu(index: number) {
     if (this.isMenuOpen) {
       this.subMenuVisible = this.subMenuVisible === index ? null : index;
     }

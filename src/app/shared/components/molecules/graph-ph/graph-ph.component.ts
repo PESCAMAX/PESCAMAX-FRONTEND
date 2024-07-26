@@ -14,7 +14,7 @@ export class GraphPhComponent implements OnInit {
   public selectedLote: number | null = null;
   private startDate: Date | null = null;
   private endDate: Date | null = null;
-
+  isMenuOpen: boolean = true;
   constructor(private apiService: ApiService, private authService: AuthService) {}
 
   ngOnInit(): void {
@@ -71,7 +71,9 @@ export class GraphPhComponent implements OnInit {
       error: (error) => console.error('Error al cargar datos para el gráfico:', error)
     });
   }
-
+  onMenuToggle(isOpen: boolean) {
+    this.isMenuOpen = isOpen;
+  }
   createChart(labels: string[], data: number[]) {
     if (this.chart) {
       this.chart.destroy();

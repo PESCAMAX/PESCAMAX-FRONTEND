@@ -3,6 +3,7 @@ import { ApiService } from '../../../../features/monitoreo/services/api-form/api
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from '../../../../features/monitoreo/services/api-login/auth.service';
+import { ActivatedRoute } from '@angular/router';
 interface Especie {
   Id: number;
   NombreEspecie: string;
@@ -30,6 +31,7 @@ interface AlertState {
 })
 
 export class TablaEspecieComponent implements OnInit {
+  isMenuOpen: boolean = true;
   especies: Especie[] = [];
   especiesFiltradas: Especie[] = [];
   searchText: string = '';
@@ -67,6 +69,10 @@ export class TablaEspecieComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerEspecies();
+  }
+
+  onMenuToggle(isOpen: boolean) {
+    this.isMenuOpen = isOpen;
   }
 
   obtenerEspecies(): void {
