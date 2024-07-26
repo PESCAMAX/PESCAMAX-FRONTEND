@@ -42,10 +42,8 @@
 <div class="carousel">
     <img *ngFor="let image of carouselImages; let i = index" 
          [src]="image" 
-         [class.active]="i === activeImageIndex" 
-         alt="Fondo {{i + 1}}">
+         [class.active]="activeImageIndex">
   </div>
-  
 
 <!-- Sección Sobre Nosotros -->
 <section class="about-us">

@@ -1,5 +1,5 @@
 .hero-container {
-    min-height: 85vh;
+    min-height: 63vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -163,11 +163,11 @@
     background-image: url('/assets/images/claudio-guglieri-K2RH1QZdLF4-unsplash.jpg'); /* Ruta de la imagen */
     background-size: cover;
     background-position: center;
-    height: 100%;
+    height: 80%;
     border-radius: 50%; /* Hace la imagen redonda */
-    width: 100%; /* Asegura que la imagen mantenga proporciones */
-    max-width: 300px; /* Ajusta el tamaño máximo de la imagen */
-    max-height: 300px; /* Ajusta el tamaño máximo de la imagen */
+    width: 80%; /* Asegura que la imagen mantenga proporciones */
+    max-width: 270px; /* Ajusta el tamaño máximo de la imagen */
+    max-height: 270px; /* Ajusta el tamaño máximo de la imagen */
 }
 
 .equipo-tra {
