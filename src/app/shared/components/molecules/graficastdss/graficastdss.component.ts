@@ -13,11 +13,15 @@ export class GraficastdssComponent implements OnInit {
   public selectedLote: number | null = null;
   private startDate: Date | null = null;
   private endDate: Date | null = null;
+  isMenuOpen: boolean = true;
 
   constructor(private apiService: ApiService, private AuthService: AuthService) {}
 
   ngOnInit(): void {
     this.loadLotes();
+  }
+  onMenuToggle(isOpen: boolean) {
+    this.isMenuOpen = isOpen;
   }
 
   loadLotes() {
