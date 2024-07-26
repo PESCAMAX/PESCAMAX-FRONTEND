@@ -7,5 +7,9 @@ import { HistorialAlertasComponent } from '../../../../../shared/components/mole
   styleUrl: './historial-de-alertas.component.css'
 })
 export class HistorialDeAlertasComponent {
+  isMenuOpen: boolean = true;
 
+  onMenuToggle(isOpen: boolean) {
+    this.isMenuOpen = isOpen;
+  }
 }

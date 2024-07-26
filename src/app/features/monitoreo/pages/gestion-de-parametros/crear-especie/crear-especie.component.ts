@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrl: './crear-especie.component.css'
 })
 export class CrearEspecieComponent {
+  isMenuOpen: boolean = true;
 
+  onMenuToggle(isOpen: boolean) {
+    this.isMenuOpen = isOpen;
+  }
 }

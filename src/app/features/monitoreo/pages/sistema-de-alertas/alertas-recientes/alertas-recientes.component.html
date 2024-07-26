@@ -1,17 +1,16 @@
 <div class="flex">
     <!-- Menu Lateral -->
-    <div class="menu-lateral fixed left-0 top-0 h-full w-[240px]">
-        <app-menu-lateral></app-menu-lateral>
+    <app-menu-lateral (menuToggled)="onMenuToggle($event)"></app-menu-lateral>
     </div>
 
     <!-- Contenido Principal -->
-    <div class="flex-1 p-4">
+    <div class="flex-1 p-4 transition-all duration-300" [ngClass]="{'ml-64': isMenuOpen, 'ml-16': !isMenuOpen}">
       <div class="flex items-center ml-16">
         <img src="../../../../../assets/icons/Logo_pescamax.png" alt="PESCAMAX logo" class="w-8 h-8 mr-2">
         <span class="text-lg font-semibold text-blue-500 hidden md:inline ml6">PESCA<span class="text-black">MAX</span></span>
     </div>
       <app-card-alerts></app-card-alerts>
     </div>
-</div>
+
 
 
