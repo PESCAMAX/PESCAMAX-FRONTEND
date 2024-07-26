@@ -14,6 +14,7 @@ export class GraficasTemperaturaComponent implements OnInit {
   public selectedLote: number | null = null;
   private startDate: Date | null = null;
   private endDate: Date | null = null;
+  isMenuOpen: boolean = true;
 
   constructor(private apiService: ApiService, private AuthService:AuthService) {}
 

@@ -1,1 +1,15 @@
-c
+<div class="flex">
+    <!-- Menu Lateral -->
+    <app-menu-lateral (menuToggled)="onMenuToggle($event)"></app-menu-lateral>
+
+
+    <!-- Contenido Principal -->
+  <div class="flex-1 p-4 transition-all duration-300" [ngClass]="{'ml-64': isMenuOpen, 'ml-16': !isMenuOpen}">
+   
+         <h1 class="text-blue-500 text-center font-bold text-lg font-sans">Gráfica Temperatura</h1>
+         <app-graficastdss></app-graficastdss>
+    </div>
+</div>
+
+
+       

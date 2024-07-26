@@ -18,9 +18,13 @@ export class GraficaComponent implements OnInit {
   fechaFin: Date | null = null;
   fechaMasAntigua: Date = new Date();
   fechaActual: Date = new Date();
+  isMenuOpen: boolean = true;
 
   constructor(private apiService: ApiService, private AuthService: AuthService) {
     this.fechaActual.setHours(23, 59, 59, 999);
+  }
+  onMenuToggle(isOpen: boolean) {
+    this.isMenuOpen = isOpen;
   }
 
   ngOnInit(): void {

@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrl: './grafica-temperatura.component.css'
 })
 export class GraficaTemperaturaComponent {
+  isMenuOpen: boolean = true;
 
+  onMenuToggle(isOpen: boolean) {
+    this.isMenuOpen = isOpen;
+  }
 }
