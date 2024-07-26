@@ -8,7 +8,7 @@ import { AuthService } from '../../../../features/monitoreo/services/api-login/a
   styleUrls: ['./historial-alertas.component.css']
 })
 export class HistorialAlertasComponent implements OnInit {
-
+  isMenuOpen: boolean = true;
   alertas: Alerta[] = [];
   alertasFiltradas: Alerta[] = [];
   mensajeAlerta: string = '';
@@ -18,7 +18,9 @@ export class HistorialAlertasComponent implements OnInit {
   ngOnInit(): void {
     this.cargarAlertas();
   }
-
+  onMenuToggle(isOpen: boolean) {
+    this.isMenuOpen = isOpen;
+  }
   cargarAlertas(): void {
     if (!this.authService.isAuthenticated()) {
       console.error('Usuario no autenticado');

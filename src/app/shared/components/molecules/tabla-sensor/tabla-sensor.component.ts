@@ -12,11 +12,15 @@ export class TablaSensorComponent implements OnInit {
   filteredData: Monitoreo[] = [];
   lotes: number[] = [];
   loteSeleccionado: number | null = null;
+  isMenuOpen: boolean = true;
 
   constructor(private apiService: ApiService, private AuthService:AuthService) {}
 
   ngOnInit(): void {
     this.cargarDatos();
+  }
+  onMenuToggle(isOpen: boolean) {
+    this.isMenuOpen = isOpen;
   }
 
   cargarDatos(): void {

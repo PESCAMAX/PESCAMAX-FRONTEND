@@ -8,14 +8,16 @@
     </button>
     <div class="flex items-center ml-7" [ngClass]="{'hidden': !isMenuOpen}">
       <img src="../../../../../assets/icons/Logo_pescamax.png" alt="PESCAMAX logo" class="w-8 h-8 mr-2">
-      <span class="text-lg font-semibold text-blue-500">PESCA<span class="text-black">MAX</span></span>
+      <a [href]="'/home/' + userId" class="flex items-center">
+        <span class="text-lg font-semibold text-blue-500">PESCA<span class="text-black">MAX</span> </span>
+      </a>
     </div>
   </div>
 
   <nav class="mt-8">
     <div class="px-2">
-      <button (click)="toggleSubMenu(1)" class="flex items-center w-full py-4 text-gray-600 hover:bg-gray-100 rounded-lg p-2">
-        <img src="../../../../../assets/icons/grafico-de-negocios.png" alt="Dashboard" class="w-8 h-8 mr-3">
+      <button (click)="toggleSubMenu(1)" class="flex items-center w-full py-4 text-gray-600 hover:bg-gray-100 rounded-lg p-2" >
+        <img src="../../../../../assets/icons/grafico-de-negocios.png"  alt="Dashboard" class="w-8 h-8 mr-3">
         <span class="text-sm font-medium" [ngClass]="{'hidden': !isMenuOpen}">Panel De Control</span>
       </button>
       <div *ngIf="subMenuVisible === 1 && isMenuOpen" class="ml-10 mt-2">
