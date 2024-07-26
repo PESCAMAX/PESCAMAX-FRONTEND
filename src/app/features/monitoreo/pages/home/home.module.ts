@@ -21,7 +21,8 @@ import { SharedModule } from '../../../../shared/shared.module';
     RecuperarPageComponent,
     CambiarPageComponent,
     ForgotPasswordComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    CambiarPageComponent
     
   ],
   imports: [

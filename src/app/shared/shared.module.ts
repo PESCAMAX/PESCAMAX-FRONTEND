@@ -36,6 +36,8 @@ import { ExitComponent } from './components/atoms/exit/exit.component';
 import { ChatbotComponent } from './components/atoms/chatbot/chatbot.component';
 import { LoginPageComponent } from '../features/monitoreo/pages/home/login-page/login-page.component';
 import { RegisterPageComponent } from '../features/monitoreo/pages/home/register-page/register-page.component';
+import { RecuperarPageComponent } from '../features/monitoreo/pages/home/recuperar-page/recuperar-page.component';
+import { CambiarPageComponent } from '../features/monitoreo/pages/home/cambiar-page/cambiar-page.component';
 @NgModule({
   declarations: [
     ButtonEnviarComponent,
@@ -65,7 +67,9 @@ import { RegisterPageComponent } from '../features/monitoreo/pages/home/register
     ExitComponent,
     ChatbotComponent,
     LoginPageComponent,
-    RegisterPageComponent
+    RegisterPageComponent,
+    RecuperarPageComponent,
+    CambiarPageComponent
 
   ],
   imports: [
@@ -99,7 +103,9 @@ import { RegisterPageComponent } from '../features/monitoreo/pages/home/register
     ForgotPasswordComponent,
     ResetPasswordComponent,
     LoginPageComponent,
-    RegisterPageComponent
+    RegisterPageComponent,
+    RecuperarPageComponent,
+    CambiarPageComponent
   ]
 })
 export class SharedModule { }
