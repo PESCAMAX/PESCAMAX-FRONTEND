@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Chart, ChartConfiguration } from 'chart.js/auto';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import * as d3 from 'd3';
 import { ApiService } from '../../../../features/monitoreo/services/api-form/api.service';
 import { AuthService } from '../../../../features/monitoreo/services/api-login/auth.service';
 
@@ -9,12 +9,14 @@ import { AuthService } from '../../../../features/monitoreo/services/api-login/a
   styleUrls: ['./graph-ph.component.css']
 })
 export class GraphPhComponent implements OnInit {
-  public chart: Chart | null = null;
   public lotes: number[] = [];
   public selectedLote: number | null = null;
   private startDate: Date | null = null;
   private endDate: Date | null = null;
   isMenuOpen: boolean = true;
+
+  @ViewChild('chartContainer', { static: true }) chartContainer!: ElementRef;
+
   constructor(private apiService: ApiService, private authService: AuthService) {}
 
   ngOnInit(): void {
@@ -45,10 +47,15 @@ export class GraphPhComponent implements OnInit {
     this.selectedLote = parseInt(selectElement.value, 10);
     this.loadDataAndCreateChart();
   }
+
   onDateRangeSelected(event: { startDate: Date, endDate: Date }): void {
     this.startDate = event.startDate;
     this.endDate = event.endDate;
     this.loadDataAndCreateChart();
+  }
+
+  onMenuToggle(isOpen: boolean) {
+    this.isMenuOpen = isOpen;
   }
 
   loadDataAndCreateChart() {
@@ -71,47 +78,65 @@ export class GraphPhComponent implements OnInit {
       error: (error) => console.error('Error al cargar datos para el gráfico:', error)
     });
   }
-  onMenuToggle(isOpen: boolean) {
-    this.isMenuOpen = isOpen;
-  }
+
   createChart(labels: string[], data: number[]) {
-    if (this.chart) {
-      this.chart.destroy();
-    }
+    const element = this.chartContainer.nativeElement;
+    d3.select(element).selectAll('*').remove(); // Limpiar el contenedor del gráfico
 
-    const chartConfig: ChartConfiguration = {
-      type: 'line',
-      data: {
-        labels: labels,
-        datasets: [{
-          label: "PH",
-          data: data,
-          backgroundColor: 'green',
-          borderColor: 'green',
-          fill: false
-        }]
-      },
-      options: {
-        responsive: true,
-        aspectRatio: 2.5,
-        scales: {
-          x: {
-            title: {
-              display: true,
-              text: 'Fecha y Hora'
-            }
-          },
-          y: {
-            title: {
-              display: true,
-              text: 'PH'
-            },
-            beginAtZero: true
-          }
-        }
-      }
-    };
+    const width = 928;
+    const height = 600;
+    const marginTop = 10;
+    const marginRight = 20;
+    const marginBottom = 30;
+    const marginLeft = 40;
 
-    this.chart 
+    const svg = d3.select(element)
+      .append('svg')
+      .attr('width', width)
+      .attr('height', height)
+      .attr('viewBox', `0 0 ${width} ${height}`)
+      .attr('style', 'max-width: 100%; height: auto;');
+
+    const x = d3.scaleTime()
+      .domain(d3.extent(labels, d => new Date(d)) as [Date, Date])
+      .rangeRound([marginLeft, width - marginRight]);
+
+    const y = d3.scaleLog()
+      .domain(d3.extent(data) as [number, number])
+      .rangeRound([height - marginBottom - 20, marginTop]);
+
+    const line = d3.line<number>()
+      .defined((d: number, i: number) => !isNaN(new Date(labels[i]).getTime()) && !isNaN(d))
+      .x((d: number, i: number) => x(new Date(labels[i])) as number)
+      .y((d: number) => y(d) as number);
+
+    svg.append('g')
+      .attr('transform', `translate(0,${height - marginBottom})`)
+      .call(d3.axisBottom(x).ticks(width / 80))
+      .call(g => g.select('.domain').remove());
+
+    svg.append('g')
+      .attr('transform', `translate(${marginLeft},0)`)
+      .call(d3.axisLeft(y).tickValues(d3.ticks(...(y.domain() as [number, number]), 10)).tickFormat(d3.format('~')))
+      .call(g => g.select('.domain').remove())
+      .call(g => g.selectAll('.tick line').clone()
+          .attr('x2', width - marginLeft - marginRight)
+          .attr('stroke-opacity', 0.1))
+      .call(g => g.select('.tick:last-of-type text').clone()
+          .attr('x', 3)
+          .attr('text-anchor', 'start')
+          .attr('font-weight', 'bold')
+          .text('↑ Daily close ($)'));
+
+    svg.append('g')
+      .attr('fill', 'none')
+      .attr('stroke-width', 1.5)
+      .attr('stroke-linejoin', 'round')
+      .attr('stroke-linecap', 'round')
+      .selectAll('path')
+      .data([data])
+      .enter().append('path')
+      .attr('stroke', 'green')
+      .attr('d', line);
   }
 }
