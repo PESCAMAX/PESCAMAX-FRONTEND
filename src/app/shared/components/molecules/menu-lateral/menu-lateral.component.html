@@ -16,28 +16,28 @@
 
   <nav class="mt-8">
     <div class="px-2">
-      <button (click)="toggleSubMenu(1)" class="flex items-center w-full py-4 text-gray-600 hover:bg-gray-100 rounded-lg p-2" >
+      <button (click)="toggleSubMenu(1)" class="flex items-center w-full py-4 text-custom-black hover:bg-gray-100 rounded-lg p-2" >
         <img src="../../../../../assets/icons/grafico-de-negocios.png"  alt="Dashboard" class="w-8 h-8 mr-3">
         <span class="text-sm font-medium" [ngClass]="{'hidden': !isMenuOpen}">Panel De Control</span>
       </button>
       <div *ngIf="subMenuVisible === 1 && isMenuOpen" class="ml-10 mt-2">
-        <a [href]="'/temperatura/' + userId" class="flex items-center py-2 text-sm text-gray-500 hover:text-blue-500">
+        <a [href]="'/temperatura/' + userId" class="flex items-center py-2 text-sm text-gray-700 hover:text-blue-500">
           <img src="../../../../../assets/icons/icons8-temperatura-50.png" alt="Temperatura" class="w-5 h-5 mr-2 ml-5">
           <span>Gráfica temperatura</span>
         </a>
-        <a [href]="'/grafica-tds/' + userId" class="flex items-center py-2 text-sm text-gray-500 hover:text-blue-500">
+        <a [href]="'/grafica-tds/' + userId" class="flex items-center py-2 text-sm text-gray-700 hover:text-blue-500">
           <img src="../../../../../assets/icons/icons8-termometro-50.png" alt="TDS" class="w-5 h-5 mr-2 ml-5">
           <span>Gráfica de TDS</span>
         </a>
-        <a [href]="'/grafica-ph/' + userId" class="flex items-center py-2 text-sm text-gray-500 hover:text-blue-500">
+        <a [href]="'/grafica-ph/' + userId" class="flex items-center py-2 text-sm text-gray-700 hover:text-blue-500">
           <img src="../../../../../assets/icons/icons8-ph-50.png" alt="Ph" class="w-5 h-5 mr-2 ml-5">
           <span>Gráfica de Ph</span>
         </a>
-        <a [href]="'/home/' + userId" class="flex items-center py-2 text-sm text-gray-500 hover:text-blue-500">
+        <a [href]="'/home/' + userId" class="flex items-center py-2 text-sm text-gray-700 hover:text-blue-500">
           <img src="../../../../../assets/icons/crecimiento.png" alt="Gráfica General" class="w-5 h-5 mr-2 ml-5">
           <span>Gráfica General</span>
         </a>
-        <a [href]="'/tabla-datos/' + userId" class="flex items-center py-2 text-sm text-gray-500 hover:text-blue-500">
+        <a [href]="'/tabla-datos/' + userId" class="flex items-center py-2 text-sm text-gray-700 hover:text-blue-500">
           <img src="../../../../../assets/icons/icons8-crear-nuevo-30.png" alt="Tablas" class="w-5 h-5 mr-2 ml-5">
           <span>Tablas</span>
         </a>
@@ -45,20 +45,20 @@
     </div>
 
     <div class="px-2 mt-4">
-      <button (click)="toggleSubMenu(2)" class="flex items-center w-full py-4 text-gray-600 hover:bg-gray-100 rounded-lg p-2">
+      <button (click)="toggleSubMenu(2)" class="flex items-center w-full py-4 text-custom-black  hover:bg-gray-100 rounded-lg p-2">
         <img src="../../../../../assets/icons/creador-de-contenido.png" alt="Gestión" class="w-8 h-8 mr-3">
         <span class="text-sm font-medium" [ngClass]="{'hidden': !isMenuOpen}">Gestión de parámetros</span>
       </button>
       <div *ngIf="subMenuVisible === 2 && isMenuOpen" class="ml-10 mt-2">
-        <a [href]="'/crear-especie/' + userId" class="flex items-center py-2 text-sm text-gray-500 hover:text-blue-500">
+        <a [href]="'/crear-especie/' + userId" class="flex items-center py-2 text-sm text-gray-700 hover:text-blue-500">
           <img src="../../../../../assets/icons/icons8-crear-nuevo-30.png" alt="Crear especie" class="w-5 h-5 mr-2 ml-5">
           <span>Crear especie</span>
         </a>
-        <a [href]="'/seleccionar-especie/' + userId" class="flex items-center py-2 text-sm text-gray-500 hover:text-blue-500">
+        <a [href]="'/seleccionar-especie/' + userId" class="flex items-center py-2 text-sm text-gray-700 hover:text-blue-500">
           <img src="../../../../../assets/icons/icons8-natural-user-interface-2-26.png" alt="Seleccionar especie" class="w-5 h-5 mr-2 ml-5">
           <span>Seleccionar especie</span>
         </a>
-        <a [href]="'/modificar-especie/' + userId" class="flex items-center py-2 text-sm text-gray-500 hover:text-blue-500">
+        <a [href]="'/modificar-especie/' + userId" class="flex items-center py-2 text-sm text-gray-700 hover:text-blue-500">
           <img src="../../../../../assets/icons/icons8-editar-archivo-30.png" alt="Modificar especie" class="w-5 h-5 mr-2 ml-5">
           <span>Modificar especie</span>
         </a>
@@ -66,16 +66,16 @@
     </div>
 
     <div class="px-2 mt-4">
-      <button (click)="toggleSubMenu(3)" class="flex items-center w-full py-4 text-gray-600 hover:bg-gray-100 rounded-lg p-2">
+      <button (click)="toggleSubMenu(3)" class="flex items-center w-full py-4 text-custom-black  hover:bg-gray-100 rounded-lg p-2">
         <img src="../../../../../assets/icons/advertencia.png" alt="Alertas" class="w-8 h-8 mr-3">
         <span class="text-sm font-medium" [ngClass]="{'hidden': !isMenuOpen}">Sistema de alertas</span>
       </button>
       <div *ngIf="subMenuVisible === 3 && isMenuOpen" class="ml-10 mt-2">
-        <a [href]="'/alertas-recientes/' + userId" class="flex items-center py-2 text-sm text-gray-500 hover:text-blue-500">
+        <a [href]="'/alertas-recientes/' + userId" class="flex items-center py-2 text-sm text-gray-700 hover:text-blue-500">
           <img src="../../../../../assets/icons/configuracion.png" alt="Configuracion De Alertas" class="w-5 h-5 mr-2 ml-5">
           <span>Configuracion De Alertas</span>
         </a>
-        <a [href]="'/historial-alertas/' + userId" class="flex items-center py-2 text-sm text-gray-500 hover:text-blue-500">
+        <a [href]="'/historial-alertas/' + userId" class="flex items-center py-2 text-sm text-gray-700 hover:text-blue-500">
           <img src="../../../../../assets/icons/regulacion.png" alt="Historial de alertas" class="w-5 h-5 mr-2 ml-5">
           <span>Historial de alertas</span>
         </a>

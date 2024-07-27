@@ -1,4 +1,4 @@
-<div class="container mx-auto p-4 bg-gray-200">
+<div class="container mx-auto p-4  bg-custom-gray">
 
   
   <!-- Buscador -->
@@ -62,7 +62,7 @@
 
 <div *ngIf="especieSeleccionada" class="fixed inset-0 z-50 overflow-auto bg-smoke-light flex">
   <div class="relative p-8 bg-white w-full max-w-md m-auto flex-col flex rounded-lg">
-    <h3 class="text-xl font-bold mb-4">Editar Especie</h3>
+    <h3 class="text-xl font-bold mb-4 text-custom-blue">Editar Especie</h3>
     <form [formGroup]="especieForm" (ngSubmit)="onSubmit()" id="editarEspecieForm">
       <div class="grid grid-cols-1 gap-4">
         <div>
