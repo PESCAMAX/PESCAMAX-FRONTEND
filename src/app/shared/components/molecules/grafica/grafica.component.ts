@@ -167,9 +167,9 @@ export class GraficaComponent implements OnInit {
       const perteneceLote = this.selectedLote ? alerta.LoteID === this.selectedLote : true;
       
       let fechaAlerta: Date | null = null;
-      if (alerta.Fecha) {
+      if (alerta.FechaCreacion) {
         // Check if alerta.Fecha is a string (ISO date) or already a Date object
-        fechaAlerta = alerta.Fecha instanceof Date ? alerta.Fecha : new Date(alerta.Fecha);
+        fechaAlerta = alerta.FechaCreacion instanceof Date ? alerta.FechaCreacion : new Date(alerta.FechaCreacion);
       }
   
       const estaEnRango = this.fechaInicio && this.fechaFin && fechaAlerta ? 
