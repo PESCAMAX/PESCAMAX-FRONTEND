@@ -35,10 +35,12 @@ import { RelojcComponent } from './components/atoms/relojc/relojc.component';
 import { InicioComponent } from '../features/monitoreo/pages/inicio/inicio.component';
 import { ExitComponent } from './components/atoms/exit/exit.component';
 import { ChatbotComponent } from './components/atoms/chatbot/chatbot.component';
+import { NavigationComponent } from './components/organisms/navigation/navigation.component';
 import { LoginPageComponent } from '../features/monitoreo/pages/home/login-page/login-page.component';
 import { RegisterPageComponent } from '../features/monitoreo/pages/home/register-page/register-page.component';
 import { RecuperarPageComponent } from '../features/monitoreo/pages/home/recuperar-page/recuperar-page.component';
 import { CambiarPageComponent } from '../features/monitoreo/pages/home/cambiar-page/cambiar-page.component';
+
 @NgModule({
   declarations: [
     ButtonEnviarComponent,
@@ -67,11 +69,13 @@ import { CambiarPageComponent } from '../features/monitoreo/pages/home/cambiar-p
     DatapickerComponent,
     ExitComponent,
     ChatbotComponent,
+    NavigationComponent
     LoginPageComponent,
     InicioComponent,
     RegisterPageComponent,
     RecuperarPageComponent,
     CambiarPageComponent
+
 
   ],
   imports: [
@@ -106,9 +110,12 @@ import { CambiarPageComponent } from '../features/monitoreo/pages/home/cambiar-p
     ResetPasswordComponent,
     LoginPageComponent,
     InicioComponent,
+    ChatbotComponent,
+    NavigationComponent
     RegisterPageComponent,
     RecuperarPageComponent,
     CambiarPageComponent
+
 
   ]
 })

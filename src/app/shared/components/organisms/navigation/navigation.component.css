@@ -1,0 +1,109 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 145vh;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #F2F5F7; 
+    color: black; 
+    padding: 0 2%;
+    position: fixed; /* Menú fijo en la parte superior */
+    top: 0; /* Asegura que el menú esté en la parte superior */
+    width: 100%; /* Ancho completo */
+    z-index: 1000; /* Asegura que el menú esté por encima de otros elementos */
+    height: 70px;
+}
+
+.menu-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 40px; /* Ajusta el tamaño del logo según sea necesario */
+    height: 40px; /* Ajusta el tamaño del logo según sea necesario */
+    margin-right: 10px; /* Espacio entre el logo y el nombre */
+}
+
+.brand-name {
+    font-size: 24px; /* Tamaño del texto del nombre */
+    font-weight: bold;
+    margin-top: 1rem;
+}
+
+.text-blue-500 {
+    color: #0000FF; /* Ajusta el color azul según sea necesario */
+}
+
+.text-black {
+    color: #000000; /* Ajusta el color negro según sea necesario */
+}
+
+.icons {
+    display: flex;
+    align-items: center;
+}
+
+.icons .icon {
+    height: 24px; /* Ajusta el tamaño del icono según sea necesario */
+    margin-right: 10px; 
+    cursor: pointer;
+    border-radius: 100%;
+    margin-left: 15px; /* Espacio entre los iconos */
+}
+
+.icon:hover, .puntos:active, .puntos:focus {
+    background-color: rgba(209, 207, 207, 0.61); /* Cambia el color de fondo al hacer hover, clic o enfoque */
+    border-radius: 100%;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Añade una sombra en el hover */
+}
+
+.user-container {
+    position: relative;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 30px;
+    background-color: white;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px;
+    color: black;
+    text-decoration: none;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f2f5f7;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .menu-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

@@ -1,0 +1,23 @@
+<header>
+    <nav>
+        <div class="menu-container">
+            <div class="logo-container">
+                <img src="assets/icons/Logo_pescamax.png" alt="Logo" class="logo">
+                <p class="brand-name">
+                    <span class="text-blue-500">PESCA</span><span class="text-black ">MAX</span>
+                </p>
+            </div>
+            <div class="icons">
+                <img src="assets/icons/notificacion.png" class="icon" alt="notificaciones">
+                <div class="user-container" (click)="toggleMenu()">
+                    <img src="assets/icons/userr.png" class="icon user-icon" alt="perfil">
+                    <div class="dropdown-menu" *ngIf="isMenuVisible">
+                        <a href="#profile">Profile</a>
+                        <a href="#settings">Settings</a>
+                        <a href="#logout">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
