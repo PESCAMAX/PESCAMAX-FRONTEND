@@ -1,9 +1,7 @@
 <div class="container mx-auto p-4 bg-gray-200">
-
-  
   <!-- Buscador -->
   <div class="mb-4">
-    <label for="search" class="mr-2  ">Buscar:</label>
+    <label for="search" class="mr-2">Buscar:</label>
     <input
       type="text"
       id="search"
@@ -12,53 +10,55 @@
       (input)="filtrarEspecies()"
     />
   </div>
- <!-- Tabla de especies con scroll -->
- <div class="overflow-x-auto">
-  <table class="w-full border-collapse bg-gray-500">
-    <thead class="bg-white">
-      <tr>
-        <th class="w-1/12 p-2 text-left font-bold border border-grey-500 text-sm">ID</th>
-        <th class="w-2/12 p-2 text-left font-bold border border-grey-500 text-sm">Nombre</th>
-        <th class="w-1/12 p-2 text-left font-bold border border-grey-500 text-sm">TDS Mínimo</th>
-        <th class="w-1/12 p-2 text-left font-bold border border-grey-500 text-sm">TDS Máximo</th>
-        <th class="w-1/12 p-2 text-left font-bold border border-grey-500 text-sm">Temp. Mínima</th>
-        <th class="w-1/12 p-2 text-left font-bold border border-grey-500 text-sm">Temp. Máxima</th>
-        <th class="w-1/12 p-2 text-left font-bold border border-grey-500 text-sm">PH Mínimo</th>
-        <th class="w-1/12 p-2 text-left font-bold border border-grey-500 text-sm">PH Máximo</th>
-        <th class="w-1/12 p-2 text-left font-bold border border-grey-500 text-sm">Eliminar</th>
-        <th class="w-1/12 p-2 text-left font-bold border border-grey-500 text-sm">Editar</th>
+  <!-- Tabla de especies con scroll -->
+  <div class="overflow-x-auto">
+    <table class="w-full border-collapse bg-gray-500">
+      <thead class="bg-white">
+        <tr>
+          <th class="w-1/12 p-2 text-left font-bold border border-grey-500 text-sm">ID</th>
+          <th class="w-2/12 p-2 text-left font-bold border border-grey-500 text-sm">Nombre</th>
+          <th class="w-1/12 p-2 text-left font-bold border border-grey-500 text-sm">TDS Mínimo</th>
+          <th class="w-1/12 p-2 text-left font-bold border border-grey-500 text-sm">TDS Máximo</th>
+          <th class="w-1/12 p-2 text-left font-bold border border-grey-500 text-sm">Temp. Mínima</th>
+          <th class="w-1/12 p-2 text-left font-bold border border-grey-500 text-sm">Temp. Máxima</th>
+          <th class="w-1/12 p-2 text-left font-bold border border-grey-500 text-sm">PH Mínimo</th>
+          <th class="w-1/12 p-2 text-left font-bold border border-grey-500 text-sm">PH Máximo</th>
+          <th class="w-1/12 p-2 text-left font-bold border border-grey-500 text-sm">Eliminar</th>
+          <th class="w-1/12 p-2 text-left font-bold border border-grey-500 text-sm">Editar</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="overflow-y-auto" style="max-height: 600px;">
+    <table class="w-full border-collapse bg-gray-500">
+      <tbody>
+        <tr class="bg-gray-100 border border-grey-500" *ngFor="let especie of especiesFiltradas">
+          <td class="w-1/12 p-2 border bg-white text-left">{{ especie.Id }}</td>
+          <td class="w-2/12 p-2 border bg-white text-left">{{ especie.NombreEspecie }}</td>
+          <td class="w-1/12 p-2 border bg-white text-left">{{ especie.TdsMinimo }}</td>
+          <td class="w-1/12 p-2 border bg-white text-left">{{ especie.TdsMaximo }}</td>
+          <td class="w-1/12 p-2 border bg-white text-left">{{ especie.TemperaturaMinimo }}</td>
+          <td class="w-1/12 p-2 border bg-white text-left">{{ especie.TemperaturaMaximo }}</td>
+          <td class="w-1/12 p-2 border bg-white text-left">{{ especie.PhMinimo }}</td>
+          <td class="w-1/12 p-2 border bg-white text-left">{{ especie.PhMaximo }}</td>
+          <td class="w-1/12 p-2 border bg-white text-left">
+            <button (click)="eliminarEspecie(especie.Id)" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded text-xs flex items-center">
+              <img src="./assets/icons/borrar.png" alt="Eliminar Icono" class="w-4 h-4 mr-1">
+              Eliminar
+            </button>
+          </td>
+          <td class="w-1/12 p-2 border bg-white text-left">
+            <button (click)="editarEspecie(especie)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded text-xs flex items-center">
+              <img src="./assets/icons/editar.png" alt="Editar Icono" class="w-4 h-4 mr-1">
+              Editar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-      </tr>
-    </thead>
-  </table>
-</div>
-<div class="overflow-y-auto" style="max-height: 600px;">
-  <table class="w-full border-collapse bg-gray-500">
-    <tbody>
-      <tr class="bg-gray-100 border border-grey-500" *ngFor="let especie of especiesFiltradas">
-        <td class="w-1/12 p-2 border bg-white text-left">{{ especie.Id }}</td>
-        <td class="w-2/12 p-2 border bg-white text-left">{{ especie.NombreEspecie }}</td>
-        <td class="w-1/12 p-2 border bg-white text-left">{{ especie.TdsMinimo }}</td>
-        <td class="w-1/12 p-2 border bg-white text-left">{{ especie.TdsMaximo }}</td>
-        <td class="w-1/12 p-2 border bg-white text-left">{{ especie.TemperaturaMinimo }}</td>
-        <td class="w-1/12 p-2 border bg-white text-left">{{ especie.TemperaturaMaximo }}</td>
-        <td class="w-1/12 p-2 border bg-white text-left">{{ especie.PhMinimo }}</td>
-        <td class="w-1/12 p-2 border bg-white text-left">{{ especie.PhMaximo }}</td>
-        <td class="w-1/12 p-2 border bg-white text-left">
-          <button (click)="eliminarEspecie(especie.Id)" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded text-xs">
-            Eliminar
-          </button>
-        </td>
-        <td class="w-1/12 p-2 border bg-white text-left">
-          <button (click)="editarEspecie(especie)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded text-xs">
-            Editar
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-</div>
 
 <div *ngIf="especieSeleccionada" class="fixed inset-0 z-50 overflow-auto bg-smoke-light flex">
   <div class="relative p-8 bg-white w-full max-w-md m-auto flex-col flex rounded-lg">
