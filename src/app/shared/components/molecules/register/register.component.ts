@@ -47,7 +47,9 @@ export class RegisterComponent {
 
         if (error.status === 400 || error.status === 409) {
           if (error.error && typeof error.error === 'string') {
-            if (error.error.includes('correo electrónico ya está registrado')) {
+            if (error.error.includes('correo electrónico ya está registrado') && error.error.includes('usuario ya existe')) {
+              this.errorMessage = 'El nombre de usuario y el correo electrónico ya están registrados.';
+            } else if (error.error.includes('correo electrónico ya está registrado')) {
               this.errorMessage = 'Este correo electrónico ya está registrado. Por favor, use otro o inicie sesión.';
             } else if (error.error.includes('usuario ya existe')) {
               this.errorMessage = 'Este nombre de usuario ya existe. Por favor, elija otro.';
@@ -55,7 +57,9 @@ export class RegisterComponent {
               this.errorMessage = error.error;
             }
           } else if (error.error && error.error.message) {
-            if (error.error.message.includes('correo electrónico ya está registrado')) {
+            if (error.error.message.includes('correo electrónico ya está registrado') && error.error.message.includes('usuario ya existe')) {
+              this.errorMessage = 'El nombre de usuario y el correo electrónico ya están registrados.';
+            } else if (error.error.message.includes('correo electrónico ya está registrado')) {
               this.errorMessage = 'Este correo electrónico ya está registrado. Por favor, use otro o inicie sesión.';
             } else if (error.error.message.includes('usuario ya existe')) {
               this.errorMessage = 'Este nombre de usuario ya existe. Por favor, elija otro.';
