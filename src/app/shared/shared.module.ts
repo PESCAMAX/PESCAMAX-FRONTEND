@@ -36,6 +36,7 @@ import { RelojcComponent } from './components/atoms/relojc/relojc.component';
 import { InicioComponent } from '../features/monitoreo/pages/inicio/inicio.component';
 import { ExitComponent } from './components/atoms/exit/exit.component';
 import { ChatbotComponent } from './components/atoms/chatbot/chatbot.component';
+import { NavigationComponent } from './components/organisms/navigation/navigation.component';
 
 
 
@@ -68,7 +69,8 @@ import { ChatbotComponent } from './components/atoms/chatbot/chatbot.component';
     DatapickerComponent,// Asegúrate de que este componente está declarado aquí
     InicioComponent,
     ExitComponent,
-    ChatbotComponent
+    ChatbotComponent,
+    NavigationComponent
 
 
 
@@ -101,7 +103,8 @@ import { ChatbotComponent } from './components/atoms/chatbot/chatbot.component';
     GraphPhComponent,
     DatapickerComponent,
     InicioComponent,
-    ChatbotComponent
+    ChatbotComponent,
+    NavigationComponent
 
   ]
 })
