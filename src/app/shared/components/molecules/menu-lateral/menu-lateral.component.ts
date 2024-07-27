@@ -1,4 +1,3 @@
-// menu-lateral.component.ts
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MenuStateService } from '../../../../features/monitoreo/services/menu-state/menu-state.service';
 import { Router, NavigationEnd } from '@angular/router';
@@ -24,7 +23,6 @@ export class MenuLateralComponent implements OnInit {
 
   ngOnInit() {
     this.userId = localStorage.getItem('userId') || '';
-
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
@@ -32,12 +30,10 @@ export class MenuLateralComponent implements OnInit {
     });
   }
 
-
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
     this.menuToggled.emit(this.isMenuOpen);
   }
-
 
   closeMenu() {
     this.isMenuOpen = false;
@@ -48,6 +44,12 @@ export class MenuLateralComponent implements OnInit {
   toggleSubMenu(index: number) {
     if (this.isMenuOpen) {
       this.subMenuVisible = this.subMenuVisible === index ? null : index;
+    }
+  }
+
+  openMenuFromLogo() {
+    if (!this.isMenuOpen) {
+      this.toggleMenu();
     }
   }
 }

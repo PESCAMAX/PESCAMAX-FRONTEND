@@ -9,15 +9,15 @@
     <div class="flex items-center ml-7" [ngClass]="{'hidden': !isMenuOpen}">
       <img src="../../../../../assets/icons/Logo_pescamax.png" alt="PESCAMAX logo" class="w-8 h-8 mr-2">
       <a [href]="'/home/' + userId" class="flex items-center">
-        <span class="text-lg font-semibold text-blue-500">PESCA<span class="text-black">MAX</span> </span>
+        <span class="text-lg font-semibold text-blue-500">PESCA<span class="text-black">MAX</span></span>
       </a>
     </div>
   </div>
 
   <nav class="mt-8">
     <div class="px-2">
-      <button (click)="toggleSubMenu(1)" class="flex items-center w-full py-4 text-gray-600 hover:bg-gray-100 rounded-lg p-2" >
-        <img src="../../../../../assets/icons/grafico-de-negocios.png"  alt="Dashboard" class="w-8 h-8 mr-3">
+      <button (click)="toggleSubMenu(1)" class="flex items-center w-full py-4 text-gray-600 hover:bg-gray-100 rounded-lg p-2">
+        <img src="../../../../../assets/icons/grafico-de-negocios.png" alt="Dashboard" class="w-8 h-8 mr-3" (click)="openMenuFromLogo()">
         <span class="text-sm font-medium" [ngClass]="{'hidden': !isMenuOpen}">Panel De Control</span>
       </button>
       <div *ngIf="subMenuVisible === 1 && isMenuOpen" class="ml-10 mt-2">
@@ -46,7 +46,7 @@
 
     <div class="px-2 mt-4">
       <button (click)="toggleSubMenu(2)" class="flex items-center w-full py-4 text-gray-600 hover:bg-gray-100 rounded-lg p-2">
-        <img src="../../../../../assets/icons/creador-de-contenido.png" alt="Gestión" class="w-8 h-8 mr-3">
+        <img src="../../../../../assets/icons/creador-de-contenido.png" alt="Gestión" class="w-8 h-8 mr-3" (click)="openMenuFromLogo()">
         <span class="text-sm font-medium" [ngClass]="{'hidden': !isMenuOpen}">Gestión de parámetros</span>
       </button>
       <div *ngIf="subMenuVisible === 2 && isMenuOpen" class="ml-10 mt-2">
@@ -67,7 +67,7 @@
 
     <div class="px-2 mt-4">
       <button (click)="toggleSubMenu(3)" class="flex items-center w-full py-4 text-gray-600 hover:bg-gray-100 rounded-lg p-2">
-        <img src="../../../../../assets/icons/advertencia.png" alt="Alertas" class="w-8 h-8 mr-3">
+        <img src="../../../../../assets/icons/advertencia.png" alt="Alertas" class="w-8 h-8 mr-3" (click)="openMenuFromLogo()">
         <span class="text-sm font-medium" [ngClass]="{'hidden': !isMenuOpen}">Sistema de alertas</span>
       </button>
       <div *ngIf="subMenuVisible === 3 && isMenuOpen" class="ml-10 mt-2">
