@@ -21,7 +21,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let alerta of alertasFiltradas">
-              <td>{{ alerta.Fecha | date:'medium' }}</td>
+              <td>{{ alerta.FechaCreacion | date:'medium' }}</td>
               <td>{{ alerta.Descripcion }}</td>
             </tr>
           </tbody>

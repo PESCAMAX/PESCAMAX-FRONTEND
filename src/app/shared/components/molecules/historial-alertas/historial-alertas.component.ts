@@ -41,7 +41,7 @@ export class HistorialAlertasComponent implements OnInit {
 
   filtrarPorFecha(fechaInicio: Date, fechaFin: Date): void {
     this.alertasFiltradas = this.alertas.filter(alerta => {
-      const fechaAlerta = new Date(alerta.Fecha!);
+      const fechaAlerta = new Date(alerta.FechaCreacion!);
       const finDelDia = new Date(fechaFin);
       finDelDia.setHours(23, 59, 59, 999);
       return fechaAlerta >= fechaInicio && fechaAlerta <= finDelDia;
