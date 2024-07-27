@@ -69,7 +69,7 @@ import { CambiarPageComponent } from '../features/monitoreo/pages/home/cambiar-p
     DatapickerComponent,
     ExitComponent,
     ChatbotComponent,
-    NavigationComponent
+    NavigationComponent,
     LoginPageComponent,
     InicioComponent,
     RegisterPageComponent,
@@ -111,7 +111,7 @@ import { CambiarPageComponent } from '../features/monitoreo/pages/home/cambiar-p
     LoginPageComponent,
     InicioComponent,
     ChatbotComponent,
-    NavigationComponent
+    NavigationComponent,
     RegisterPageComponent,
     RecuperarPageComponent,
     CambiarPageComponent
