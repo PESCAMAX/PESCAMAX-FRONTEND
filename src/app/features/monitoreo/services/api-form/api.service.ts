@@ -73,8 +73,33 @@ export class ApiService {
         catchError(this.handleError)
       );
   }
+    // Métodos para Asignar
+    crearAsignar(asignar: Asignar): Observable<any> {
+      return this.http.post(`${this.baseUrl}/Asignar/Crear`, asignar, { headers: this.getHeaders() })
+        .pipe(catchError(this.handleError));
+    }
+  
+    modificarAsignar(asignar: Asignar): Observable<any> {
+      return this.http.put(`${this.baseUrl}/Asignar/Modificar`, asignar, { headers: this.getHeaders() })
+        .pipe(catchError(this.handleError));
+    }
+  
+    eliminarAsignar(id: number): Observable<any> {
+      return this.http.delete<any>(`${this.baseUrl}/Asignar/Eliminar/${id}`, { headers: this.getHeaders() })
+        .pipe(catchError(this.handleError));
+    }
+  
+    listarAsignar(): Observable<Asignar[]> {
+      return this.http.get<Asignar[]>(`${this.baseUrl}/Asignar/ListarAsignar`, { headers: this.getHeaders() })
+        .pipe(
+          catchError(this.handleError)
+        );
+    }
+    crearOActualizarAsignacion(asignar: Asignar): Observable<any> {
+      return this.http.post(`${this.baseUrl}/asignar`, asignar);  // Ajusta la URL según tu API
+    }
+  }
 
-}
 
 export interface Monitoreo {
   ID_M: number;
@@ -105,5 +130,12 @@ export interface Alerta {
   LoteID: number;
   Descripcion: string;
   FechaCreacion?: Date; // Asegúrate de que este campo es de tipo Date
+  UserId: string;
+}
+export interface Asignar {
+  EspecieID: any;
+  Id: number;
+  EspecieNomb: string;
+  LoteID: number;
   UserId: string;
 }
