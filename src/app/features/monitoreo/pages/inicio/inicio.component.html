@@ -2,8 +2,7 @@
     <!-- Header con logo y botones -->
     <header class="header">
         <div class="logo-container">
-            <img src="../../../../../assets/icons/Favicon.png" alt="Logo" class="logo-img"  class="w-9 h-9 mr-1" style="margin-top: -10px;">
-
+            <img src="assets/icons/Favicon.png" alt="Logo" class="logo-img">
             <p class="logo-text">
                 <span class="text-blue">PESCA</span><span class="text-black">MAX</span>
             </p>
@@ -11,14 +10,12 @@
         <p class="producto">
             <span class="producto">Productos</span>
         </p>
-        <p class="Noticias">
+        <p class="noticias">
             <span class="noticias">Noticias</span>
         </p>
-
-
         <nav class="nav-buttons">
-            <a href="http://localhost:4200/login" class="btn btn-login">Ingresar</a>
-            <a href="http://localhost:4200/register" class="btn btn-register">Registrate</a>
+            <a href="/login" class="btn btn-login">Ingresar</a>
+            <a href="/register" class="btn btn-register">Registrate</a>
         </nav>
     </header>
 
@@ -26,47 +23,37 @@
     <main class="main-content">
         <div class="left-content">
             <div class="top-text">
-                <h1 class="main-title text-transform: uppercase">BIENVENIDO A PESCAMAX</h1>
-                <p class="main-subtitle text-transform: uppercase">LA MEJOR PLATAFORMA PARA EL MONITOREO DE TUS PECES</p>
+                <h1 class="main-title">BIENVENIDO A PESCAMAX</h1>
+                <p class="main-subtitle">LA MEJOR PLATAFORMA PARA EL MONITOREO DE TUS PECES</p>
                 <p class="start-text">Empieza con nosotros</p>
-                <a href="http://localhost:4200/login" class="btn btn-login">Ingresar</a>
+                <a href="/login" class="btn btn-login">Ingresar</a>
             </div>
         </div>
         <div class="right-content">
-            <!-- Nuevo texto en el centro -->
             <p class="new-text">El objetivo principal de Pescamax es simplificar y hacer más accesible la piscicultura, convirtiéndola en un negocio más rentable y sostenible a largo plazo para todas las personas interesadas.</p>
         </div>
     </main>
 </div>
 
+<!-- Carrusel de imágenes de fondo -->
 <div class="carousel">
     <img *ngFor="let image of carouselImages; let i = index" 
          [src]="image" 
-         [class.active]="activeImageIndex">
-  </div>
+         [class.active]="i === activeImageIndex" 
+         alt="Fondo {{i + 1}}">
+</div>
 
 <!-- Sección Sobre Nosotros -->
 <section class="about-us">
     <div class="about-content">
         <h2>Sobre Nosotros</h2>
-        <p>
-            El objetivo principal de Pescamax es simplificar y hacer más accesible la piscicultura, convirtiéndola en
-             un negocio más rentable y sostenible a largo plazo para todas las personas interesadas.
-        </p>
+        <p>El objetivo principal de Pescamax es simplificar y hacer más accesible la piscicultura, convirtiéndola en un negocio más rentable y sostenible a largo plazo para todas las personas interesadas.</p>
     </div>
-    <div class="about-image">
-    
-    </div>
+    <div class="about-image"></div>
 </section>
 <section class="equipo-tra">
     <div class="equipo-trabajo">
         <h2>Equipo de trabajo</h2>
-        <p>
-            El objetivo principal de Pescamax es simplificar y hacer más accesible la piscicultura, convirtiéndola en
-             un negocio más rentable y sostenible a largo plazo para todas las personas interesadas.
-        </p>
+        <p>El objetivo principal de Pescamax es simplificar y hacer más accesible la piscicultura, convirtiéndola en un negocio más rentable y sostenible a largo plazo para todas las personas interesadas.</p>
     </div>
-    
-    
-    
 </section>
