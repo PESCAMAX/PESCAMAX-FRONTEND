@@ -3,7 +3,6 @@ import { AuthService } from '../../../../features/monitoreo/services/api-login/a
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,11 +11,12 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   successMessage: string = '';
   errorMessage: string = '';
-  loginForm!: FormGroup; // Utilizando el operador de aserción de tipo
+  loginForm!: FormGroup;
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router // Inyección del servicio Router
   ) {}
 
   ngOnInit() {
@@ -27,13 +27,16 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin() {
-
     if (this.loginForm.valid) {
       console.log('Intentando iniciar sesión con:', this.loginForm.value);
+
+      // Llamada al servicio de autenticación
       this.authService.login(this.loginForm.value).subscribe(
         response => {
           console.log('Inicio de sesión exitoso', response);
-          // El servicio de autenticación manejará la navegación
+
+          // Redirigir a la página de Gráfica General
+          this.router.navigate(['/home/+ userId']);
         },
         error => {
           console.error('Error en el inicio de sesión', error);
@@ -46,7 +49,7 @@ export class LoginComponent implements OnInit {
       );
     } else {
       console.log('El formulario es inválido', this.loginForm.errors);
+      this.errorMessage = 'Por favor, complete todos los campos requeridos';
     }
-
   }
 }
