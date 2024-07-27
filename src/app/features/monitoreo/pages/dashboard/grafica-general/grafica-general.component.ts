@@ -6,6 +6,10 @@ import { Component } from '@angular/core';
   styleUrl: './grafica-general.component.css'
 })
 export class GraficaGeneralComponent {
-  
+  isMenuOpen: boolean = true;
+
+  onMenuToggle(isOpen: boolean) {
+    this.isMenuOpen = isOpen;
+  }
 }
 

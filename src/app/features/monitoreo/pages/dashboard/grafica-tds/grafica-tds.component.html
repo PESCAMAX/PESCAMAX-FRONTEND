@@ -1,12 +1,15 @@
 <div class="flex">
     <!-- Menu Lateral -->
-    <div class="menu-lateral fixed left-0 top-0 h-full w-[240px]">
-        <app-menu-lateral></app-menu-lateral>
-    </div>
+    <app-menu-lateral (menuToggled)="onMenuToggle($event)"></app-menu-lateral>
+
 
     <!-- Contenido Principal -->
-    <div class="ml-[290px] flex-1 p-4">     
-        <h1 class="text-blue-500 text-center font-bold text-lg font-sans ">Gráfica TDS</h1>
-        <app-graficastdss></app-graficastdss>
+  <div class="flex-1 p-4 transition-all duration-300" [ngClass]="{'ml-64': isMenuOpen, 'ml-16': !isMenuOpen}">
+   
+         <h1 class="text-blue-500 text-center font-bold text-lg font-sans">Gráfica Tds</h1>
+         <app-graficastdss></app-graficastdss>
     </div>
 </div>
+
+
+       

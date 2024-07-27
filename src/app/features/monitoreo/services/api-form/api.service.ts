@@ -104,6 +104,6 @@ export interface Alerta {
   Nombre: string;
   LoteID: number;
   Descripcion: string;
-  Fecha?: Date;
-  UserId: string; 
+  FechaCreacion?: Date; // Asegúrate de que este campo es de tipo Date
+  UserId: string;
 }

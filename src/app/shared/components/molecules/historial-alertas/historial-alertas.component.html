@@ -1,4 +1,4 @@
-<div class="text-gray-900 bg-gray-200">
+<div class="container flex-1 text-gray-900 mx-auto bg-gray-200">
   <div class="p-4 flex justify-between items-center">
     <div class="datepicker-container ml-19"> <!-- Cambiado de ml-2 a ml-8 -->
       <app-datapicker (dateRangeSelected)="onDateRangeSelected($event)"></app-datapicker>
@@ -23,7 +23,7 @@
           <td class="p-3 px-5">{{ Alertas.Nombre }}</td>
           <td class="p-3 px-5">{{ Alertas.LoteID }}</td>
           <td class="p-3 px-5">{{ Alertas.Descripcion }}</td>
-          <td class="p-3 px-5">{{ Alertas.Fecha | date:'medium' }}</td>
+          <td class="p-3 px-5">{{ Alertas.FechaCreacion | date:'medium' }}</td>
         </tr>
       </tbody>
     </table>

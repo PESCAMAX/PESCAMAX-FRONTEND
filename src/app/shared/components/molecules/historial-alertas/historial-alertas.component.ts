@@ -8,7 +8,7 @@ import { AuthService } from '../../../../features/monitoreo/services/api-login/a
   styleUrls: ['./historial-alertas.component.css']
 })
 export class HistorialAlertasComponent implements OnInit {
-
+  isMenuOpen: boolean = true;
   alertas: Alerta[] = [];
   alertasFiltradas: Alerta[] = [];
   mensajeAlerta: string = '';
@@ -18,7 +18,9 @@ export class HistorialAlertasComponent implements OnInit {
   ngOnInit(): void {
     this.cargarAlertas();
   }
-
+  onMenuToggle(isOpen: boolean) {
+    this.isMenuOpen = isOpen;
+  }
   cargarAlertas(): void {
     if (!this.authService.isAuthenticated()) {
       console.error('Usuario no autenticado');
@@ -39,7 +41,7 @@ export class HistorialAlertasComponent implements OnInit {
 
   filtrarPorFecha(fechaInicio: Date, fechaFin: Date): void {
     this.alertasFiltradas = this.alertas.filter(alerta => {
-      const fechaAlerta = new Date(alerta.Fecha!);
+      const fechaAlerta = new Date(alerta.FechaCreacion!);
       const finDelDia = new Date(fechaFin);
       finDelDia.setHours(23, 59, 59, 999);
       return fechaAlerta >= fechaInicio && fechaAlerta <= finDelDia;

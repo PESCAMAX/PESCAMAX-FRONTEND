@@ -59,48 +59,7 @@
   </table>
 </div>
 </div>
-  <!-- Tabla de especies 
-  <table class="min-w-full border-collapse block md:table bg-gray-500">
-    <thead class="block md:table-header-group">
-      <tr class="border border-grey-500 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto md:relative">
-        <th class="bg-white p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">ID</th>
-        <th class="bg-white p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">Nombre</th>
-        <th class="bg-white p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">TDS Mínimo</th>
-        <th class="bg-white p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">TDS Máximo</th>
-        <th class="bg-white p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">Temperatura Mínima</th>
-        <th class="bg-white p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">Temperatura Máxima</th>
-        <th class="bg-white p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">PH Mínimo</th>
-        <th class="bg-white p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">PH Máximo</th>
-        <th class="bg-white p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">Eliminar</th>
-        <th class="bg-white p-2 text-left font-bold md:border md:border-grey-500 text-sm block md:table-cell">Editar</th>
-      </tr>
-    </thead>
-    <tbody class="block md:table-row-group">
-      <tr class="bg-gray-100 border border-grey-500 md:border-none block md:table-row" *ngFor="let especie of especiesFiltradas">
-        <td class="p-2 md:border md:bg-white text-left block md:table-cell">{{ especie.Id }}</td>
-        <td class="p-2 md:border md:bg-white text-left block md:table-cell">{{ especie.NombreEspecie }}</td>
-        <td class="p-2 md:border md:bg-white text-left block md:table-cell">{{ especie.TdsMinimo }}</td>
-        <td class="p-2 md:border md:bg-white text-left block md:table-cell">{{ especie.TdsMaximo }}</td>
-        <td class="p-2 md:border md:bg-white text-left block md:table-cell">{{ especie.TemperaturaMinimo }}</td>
-        <td class="p-2 md:border md:bg-white text-left block md:table-cell">{{ especie.TemperaturaMaximo }}</td>
-        <td class="p-2 md:border md:bg-white text-left block md:table-cell">{{ especie.PhMinimo }}</td>
-        <td class="p-2 md:border md:bg-white text-left block md:table-cell">{{ especie.PhMaximo }}</td>
-        <td class="p-2 md:border md:bg-white text-left block md:table-cell">
-          <button (click)="eliminarEspecie(especie.Id)" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-            Eliminar
-          </button>
-        </td>
-        <td class="p-2 md:border md:bg-white text-left block md:table-cell">
-          <button (click)="editarEspecie(especie)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Editar
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <!-- Formulario de edición -->
-   
-  <!-- Modal de edición -->
+
 <div *ngIf="especieSeleccionada" class="fixed inset-0 z-50 overflow-auto bg-smoke-light flex">
   <div class="relative p-8 bg-white w-full max-w-md m-auto flex-col flex rounded-lg">
     <h3 class="text-xl font-bold mb-4">Editar Especie</h3>

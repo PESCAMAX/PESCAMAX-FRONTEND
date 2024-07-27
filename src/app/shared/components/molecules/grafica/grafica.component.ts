@@ -18,9 +18,13 @@ export class GraficaComponent implements OnInit {
   fechaFin: Date | null = null;
   fechaMasAntigua: Date = new Date();
   fechaActual: Date = new Date();
+  isMenuOpen: boolean = true;
 
   constructor(private apiService: ApiService, private AuthService: AuthService) {
     this.fechaActual.setHours(23, 59, 59, 999);
+  }
+  onMenuToggle(isOpen: boolean) {
+    this.isMenuOpen = isOpen;
   }
 
   ngOnInit(): void {
@@ -163,9 +167,9 @@ export class GraficaComponent implements OnInit {
       const perteneceLote = this.selectedLote ? alerta.LoteID === this.selectedLote : true;
       
       let fechaAlerta: Date | null = null;
-      if (alerta.Fecha) {
+      if (alerta.FechaCreacion) {
         // Check if alerta.Fecha is a string (ISO date) or already a Date object
-        fechaAlerta = alerta.Fecha instanceof Date ? alerta.Fecha : new Date(alerta.Fecha);
+        fechaAlerta = alerta.FechaCreacion instanceof Date ? alerta.FechaCreacion : new Date(alerta.FechaCreacion);
       }
   
       const estaEnRango = this.fechaInicio && this.fechaFin && fechaAlerta ? 

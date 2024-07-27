@@ -1,13 +1,14 @@
-<div>
+<div class="container mx-auto">
     <label for="loteSelector">Seleccionar Lote: </label>
    
 
     <select id="loteSelector" (change)="onLoteChange($event)">
       <option *ngFor="let lote of lotes" [value]="lote">Lote {{ lote }}</option>
     </select>
+    <app-datapicker (dateRangeSelected)="onDateRangeSelected($event)"></app-datapicker>
   </div>
   <div class="chart-container">
-    <app-datapicker (dateRangeSelected)="onDateRangeSelected($event)"></app-datapicker>
+   
 
     <canvas id="MyChart">{{ chart }}</canvas>
   </div>

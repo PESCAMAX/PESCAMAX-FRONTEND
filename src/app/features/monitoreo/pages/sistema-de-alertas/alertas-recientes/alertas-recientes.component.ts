@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrl: './alertas-recientes.component.css'
 })
 export class AlertasRecientesComponent {
+  isMenuOpen: boolean = true;
 
+  onMenuToggle(isOpen: boolean) {
+    this.isMenuOpen = isOpen;
+  }
 }

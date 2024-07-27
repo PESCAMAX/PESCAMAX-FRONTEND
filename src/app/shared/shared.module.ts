@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -32,14 +32,14 @@ import { GraficasTemperaturaComponent } from './components/molecules/graficas-te
 import { GraphPhComponent } from './components/molecules/graph-ph/graph-ph.component';
 import { DatapickerComponent } from './components/molecules/datapicker/datapicker.component';
 import { RelojcComponent } from './components/atoms/relojc/relojc.component';
-
 import { InicioComponent } from '../features/monitoreo/pages/inicio/inicio.component';
 import { ExitComponent } from './components/atoms/exit/exit.component';
 import { ChatbotComponent } from './components/atoms/chatbot/chatbot.component';
 import { NavigationComponent } from './components/organisms/navigation/navigation.component';
-
-
-
+import { LoginPageComponent } from '../features/monitoreo/pages/home/login-page/login-page.component';
+import { RegisterPageComponent } from '../features/monitoreo/pages/home/register-page/register-page.component';
+import { RecuperarPageComponent } from '../features/monitoreo/pages/home/recuperar-page/recuperar-page.component';
+import { CambiarPageComponent } from '../features/monitoreo/pages/home/cambiar-page/cambiar-page.component';
 
 @NgModule({
   declarations: [
@@ -59,19 +59,22 @@ import { NavigationComponent } from './components/organisms/navigation/navigatio
     RegisterComponent,
     LoginComponent,
     ForgotPasswordComponent,
-    ResetPasswordComponent, // Asegúrate de que este componente está declarado aquí
+    ResetPasswordComponent,
     HistorialAlertasComponent,
     GraficaComponent,
     GraficastdssComponent,
     GraficasTemperaturaComponent,
     GraphPhComponent,
-    RelojcComponent,// Asegúrate de que este componente está declarado aquí
-    DatapickerComponent,// Asegúrate de que este componente está declarado aquí
-    InicioComponent,
+    RelojcComponent,
+    DatapickerComponent,
     ExitComponent,
     ChatbotComponent,
     NavigationComponent
-
+    LoginPageComponent,
+    InicioComponent,
+    RegisterPageComponent,
+    RecuperarPageComponent,
+    CambiarPageComponent
 
 
   ],
@@ -81,7 +84,7 @@ import { NavigationComponent } from './components/organisms/navigation/navigatio
     FormsModule,
     MatDatepickerModule,
     MatFormFieldModule,
-    MatNativeDateModule // Asegúrate de importar FormsModule aquí también
+    MatNativeDateModule
   ],
   exports: [
     ButtonEnviarComponent,
@@ -94,7 +97,7 @@ import { NavigationComponent } from './components/organisms/navigation/navigatio
     EspecieFormComponent,
     AlertFormComponent,
     TablaSensorComponent,
-    RegisterComponent, // Exporta tus componentes aquí si los necesitas en otros módulos
+    RegisterComponent,
     LoginComponent,
     HistorialAlertasComponent,
     GraficaComponent,
@@ -102,9 +105,17 @@ import { NavigationComponent } from './components/organisms/navigation/navigatio
     GraficasTemperaturaComponent,
     GraphPhComponent,
     DatapickerComponent,
+    ChatbotComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
+    LoginPageComponent,
     InicioComponent,
     ChatbotComponent,
     NavigationComponent
+    RegisterPageComponent,
+    RecuperarPageComponent,
+    CambiarPageComponent
+
 
   ]
 })
