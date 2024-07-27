@@ -1,5 +1,5 @@
 .hero-container {
-    min-height: 63vh;
+    min-height: 65vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -33,7 +33,7 @@
 .producto,
 .noticias {
     color: whitesmoke;
-    margin-bottom: 0.5rem; /* Ajusta este valor según sea necesario */
+    margin-bottom: 0.5rem;
 }
 
 .text-blue {
@@ -92,12 +92,13 @@
 .new-text {
     font-size: 1.2em;
     text-align: justify;
-    max-width: 500px; /* Ancho máximo del contenedor de texto */
-    padding: 1rem; /* Espaciado interno */
-    background-color: (); /* Fondo semi-transparente */
-    border-radius: 0.5rem; /* Bordes redondeados */
-    color: white; /* Color del texto */
+    max-width: 500px;
+    padding: 1rem;
+    background-color:(0, 0, 0, 0.5);
+    border-radius: 0.5rem;
+    color: white;
 }
+
 .main-title {
     font-size: 2.5rem;
     margin-bottom: 1rem;
@@ -137,51 +138,35 @@
     opacity: 1;
 }
 
-.about-us {
+.about-us, .equipo-tra {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    padding: 2rem 1rem; /* Ajustado para que ocupe menos espacio */
+    padding: 2rem 1rem;
     background-color: whitesmoke;
-    height: 40vh; /* Ajustado para que ocupe menos espacio */
+    height: 40vh;
 }
 
-.about-content {
+.about-content, .equipo-trabajo {
     flex: 1;
     max-width: 800px;
     padding: 1rem;
 }
 
-.about-content h2 {
+.about-content h2, .equipo-trabajo h2 {
     font-size: 2rem;
     margin-bottom: 1rem;
 }
 
 .about-image {
     flex: 1;
-    background-image: url('/assets/images/claudio-guglieri-K2RH1QZdLF4-unsplash.jpg'); /* Ruta de la imagen */
+    background-image: url('/assets/images/claudio-guglieri-K2RH1QZdLF4-unsplash.jpg');
     background-size: cover;
     background-position: center;
-    height: 80%;
-    border-radius: 50%; /* Hace la imagen redonda */
-    width: 80%; /* Asegura que la imagen mantenga proporciones */
-    max-width: 270px; /* Ajusta el tamaño máximo de la imagen */
-    max-height: 270px; /* Ajusta el tamaño máximo de la imagen */
-}
-
-.equipo-tra {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem 1rem; /* Ajustado para que ocupe menos espacio */
-    background-color: whitesmoke;
-    height: 40vh; /* Ajustado para que ocupe menos espacio */
-}
-
-.equipo-trabajo {
-    flex: 1;
-    max-width: 800px;
-    padding: 1rem;
+    height: 100%;
+    border-radius: 50%;
+    width: 100%;
+    max-width: 300px;
+    max-height: 300px;
 }

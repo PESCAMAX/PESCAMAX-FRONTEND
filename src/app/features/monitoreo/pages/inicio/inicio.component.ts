@@ -7,7 +7,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 })
 export class InicioComponent implements OnInit, OnDestroy {
   carouselImages: string[] = [
-    'assets/images/tifenn-degornet-PpwK032gSao-unsplash.jpg',
+    'assets/images/masaaki-komori-vXid97obEy8-unsplash.jpg',
     'assets/images/tifenn-degornet-PpwK032gSao-unsplash.jpg',
   ];
   activeImageIndex: number = 0;
