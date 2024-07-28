@@ -8,6 +8,11 @@ module.exports = {
       fontFamily: {
         sans: ['Arial', 'sans-serif'],
       },
+      colors: {
+        'custom-blue': '#3B82F6',
+        'custom-black': '#000000',
+        'custom-gray': '#e5e7eb',
+      },
     },
   },
   plugins: [],
