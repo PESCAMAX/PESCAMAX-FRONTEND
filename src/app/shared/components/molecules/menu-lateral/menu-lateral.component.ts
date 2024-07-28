@@ -1,5 +1,4 @@
-// menu-lateral.component.ts
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, HostListener } from '@angular/core';
 import { MenuStateService } from '../../../../features/monitoreo/services/menu-state/menu-state.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
@@ -15,6 +14,7 @@ export class MenuLateralComponent implements OnInit {
   isMenuOpen: boolean = true;
   subMenuVisible: number | null = null;
   userId: string = '';
+  isUserMenuVisible: boolean = false;
 
   constructor(
     private menuStateService: MenuStateService,
@@ -24,7 +24,6 @@ export class MenuLateralComponent implements OnInit {
 
   ngOnInit() {
     this.userId = localStorage.getItem('userId') || '';
-
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
@@ -32,12 +31,17 @@ export class MenuLateralComponent implements OnInit {
     });
   }
 
-
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
     this.menuToggled.emit(this.isMenuOpen);
   }
 
+  openMenu() {
+    if (!this.isMenuOpen) {
+      this.isMenuOpen = true;
+      this.menuToggled.emit(this.isMenuOpen);
+    }
+  }
 
   closeMenu() {
     this.isMenuOpen = false;
@@ -46,8 +50,22 @@ export class MenuLateralComponent implements OnInit {
   }
 
   toggleSubMenu(index: number) {
-    if (this.isMenuOpen) {
-      this.subMenuVisible = this.subMenuVisible === index ? null : index;
+    this.openMenu(); // Asegúrate de que el menú esté abierto
+    this.subMenuVisible = this.subMenuVisible === index ? null : index;
+  }
+
+  toggleUserMenu() {
+    this.isUserMenuVisible = !this.isUserMenuVisible;
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    const userIcon = document.querySelector('img[alt="Perfil"]');
+    const dropdownMenu = document.querySelector('.absolute.right-4.top-16');
+    if (userIcon && dropdownMenu &&
+        !userIcon.contains(event.target as Node) &&
+        !dropdownMenu.contains(event.target as Node)) {
+      this.isUserMenuVisible = false;
     }
   }
 }

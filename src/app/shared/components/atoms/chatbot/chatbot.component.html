@@ -1,9 +1,9 @@
 <!-- chatbot.component.html -->
 <div class="chatbot-container">
-    <button (click)="toggleChat()" class="chat-toggle">
-      <img src="assets/icons/Favicon.png" alt="Favicon " class="chat-logo">
-    </button>
-    <div *ngIf="isOpen" class="chat-window">
-      <iframe src='https://webchat.botframework.com/embed/Dory-bot?s=t0RkUKU8ARw.lhRB8Ve3NPu5cBHsMVBZqEqVSCgaBCKjpZAyMuP5Kcc' style='width: 100%; height: 100%;'></iframe>
-    </div>
+  <button (click)="toggleChat()" class="chat-toggle">
+    <img src="./assets/icons/bot-nuevo.png" alt="Chatbot Logo" class="chat-logo">
+  </button>
+  <div *ngIf="isOpen" class="chat-window">
+    <iframe src='https://webchat.botframework.com/embed/Dory-bot?s=t0RkUKU8ARw.lhRB8Ve3NPu5cBHsMVBZqEqVSCgaBCKjpZAyMuP5Kcc' style='width: 100%; height: 100%;'></iframe>
   </div>
+</div>

@@ -1,9 +1,6 @@
 <div class="flex">
     <!-- Menu Lateral -->
-    <div class="menu-lateral fixed left-0 top-0 h-full w-[240px]">
-        <app-menu-lateral></app-menu-lateral>
-    </div>
-
+    <app-menu-lateral (menuToggled)="onMenuToggle($event)"></app-menu-lateral>
     <!-- Contenido Principal -->
     <div class=" flex-1 p-4"> 
         <div class="flex items-center ml-16">
@@ -11,6 +8,7 @@
             <span class="text-lg font-semibold text-blue-500 hidden md:inline ml6">PESCA<span class="text-black">MAX</span></span>
         </div>    
     <h1 class=" font-bold mb-4 text-custom-blue text-center font-bold text-lg font-sans ">Gráfica Ph</h1>
+
         <app-graph-ph></app-graph-ph>
     </div>
 </div>
