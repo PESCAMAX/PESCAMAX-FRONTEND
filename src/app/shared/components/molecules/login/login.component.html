@@ -1,121 +1,35 @@
-<div class="container" id="container">
-  <div class="form-container sign-up-container">
-    <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
-      <h1>Create Account</h1>
-      <div class="social-container">
-        <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-        <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-      </div>
-      <span>or use your email for registration</span>
-      <div class="infield">
-        <input type="text" formControlName="name" placeholder="Name" />
-      </div>
-      <div class="infield">
-        <input type="email" formControlName="email" placeholder="Email" />
-      </div>
-      <div class="infield">
-        <input type="password" formControlName="password" placeholder="Password" />
-      </div>
-      <button type="submit" style="background-color: #3B82F6;">Sign Up</button>
-    </form>
-  </div>
-  <div class="form-container sign-in-container">
+<div class="bg-gray-100 flex items-center justify-center h-screen">
+  <div class="bg-black-transparent p-8 rounded-lg shadow-lg max-w-sm w-full">
+    <div class="flex justify-center mb-6">
+      <img src="../../../../../assets/icons/Favicon.png" alt="Logo" class="w-16 h-16">
+    </div>
+    <h2 class="text-2xl font-semibold text-center mb-4">Ingresa a tu cuenta</h2>
+    <app-alert-form [successMessage]="successMessage" [errorMessage]="errorMessage"></app-alert-form>
     <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-      <h1>Sign in</h1>
-      <div class="social-container">
-        <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-        <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+      <div class="relative mb-4">
+        <input type="text" formControlName="username" id="username" placeholder=" " name="username"
+               class="border-gray-400 form-input w-full px-4 py-3 focus:outline-none focus:ring-5 focus:ring-blue-400 rounded" required>
+        <label for="username" class="floating-label">Nombre de usuario</label>
+        <div *ngIf="loginForm.controls['username'].invalid && (loginForm.controls['username'].dirty || loginForm.controls['username'].touched)">
+          <small class="text-red-600">Nombre de usuario es requerido</small>
+        </div>
       </div>
-      <span>or use your account</span>
-      <div class="infield">
-        <input type="email" formControlName="email" placeholder="Email" />
+      <div class="relative mb-6">
+        <input type="password" formControlName="password" id="password" placeholder=" " name="password"
+               class="border-gray-400 form-input w-full px-4 py-3 focus:outline-none focus:ring-5 focus:ring-blue-400 rounded" required>
+        <label for="password" class="floating-label">Contraseña</label>
+        <div *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)">
+          <small class="text-red-600">Contraseña es requerida</small>
+        </div>
       </div>
-      <div class="infield">
-        <input type="password" formControlName="password" placeholder="Password" />
-      </div>
-      <a href="#" class="forgot">Forgot your password?</a>
-      <button type="submit">Sign In</button>
+      <button type="submit" class="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Ingresar</button>
+      
     </form>
-  </div>
-  <div class="overlay-container" id="overlayCon">
-    <div class="overlay">
-      <div class="overlay-panel overlay-left">
-        <h1>Welcome Back!</h1>
-        <p>To keep connected with us please login with your personal info</p>
-        <button (click)="showSignIn()">Sign In</button>
-      </div>
-      <div class="overlay-panel overlay-right">
-        <h1>Hello, Friend!</h1>
-        <p>Enter your personal details and start journey with us</p>
-        <button (click)="showSignUp()">Sign Up</button>
-      </div>
+    <div class="mt-4 text-center">
+      <a href="/forgot-password" class="text-sm text-blue-500 hover:underline">¿Olvidaste tu Contraseña?</a>
+    </div>
+    <div class="mt-4 text-center">
+      <a href="http://localhost:4200/register" class="text-sm text-blue-500 hover:underline">Crear cuenta</a>
     </div>
   </div>
 </div>
-
-
-<!-- <div class="container" id="container">
-  <div class="form-container sign-up-container">
-      <form action="#">
-          <h1>Create Account</h1>
-          <div class="social-container">
-              <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-              <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-              <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-          </div>
-          <span>or use your email for registration</span>
-          <div class="infield">
-              <input type="text" placeholder="Name" />
-              <label></label>
-          </div>
-          <div class="infield">
-              <input type="email" placeholder="Email" name="email"/>
-              <label></label>
-          </div>
-
-          <div class="infield">
-              <input type="password" placeholder="Password" />
-              <label></label>
-          </div>
-          <button style="background-color: #3B82F6;">Sign Up</button>
-      </form>
-  </div>
-  <div class="form-container sign-in-container">
-      <form action="#">
-          <h1>Sign in</h1>
-          <div class="social-container">
-              <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-              <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-              <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-          </div>
-          <span>or use your account</span>
-          <div class="infield">
-              <input type="email" placeholder="Email" name="email"/>
-              <label></label>
-          </div>
-          <div class="infield">
-              <input type="password" placeholder="Password" />
-              <label></label>
-          </div>
-          <a href="#" class="forgot">Forgot your password?</a>
-          <button>Crear cuenta</button>
-      </form>
-  </div>
-  <div class="overlay-container" id="overlayCon">
-      <div class="overlay">
-          <div class="overlay-panel overlay-left">
-              <h1>Welcome Back!</h1>
-              <p>To keep connected with us please login with your personal info</p>
-              <button>Sign In</button>
-          </div>
-          <div class="overlay-panel overlay-right">
-              <h1>Hello, Friend!</h1>
-              <p>Enter your personal details and start journey with us</p>
-              <button>Sign Up</button>
-          </div>
-      </div>
-      <button id="overlayBtn"></button>
-  </div>
-</div> -->

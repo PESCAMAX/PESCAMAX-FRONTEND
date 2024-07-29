@@ -6,7 +6,6 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
-import { LoginComponent } from './components/molecules/login/login.component';
 
 // Componentes
 import { ButtonEnviarComponent } from './components/atoms/button-enviar/button-enviar.component';
@@ -23,7 +22,7 @@ import { EspecieFormComponent } from './components/molecules/form-especie/form-e
 import { AlertFormComponent } from './components/organisms/alert-form/alert-form.component';
 import { TablaSensorComponent } from './components/molecules/tabla-sensor/tabla-sensor.component';
 import { RegisterComponent } from './components/molecules/register/register.component';
-
+import { LoginComponent } from './components/molecules/login/login.component';
 import { ForgotPasswordComponent } from './components/molecules/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './components/molecules/reset-password/reset-password.component';
 import { HistorialAlertasComponent } from './components/molecules/historial-alertas/historial-alertas.component';
