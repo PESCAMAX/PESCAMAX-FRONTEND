@@ -13,6 +13,7 @@ export class GraficastdssComponent implements OnInit {
   public lotes: number[] = [];
   public selectedLote: number | null = null;
   private startDate: Date | null = null;
+  public loteDropdownOpen: boolean = false; 
   private endDate: Date | null = null;
   isMenuOpen: boolean = true;
   isDropdownOpen: boolean = false;
@@ -28,8 +29,9 @@ export class GraficastdssComponent implements OnInit {
   }
 
   toggleDropdown() {
-    this.isDropdownOpen = !this.isDropdownOpen;
+    this.loteDropdownOpen = !this.loteDropdownOpen;
   }
+
 
   loadLotes() {
     this.apiService.listarMonitoreo(this.AuthService.getUserId()).subscribe( 
