@@ -28,23 +28,23 @@
           <span class="text-sm font-medium" [ngClass]="{'hidden': !isMenuOpen}">Panel De Control</span>
         </button>
         <div *ngIf="subMenuVisible === 1 && isMenuOpen" class="ml-10 mt-2">
-          <a [href]="'/temperatura/' + userId" class="flex items-center py-2 text-sm text-gray-500 hover:text-blue-500">
-            <img src="../../../../../assets/icons/temperatura.png" alt="Temperatura" class="w-5 h-5 mr-2 ml-5">
-            <span>Gráfica temperatura</span>
-          </a>
-          <a [href]="'/grafica-tds/' + userId" class="flex items-center py-2 text-sm text-gray-500 hover:text-blue-500">
-            <img src="../../../../../assets/icons/medidor-de-ph-digital.png" alt="TDS" class="w-5 h-5 mr-2 ml-5">
-            <span>Gráfica de TDS</span>
-          </a>
-          <a [href]="'/grafica-ph/' + userId" class="flex items-center py-2 text-sm text-gray-500 hover:text-blue-500">
-            <img src="../../../../../assets/icons/metros.png" alt="Ph" class="w-5 h-5 mr-2 ml-5">
-            <span>Gráfica de Ph</span>
-          </a>
-          <a [href]="'/home/' + userId" class="flex items-center py-2 text-sm text-gray-500 hover:text-blue-500">
+          <a [href]="'/home/' + userId" class="flex items-center py-2 text-sm text-gray-700 hover:text-blue-500">
             <img src="../../../../../assets/icons/grafico-de-linea.png" alt="Gráfica General" class="w-5 h-5 mr-2 ml-5">
             <span>Gráfica General</span>
           </a>
-          <a [href]="'/tabla-datos/' + userId" class="flex items-center py-2 text-sm text-gray-500 hover:text-blue-500">
+          <a [href]="'/temperatura/' + userId" class="flex items-center py-2 text-sm text-gray-700 hover:text-blue-500">
+            <img src="../../../../../assets/icons/temperatura.png" alt="Temperatura" class="w-5 h-5 mr-2 ml-5">
+            <span>Gráfica Temperatura</span>
+          </a>
+          <a [href]="'/grafica-tds/' + userId" class="flex items-center py-2 text-sm text-gray-700 hover:text-blue-500">
+            <img src="../../../../../assets/icons/medidor-de-ph-digital.png" alt="TDS" class="w-5 h-5 mr-2 ml-5">
+            <span>Gráfica de TDS</span>
+          </a>
+          <a [href]="'/grafica-ph/' + userId" class="flex items-center py-2 text-sm text-gray-700 hover:text-blue-500">
+            <img src="../../../../../assets/icons/metros.png" alt="Ph" class="w-5 h-5 mr-2 ml-5">
+            <span>Gráfica de Ph</span>
+          </a>
+          <a [href]="'/tabla-datos/' + userId" class="flex items-center py-2 text-sm text-gray-700 hover:text-blue-500">
             <img src="../../../../../assets/icons/mesa.png" alt="Tablas" class="w-5 h-5 mr-2 ml-5">
             <span>Tablas</span>
           </a>
@@ -59,15 +59,15 @@
           <span class="text-sm font-medium" [ngClass]="{'hidden': !isMenuOpen}">Gestión de parámetros</span>
         </button>
         <div *ngIf="subMenuVisible === 2 && isMenuOpen" class="ml-10 mt-2">
-          <a [href]="'/crear-especie/' + userId" class="flex items-center py-2 text-sm text-gray-500 hover:text-blue-500">
+          <a [href]="'/crear-especie/' + userId" class="flex items-center py-2 text-sm text-gray-700 hover:text-blue-500">
             <img src="../../../../../assets/icons/crear-especie.png" alt="Crear especie" class="w-5 h-5 mr-2 ml-5">
             <span>Crear especie</span>
           </a>
-          <a [href]="'/seleccionar-especie/' + userId" class="flex items-center py-2 text-sm text-gray-500 hover:text-blue-500">
+          <a [href]="'/seleccionar-especie/' + userId" class="flex items-center py-2 text-sm text-gray-700 hover:text-blue-500">
             <img src="../../../../../assets/icons/seleccion-de-caracteristicas.png" alt="Seleccionar especie" class="w-5 h-5 mr-2 ml-5">
             <span>Seleccionar especie</span>
           </a>
-          <a [href]="'/modificar-especie/' + userId" class="flex items-center py-2 text-sm text-gray-500 hover:text-blue-500">
+          <a [href]="'/modificar-especie/' + userId" class="flex items-center py-2 text-sm text-gray-700 hover:text-blue-500">
             <img src="../../../../../assets/icons/editar.png" alt="Modificar especie" class="w-5 h-5 mr-2 ml-5">
             <span>Modificar especie</span>
           </a>
@@ -81,11 +81,11 @@
           <span class="text-sm font-medium" [ngClass]="{'hidden': !isMenuOpen}">Sistema de alertas</span>
         </button>
         <div *ngIf="subMenuVisible === 3 && isMenuOpen" class="ml-10 mt-2">
-          <a [href]="'/alertas-recientes/' + userId" class="flex items-center py-2 text-sm text-gray-500 hover:text-blue-500">
+          <a [href]="'/alertas-recientes/' + userId" class="flex items-center py-2 text-sm text-gray-700 hover:text-blue-500">
             <img src="../../../../../assets/icons/configuracion.png" alt="Configuracion De Alertas" class="w-5 h-5 mr-2 ml-5">
             <span>Configuracion De Alertas</span>
           </a>
-          <a [href]="'/historial-alertas/' + userId" class="flex items-center py-2 text-sm text-gray-500 hover:text-blue-500">
+          <a [href]="'/historial-alertas/' + userId" class="flex items-center py-2 text-sm text-gray-700 hover:text-blue-500">
             <img src="../../../../../assets/icons/regulacion.png" alt="Historial de alertas" class="w-5 h-5 mr-2 ml-5">
             <span>Historial de alertas</span>
           </a>
@@ -94,7 +94,7 @@
     </nav>
 
     <div class="absolute bottom-4 left-4" [ngClass]="{'hidden': !isMenuOpen}">
-      <app-exit></app-exit>
+  
     </div>
   </div>
 
@@ -112,7 +112,7 @@
   <div *ngIf="isUserMenuVisible" class="absolute right-4 top-16 bg-white shadow-lg rounded-lg overflow-hidden">
     <a href="#profile" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Profile</a>
     <a href="#settings" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Settings</a>
-    <a href="#logout" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Logout</a>
+    <a href="http://localhost:4200/Inicio" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Logout</a>
   </div>
 
   <!-- Contenido principal -->
