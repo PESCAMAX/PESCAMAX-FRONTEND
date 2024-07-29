@@ -54,9 +54,13 @@ const routes: Routes = [
     component: InicioComponent
   },
 
-  { path: 'crear-especie/:userId', component: CrearEspecieComponent, canActivate: [AuthGuard] },
+  { path: 'crear-especie/:userId', 
+    component: CrearEspecieComponent,
+     canActivate: [AuthGuard] },
 
-  { path: 'modificar-especie/:userId', component: ModificarEspecieComponent, canActivate: [AuthGuard] },
+  { path: 'modificar-especie/:userId', 
+    component: ModificarEspecieComponent, 
+    canActivate: [AuthGuard] },
 
   { path: 'seleccionar-especie/:userId', component: SeleccionarEspecieComponent, canActivate: [AuthGuard] },
 
