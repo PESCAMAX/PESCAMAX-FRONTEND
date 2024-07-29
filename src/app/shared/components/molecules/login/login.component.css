@@ -116,17 +116,7 @@ a.forgot{
     padding-bottom: 3px;
     border-bottom: 2px solid #eee;
 }
-button{
-    border-radius: 20px;
-    border: 1px solid var(--grad-clr1);
-    background: var(--grad-clr2);
-    color: #fff;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 12px 45px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
+
 .form-container{
     margin-top: 17px;
     transition: 80ms ease-in;
@@ -244,5 +234,18 @@ p{
     50%{
         width: 250px;
     }
+
+  }
+  .boton-enviar{
+
+  background-color: #3B82F6;
+  border-radius: 20px;
+  border: 1px solid var(--grad-clr1);
+
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 
   }
