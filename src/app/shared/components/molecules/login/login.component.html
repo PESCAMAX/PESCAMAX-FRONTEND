@@ -1,57 +1,75 @@
 <div class="container" id="container">
+  <!-- Formulario de Registro -->
   <div class="form-container sign-up-container">
     <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
-      <h1>Create Account</h1>
+      <h1>Crear Cuenta</h1>
       <div class="social-container">
         <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
         <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
         <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
       </div>
-      <span>or use your email for registration</span>
+      <span>o usa tu email para registrarte</span>
       <div class="infield">
-        <input type="text" formControlName="name" placeholder="Name" />
+        <input type="text" formControlName="UserName" placeholder="Nombre" />
       </div>
       <div class="infield">
         <input type="email" formControlName="email" placeholder="Email" />
       </div>
       <div class="infield">
-        <input type="password" formControlName="password" placeholder="Password" />
+        <input type="password" formControlName="password" placeholder="Contraseña" />
       </div>
-      <button type="submit" style="background-color: #3B82F6;">Ingresar</button>
+      <button type="submit" [disabled]="!registerForm.valid">Registrarse</button>
     </form>
   </div>
+
+  <!-- Formulario de Inicio de Sesión -->
   <div class="form-container sign-in-container">
     <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-      <h1>Iniciar sesion</h1>
+      <h1>Iniciar sesión</h1>
       <div class="social-container">
         <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
         <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
         <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
       </div>
-      <span>Ingresa tu cuenta"</span>
+      <span>o usa tu cuenta</span>
       <div class="infield">
-        <input type="text" formControlName="username" placeholder="Username" />
+        <input type="text" formControlName="username" placeholder="Usuario" />
       </div>
       <div class="infield">
-        <input type="password" formControlName="password" placeholder="Password" />
+        <input type="password" formControlName="password" placeholder="Contraseña" />
       </div>
+
       <a href="http://localhost:4200/forgot-password" class="forgot">Olvidaste tu contraseña?</a>
       <button class="boton-enviar" type="submit">Ingresar</button>
+
     </form>
   </div>
+
+  <!-- Panel de superposición -->
   <div class="overlay-container" id="overlayCon">
     <div class="overlay">
       <div class="overlay-panel overlay-left">
-        <h1>Bienvenido de nuevo a  <span class="text-lg font-semibold text-blue-500">PESCA<span class="text-black text-lg font-semibold">MAX</span></span></h1>
-        <p>To keep connected with us please login with your personal info</p>
-        <button (click)="showSignIn()">Sign In</button>
+        <h1>Bienvenido de nuevo a <span class="text-lg font-semibold text-blue-500">PESCA<span class="text-black text-lg font-semibold">MAX</span></span></h1>
+        <p>Para mantenerte conectado con nosotros, por favor inicia sesión con tu información personal</p>
+        <button class="ghost" id="signIn" (click)="showSignIn()">Iniciar Sesión</button>
       </div>
       <div class="overlay-panel overlay-right">
+<<<<<<< HEAD
         <h1>Hello, Friend!</h1>
         <p>Enter your personal details and start journey with us</p>
         <button (click)="showSignUp()">Sign Up</button>
        
+=======
+        <h1>¡Hola, amigo!</h1>
+        <p>Ingresa tus datos personales y comienza tu viaje con nosotros</p>
+        <button class="ghost" id="signUp" (click)="showSignUp()">Registrarse</button>
+>>>>>>> 53075b312ed1316654853fe5178824dbb4296050
       </div>
     </div>
+    <button id="overlayBtn" style="display: none;"><span>Click!</span></button>
   </div>
 </div>
+
+<!-- Mensajes de éxito y error -->
+<div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+<div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>

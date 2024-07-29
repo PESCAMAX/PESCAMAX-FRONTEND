@@ -28,9 +28,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
     });
 
     this.registerForm = this.fb.group({
-      name: ['', Validators.required],
+      UserName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
@@ -51,12 +51,12 @@ export class LoginComponent implements OnInit, AfterViewInit {
   onLogin() {
     if (this.loginForm.valid) {
       console.log('Intentando iniciar sesión con:', this.loginForm.value);
-      this.authService.login(this.loginForm.value).subscribe(
-        response => {
+      this.authService.login(this.loginForm.value).subscribe({
+        next: (response) => {
           console.log('Inicio de sesión exitoso', response);
-          this.router.navigate(['home/:userId']);
+          this.router.navigate(['/home', response.userId]);
         },
-        error => {
+        error: (error) => {
           console.error('Error en el inicio de sesión', error);
           if (error.error instanceof ErrorEvent) {
             this.errorMessage = `Error: ${error.error.message}`;
@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
             this.errorMessage = `Código de Error: ${error.status}\nMensaje: ${error.message}`;
           }
         }
-      );
+      });
     } else {
       console.log('El formulario es inválido', this.loginForm.errors);
       this.errorMessage = 'Por favor, complete todos los campos requeridos';
@@ -74,9 +74,24 @@ export class LoginComponent implements OnInit, AfterViewInit {
   onRegister() {
     if (this.registerForm.valid) {
       console.log('Registrando usuario:', this.registerForm.value);
-      // Implementa la lógica para el registro de usuario aquí
+      this.authService.register(this.registerForm.value).subscribe({
+        next: (response) => {
+          console.log('Registro exitoso', response);
+          this.successMessage = 'Registro exitoso. Por favor, inicie sesión.';
+          this.showSignIn(); // Switch to the login form
+        },
+        error: (error) => {
+          console.error('Error en el registro', error);
+          if (error.error instanceof ErrorEvent) {
+            this.errorMessage = `Error: ${error.error.message}`;
+          } else {
+            this.errorMessage = `Código de Error: ${error.status}\nMensaje: ${error.message}`;
+          }
+        }
+      });
     } else {
-      console.log('El formulario de registro es inválido');
+      console.log('El formulario de registro es inválido', this.registerForm.errors);
+      this.errorMessage = 'Por favor, complete todos los campos requeridos correctamente';
     }
   }
 
@@ -88,5 +103,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
   showSignUp() {
     const container = document.getElementById('container');
     container?.classList.add('right-panel-active');
+  }
+
+  clearMessages() {
+    this.successMessage = '';
+    this.errorMessage = '';
   }
 }
