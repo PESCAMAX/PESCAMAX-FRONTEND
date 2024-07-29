@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     });
 
     this.registerForm = this.fb.group({
-      name: ['', Validators.required],
+      UserName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
