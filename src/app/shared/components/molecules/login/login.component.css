@@ -55,7 +55,7 @@ form{
     padding: 0px 50px;
 }
 h1{
-    color:  var(--grad-clr1);
+    color:  #3B82F6;
     display: block;
     font-size: 2em;
     margin-block-start: 0.67em;
@@ -118,8 +118,8 @@ a.forgot{
 }
 button{
     border-radius: 20px;
-    border: 1px solid var(--grad-clr1);
-    background: var(--grad-clr2);
+    border: 1px #eee;
+    background: #3B82F6;
     color: #fff;
     font-size: 12px;
     font-weight: bold;
@@ -184,7 +184,7 @@ button{
     transform: translateX(-12%);
 }
 .overlay-right{
-   background-color: #3B82F6;
+   background-color: #38e1ce;
     right: 0;
     transform: translateX(0%);
 }
