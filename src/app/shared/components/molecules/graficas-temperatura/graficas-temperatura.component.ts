@@ -14,6 +14,7 @@ export class GraficasTemperaturaComponent implements OnInit {
   public selectedLote: number | null = null;
   private startDate: Date | null = null;
   private endDate: Date | null = null;
+  public loteDropdownOpen: boolean = false; 
   isMenuOpen: boolean = true;
 
   constructor(private apiService: ApiService, private AuthService:AuthService) {}
@@ -36,6 +37,11 @@ export class GraficasTemperaturaComponent implements OnInit {
       }
     );
   }
+
+  toggleDropdown() {
+    this.loteDropdownOpen = !this.loteDropdownOpen;
+  }
+
 
   onLoteChange(event: Event) {
     const selectElement = event.target as HTMLSelectElement;
