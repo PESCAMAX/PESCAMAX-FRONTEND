@@ -4,7 +4,6 @@ module.exports = {
     "./src/**/*.{html,ts}",
   ],
   theme: {
-    
     extend: {
       fontFamily: {
         sans: ['Arial', 'sans-serif'],
