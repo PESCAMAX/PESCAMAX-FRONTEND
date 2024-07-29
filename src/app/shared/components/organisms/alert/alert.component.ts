@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AlertService } from '../../../../features/monitoreo/services/api-alert/alert.service';
 import { Router, NavigationStart } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../../../../features/monitoreo/services/api-login/auth.service';
 
 @Component({
   selector: 'app-alert',
@@ -13,13 +14,12 @@ export class AlertComponent implements OnInit, OnDestroy {
   type: 'info' | 'danger' | 'warning' = 'warning';
   message: string = '';
   private alertSubscription!: Subscription;
-  private routerSubscription!:Subscription; 
+  private routerSubscription!: Subscription;
 
   constructor(
     private alertService: AlertService,
     private router: Router,
-    
-  
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -62,7 +62,8 @@ export class AlertComponent implements OnInit, OnDestroy {
   }
 
   onViewMore(): void {
-    this.router.navigate(['/historial-alertas']);
+    const userId = this.authService.getUserId(); // Assuming you have a method to get the user ID
+    this.router.navigate(['/historial-alertas', userId]);
     this.clearAlert();
   }
 
