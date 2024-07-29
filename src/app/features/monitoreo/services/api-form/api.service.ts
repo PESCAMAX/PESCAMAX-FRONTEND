@@ -11,7 +11,7 @@ export class ApiService {
   private baseUrl = 'http://localhost:6754/api';
 
   constructor(
-    private http: HttpClient, 
+    private http: HttpClient,
     private authService: AuthService
   ) {}
 
@@ -131,7 +131,7 @@ export interface Alerta {
   Descripcion: string;
   FechaCreacion?: Date; // Asegúrate de que este campo es de tipo Date
   UserId: string;
-}
+
 export interface Asignar {
   EspecieID: any;
   Id: number;

@@ -1,44 +1,45 @@
-<div class="container mx-auto">
-  <app-datapicker
-    (dateRangeSelected)="onDateRangeSelected($event)"
-    [minDate]="fechaMasAntigua"
-    [maxDate]="fechaActual">
-  </app-datapicker>
-  <label for="loteSelector">Seleccionar Lote: </label>
-  <select id="loteSelector" (change)="onLoteChange($event)">
-    <option *ngFor="let lote of lotes" [value]="lote">Lote {{ lote }}</option>
-  </select>
-  <div class="alertas-dropdown ">
-    <h3 class="alertas-trigger">Fecha y Mensajes</h3>
-    <div class="alertas-content" *ngIf="alertasFiltradas.length > 0">
-      <div class="alertas-container">
-        <table>
-          <thead>
-            <tr>
-              <th>Fecha</th>
-              <th>Mensaje</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let alerta of alertasFiltradas">
-              <td>{{ alerta.FechaCreacion | date:'medium' }}</td>
-              <td>{{ alerta.Descripcion }}</td>
-            </tr>
-          </tbody>
-        </table>
+<div class="flex flex-col w-full h-full">
+  <!-- Título de la página -->
+  <h1 class="text-blue-500 text-center font-bold text-lg font-sans mb-4">Gráfica General</h1>
+  <!-- Contenido Principal -->
+  <div class="flex-1 p-4 transition-all duration-300" [ngClass]="{'ml-64': isMenuOpen, 'ml-16': !isMenuOpen}">
+    <app-datapicker
+      (dateRangeSelected)="onDateRangeSelected($event)"
+      [minDate]="fechaMasAntigua"
+      [maxDate]="fechaActual">
+    </app-datapicker>
+    <label for="loteSelector">Seleccionar Lote: </label>
+    <select id="loteSelector" (change)="onLoteChange($event)">
+      <option *ngFor="let lote of lotes" [value]="lote">Lote {{ lote }}</option>
+    </select>
+    <div class="alertas-dropdown">
+      <h3 class="alertas-trigger">Fecha y Mensajes</h3>
+      <div class="alertas-content" *ngIf="alertasFiltradas.length > 0">
+        <div class="alertas-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Mensaje</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let alerta of alertasFiltradas">
+                <td>{{ alerta.FechaCreacion | date:'medium' }}</td>
+                <td>{{ alerta.Descripcion }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
+
+    <div *ngIf="mensajeAlerta" class="alert-message">
+      {{ mensajeAlerta }}
+    </div>
+
+    <div class="grafica-container">
+      <canvas id="MyChart">{{ chart }}</canvas>
+    </div>
   </div>
-  
-</div>
-
-<div *ngIf="mensajeAlerta" class="alert-message">
-  {{ mensajeAlerta }}
-</div>
-
-
-
-
-<div class="chart-container">
-  <canvas id="MyChart"></canvas>
 </div>

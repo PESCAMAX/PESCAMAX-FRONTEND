@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js/auto';
 import { ApiService } from '../../../../features/monitoreo/services/api-form/api.service';
 import { AuthService } from '../../../../features/monitoreo/services/api-login/auth.service';
+
 @Component({
   selector: 'app-graficastdss',
   templateUrl: './graficastdss.component.html',
@@ -12,17 +13,25 @@ export class GraficastdssComponent implements OnInit {
   public lotes: number[] = [];
   public selectedLote: number | null = null;
   private startDate: Date | null = null;
+  public loteDropdownOpen: boolean = false; 
   private endDate: Date | null = null;
   isMenuOpen: boolean = true;
+  isDropdownOpen: boolean = false;
 
   constructor(private apiService: ApiService, private AuthService: AuthService) {}
 
   ngOnInit(): void {
     this.loadLotes();
   }
+
   onMenuToggle(isOpen: boolean) {
     this.isMenuOpen = isOpen;
   }
+
+  toggleDropdown() {
+    this.loteDropdownOpen = !this.loteDropdownOpen;
+  }
+
 
   loadLotes() {
     this.apiService.listarMonitoreo(this.AuthService.getUserId()).subscribe( 
@@ -44,7 +53,6 @@ export class GraficastdssComponent implements OnInit {
     this.selectedLote = parseInt(selectElement.value, 10);
     this.loadDataAndCreateChart();
   }
-
 
   onDateRangeSelected(event: { startDate: Date, endDate: Date }): void {
     this.startDate = event.startDate;

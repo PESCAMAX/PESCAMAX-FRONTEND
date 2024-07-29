@@ -76,6 +76,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
 
   },
+
   {
     path: 'grafica-ph/:userId',
     component: GraficaPhComponent,

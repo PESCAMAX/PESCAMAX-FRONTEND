@@ -31,7 +31,7 @@ export class GraficaComponent implements OnInit {
     this.loadLotes();
     this.cargarAlertas();
     this.obtenerFechaMasAntigua();
-   
+
   }
   obtenerFechaMasAntigua(): void {
     this.apiService.listarMonitoreo(this.AuthService.getUserId()).subscribe(
@@ -47,7 +47,7 @@ export class GraficaComponent implements OnInit {
   }
 
   loadLotes() {
-    this.apiService.listarMonitoreo(this.AuthService.getUserId()).subscribe( 
+    this.apiService.listarMonitoreo(this.AuthService.getUserId()).subscribe(
       data => {
         this.lotes = [...new Set(data.response.map(item => item.LoteID))];
         if (this.lotes.length > 0) {
@@ -70,8 +70,8 @@ export class GraficaComponent implements OnInit {
 
   loadDataAndCreateChart() {
     if (this.selectedLote === null) return;
-  
-    this.apiService.listarMonitoreo(this.AuthService.getUserId()).subscribe( 
+
+    this.apiService.listarMonitoreo(this.AuthService.getUserId()).subscribe(
       data => {
         let filteredData = data.response.filter(item => item.LoteID === this.selectedLote);
         if (this.fechaInicio && this.fechaFin) {
@@ -162,22 +162,22 @@ export class GraficaComponent implements OnInit {
       this.alertasFiltradas = this.alertas;
       return;
     }
-  
+
     this.alertasFiltradas = this.alertas.filter(alerta => {
       const perteneceLote = this.selectedLote ? alerta.LoteID === this.selectedLote : true;
-      
+
       let fechaAlerta: Date | null = null;
       if (alerta.FechaCreacion) {
         // Check if alerta.Fecha is a string (ISO date) or already a Date object
         fechaAlerta = alerta.FechaCreacion instanceof Date ? alerta.FechaCreacion : new Date(alerta.FechaCreacion);
       }
-  
-      const estaEnRango = this.fechaInicio && this.fechaFin && fechaAlerta ? 
+
+      const estaEnRango = this.fechaInicio && this.fechaFin && fechaAlerta ?
         (fechaAlerta >= this.fechaInicio && fechaAlerta <= this.fechaFin) : true;
-  
+
       return perteneceLote && estaEnRango;
     });
-  
+
     if (this.alertasFiltradas.length === 0) {
       this.mensajeAlerta = "No hay datos disponibles para el rango de fechas y lote seleccionado.";
     } else {
@@ -193,5 +193,5 @@ export class GraficaComponent implements OnInit {
   disableDates = (date: Date): boolean => {
     return date > this.fechaActual || (this.fechaMasAntigua !== null && date < this.fechaMasAntigua);
   };
-  
+
 }

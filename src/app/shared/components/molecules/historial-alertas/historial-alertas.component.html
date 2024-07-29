@@ -1,33 +1,32 @@
-<div class="container flex-1 text-gray-900 mx-auto bg-gray-200">
+<div class="container flex-1 text-gray-900 mx-auto bg-custom-gray">
   <div class="p-4 flex justify-between items-center">
-    <div class="datepicker-container ml-19"> <!-- Cambiado de ml-2 a ml-8 -->
+    <div class="datepicker-container ml-19">
       <app-datapicker (dateRangeSelected)="onDateRangeSelected($event)"></app-datapicker>
     </div>
   </div>
 
   <div class="px-3 py-4 flex justify-center">
-
-    <table class="w-full text-md bg-white shadow-md rounded mb-4">
-      <thead>
-        <tr class="border-b">
-          <th class="text-left p-3 px-5">Especie ID</th>
-          <th class="text-left p-3 px-5">Nombre Especie</th>
-          <th class="text-left p-3 px-5">Lote ID</th>
-          <th class="text-left p-3 px-5">Descripción</th>
-          <th class="text-left p-3 px-5">Fecha</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let Alertas of alertasFiltradas" class="border-b hover:bg-orange-100">
-          <td class="p-3 px-5">{{ Alertas.EspecieID }}</td>
-          <td class="p-3 px-5">{{ Alertas.Nombre }}</td>
-          <td class="p-3 px-5">{{ Alertas.LoteID }}</td>
-          <td class="p-3 px-5">{{ Alertas.Descripcion }}</td>
-          <td class="p-3 px-5">{{ Alertas.FechaCreacion | date:'medium' }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-container">
+      <table class="w-full text-md bg-white shadow-md rounded mb-4">
+        <thead>
+          <tr class="border-b sticky-header">
+            <th class="text-left p-3 px-5">Especie ID</th>
+            <th class="text-left p-3 px-5">Nombre Especie</th>
+            <th class="text-left p-3 px-5">Lote ID</th>
+            <th class="text-left p-3 px-5">Descripción</th>
+            <th class="text-left p-3 px-5">Fecha</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let Alertas of alertasFiltradas" class="border-b hover:bg-orange-100">
+            <td class="p-3 px-5">{{ Alertas.EspecieID }}</td>
+            <td class="p-3 px-5">{{ Alertas.Nombre }}</td>
+            <td class="p-3 px-5">{{ Alertas.LoteID }}</td>
+            <td class="p-3 px-5">{{ Alertas.Descripcion }}</td>
+            <td class="p-3 px-5">{{ Alertas.FechaCreacion | date:'medium' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
-
-<tr *ngFor="let alerta of alertasFiltradas">

@@ -12,8 +12,8 @@ body {
 }
 
 header {
-    background-color: #F2F5F7; 
-    color: black; 
+    background-color: #F2F5F7;
+    color: black;
     padding: 0 2%;
     position: fixed; /* Menú fijo en la parte superior */
     top: 0; /* Asegura que el menú esté en la parte superior */
@@ -61,7 +61,7 @@ header {
 
 .icons .icon {
     height: 24px; /* Ajusta el tamaño del icono según sea necesario */
-    margin-right: 10px; 
+    margin-right: 10px;
     cursor: pointer;
     border-radius: 100%;
     margin-left: 15px; /* Espacio entre los iconos */

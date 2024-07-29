@@ -12,6 +12,7 @@ export class GraphPhComponent implements OnInit {
   public chart: Chart | null = null;
   public lotes: number[] = [];
   public selectedLote: number | null = null;
+  public loteDropdownOpen: boolean = false; // Nueva variable
   private startDate: Date | null = null;
   private endDate: Date | null = null;
 
@@ -38,10 +39,15 @@ export class GraphPhComponent implements OnInit {
     });
   }
 
+  toggleDropdown() {
+    this.loteDropdownOpen = !this.loteDropdownOpen;
+  }
+
   onLoteChange(event: Event) {
     const selectElement = event.target as HTMLSelectElement;
     this.selectedLote = parseInt(selectElement.value, 10);
     this.loadDataAndCreateChart();
+    this.loteDropdownOpen = false; // Cerrar dropdown al seleccionar
   }
 
   onDateRangeSelected(event: { startDate: Date, endDate: Date }): void {

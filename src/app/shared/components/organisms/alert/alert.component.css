@@ -1,8 +1,10 @@
 /* src/app/shared/components/molecules/alertas/alertas.component.css */
+
 .alert {
   padding: 1rem;
   margin-bottom: 1rem;
   border-radius: 0.5rem;
+  z-index: 1100; /* Ajuste del z-index para estar por encima de otros elementos */
 }
 
 .danger {
@@ -17,3 +19,9 @@
   @apply text-blue-800 border border-blue-300 rounded-lg bg-blue-50 dark:bg-blue-50 dark:text-blue-400 dark:border-blue-800;
 }
 
+.fixed-alert {
+  position: fixed;
+  top: 1rem; /* Ajusta la distancia desde la parte superior */
+  right: 1rem; /* Ajusta la distancia desde la parte derecha */
+  z-index: 1100; /* Ajuste del z-index para estar por encima de otros elementos */
+}
