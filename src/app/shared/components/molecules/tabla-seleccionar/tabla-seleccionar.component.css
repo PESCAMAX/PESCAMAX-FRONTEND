@@ -107,6 +107,7 @@
 }
 
 /* Añadido para evitar el solapamiento con el menú */
+/* Ajuste en el CSS global para el contenedor principal */
 .container {
   position: relative;
   z-index: 5;

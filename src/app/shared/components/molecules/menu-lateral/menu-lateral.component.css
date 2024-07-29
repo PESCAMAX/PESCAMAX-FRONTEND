@@ -4,4 +4,20 @@
   .flex-1.p-4.transition-all.duration-300 {
     margin-top: 4rem; /* Ajusta el margen superior para que el contenido no quede oculto detrás de la barra superior */
   }
+ /* src/app/shared/components/your-menu-lateral/menu-lateral.component.css */
+
+.menu-lateral {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 250px;
+    background-color: #1f2937; /* bg-gray-800 */
+    z-index: 1000; /* Ajuste del z-index si es necesario */
+  }
   
+  .content {
+    margin-left: 250px;
+    padding: 16px;
+  }
+   
