@@ -7,6 +7,8 @@ import { ButtonCancelarComponent } from './components/atomos-monitoreo/button-ca
 import { BtnLoginRegisterComponent } from './components/atomos-monitoreo/btn-login-register/btn-login-register.component';
 import { SharedModule } from '../../shared/shared.module';
 import { InputsFormComponent } from './components/atomos-monitoreo/inputs-form/inputs-form.component';
+import { LotesComponent } from './components/atomos-monitoreo/lotes/lotes.component';
+
 
 
 @NgModule({
@@ -19,7 +21,8 @@ import { InputsFormComponent } from './components/atomos-monitoreo/inputs-form/i
           ButtonCancelarComponent,
           BtnLoginRegisterComponent,
           SharedModule,
-          InputsFormComponent
+          InputsFormComponent,
+          LotesComponent
 
   ],
   imports: [

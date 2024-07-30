@@ -4,63 +4,74 @@
     width: 100%;
     border-collapse: separate;
   }
-
   i {
     font-size: 1rem !important;
   }
-
   .table tr {
     border-radius: 20px;
   }
-
   tr td:nth-child(n + 6),
   tr th:nth-child(n + 6) {
     border-radius: 0 0.625rem 0.625rem 0;
   }
-
   tr td:nth-child(1),
   tr th:nth-child(1) {
     border-radius: 0.625rem 0 0 0.625rem;
   }
-
   .button-spacing {
-    margin-right: 10px; /* Ajusta el valor según el espacio deseado */
+    margin-right: 10px;
   }
-
   .table-container {
-    max-height: 400px; /* Ajusta la altura según tus necesidades */
+    max-height: 400px;
     overflow-y: auto;
   }
-
   thead th {
     position: sticky;
     top: 0;
     background: white;
     z-index: 2;
   }
+  .no-border {
+    border: none;
+  }
+  .loading-spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #000;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+  }
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 </style>
 
-<link
-  href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
-  rel="stylesheet"
-/>
-<div class="container mx-auto flex">
- 
+<body>
 
+ 
+<div class="container mx-auto flex">
   <div class="flex-1 p-4">
-    <div class="text-gray-900  bg-custom-gray p-4 rounded shadow-md">
+    <div class="text-gray-900 bg-custom-gray p-4 rounded shadow-md">
       <div class="overflow-auto lg:overflow-visible">
-        <div class="flex lg:justify-between border-b-2 border-blue-600 pb-1">
+        <div class="flex lg:justify-between pb-1">
           <h2 class="text-3xl text-gray-500 font-bold">Monitoreo Datos</h2>
+          <button (click)="cargarDatos()" class="">
+            <i class="material-icons">refresh</i>
+            <span *ngIf="isLoading" class="loading-spinner"></span>
+          </button>
           <div class="text-center flex-auto"></div>
           <div>
-            <button (click)="filtrarTodos()" class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-lg button-spacing">Todos</button>
-            <button (click)="filtrarMasRecientes()" class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-lg button-spacing">Mas Recientes</button>
-            <select (change)="filtrarPorLote($event)" class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-lg">
-              <option value="">Seleccionar Lote</option>
-              <option *ngFor="let lote of lotes" [value]="lote">Lote {{ lote }}</option>
-            </select>
+
           </div>
+
+          <app-lotes [monitoreoData]="monitoreoData" (loteSeleccionado)="onLoteSeleccionado($event)"></app-lotes>
+
         </div>
         <div class="table-container">
           <table class="table w-full text-md bg-white shadow-md rounded mb-4 mt-4">
@@ -88,93 +99,3 @@
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-<!-- <style>
-  .table {
-    border-spacing: 0 15px;
-  }
-
-  i {
-    font-size: 1rem !important;
-  }
-
-  .table tr {
-    border-radius: 20px;
-  }
-
-  tr td:nth-child(n + 6),
-  tr th:nth-child(n + 6) {
-    border-radius: 0 0.625rem 0.625rem 0;
-  }
-
-  tr td:nth-child(1),
-  tr th:nth-child(1) {
-    border-radius: 0.625rem 0 0 0.625rem;
-  }
-
-  .button-spacing {
-    margin-right: 10px; /* Ajusta el valor según el espacio deseado */
-  }
-</style>
-
-
-
-<link
-  href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
-  rel="stylesheet"
-/>
-<div class="flex">
-  <div class="menu-lateral fixed left-0 top-0 h-full w-[250px] bg-gray-800">
-    <app-menu-lateral></app-menu-lateral>
-  </div>
-
-
-  <div class="flex-1 p-4">
-    <div class="text-gray-900 bg-gray-200 p-4 rounded shadow-md">
-      <div class="overflow-auto lg:overflow-visible">
-        <div class="flex lg:justify-between border-b-2 border-blue-600 pb-1">
-          <h2 class="text-3xl text-gray-500 font-bold">Monitoreo Datos</h2>
-          <div class="text-center flex-auto"></div>
-          <div>
-            <button (click)="filtrarTodos()" class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-lg button-spacing">Todos</button>
-            <button (click)="filtrarMasRecientes()" class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-lg button-spacing">Mas Recientes</button>
-            <select (change)="filtrarPorLote($event)" class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-lg">
-              <option value="">Seleccionar Lote</option>
-              <option *ngFor="let lote of lotes" [value]="lote">Lote {{ lote }}</option>
-            </select>
-          </div>
-        </div>
-        <table class="w-full text-md bg-white shadow-md rounded mb-4 mt-4">
-          <thead>
-            <tr class="border-b bg-white">
-              <th class="text-left p-3 px-5">Geomenbrana</th>
-              <th class="text-left p-3 px-5">Tds</th>
-              <th class="text-left p-3 px-5">Temperatura</th>
-              <th class="text-left p-3 px-5">Ph</th>
-              <th class="text-left p-3 px-5">Fecha</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of filteredData" class="border-b hover:bg-orange-100">
-              <td class="p-3 px-5">{{ item.LoteID }}</td>
-              <td class="p-3 px-5">{{ item.tds }}</td>
-              <td class="p-3 px-5">{{ item.Temperatura }}</td>
-              <td class="p-3 px-5">{{ item.PH }}</td>
-              <td class="p-3 px-5">{{ item.FechaHora | date:'short' }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</div> -->
