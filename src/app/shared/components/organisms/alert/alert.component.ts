@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AlertService } from '../../../../features/monitoreo/services/api-alert/alert.service';
 import { Router, NavigationStart } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AuthService } from '../../../../features/monitoreo/services/api-login/auth.service';
+import { AuthService } from '../../../../core/services/api-login/auth.service';
 
 @Component({
   selector: 'app-alert',

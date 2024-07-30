@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Alerta, ApiService, Especie, Monitoreo } from '../../../../features/monitoreo/services/api-form/api.service';
-import { AlertService } from '../../../../features/monitoreo/services/api-alert/alert.service';
-import { AuthService } from '../../../../features/monitoreo/services/api-login/auth.service';
+import { Alerta,ApiService,Especie,Monitoreo } from '../../../services/api-form/api.service';
+import { AlertService } from '../../../services/api-alert/alert.service';
+import { AuthService } from '../../../../../core/services/api-login/auth.service';
 import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-tabla-seleccionar',

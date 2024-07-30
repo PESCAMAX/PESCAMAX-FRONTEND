@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../../../features/monitoreo/services/api-form/api.service';
+import { ApiService } from '../../../services/api-form/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
-import { AuthService } from '../../../../features/monitoreo/services/api-login/auth.service';
+import { AuthService } from '../../../../../core/services/api-login/auth.service';
 import { ActivatedRoute } from '@angular/router';
 interface Especie {
   Id: number;

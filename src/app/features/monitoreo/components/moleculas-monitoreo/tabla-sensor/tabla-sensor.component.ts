@@ -1,7 +1,7 @@
 // src/app/shared/components/molecules/tabla-sensor/tabla-sensor.component.ts
 import { Component, OnInit } from '@angular/core';
-import { ApiService, Monitoreo } from '../../../../features/monitoreo/services/api-form/api.service';
-import { AuthService } from '../../../../features/monitoreo/services/api-login/auth.service';
+import { ApiService,Monitoreo } from '../../../services/api-form/api.service';
+import { AuthService } from '../../../../../core/services/api-login/auth.service';
 @Component({
   selector: 'app-tabla-sensor',
   templateUrl: './tabla-sensor.component.html',

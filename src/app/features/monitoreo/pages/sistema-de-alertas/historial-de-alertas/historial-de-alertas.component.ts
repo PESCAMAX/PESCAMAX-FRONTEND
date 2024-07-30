@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HistorialAlertasComponent } from '../../../../../shared/components/molecules/historial-alertas/historial-alertas.component';
+import { HistorialAlertasComponent } from '../../../components/moleculas-monitoreo/historial-alertas/historial-alertas.component';
 
 @Component({
   selector: 'app-historial-de-alertas',

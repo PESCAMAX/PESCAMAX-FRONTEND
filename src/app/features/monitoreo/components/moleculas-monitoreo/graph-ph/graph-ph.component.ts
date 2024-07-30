@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, ChartConfiguration } from 'chart.js/auto';
-import { ApiService } from '../../../../features/monitoreo/services/api-form/api.service';
-import { AuthService } from '../../../../features/monitoreo/services/api-login/auth.service';
+import { ApiService } from '../../../services/api-form/api.service';
+import { AuthService } from '../../../../../core/services/api-login/auth.service';
 
 @Component({
   selector: 'app-graph-ph',

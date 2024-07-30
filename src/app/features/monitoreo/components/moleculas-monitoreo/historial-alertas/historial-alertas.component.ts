@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService, Alerta } from '../../../../features/monitoreo/services/api-form/api.service';
-import { AuthService } from '../../../../features/monitoreo/services/api-login/auth.service';
+import { ApiService,Alerta } from '../../../services/api-form/api.service';
+import { AuthService } from '../../../../../core/services/api-login/auth.service';
 
 @Component({
   selector: 'app-historial-alertas',

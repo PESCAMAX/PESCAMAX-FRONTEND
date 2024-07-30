@@ -1,8 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, HostListener } from '@angular/core';
-import { MenuStateService } from '../../../../features/monitoreo/services/menu-state/menu-state.service';
+import { MenuStateService } from '../../../services/menu-state/menu-state.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { AuthService } from '../../../../features/monitoreo/services/api-login/auth.service';
+import { AuthService } from '../../../../../core/services/api-login/auth.service';
 
 @Component({
   selector: 'app-menu-lateral',

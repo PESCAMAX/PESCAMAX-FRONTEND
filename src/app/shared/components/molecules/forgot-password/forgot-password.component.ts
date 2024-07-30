@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../../../features/monitoreo/services/api-login/auth.service';
+import { AuthService } from '../../../../core/services/api-login/auth.service';
 
 @Component({
   selector: 'app-forgot-password',

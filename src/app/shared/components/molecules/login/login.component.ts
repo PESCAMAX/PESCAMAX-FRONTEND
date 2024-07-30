@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../../../features/monitoreo/services/api-login/auth.service';
+import { AuthService } from '../../../../core/services/api-login/auth.service';
 import { Router } from '@angular/router';
 
 @Component({

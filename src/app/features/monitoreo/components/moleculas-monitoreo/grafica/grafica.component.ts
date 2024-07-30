@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js/auto';
-import { ApiService, Alerta } from '../../../../features/monitoreo/services/api-form/api.service';
-import { AuthService } from '../../../../features/monitoreo/services/api-login/auth.service';
+import { ApiService,Alerta } from '../../../services/api-form/api.service';
+import { AuthService } from '../../../../../core/services/api-login/auth.service';
 @Component({
   selector: 'app-grafica',
   templateUrl: './grafica.component.html',
