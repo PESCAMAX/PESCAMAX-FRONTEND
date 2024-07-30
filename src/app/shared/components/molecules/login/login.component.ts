@@ -54,45 +54,63 @@ export class LoginComponent implements OnInit, AfterViewInit {
       this.authService.login(this.loginForm.value).subscribe({
         next: (response) => {
           console.log('Inicio de sesión exitoso', response);
+          this.showTemporaryMessage('Inicio de sesión exitoso', false);
           this.router.navigate(['/home', response.userId]);
         },
         error: (error) => {
           console.error('Error en el inicio de sesión', error);
+          let errorMsg = 'Error en el inicio de sesión';
           if (error.error instanceof ErrorEvent) {
-            this.errorMessage = `Error: ${error.error.message}`;
+            errorMsg = `Error: ${error.error.message}`;
           } else {
-            this.errorMessage = `Código de Error: ${error.status}\nMensaje: ${error.message}`;
+            errorMsg = `Código de Error: ${error.status}\nMensaje: ${error.message}`;
           }
+          this.showTemporaryMessage(errorMsg, true);
         }
       });
     } else {
       console.log('El formulario es inválido', this.loginForm.errors);
-      this.errorMessage = 'Por favor, complete todos los campos requeridos';
+      this.showTemporaryMessage('Por favor, complete todos los campos requeridos', true);
     }
   }
-
+  
   onRegister() {
     if (this.registerForm.valid) {
       console.log('Registrando usuario:', this.registerForm.value);
       this.authService.register(this.registerForm.value).subscribe({
         next: (response) => {
           console.log('Registro exitoso', response);
-          this.successMessage = 'Registro exitoso. Por favor, inicie sesión.';
+          this.showTemporaryMessage('Registro exitoso. Por favor, inicie sesión.', false);
           this.showSignIn(); // Switch to the login form
         },
         error: (error) => {
           console.error('Error en el registro', error);
+          let errorMsg = 'Error en el registro';
           if (error.error instanceof ErrorEvent) {
-            this.errorMessage = `Error: ${error.error.message}`;
+            errorMsg = `Error: ${error.error.message}`;
           } else {
-            this.errorMessage = `Código de Error: ${error.status}\nMensaje: ${error.message}`;
+            errorMsg = `Código de Error: ${error.status}\nMensaje: ${error.message}`;
           }
+          this.showTemporaryMessage(errorMsg, true);
         }
       });
     } else {
       console.log('El formulario de registro es inválido', this.registerForm.errors);
-      this.errorMessage = 'Por favor, complete todos los campos requeridos correctamente';
+      this.showTemporaryMessage('Por favor, complete todos los campos requeridos correctamente', true);
     }
+  }
+  private showTemporaryMessage(message: string, isError: boolean, duration: number = 2000) {
+    if (isError) {
+      this.errorMessage = message;
+      this.successMessage = '';
+    } else {
+      this.successMessage = message;
+      this.errorMessage = '';
+    }
+  
+    setTimeout(() => {
+      this.clearMessages();
+    }, duration);
   }
 
   showSignIn() {
