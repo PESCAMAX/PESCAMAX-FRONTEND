@@ -1,93 +1,113 @@
+<div class="mx-auto w-full max-w-[550px] bg-white shadow-lg rounded-lg p-8">
+  <app-alert-form [successMessage]="successMessage" [errorMessage]="errorMessage"></app-alert-form>
+  <form [formGroup]="especieForm" (ngSubmit)="onSubmit()">
+    <div class="mb-5">
+      <label for="nombreEspecie" class="mb-3 block text-base font-medium text-[#07074D]">
+        Nombre de la especie
+      </label>
+      <app-inputs-form
+        formControlName="nombreEspecie"
+        type="text"
+        placeholder="Nombre de la especie"
+      ></app-inputs-form>
+      <div *ngIf="especieForm.get('nombreEspecie')?.invalid && especieForm.get('nombreEspecie')?.touched" class="text-red-500 text-sm">
+        {{ getErrorMessage('nombreEspecie') }}
+      </div>
+    </div>
 
- <div class="mx-auto w-full max-w-[550px] bg-white shadow-lg rounded-lg p-8">
-    <app-alert-form [successMessage]="successMessage" [errorMessage]="errorMessage"></app-alert-form>
-    <form [formGroup]="especieForm" (ngSubmit)="onSubmit()">
-      <div class="mb-5">
-        <label for="nombreEspecie" class="mb-3 block text-base font-medium text-[#07074D]">
-          Nombre de la especie
+    <div class="mb-5 flex space-x-4">
+      <div class="w-1/2">
+        <label for="tdsMinimo" class="mb-3 block text-base font-medium text-[#07074D]">
+          TDS ideal mínimo
         </label>
-        <input formControlName="nombreEspecie" type="text" id="nombreEspecie" placeholder="Nombre de la especie"
-               class="w-full rounded-lg border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#4295e2] focus:shadow-md" />
-        <div *ngIf="especieForm.get('nombreEspecie')?.invalid && especieForm.get('nombreEspecie')?.touched" class="text-red-500 text-sm">
-          {{ getErrorMessage('nombreEspecie') }}
+        <app-inputs-form
+          formControlName="tdsMinimo"
+          type="text"
+          placeholder="TDS ideal mínimo"
+        ></app-inputs-form>
+        <div *ngIf="especieForm.get('tdsMinimo')?.invalid && especieForm.get('tdsMinimo')?.touched" class="text-red-500 text-sm">
+          {{ getErrorMessage('tdsMinimo') }}
         </div>
       </div>
-
-      <div class="mb-5 flex space-x-4">
-        <div class="w-1/2">
-          <label for="tdsMinimo" class="mb-3 block text-base font-medium text-[#07074D]">
-            TDS ideal mínimo
-          </label>
-          <input formControlName="tdsMinimo" type="text" id="tdsMinimo" placeholder="TDS ideal mínimo"
-                 class="w-full rounded-lg border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#4295e2] focus:shadow-md" />
-          <div *ngIf="especieForm.get('tdsMinimo')?.invalid && especieForm.get('tdsMinimo')?.touched" class="text-red-500 text-sm">
-            {{ getErrorMessage('tdsMinimo') }}
-          </div>
-        </div>
-        <div class="w-1/2">
-          <label for="tdsMaximo" class="mb-3 block text-base font-medium text-[#07074D]">
-            TDS ideal máximo
-          </label>
-          <input formControlName="tdsMaximo" type="text" id="tdsMaximo" placeholder="TDS ideal máximo"
-                 class="w-full rounded-lg border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#4295e2] focus:shadow-md" />
-          <div *ngIf="especieForm.get('tdsMaximo')?.errors && especieForm.get('tdsMaximo')?.touched" class="text-red-500 text-sm">
-            {{ getErrorMessage('tdsMaximo') }}
-          </div>
+      <div class="w-1/2">
+        <label for="tdsMaximo" class="mb-3 block text-base font-medium text-[#07074D]">
+          TDS ideal máximo
+        </label>
+        <app-inputs-form
+          formControlName="tdsMaximo"
+          type="text"
+          placeholder="TDS ideal máximo"
+        ></app-inputs-form>
+        <div *ngIf="especieForm.get('tdsMaximo')?.errors && especieForm.get('tdsMaximo')?.touched" class="text-red-500 text-sm">
+          {{ getErrorMessage('tdsMaximo') }}
         </div>
       </div>
+    </div>
 
-      <div class="mb-5 flex space-x-4">
-        <div class="w-1/2">
-          <label for="temperaturaMinimo" class="mb-3 block text-base font-medium text-[#07074D]">
-            Temperatura ideal mínima
-          </label>
-          <input formControlName="temperaturaMinimo" type="text" id="temperaturaMinimo" placeholder="Temperatura ideal mínima"
-                 class="w-full rounded-lg border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#4295e2] focus:shadow-md" />
-          <div *ngIf="especieForm.get('temperaturaMinimo')?.invalid && especieForm.get('temperaturaMinimo')?.touched" class="text-red-500 text-sm">
-            {{ getErrorMessage('temperaturaMinimo') }}
-          </div>
-        </div>
-        <div class="w-1/2">
-          <label for="temperaturaMaximo" class="mb-3 block text-base font-medium text-[#07074D]">
-            Temperatura ideal máxima
-          </label>
-          <input formControlName="temperaturaMaximo" type="text" id="temperaturaMaximo" placeholder="Temperatura ideal máxima"
-                 class="w-full rounded-lg border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#4295e2] focus:shadow-md" />
-          <div *ngIf="especieForm.get('temperaturaMaximo')?.errors && especieForm.get('temperaturaMaximo')?.touched" class="text-red-500 text-sm">
-            {{ getErrorMessage('temperaturaMaximo') }}
-          </div>
+    <div class="mb-5 flex space-x-4">
+      <div class="w-1/2">
+        <label for="temperaturaMinimo" class="mb-3 block text-base font-medium text-[#07074D]">
+          Temperatura ideal mínima
+        </label>
+        <app-inputs-form
+          formControlName="temperaturaMinimo"
+          type="text"
+          placeholder="Temperatura ideal mínima"
+        ></app-inputs-form>
+        <div *ngIf="especieForm.get('temperaturaMinimo')?.invalid && especieForm.get('temperaturaMinimo')?.touched" class="text-red-500 text-sm">
+          {{ getErrorMessage('temperaturaMinimo') }}
         </div>
       </div>
-
-      <div class="mb-5 flex space-x-4">
-        <div class="w-1/2">
-          <label for="phMinimo" class="mb-3 block text-base font-medium text-[#07074D]">
-            PH del agua mínimo
-          </label>
-          <input formControlName="phMinimo" type="text" id="phMinimo" placeholder="PH del agua mínimo"
-                 class="w-full rounded-lg border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#4295e2] focus:shadow-md" />
-          <div *ngIf="especieForm.get('phMinimo')?.invalid && especieForm.get('phMinimo')?.touched" class="text-red-500 text-sm">
-            {{ getErrorMessage('phMinimo') }}
-          </div>
-        </div>
-        <div class="w-1/2">
-          <label for="phMaximo" class="mb-3 block text-base font-medium text-[#07074D]">
-            PH del agua máximo
-          </label>
-          <input formControlName="phMaximo" type="text" id="phMaximo" placeholder="PH del agua máximo"
-                 class="w-full rounded-lg border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#4295e2] focus:shadow-md" />
-          <div *ngIf="especieForm.get('phMaximo')?.errors && especieForm.get('phMaximo')?.touched" class="text-red-500 text-sm">
-            {{ getErrorMessage('phMaximo') }}
-          </div>
+      <div class="w-1/2">
+        <label for="temperaturaMaximo" class="mb-3 block text-base font-medium text-[#07074D]">
+          Temperatura ideal máxima
+        </label>
+        <app-inputs-form
+          formControlName="temperaturaMaximo"
+          type="text"
+          placeholder="Temperatura ideal máxima"
+        ></app-inputs-form>
+        <div *ngIf="especieForm.get('temperaturaMaximo')?.errors && especieForm.get('temperaturaMaximo')?.touched" class="text-red-500 text-sm">
+          {{ getErrorMessage('temperaturaMaximo') }}
         </div>
       </div>
+    </div>
 
-      <div>
-        <app-button-guardar 
+    <div class="mb-5 flex space-x-4">
+      <div class="w-1/2">
+        <label for="phMinimo" class="mb-3 block text-base font-medium text-[#07074D]">
+          PH del agua mínimo
+        </label>
+        <app-inputs-form
+          formControlName="phMinimo"
+          type="text"
+          placeholder="PH del agua mínimo"
+        ></app-inputs-form>
+        <div *ngIf="especieForm.get('phMinimo')?.invalid && especieForm.get('phMinimo')?.touched" class="text-red-500 text-sm">
+          {{ getErrorMessage('phMinimo') }}
+        </div>
+      </div>
+      <div class="w-1/2">
+        <label for="phMaximo" class="mb-3 block text-base font-medium text-[#07074D]">
+          PH del agua máximo
+        </label>
+        <app-inputs-form
+          formControlName="phMaximo"
+          type="text"
+          placeholder="PH del agua máximo"
+        ></app-inputs-form>
+        <div *ngIf="especieForm.get('phMaximo')?.errors && especieForm.get('phMaximo')?.touched" class="text-red-500 text-sm">
+          {{ getErrorMessage('phMaximo') }}
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <app-button-guardar 
         type="submit"
         [texto]="'Guardar'"
         [customClass]="'w-full py-3 px-8'">
-      </app-button-guardar>     </div>
-    </form>
-  </div>
-
+      </app-button-guardar>
+    </div>
+  </form>
+</div>

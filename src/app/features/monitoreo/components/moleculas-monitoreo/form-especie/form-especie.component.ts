@@ -13,14 +13,11 @@ export class EspecieFormComponent implements OnInit {
   successMessage: string = '';
   errorMessage: string = '';
 
-  type: any;
-
   constructor(
     private fb: FormBuilder, 
     private apiService: ApiService,
-    private authService: AuthService // Añade el AuthService al constructor
+    private authService: AuthService
   ) {
-
     this.especieForm = this.fb.group({
       nombreEspecie: ['', [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)]],
       tdsMinimo: ['', [Validators.required, this.numberValidator]],
@@ -37,7 +34,7 @@ export class EspecieFormComponent implements OnInit {
   onSubmit(): void {
     this.especieForm.updateValueAndValidity();
     if (this.especieForm.valid) {
-      const username = this.authService.getUserId(); // Usa el método del AuthService
+      const username = this.authService.getUserId();
       if (!username) {
         this.showError('No se pudo obtener el nombre de usuario. Por favor, inicie sesión nuevamente.');
         return;
@@ -56,6 +53,7 @@ export class EspecieFormComponent implements OnInit {
       this.validateAllFormFields(this.especieForm);
     }
   }
+
   showSuccess(message: string): void {
     this.successMessage = message;
     setTimeout(() => {
