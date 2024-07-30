@@ -41,7 +41,7 @@ import { RegisterPageComponent } from '../features/monitoreo/pages/home/register
 import { RecuperarPageComponent } from '../features/monitoreo/pages/home/recuperar-page/recuperar-page.component';
 import { CambiarPageComponent } from '../features/monitoreo/pages/home/cambiar-page/cambiar-page.component';
 import { BtnLoginRegisterComponent } from '../features/monitoreo/components/atomos-monitoreo/btn-login-register/btn-login-register.component';
-
+import { InputsFormComponent } from '../features/monitoreo/components/atomos-monitoreo/inputs-form/inputs-form.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +77,8 @@ import { BtnLoginRegisterComponent } from '../features/monitoreo/components/atom
     RegisterPageComponent,
     RecuperarPageComponent,
     CambiarPageComponent,
-    BtnLoginRegisterComponent
+    BtnLoginRegisterComponent,
+    InputsFormComponent
 
 
   ],
@@ -118,7 +119,8 @@ import { BtnLoginRegisterComponent } from '../features/monitoreo/components/atom
     RegisterPageComponent,
     RecuperarPageComponent,
     CambiarPageComponent,
-    BtnLoginRegisterComponent
+    BtnLoginRegisterComponent,
+    InputsFormComponent
 
 
   ]
