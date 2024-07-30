@@ -99,9 +99,12 @@
         </div>
       </div>
       <div class="mt-4 flex justify-end">
-        <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2">
-          Guardar Cambios
-        </button>
+        <app-button-guardar 
+        type="submit"
+        [texto]="'Guardar Cambios'"
+        [color]="'green'"
+        [customClass]="'mr-2'">
+      </app-button-guardar>
         <button type="button" (click)="cerrarModal()" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
           Cancelar
         </button>

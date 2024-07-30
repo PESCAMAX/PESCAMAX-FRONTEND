@@ -20,10 +20,10 @@
             </select>
           </td>
           <td class="p-3 px-5 flex justify-end">
-            <button type="button" (click)="guardarSeleccion(especie.Id)" class="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Guardar</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+            <app-button-guardar 
+            [texto]="'Guardar'"
+            (clickBoton)="guardarSeleccion(especie.Id)"
+            [customClass]="'mr-3 text-sm py-1 px-2'">
+          </app-button-guardar>  </table>
   </div>
 </div>

@@ -40,7 +40,7 @@ import { LoginPageComponent } from '../features/monitoreo/pages/home/login-page/
 import { RegisterPageComponent } from '../features/monitoreo/pages/home/register-page/register-page.component';
 import { RecuperarPageComponent } from '../features/monitoreo/pages/home/recuperar-page/recuperar-page.component';
 import { CambiarPageComponent } from '../features/monitoreo/pages/home/cambiar-page/cambiar-page.component';
-
+import { ButtonGuardarComponent } from '../features/monitoreo/components/atomos-monitoreo/button-guardar/button-guardar.component';
 @NgModule({
   declarations: [
     ButtonEnviarComponent,
@@ -74,7 +74,8 @@ import { CambiarPageComponent } from '../features/monitoreo/pages/home/cambiar-p
     InicioComponent,
     RegisterPageComponent,
     RecuperarPageComponent,
-    CambiarPageComponent
+    CambiarPageComponent,
+    ButtonGuardarComponent
 
 
   ],
