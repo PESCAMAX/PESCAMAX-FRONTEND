@@ -8,6 +8,7 @@ import { BtnLoginRegisterComponent } from './components/atomos-monitoreo/btn-log
 import { SharedModule } from '../../shared/shared.module';
 import { InputsFormComponent } from './components/atomos-monitoreo/inputs-form/inputs-form.component';
 import { LotesComponent } from './components/atomos-monitoreo/lotes/lotes.component';
+import { FechasMensajesComponent } from './components/atomos-monitoreo/fechas-mensajes/fechas-mensajes.component';
 
 
 
@@ -22,7 +23,8 @@ import { LotesComponent } from './components/atomos-monitoreo/lotes/lotes.compon
           BtnLoginRegisterComponent,
           SharedModule,
           InputsFormComponent,
-          LotesComponent
+          LotesComponent,
+          FechasMensajesComponent
 
   ],
   imports: [
