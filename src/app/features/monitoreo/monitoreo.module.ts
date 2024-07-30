@@ -10,6 +10,8 @@ import { InputsFormComponent } from './components/atomos-monitoreo/inputs-form/i
 import { LotesComponent } from './components/atomos-monitoreo/lotes/lotes.component';
 import { ButtonMasrecientesComponent } from './components/atomos-monitoreo/button-masrecientes/button-masrecientes.component';
 import { ButtonHorarioAlertasComponent } from './components/atomos-monitoreo/button-horario-alertas/button-horario-alertas.component';
+import { FechasMensajesComponent } from './components/atomos-monitoreo/fechas-mensajes/fechas-mensajes.component';
+
 
 
 
@@ -26,7 +28,9 @@ import { ButtonHorarioAlertasComponent } from './components/atomos-monitoreo/but
           InputsFormComponent,
           LotesComponent,
           ButtonMasrecientesComponent,
-          ButtonHorarioAlertasComponent
+          ButtonHorarioAlertasComponent,
+          FechasMensajesComponent
+
 
   ],
   imports: [
