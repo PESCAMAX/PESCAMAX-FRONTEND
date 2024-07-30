@@ -14,9 +14,9 @@
             <span class="noticias">Noticias</span>
         </p>
         <nav class="nav-buttons">
-            <a href="/login" class="btn btn-login">Ingresar</a>
-            <a href="/register" class="btn btn-register">Registrate</a>
-        </nav>
+            <app-btn-login-register [text]="'Ingresar'" [href]="'/login'" variant="login"></app-btn-login-register>
+            <app-btn-login-register [text]="'Registrate'" [href]="'/register'" variant="register"></app-btn-login-register>
+          </nav>
     </header>
 
     <!-- Contenido principal -->
@@ -26,7 +26,7 @@
                 <h1 class="main-title">BIENVENIDO A PESCAMAX</h1>
                 <p class="main-subtitle">LA MEJOR PLATAFORMA PARA EL MONITOREO DE TUS PECES</p>
                 <p class="start-text">Empieza con nosotros</p>
-                <a href="/login" class="btn btn-login">Ingresar</a>
+                <app-btn-login-register [text]="'Ingresar'" [href]="'/login'" variant="login"></app-btn-login-register>
             </div>
         </div>
         <div class="right-content">

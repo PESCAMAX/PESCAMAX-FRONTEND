@@ -43,6 +43,9 @@ import { CambiarPageComponent } from '../features/monitoreo/pages/home/cambiar-p
 import { ButtonGuardarComponent } from '../features/monitoreo/components/atomos-monitoreo/button-guardar/button-guardar.component';
 import { ButtonEliminarComponent } from '../features/monitoreo/components/atomos-monitoreo/button-eliminar/button-eliminar.component';
 import { ButtonCancelarComponent } from '../features/monitoreo/components/atomos-monitoreo/button-cancelar/button-cancelar.component';
+import { BtnLoginRegisterComponent } from '../features/monitoreo/components/atomos-monitoreo/btn-login-register/btn-login-register.component';
+import { InputsFormComponent } from '../features/monitoreo/components/atomos-monitoreo/inputs-form/inputs-form.component';
+
 @NgModule({
   declarations: [
     ButtonEnviarComponent,
@@ -79,7 +82,10 @@ import { ButtonCancelarComponent } from '../features/monitoreo/components/atomos
     CambiarPageComponent,
     ButtonGuardarComponent,
     ButtonEliminarComponent,
-    ButtonCancelarComponent
+    ButtonCancelarComponent,
+    BtnLoginRegisterComponent,
+    InputsFormComponent
+
 
 
   ],
@@ -119,7 +125,9 @@ import { ButtonCancelarComponent } from '../features/monitoreo/components/atomos
     NavigationComponent,
     RegisterPageComponent,
     RecuperarPageComponent,
-    CambiarPageComponent
+    CambiarPageComponent,
+    BtnLoginRegisterComponent,
+    InputsFormComponent
 
 
   ]

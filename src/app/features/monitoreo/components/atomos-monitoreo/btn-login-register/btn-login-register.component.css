@@ -1,0 +1,26 @@
+.btn {
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.btn-login {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.btn-login:hover {
+  background-color: darken(#3b82f6, 10%);
+}
+
+.btn-register {
+  background-color: white;
+  color: #3b82f6;
+  border: 1px solid #3b82f6;
+}
+
+.btn-register:hover {
+  background-color: #3b82f6;
+  color: white;
+}

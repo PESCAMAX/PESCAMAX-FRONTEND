@@ -4,21 +4,26 @@ import { InicioComponent } from './pages/inicio/inicio.component';
 import { ButtonGuardarComponent } from './components/atomos-monitoreo/button-guardar/button-guardar.component';
 import { ButtonEliminarComponent } from './components/atomos-monitoreo/button-eliminar/button-eliminar.component';
 import { ButtonCancelarComponent } from './components/atomos-monitoreo/button-cancelar/button-cancelar.component';
-
+import { BtnLoginRegisterComponent } from './components/atomos-monitoreo/btn-login-register/btn-login-register.component';
+import { SharedModule } from '../../shared/shared.module';
+import { InputsFormComponent } from './components/atomos-monitoreo/inputs-form/inputs-form.component';
 
 
 @NgModule({
   declarations: [
 
   
-    InicioComponent,
+          InicioComponent,
           ButtonGuardarComponent,
           ButtonEliminarComponent,
-          ButtonCancelarComponent
+          ButtonCancelarComponent,
+          BtnLoginRegisterComponent,
+          SharedModule,
+          InputsFormComponent
+
   ],
   imports: [
-    CommonModule,
-  
+    CommonModule
   ]
 })
 export class MonitoreoModule { }
