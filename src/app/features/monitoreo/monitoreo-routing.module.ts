@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { CardAlertsComponent } from '../../shared/components/molecules/card-alerts/card-alerts.component';
-import { TablaEspecieComponent } from '../../shared/components/molecules/tabla-especie/tabla-especie.component';
+import { CardAlertsComponent } from './components/moleculas-monitoreo/card-alerts/card-alerts.component';
+import { TablaEspecieComponent } from './components/moleculas-monitoreo/tabla-especie/tabla-especie.component';
 import { CrearEspecieComponent } from './pages/gestion-de-parametros/crear-especie/crear-especie.component';
 import { ModificarEspecieComponent } from './pages/gestion-de-parametros/modificar-especie/modificar-especie.component';
 import { SeleccionarEspecieComponent } from './pages/gestion-de-parametros/seleccionar-especie/seleccionar-especie.component';
