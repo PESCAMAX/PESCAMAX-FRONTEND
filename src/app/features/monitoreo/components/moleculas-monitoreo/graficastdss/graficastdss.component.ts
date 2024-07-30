@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js/auto';
-import { ApiService } from '../../../services/api-form/api.service';
+import { ApiService,Monitoreo } from '../../../services/api-form/api.service';
 import { AuthService } from '../../../../../core/services/api-login/auth.service';
 
 @Component({
@@ -15,6 +15,7 @@ export class GraficastdssComponent implements OnInit {
   private startDate: Date | null = null;
   public loteDropdownOpen: boolean = false; 
   private endDate: Date | null = null;
+  monitoreoData: Monitoreo[] = []; 
   isMenuOpen: boolean = true;
   isDropdownOpen: boolean = false;
 
@@ -34,8 +35,9 @@ export class GraficastdssComponent implements OnInit {
 
 
   loadLotes() {
-    this.apiService.listarMonitoreo(this.AuthService.getUserId()).subscribe( 
+    this.apiService.listarMonitoreo(this.AuthService.getUserId()).subscribe(
       data => {
+        this.monitoreoData = data.response; // Asigna los datos a monitoreoData
         this.lotes = [...new Set(data.response.map(item => item.LoteID))];
         if (this.lotes.length > 0) {
           this.selectedLote = this.lotes[0];
@@ -48,12 +50,11 @@ export class GraficastdssComponent implements OnInit {
     );
   }
 
-  onLoteChange(event: Event) {
-    const selectElement = event.target as HTMLSelectElement;
-    this.selectedLote = parseInt(selectElement.value, 10);
+  onLoteChange(lote: number | null): void {
+    this.selectedLote = lote;
     this.loadDataAndCreateChart();
+   
   }
-
   onDateRangeSelected(event: { startDate: Date, endDate: Date }): void {
     this.startDate = event.startDate;
     this.endDate = event.endDate;

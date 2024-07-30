@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, ChartConfiguration } from 'chart.js/auto';
-import { ApiService } from '../../../services/api-form/api.service';
+import { ApiService,Monitoreo } from '../../../services/api-form/api.service';
 import { AuthService } from '../../../../../core/services/api-login/auth.service';
 
 @Component({
@@ -15,6 +15,7 @@ export class GraphPhComponent implements OnInit {
   public loteDropdownOpen: boolean = false; // Nueva variable
   private startDate: Date | null = null;
   private endDate: Date | null = null;
+  monitoreoData: Monitoreo[] = []; 
 
   constructor(private apiService: ApiService, private authService: AuthService) {}
 
@@ -23,33 +24,32 @@ export class GraphPhComponent implements OnInit {
   }
 
   loadLotes() {
-    this.apiService.listarMonitoreo(this.authService.getUserId()).subscribe({
-      next: (data) => {
-        if (data && data.response) {
-          this.lotes = [...new Set(data.response.map(item => item.LoteID))];
-          if (this.lotes.length > 0) {
-            this.selectedLote = this.lotes[0];
-            this.loadDataAndCreateChart();
-          }
-        } else {
-          console.error('La respuesta no tiene el formato esperado:', data);
+    this.apiService.listarMonitoreo(this.authService.getUserId()).subscribe(
+      data => {
+        this.monitoreoData = data.response; // Asigna los datos a monitoreoData
+        this.lotes = [...new Set(data.response.map(item => item.LoteID))];
+        if (this.lotes.length > 0) {
+          this.selectedLote = this.lotes[0];
+          this.loadDataAndCreateChart();
         }
       },
-      error: (error) => console.error('Error al cargar lotes:', error)
-    });
+      error => {
+        console.error('Error al cargar los lotes:', error);
+      }
+    );
   }
+
 
   toggleDropdown() {
     this.loteDropdownOpen = !this.loteDropdownOpen;
   }
 
-  onLoteChange(event: Event) {
-    const selectElement = event.target as HTMLSelectElement;
-    this.selectedLote = parseInt(selectElement.value, 10);
-    this.loadDataAndCreateChart();
-    this.loteDropdownOpen = false; // Cerrar dropdown al seleccionar
-  }
 
+  onLoteChange(lote: number | null): void {
+    this.selectedLote = lote;
+    this.loadDataAndCreateChart();
+   
+  }
   onDateRangeSelected(event: { startDate: Date, endDate: Date }): void {
     this.startDate = event.startDate;
     this.endDate = event.endDate;
