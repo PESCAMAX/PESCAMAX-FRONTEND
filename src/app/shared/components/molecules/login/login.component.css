@@ -23,12 +23,13 @@ body {
 .container{
 right: 58%;
 position: relative;
-width: 850px;
+width: 800px;
 height: 500px;
 background-color: #fff;
 box-shadow: 25px 30px 55px #5557;
 border-radius: 13px;
 overflow: hidden;
+
 }
 
 
@@ -245,4 +246,22 @@ p{
         width: 250px;
     }
 
+  }
+
+  .alert {
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+  
+  .success {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+  }
+  
+  .error {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
   }
