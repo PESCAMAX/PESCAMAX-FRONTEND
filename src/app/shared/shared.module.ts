@@ -45,6 +45,7 @@ import { ButtonEliminarComponent } from '../features/monitoreo/components/atomos
 import { ButtonCancelarComponent } from '../features/monitoreo/components/atomos-monitoreo/button-cancelar/button-cancelar.component';
 import { BtnLoginRegisterComponent } from '../features/monitoreo/components/atomos-monitoreo/btn-login-register/btn-login-register.component';
 import { InputsFormComponent } from '../features/monitoreo/components/atomos-monitoreo/inputs-form/inputs-form.component';
+import { ButtonHorarioAlertasComponent } from '../features/monitoreo/components/atomos-monitoreo/button-horario-alertas/button-horario-alertas.component';
 import { LotesComponent } from '../features/monitoreo/components/atomos-monitoreo/lotes/lotes.component';
 @NgModule({
   declarations: [
@@ -85,7 +86,8 @@ import { LotesComponent } from '../features/monitoreo/components/atomos-monitore
     ButtonCancelarComponent,
     BtnLoginRegisterComponent,
     InputsFormComponent,
-    LotesComponent
+    LotesComponent,
+    ButtonHorarioAlertasComponent
 
 
 
