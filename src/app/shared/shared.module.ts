@@ -40,6 +40,9 @@ import { LoginPageComponent } from '../features/monitoreo/pages/home/login-page/
 import { RegisterPageComponent } from '../features/monitoreo/pages/home/register-page/register-page.component';
 import { RecuperarPageComponent } from '../features/monitoreo/pages/home/recuperar-page/recuperar-page.component';
 import { CambiarPageComponent } from '../features/monitoreo/pages/home/cambiar-page/cambiar-page.component';
+import { ButtonGuardarComponent } from '../features/monitoreo/components/atomos-monitoreo/button-guardar/button-guardar.component';
+import { ButtonEliminarComponent } from '../features/monitoreo/components/atomos-monitoreo/button-eliminar/button-eliminar.component';
+import { ButtonCancelarComponent } from '../features/monitoreo/components/atomos-monitoreo/button-cancelar/button-cancelar.component';
 import { BtnLoginRegisterComponent } from '../features/monitoreo/components/atomos-monitoreo/btn-login-register/btn-login-register.component';
 import { InputsFormComponent } from '../features/monitoreo/components/atomos-monitoreo/inputs-form/inputs-form.component';
 
@@ -77,8 +80,12 @@ import { InputsFormComponent } from '../features/monitoreo/components/atomos-mon
     RegisterPageComponent,
     RecuperarPageComponent,
     CambiarPageComponent,
+    ButtonGuardarComponent,
+    ButtonEliminarComponent,
+    ButtonCancelarComponent,
     BtnLoginRegisterComponent,
     InputsFormComponent
+
 
 
   ],
