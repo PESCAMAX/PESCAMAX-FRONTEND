@@ -1,5 +1,5 @@
 <div class="container" id="container">
-  <!-- Formulario de Registro -->
+  <!-- Alertas -->  <!-- Formulario de Registro -->
   <div class="form-container sign-up-container">
     <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
       <h1>Crear Cuenta</h1>
@@ -26,12 +26,14 @@
   <div class="form-container sign-in-container">
     <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
       <h1>Iniciar sesión</h1>
+      <app-alert-form [successMessage]="successMessage" [errorMessage]="errorMessage"></app-alert-form>
+
       <div class="social-container">
         <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
         <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
         <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
       </div>
-      <span>o usa tu cuenta</span>
+      <span>usa tu cuenta</span>
       <div class="infield">
         <input type="text" formControlName="username" placeholder="Usuario" />
       </div>
@@ -65,6 +67,5 @@
   </div>
 </div>
 
+
 <!-- Mensajes de éxito y error -->
-<div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
-<div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>

@@ -23,12 +23,13 @@ body {
 .container{
 right: 58%;
 position: relative;
-width: 850px;
+width: 800px;
 height: 500px;
 background-color: #fff;
 box-shadow: 25px 30px 55px #5557;
 border-radius: 13px;
 overflow: hidden;
+
 }
 
 
@@ -248,16 +249,22 @@ p{
     }
 
   }
-  .boton-enviar{
 
-  background-color: #3B82F6;
-  border-radius: 20px;
-  border: 1px solid var(--grad-clr1);
 
-  font-size: 12px;
-  font-weight: bold;
-  padding: 12px 45px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-
+  .alert {
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+  
+  .success {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+  }
+  
+  .error {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
   }
