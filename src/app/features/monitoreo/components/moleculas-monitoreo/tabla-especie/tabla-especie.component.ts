@@ -13,7 +13,7 @@ interface Especie {
   TemperaturaMaximo: number;
   PhMinimo: number;
   PhMaximo: number;
-  UserId: string;  // Añade esta línea si no estaba presente
+  UserId: string;
 }
 
 interface AlertState {
@@ -29,12 +29,14 @@ interface AlertState {
   templateUrl: './tabla-especie.component.html',
   styleUrls: ['./tabla-especie.component.css']
 })
-
 export class TablaEspecieComponent implements OnInit {
   isMenuOpen: boolean = true;
   especies: Especie[] = [];
   especiesFiltradas: Especie[] = [];
   searchText: string = '';
+
+  alertConfirmAction: (() => void) | null = null;
+  alertCancelAction: () => void = () => this.cerrarAlerta();
 
   alertState: AlertState = {
     show: false,
@@ -49,14 +51,10 @@ export class TablaEspecieComponent implements OnInit {
     this.especieForm.reset();
   }
 
-  alertConfirmAction: (() => void) | null = null;
-  alertCancelAction: (() => void) | null = null;
-
   especieForm: FormGroup;
   especieSeleccionada: Especie | null = null;
 
-  constructor(private apiService: ApiService, private fb: FormBuilder,private AuthService:AuthService) {
-    this.especieForm = this.fb.group({
+  constructor(private apiService: ApiService, private fb: FormBuilder, private AuthService: AuthService) {    this.especieForm = this.fb.group({
       NombreEspecie: ['', Validators.required],
       TdsMinimo: ['', Validators.required],
       TdsMaximo: ['', Validators.required],
@@ -102,7 +100,7 @@ export class TablaEspecieComponent implements OnInit {
     this.mostrarAlertaConfirmacion(id);
   }
 
-  mostrarAlertaConfirmacion(id: number): void {
+ mostrarAlertaConfirmacion(id: number): void {
     this.alertState = {
       show: true,
       type: 'warning',
@@ -193,6 +191,12 @@ export class TablaEspecieComponent implements OnInit {
           this.mostrarAlerta('danger', 'Error', mensajeError, 'red');
         }
       );
+    }
+  }
+
+  handleAlertCancel(): void {
+    if (this.alertCancelAction) {
+      this.alertCancelAction();
     }
   }
 }

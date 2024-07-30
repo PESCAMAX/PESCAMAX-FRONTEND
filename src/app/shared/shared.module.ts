@@ -41,6 +41,8 @@ import { RegisterPageComponent } from '../features/monitoreo/pages/home/register
 import { RecuperarPageComponent } from '../features/monitoreo/pages/home/recuperar-page/recuperar-page.component';
 import { CambiarPageComponent } from '../features/monitoreo/pages/home/cambiar-page/cambiar-page.component';
 import { ButtonGuardarComponent } from '../features/monitoreo/components/atomos-monitoreo/button-guardar/button-guardar.component';
+import { ButtonEliminarComponent } from '../features/monitoreo/components/atomos-monitoreo/button-eliminar/button-eliminar.component';
+import { ButtonCancelarComponent } from '../features/monitoreo/components/atomos-monitoreo/button-cancelar/button-cancelar.component';
 @NgModule({
   declarations: [
     ButtonEnviarComponent,
@@ -75,7 +77,9 @@ import { ButtonGuardarComponent } from '../features/monitoreo/components/atomos-
     RegisterPageComponent,
     RecuperarPageComponent,
     CambiarPageComponent,
-    ButtonGuardarComponent
+    ButtonGuardarComponent,
+    ButtonEliminarComponent,
+    ButtonCancelarComponent
 
 
   ],
