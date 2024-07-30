@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js/auto';
-import { ApiService,Alerta } from '../../../services/api-form/api.service';
+import { ApiService, Alerta, Monitoreo } from '../../../services/api-form/api.service';
 import { AuthService } from '../../../../../core/services/api-login/auth.service';
+
 @Component({
   selector: 'app-grafica',
   templateUrl: './grafica.component.html',
@@ -19,10 +20,12 @@ export class GraficaComponent implements OnInit {
   fechaMasAntigua: Date = new Date();
   fechaActual: Date = new Date();
   isMenuOpen: boolean = true;
+  monitoreoData: Monitoreo[] = []; // Asegúrate de definir monitoreoData aquí
 
   constructor(private apiService: ApiService, private AuthService: AuthService) {
     this.fechaActual.setHours(23, 59, 59, 999);
   }
+
   onMenuToggle(isOpen: boolean) {
     this.isMenuOpen = isOpen;
   }
@@ -31,8 +34,8 @@ export class GraficaComponent implements OnInit {
     this.loadLotes();
     this.cargarAlertas();
     this.obtenerFechaMasAntigua();
-
   }
+
   obtenerFechaMasAntigua(): void {
     this.apiService.listarMonitoreo(this.AuthService.getUserId()).subscribe(
       data => {
@@ -49,6 +52,7 @@ export class GraficaComponent implements OnInit {
   loadLotes() {
     this.apiService.listarMonitoreo(this.AuthService.getUserId()).subscribe(
       data => {
+        this.monitoreoData = data.response; // Asigna los datos a monitoreoData
         this.lotes = [...new Set(data.response.map(item => item.LoteID))];
         if (this.lotes.length > 0) {
           this.selectedLote = this.lotes[0];
@@ -60,14 +64,12 @@ export class GraficaComponent implements OnInit {
       }
     );
   }
-
-  onLoteChange(event: Event) {
-    const selectElement = event.target as HTMLSelectElement;
-    this.selectedLote = parseInt(selectElement.value, 10);
+  onLoteChange(lote: number | null): void {
+    this.selectedLote = lote;
     this.loadDataAndCreateChart();
     this.filtrarAlertas();
   }
-
+  
   loadDataAndCreateChart() {
     if (this.selectedLote === null) return;
 
@@ -83,7 +85,7 @@ export class GraficaComponent implements OnInit {
         const fechas = filteredData.map(item => new Date(item.FechaHora).toLocaleString());
         const temperaturas = filteredData.map(item => item.Temperatura);
         const phs = filteredData.map(item => item.PH);
-        const tds = filteredData.map(item => item.tds);
+        const tds = filteredData.map(item => item.tds); // Usar tds
         this.createChart(fechas, temperaturas, phs, tds);
       },
       error => {
@@ -91,7 +93,6 @@ export class GraficaComponent implements OnInit {
       }
     );
   }
-
   createChart(labels: string[], tempData: number[], phData: number[], tdsData: number[]) {
     if (this.chart) {
       this.chart.destroy();
@@ -157,6 +158,7 @@ export class GraficaComponent implements OnInit {
       error: (error) => console.error('Error al cargar alertas:', error)
     });
   }
+
   filtrarAlertas(): void {
     if (!this.selectedLote && !this.fechaInicio && !this.fechaFin) {
       this.alertasFiltradas = this.alertas;
@@ -168,7 +170,6 @@ export class GraficaComponent implements OnInit {
 
       let fechaAlerta: Date | null = null;
       if (alerta.FechaCreacion) {
-        // Check if alerta.Fecha is a string (ISO date) or already a Date object
         fechaAlerta = alerta.FechaCreacion instanceof Date ? alerta.FechaCreacion : new Date(alerta.FechaCreacion);
       }
 
@@ -184,14 +185,15 @@ export class GraficaComponent implements OnInit {
       this.mensajeAlerta = '';
     }
   }
+
   onDateRangeSelected(event: { startDate: Date, endDate: Date }): void {
     this.fechaInicio = event.startDate;
     this.fechaFin = event.endDate;
     this.loadDataAndCreateChart();
     this.filtrarAlertas();
   }
+
   disableDates = (date: Date): boolean => {
     return date > this.fechaActual || (this.fechaMasAntigua !== null && date < this.fechaMasAntigua);
   };
-
 }

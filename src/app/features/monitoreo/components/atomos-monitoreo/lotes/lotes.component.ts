@@ -22,7 +22,8 @@ export class LotesComponent {
 
   filtrarPorLote(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
-    const lote = Number(selectElement.value);
-    this.loteSeleccionado.emit(lote || null);
+    const lote = selectElement.value !== 'null' ? Number(selectElement.value) : null;
+    this.loteSeleccionado.emit(lote);
   }
+  
 }

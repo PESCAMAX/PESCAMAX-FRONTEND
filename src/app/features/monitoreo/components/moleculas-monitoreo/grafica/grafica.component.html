@@ -8,10 +8,8 @@
       [minDate]="fechaMasAntigua"
       [maxDate]="fechaActual">
     </app-datapicker>
-    <label for="loteSelector">Seleccionar Lote: </label>
-    <select id="loteSelector" (change)="onLoteChange($event)">
-      <option *ngFor="let lote of lotes" [value]="lote">Lote {{ lote }}</option>
-    </select>
+    <app-lotes [monitoreoData]="monitoreoData" (loteSeleccionado)="onLoteChange($event)"></app-lotes>
+
     <div class="alertas-dropdown">
       <h3 class="alertas-trigger">Fecha y Mensajes</h3>
       <div class="alertas-content" *ngIf="alertasFiltradas.length > 0">
