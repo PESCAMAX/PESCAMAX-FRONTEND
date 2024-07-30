@@ -40,14 +40,11 @@ export class ResetPasswordComponent implements OnInit {
     if (this.resetPasswordForm.valid && this.token && this.email) {
       const password = this.resetPasswordForm.get('password')?.value;
       const confirmPassword = this.resetPasswordForm.get('confirmPassword')?.value;
-
       if (password !== confirmPassword) {
         alert("Las contraseñas no coinciden.");
         return;
       }
-
       console.log("Enviando solicitud de restablecimiento de contraseña con token:", this.token);
-
       this.authService.resetPassword(this.email, this.token, password).subscribe(
         response => {
           alert("Contraseña restablecida exitosamente.");

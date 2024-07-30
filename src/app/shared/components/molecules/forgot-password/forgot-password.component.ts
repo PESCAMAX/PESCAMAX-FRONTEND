@@ -16,20 +16,18 @@ export class ForgotPasswordComponent {
   onSubmit() {
     this.authService.forgotPassword(this.email).subscribe(
       response => {
-        // Si la respuesta tiene un mensaje de éxito, mostrarlo
         if (response && response.message) {
           this.successMessage = response.message;
-          this.errorMessage = ''; // Limpiar cualquier mensaje de error previo
+          this.errorMessage = '';
         }
       },
       error => {
-        // Manejar errores de la solicitud HTTP
         if (error.error && error.error.message) {
           this.errorMessage = error.error.message;
         } else {
           this.errorMessage = 'Error al enviar el correo de restablecimiento de contraseña.';
         }
-        this.successMessage = ''; // Limpiar cualquier mensaje de éxito previo
+        this.successMessage = '';
       }
     );
   }
