@@ -1,0 +1,57 @@
+.card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .card h5 {
+    color: #2c3e50;
+  }
+  
+  .card .text-gray-700 {
+    color: #7f8c8d;
+  }
+  
+  .card i {
+    font-size: 24px;
+    color:black; 
+  }
+  
+  .card-1 {
+    background-color: #fa8578; /* Gris claro */
+  }
+  
+  .card-2 {
+    background-color: #add8e6; /* Azul claro */
+  }
+  
+  .card-3 {
+    background-color: #90ee90; /* Verde claro */
+  }
+  
+  .color-box {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+  
+  .bg-red-500 {
+    background-color: #e74c3c;
+  }
+  
+  .bg-green-500 {
+    background-color: #27ae60;
+  }
+  
+  .bg-blue-500 {
+    background-color: #2980b9;
+  }
+  

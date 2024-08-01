@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Chart } from 'chart.js/auto';
 import { ApiService, Alerta, Monitoreo } from '../../../services/api-form/api.service';
 import { AuthService } from '../../../../../core/services/api-login/auth.service';
@@ -9,6 +9,7 @@ import { AuthService } from '../../../../../core/services/api-login/auth.service
   styleUrls: ['./grafica.component.css']
 })
 export class GraficaComponent implements OnInit {
+  @Input() data: any[] = []; 
   public chart: any;
   public lotes: number[] = [];
   public selectedLote: number | null = null;

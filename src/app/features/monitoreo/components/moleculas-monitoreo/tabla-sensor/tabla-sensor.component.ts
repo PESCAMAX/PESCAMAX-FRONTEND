@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ApiService, Monitoreo } from '../../../services/api-form/api.service';
 import { AuthService } from '../../../../../core/services/api-login/auth.service';
 
@@ -8,6 +8,7 @@ import { AuthService } from '../../../../../core/services/api-login/auth.service
   styleUrls: ['./tabla-sensor.component.css']
 })
 export class TablaSensorComponent implements OnInit {
+  @Input() data: any[] = []; 
   monitoreoData: Monitoreo[] = [];
   filteredData: Monitoreo[] = [];
   isLoading: boolean = false;

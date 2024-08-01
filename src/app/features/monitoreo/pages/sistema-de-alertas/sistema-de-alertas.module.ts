@@ -8,6 +8,7 @@ import { HistorialDeAlertasComponent } from './historial-de-alertas/historial-de
   declarations: [
     AlertasRecientesComponent,
     HistorialDeAlertasComponent,
+    
 
   ],
 
