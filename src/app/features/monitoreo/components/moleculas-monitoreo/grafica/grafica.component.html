@@ -1,21 +1,13 @@
 <div class="flex flex-col w-full h-full">
   <!-- Título de la página -->
-  <h1 class="text-blue-500 text-center font-bold text-lg font-sans mb-4">Gráfica General</h1>
+  <h1 class="text-blue-500 text-left font-bold text-lg font-sans mb-4"></h1> <!-- Cambiado a text-left -->
   <!-- Contenido Principal -->
   <div class="flex-1 p-4 transition-all duration-300" [ngClass]="{'ml-64': isMenuOpen, 'ml-16': !isMenuOpen}">
-    <app-datapicker
-      (dateRangeSelected)="onDateRangeSelected($event)"
-      [minDate]="fechaMasAntigua"
-      [maxDate]="fechaActual">
-    </app-datapicker>
-    
     <!-- New FechasMensajes component -->
-    <app-fechas-mensajes [alertasFiltradas]="alertasFiltradas"></app-fechas-mensajes>
-
     <div *ngIf="mensajeAlerta" class="alert-message">
       {{ mensajeAlerta }}
     </div>
-    <div class="grafica-container">
+    <div class="flex flex-col w-full h-full">
       <canvas id="MyChart">{{ chart }}</canvas>
     </div>
   </div>

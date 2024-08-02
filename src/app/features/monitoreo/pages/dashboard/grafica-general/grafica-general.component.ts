@@ -9,8 +9,10 @@ import { ChangeDetectorRef } from '@angular/core';
   styleUrls: ['./grafica-general.component.css']
 })
 export class GraficaGeneralComponent implements OnInit {
-  monitoreoData: Monitoreo[] = [];
-  monitoreoDataFiltrada: Monitoreo[] = [];
+
+  monitoreoData: any[] = [];
+  alertasFiltradas: any[] = [];
+  monitoreoDataFiltrada: any[] = [];
   isMenuOpen: boolean = true;
   isLoading: boolean = false;
 

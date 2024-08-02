@@ -1,79 +1,77 @@
-/* styles.css o grafica.component.css */
 .alertas-container {
-    max-height: 200px; /* Ajusta la altura máxima según sea necesario */
-    overflow-y: auto;
-    margin-top: 10px;
-  }
-  
-  .alertas-container table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .alertas-container th, .alertas-container td {
-    border: 1px solid #ddd;
-    padding: 8px;
-  }
-  
-  .alertas-container th {
-    background-color: #f2f2f2;
-    text-align: left;
-  }
-  .alertas-dropdown {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .alertas-trigger {
-    cursor: pointer;
-    padding: 10px;
-    background-color: #f1f1f1;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
-  
-  .alertas-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 300px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-  }
-  
-  .alertas-dropdown:hover .alertas-content {
-    display: block;
-  }
-  
-  .alertas-container {
-    max-height: 300px;
-    overflow-y: auto;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-  }
-  
-  th {
-    background-color: #f2f2f2;
-  }
+  max-height: 200px; /* Ajusta la altura máxima según sea necesario */
+  overflow-y: auto;
+  margin-top: 10px;
+  text-align: left; /* Asegura que el texto esté alineado a la izquierda */
+}
 
-  .chart-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    min-height: 400px; /* Puedes ajustar esta altura mínima según tus necesidades */
-  }
-  
-  .chart-container canvas {
-    width: 100% !important;
-    height: 100% !important;
-  }
-  
+.alertas-container table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left; /* Asegura que el contenido de la tabla esté alineado a la izquierda */
+}
+
+.alertas-container th, .alertas-container td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left; /* Asegura que el contenido de las celdas esté alineado a la izquierda */
+}
+
+.alertas-container th {
+  background-color: #f2f2f2;
+}
+
+.alertas-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.alertas-trigger {
+  cursor: pointer;
+  padding: 10px;
+  background-color: #f1f1f1;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  text-align: left; /* Asegura que el texto esté alineado a la izquierda */
+}
+
+.alertas-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 300px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  text-align: left; /* Asegura que el contenido esté alineado a la izquierda */
+}
+
+.alertas-dropdown:hover .alertas-content {
+  display: block;
+}
+.text-left {
+  text-align: left;
+}
+.chart-container {
+  width: 100%;
+  height: 100%;
+  min-height: 400px; /* Ajusta esta altura según sea necesario */
+  text-align: left; /* Asegura que el contenido esté alineado a la izquierda */
+}
+
+.chart-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
