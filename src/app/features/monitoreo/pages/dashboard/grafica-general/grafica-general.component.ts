@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ApiService, Monitoreo, Alerta } from '../../../services/api-form/api.service';
 import { AuthService } from '../../../../../core/services/api-login/auth.service';
-
+import { CardsInfoComponent } from '../../../components/atomos-monitoreo/cards-info/cards-info.component';
 @Component({
   selector: 'app-grafica-general',
   templateUrl: './grafica-general.component.html',
@@ -10,6 +10,7 @@ import { AuthService } from '../../../../../core/services/api-login/auth.service
 export class GraficaGeneralComponent implements OnInit {
   monitoreoData: Monitoreo[] = [];
   monitoreoDataFiltrada: Monitoreo[] = [];
+  alertas: Alerta[] = [];
   alertasFiltradas: Alerta[] = [];
   isMenuOpen: boolean = true;
   isLoading: boolean = false;
@@ -26,17 +27,17 @@ export class GraficaGeneralComponent implements OnInit {
     private apiService: ApiService, 
     private AuthService: AuthService, 
     private cdr: ChangeDetectorRef
-  ) {}
+  ) {
+    this.monitoreoData = [];
+    this.alertas = [];
+    this.alertasFiltradas = [];
+  }
 
   ngOnInit(): void {
     this.cargarDatos();
     this.cargarAlertas();
   }
-
-  onMenuToggle(isOpen: boolean) {
-    this.isMenuOpen = isOpen;
-  }
-
+  
   cargarDatos(): void {
     this.isLoading = true;
     this.apiService.listarMonitoreo(this.AuthService.getUserId()).subscribe(
@@ -52,17 +53,24 @@ export class GraficaGeneralComponent implements OnInit {
       }
     );
   }
-
+  
   cargarAlertas(): void {
     this.apiService.obtenerAlertas().subscribe(
       (alertas: Alerta[]) => {
-        this.alertasFiltradas = alertas;
+        this.alertas = alertas;
+        this.alertasFiltradas = [...this.alertas];
       },
       error => {
         console.error('Error al cargar las alertas', error);
       }
     );
   }
+
+  onMenuToggle(isOpen: boolean) {
+    this.isMenuOpen = isOpen;
+  }
+
+ 
 
   calcularTendencias(): void {
     if (this.monitoreoDataFiltrada.length < 2) {
@@ -88,19 +96,20 @@ export class GraficaGeneralComponent implements OnInit {
   onLoteChange(lote: number | null): void {
     if (lote === null) {
       this.monitoreoDataFiltrada = [...this.monitoreoData];
+      this.alertasFiltradas = [...this.alertas];
     } else {
       this.monitoreoDataFiltrada = this.monitoreoData.filter(data => data.LoteID === lote);
+      this.alertasFiltradas = this.alertas.filter(alerta => alerta.LoteID === lote);
     }
     this.calcularTendencias();
-    this.filtrarAlertas(lote);
     this.cdr.detectChanges();
   }
-
+  
   filtrarAlertas(lote: number | null): void {
     if (lote === null) {
-      this.alertasFiltradas = [...this.alertasFiltradas];
+      this.alertasFiltradas = [...this.alertas];
     } else {
-      this.alertasFiltradas = this.alertasFiltradas.filter(alerta => alerta.LoteID === lote);
+      this.alertasFiltradas = this.alertas.filter(alerta => alerta.LoteID === lote);
     }
   }
 }

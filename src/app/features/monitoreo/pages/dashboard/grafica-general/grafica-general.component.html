@@ -6,36 +6,21 @@
     <app-lotes [monitoreoData]="monitoreoData" (loteSeleccionado)="onLoteChange($event)"></app-lotes>
     <!-- Sección de Tarjetas -->
     <div class="grid grid-cols-3 gap-4 mt-4">
-      <div class="card card-1 flex items-center justify-between">
-        <div>
-          <h5 class="text-2xl font-bold mb-2">Temperatura</h5>
-          <p class="text-gray-700">{{ temperaturaValue }}</p>
-        </div>
-        <i class="fas" [ngClass]="{
-          'fa-arrow-up': temperaturaTrend === 'up',
-          'fa-arrow-down': temperaturaTrend === 'down'
-        }"></i>
-      </div>
-      <div class="card card-2 flex items-center justify-between">
-        <div>
-          <h5 class="text-2xl font-bold mb-2">TDS</h5>
-          <p class="text-gray-700">{{ tdsValue }}</p>
-        </div>
-        <i class="fas" [ngClass]="{
-          'fa-arrow-up': tdsTrend === 'up',
-          'fa-arrow-down': tdsTrend === 'down'
-        }"></i>
-      </div>
-      <div class="card card-3 flex items-center justify-between">
-        <div>
-          <h5 class="text-2xl font-bold mb-2">pH</h5>
-          <p class="text-gray-700">{{ phValue }}</p>
-        </div>
-        <i class="fas" [ngClass]="{
-          'fa-arrow-up': phTrend === 'up',
-          'fa-arrow-down': phTrend === 'down'
-        }"></i>
-      </div>
+      <app-cards-info 
+        title="Temperatura" 
+        [value]="temperaturaValue" 
+        [trend]="temperaturaTrend">
+      </app-cards-info>
+      <app-cards-info 
+        title="TDS" 
+        [value]="tdsValue" 
+        [trend]="tdsTrend">
+      </app-cards-info>
+      <app-cards-info 
+        title="pH" 
+        [value]="phValue" 
+        [trend]="phTrend">
+      </app-cards-info>
     </div>
     
     <!-- Sección de Gráfica y Descriptores -->
@@ -44,8 +29,7 @@
         <app-grafica [data]="monitoreoDataFiltrada"></app-grafica>
       </div>
       <div class="w-1/4">
-        <app-fechas-mensajes [alertasFiltradas]="alertasFiltradas"></app-fechas-mensajes>
-      </div>
+        <app-fechas-mensajes [alertasFiltradas]="alertasFiltradas"></app-fechas-mensajes>      </div>
     </div>
 
     <!-- Sección de Tabla de Datos -->

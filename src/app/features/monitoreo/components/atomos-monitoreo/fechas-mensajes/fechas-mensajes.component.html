@@ -1,21 +1,24 @@
 <div class="flex flex-col w-full h-full">
-  <h3>Fecha y Mensajes</h3>
-  <div class="alertas-content" *ngIf="alertasFiltradas.length > 0">
+    <h3>Fecha y Mensajes</h3>
+    <div *ngIf="alertasFiltradas.length > 0; else noAlertas">
       <div class="alertas-container">
-          <table>
-              <thead>
-                  <tr>
-                      <th>Fecha</th>
-                      <th>Mensaje</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr *ngFor="let alerta of alertasFiltradas">
-                      <td>{{ alerta.FechaCreacion | date:'medium' }}</td>
-                      <td>{{ alerta.Descripcion }}</td>
-                  </tr>
-              </tbody>
-          </table>
+        <table>
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Mensaje</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let alerta of alertasFiltradas">
+              <td>{{ alerta.FechaCreacion | date:'medium' }}</td>
+              <td>{{ alerta.Descripcion }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
+    </div>
+    <ng-template #noAlertas>
+      <p>No hay alertas para mostrar.</p>
+    </ng-template>
   </div>
-</div>
