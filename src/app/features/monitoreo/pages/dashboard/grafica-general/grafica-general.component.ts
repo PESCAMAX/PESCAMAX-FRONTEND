@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ApiService, Monitoreo } from '../../../services/api-form/api.service';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { ApiService, Monitoreo, Alerta } from '../../../services/api-form/api.service';
 import { AuthService } from '../../../../../core/services/api-login/auth.service';
-import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-grafica-general',
@@ -9,13 +8,12 @@ import { ChangeDetectorRef } from '@angular/core';
   styleUrls: ['./grafica-general.component.css']
 })
 export class GraficaGeneralComponent implements OnInit {
-
-  monitoreoData: any[] = [];
-  alertasFiltradas: any[] = [];
-  monitoreoDataFiltrada: any[] = [];
+  monitoreoData: Monitoreo[] = [];
+  monitoreoDataFiltrada: Monitoreo[] = [];
+  alertasFiltradas: Alerta[] = [];
   isMenuOpen: boolean = true;
   isLoading: boolean = false;
-
+  
   temperaturaTrend: 'up' | 'down' | 'none' = 'none';
   tdsTrend: 'up' | 'down' | 'none' = 'none';
   phTrend: 'up' | 'down' | 'none' = 'none';
@@ -25,13 +23,14 @@ export class GraficaGeneralComponent implements OnInit {
   phValue: number = 0;
 
   constructor(
-    private apiService: ApiService,
-    private AuthService: AuthService,
+    private apiService: ApiService, 
+    private AuthService: AuthService, 
     private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
     this.cargarDatos();
+    this.cargarAlertas();
   }
 
   onMenuToggle(isOpen: boolean) {
@@ -50,6 +49,17 @@ export class GraficaGeneralComponent implements OnInit {
       error => {
         this.isLoading = false;
         console.error('Error al cargar los datos', error);
+      }
+    );
+  }
+
+  cargarAlertas(): void {
+    this.apiService.obtenerAlertas().subscribe(
+      (alertas: Alerta[]) => {
+        this.alertasFiltradas = alertas;
+      },
+      error => {
+        console.error('Error al cargar las alertas', error);
       }
     );
   }
@@ -82,6 +92,15 @@ export class GraficaGeneralComponent implements OnInit {
       this.monitoreoDataFiltrada = this.monitoreoData.filter(data => data.LoteID === lote);
     }
     this.calcularTendencias();
+    this.filtrarAlertas(lote);
     this.cdr.detectChanges();
+  }
+
+  filtrarAlertas(lote: number | null): void {
+    if (lote === null) {
+      this.alertasFiltradas = [...this.alertasFiltradas];
+    } else {
+      this.alertasFiltradas = this.alertasFiltradas.filter(alerta => alerta.LoteID === lote);
+    }
   }
 }

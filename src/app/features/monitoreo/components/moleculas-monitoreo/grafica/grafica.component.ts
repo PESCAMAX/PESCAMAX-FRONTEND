@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { createChart, IChartApi, ColorType, Time, LineData } from 'lightweight-charts';
 import { ApiService, Alerta, Monitoreo } from '../../../services/api-form/api.service';
 import { AuthService } from '../../../../../core/services/api-login/auth.service';
 
-interface ChartDataPoint extends LineData<Time> {
+interface ChartDataPoint {
+  time: Time;
+  value: number;
   type: 'temperatura' | 'ph' | 'tds';
 }
 
@@ -13,9 +15,10 @@ interface ChartDataPoint extends LineData<Time> {
   styleUrls: ['./grafica.component.css']
 })
 export class GraficaComponent implements OnInit {
+  @Input() data: Monitoreo[] = [];
+  @Input() selectedLote: number | null = null;
   public chart: IChartApi | null = null;
   public lotes: number[] = [];
-  public selectedLote: number | null = null;
   alertas: Alerta[] = [];
   alertasFiltradas: Alerta[] = [];
   mensajeAlerta: string = '';
@@ -76,17 +79,18 @@ export class GraficaComponent implements OnInit {
   }
   
   loadDataAndCreateChart() {
-    if (this.selectedLote === null) return;
+    if (this.data.length === 0) return;
 
-    this.apiService.listarMonitoreo(this.authService.getUserId()).subscribe(
-      data => {
-        let filteredData = data.response.filter(item => item.LoteID === this.selectedLote);
-        if (this.fechaInicio && this.fechaFin) {
-          filteredData = filteredData.filter(item => {
-            const fecha = new Date(item.FechaHora);
-            return fecha >= this.fechaInicio! && fecha <= this.fechaFin!;
-          });
-        }
+    let filteredData = this.data;
+    if (this.selectedLote !== null) {
+      filteredData = this.data.filter(item => item.LoteID === this.selectedLote);
+    }
+    if (this.fechaInicio && this.fechaFin) {
+      filteredData = filteredData.filter(item => {
+        const fecha = new Date(item.FechaHora);
+        return fecha >= this.fechaInicio! && fecha <= this.fechaFin!;
+      });
+    }
         const chartData: ChartDataPoint[] = [];
         filteredData.forEach(item => {
           const time = this.dateToChartTime(new Date(item.FechaHora));
@@ -97,11 +101,7 @@ export class GraficaComponent implements OnInit {
           );
         });
         this.createChart(chartData);
-      },
-      error => {
-        console.error('Error al cargar los datos:', error);
-      }
-    );
+      
   }
 
   dateToChartTime(date: Date): Time {
@@ -224,4 +224,5 @@ export class GraficaComponent implements OnInit {
   disableDates = (date: Date): boolean => {
     return date > this.fechaActual || (this.fechaMasAntigua !== null && date < this.fechaMasAntigua);
   };
+  
 }

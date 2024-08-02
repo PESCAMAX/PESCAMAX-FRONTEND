@@ -52,29 +52,30 @@
         <div class="text-center flex-auto"></div>
         <div></div>
       </div>
-      <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-          <thead class="text-xs text-black uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-              <th scope="col" class="px-6 py-3">Geomenbrana</th>
-              <th scope="col" class="px-6 py-3">Tds</th>
-              <th scope="col" class="px-6 py-3">Temperatura</th>
-              <th scope="col" class="px-6 py-3">Ph</th>
-              <th scope="col" class="px-6 py-3">Fecha</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of filteredData" class="border-b dark:bg-gray-800 dark:border-gray-700 hover-bg-light-blue dark:hover:bg-gray-600">
-              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ item.LoteID }}</th>
-              <td class="px-6 py-4">{{ item.tds }}</td>
-              <td class="px-6 py-4">{{ item.Temperatura }}</td>
-              <td class="px-6 py-4">{{ item.PH }}</td>
-              <td class="px-6 py-4">{{ item.FechaHora | date:'short' }}</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="overflow-x-auto">
+        <div class="table-container max-h-96 overflow-y-auto">
+          <table class="table w-full text-md bg-white shadow-md rounded mb-4 mt-4">
+            <thead class="sticky top-0 bg-white">
+              <tr class="border-b">
+                <th class="text-left p-3 px-5">Geomenbrana</th>
+                <th class="text-left p-3 px-5">Tds</th>
+                <th class="text-left p-3 px-5">Temperatura</th>
+                <th class="text-left p-3 px-5">Ph</th>
+                <th class="text-left p-3 px-5">Fecha</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of data" class="border-b hover:bg-orange-100">
+                <td class="p-3 px-5">{{ item.LoteID }}</td>
+                <td class="p-3 px-5">{{ item.tds }}</td>
+                <td class="p-3 px-5">{{ item.Temperatura }}</td>
+                <td class="p-3 px-5">{{ item.PH }}</td>
+                <td class="p-3 px-5">{{ item.FechaHora | date:'short' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
   </div>
 </div>
 </div>

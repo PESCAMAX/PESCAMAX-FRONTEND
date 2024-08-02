@@ -3,4 +3,14 @@
     top: 0; /* Posición superior */
     z-index: 10; /* Asegura que esté sobre el contenido */
   }
+  .table-container {
+    max-height: 400px;
+    overflow-y: auto;
+  }
   
+  thead th {
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 1;
+  }

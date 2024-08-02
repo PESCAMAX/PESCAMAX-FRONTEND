@@ -3,8 +3,9 @@
 <div class="flex flex-col w-full h-full">
   <!-- Contenido Principal -->
   <div class="flex-1 p-4 transition-all duration-300" [ngClass]="{'ml-64': isMenuOpen, 'ml-16': !isMenuOpen}">
+    <app-lotes [monitoreoData]="monitoreoData" (loteSeleccionado)="onLoteChange($event)"></app-lotes>
     <!-- Sección de Tarjetas -->
-    <div class="grid grid-cols-3 gap-4">
+    <div class="grid grid-cols-3 gap-4 mt-4">
       <div class="card card-1 flex items-center justify-between">
         <div>
           <h5 class="text-2xl font-bold mb-2">Temperatura</h5>
@@ -40,7 +41,7 @@
     <!-- Sección de Gráfica y Descriptores -->
     <div class="flex mt-4">
       <div class="w-3/4 pr-4">
-        <app-grafica></app-grafica>
+        <app-grafica [data]="monitoreoDataFiltrada"></app-grafica>
       </div>
       <div class="w-1/4">
         <app-fechas-mensajes [alertasFiltradas]="alertasFiltradas"></app-fechas-mensajes>
