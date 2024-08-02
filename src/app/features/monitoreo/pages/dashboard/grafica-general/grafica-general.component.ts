@@ -10,6 +10,7 @@ import { ChangeDetectorRef } from '@angular/core';
 })
 export class GraficaGeneralComponent implements OnInit {
   monitoreoData: any[] = [];
+  alertasFiltradas: any[] = [];
   monitoreoDataFiltrada: any[] = [];
   isMenuOpen: boolean = true;
   filteredData: Monitoreo[] = [];
