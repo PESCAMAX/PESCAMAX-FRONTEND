@@ -59,7 +59,7 @@ export class GraficaComponent implements OnInit {
           this.selectedLote = this.lotes[0];
           this.loadDataAndCreateChart();
         }
-      },
+      },  
       error => {
         console.error('Error al cargar los lotes:', error);
       }
