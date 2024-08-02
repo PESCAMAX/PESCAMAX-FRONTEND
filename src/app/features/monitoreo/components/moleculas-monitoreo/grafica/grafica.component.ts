@@ -9,7 +9,7 @@ import { AuthService } from '../../../../../core/services/api-login/auth.service
   styleUrls: ['./grafica.component.css']
 })
 export class GraficaComponent implements OnInit {
-  @Input() data: any[] = []; 
+  @Input() data: any[] = [];
   public chart: any;
   public lotes: number[] = [];
   public selectedLote: number | null = null;
@@ -29,6 +29,10 @@ export class GraficaComponent implements OnInit {
 
   onMenuToggle(isOpen: boolean) {
     this.isMenuOpen = isOpen;
+  }
+
+  ngOnChanges(): void {
+    this.loadDataAndCreateChart();
   }
 
   ngOnInit(): void {
@@ -59,7 +63,7 @@ export class GraficaComponent implements OnInit {
           this.selectedLote = this.lotes[0];
           this.loadDataAndCreateChart();
         }
-      },  
+      },
       error => {
         console.error('Error al cargar los lotes:', error);
       }
@@ -70,9 +74,9 @@ export class GraficaComponent implements OnInit {
     this.loadDataAndCreateChart();
     this.filtrarAlertas();
   }
-  
+
   loadDataAndCreateChart() {
-    if (this.selectedLote === null) return;
+    if (this.data.length === 0) return;
 
     this.apiService.listarMonitoreo(this.AuthService.getUserId()).subscribe(
       data => {
@@ -83,10 +87,10 @@ export class GraficaComponent implements OnInit {
             return fecha >= this.fechaInicio! && fecha <= this.fechaFin!;
           });
         }
-        const fechas = filteredData.map(item => new Date(item.FechaHora).toLocaleString());
-        const temperaturas = filteredData.map(item => item.Temperatura);
-        const phs = filteredData.map(item => item.PH);
-        const tds = filteredData.map(item => item.tds); // Usar tds
+        const fechas = this.data.map(item => new Date(item.FechaHora).toLocaleString());
+        const temperaturas = this.data.map(item => item.Temperatura);
+        const phs = this.data.map(item => item.PH);
+        const tds = this.data.map(item => item.tds);
         this.createChart(fechas, temperaturas, phs, tds);
       },
       error => {

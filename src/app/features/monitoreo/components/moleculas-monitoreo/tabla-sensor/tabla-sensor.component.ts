@@ -8,7 +8,7 @@ import { AuthService } from '../../../../../core/services/api-login/auth.service
   styleUrls: ['./tabla-sensor.component.css']
 })
 export class TablaSensorComponent implements OnInit {
-  @Input() data: any[] = []; 
+  @Input() data: any[] = [];
   monitoreoData: Monitoreo[] = [];
   filteredData: Monitoreo[] = [];
   isLoading: boolean = false;
@@ -17,6 +17,9 @@ export class TablaSensorComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarDatos();
+  }
+  ngOnChanges(): void {
+    this.filteredData = [...this.data];
   }
 
   cargarDatos(): void {
