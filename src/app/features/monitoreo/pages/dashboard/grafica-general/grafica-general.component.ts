@@ -9,21 +9,29 @@ import { ChangeDetectorRef } from '@angular/core';
   styleUrls: ['./grafica-general.component.css']
 })
 export class GraficaGeneralComponent implements OnInit {
+
   monitoreoData: any[] = [];
   alertasFiltradas: any[] = [];
   monitoreoDataFiltrada: any[] = [];
   isMenuOpen: boolean = true;
-  filteredData: Monitoreo[] = [];
   isLoading: boolean = false;
+
   temperaturaTrend: 'up' | 'down' | 'none' = 'none';
   tdsTrend: 'up' | 'down' | 'none' = 'none';
   phTrend: 'up' | 'down' | 'none' = 'none';
 
-  constructor(private apiService: ApiService, private AuthService: AuthService, private cdr: ChangeDetectorRef) {}
+  temperaturaValue: number = 0;
+  tdsValue: number = 0;
+  phValue: number = 0;
+
+  constructor(
+    private apiService: ApiService,
+    private AuthService: AuthService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.cargarDatos();
-    this.monitoreoDataFiltrada = [...this.monitoreoData];
   }
 
   onMenuToggle(isOpen: boolean) {
@@ -58,15 +66,20 @@ export class GraficaGeneralComponent implements OnInit {
     const penultimo = this.monitoreoDataFiltrada[this.monitoreoDataFiltrada.length - 2];
 
     this.temperaturaTrend = ultimo.Temperatura > penultimo.Temperatura ? 'up' : 'down';
-    this.tdsTrend = ultimo.Tds > penultimo.Tds ? 'up' : 'down';
-    this.phTrend = ultimo.Ph > penultimo.Ph ? 'up' : 'down';
+    this.tdsTrend = ultimo.tds > penultimo.tds ? 'up' : 'down';
+    this.phTrend = ultimo.PH > penultimo.PH ? 'up' : 'down';
+
+    // Update card values
+    this.temperaturaValue = ultimo.Temperatura;
+    this.tdsValue = ultimo.tds;
+    this.phValue = ultimo.PH;
   }
 
   onLoteChange(lote: number | null): void {
     if (lote === null) {
       this.monitoreoDataFiltrada = [...this.monitoreoData];
     } else {
-      this.monitoreoDataFiltrada = this.monitoreoData.filter(data => data.Lote === lote);
+      this.monitoreoDataFiltrada = this.monitoreoData.filter(data => data.LoteID === lote);
     }
     this.calcularTendencias();
     this.cdr.detectChanges();

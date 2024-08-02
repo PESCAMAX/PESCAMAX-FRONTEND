@@ -1,22 +1,12 @@
 <style>
   .table {
-    border-spacing: 0 15px;
     width: 100%;
-    border-collapse: separate;
   }
   i {
     font-size: 1rem !important;
   }
   .table tr {
     border-radius: 20px;
-  }
-  tr td:nth-child(n + 6),
-  tr th:nth-child(n + 6) {
-    border-radius: 0 0.625rem 0.625rem 0;
-  }
-  tr td:nth-child(1),
-  tr th:nth-child(1) {
-    border-radius: 0.625rem 0 0 0.625rem;
   }
   .button-spacing {
     margin-right: 10px;
@@ -28,16 +18,9 @@
   thead th {
     position: sticky;
     top: 0;
-    background: white;
     z-index: 2;
   }
-  .no-border {
-    border: none;
-  }
   .loading-spinner {
-    border: 4px solid rgba(0, 0, 0, 0.1);
-    border-left-color: #000;
-    border-radius: 50%;
     width: 24px;
     height: 24px;
     animation: spin 1s linear infinite;
@@ -50,51 +33,48 @@
       transform: rotate(360deg);
     }
   }
+  .hover-bg-light-blue:hover {
+    background-color: #add8e6;
+  }
 </style>
 
-<body>
 
- 
 <div class="container mx-auto flex">
-  <div class="flex-1 p-4">
-    <div class="text-gray-900 bg-custom-gray p-4 rounded shadow-md">
-      <div class="overflow-auto lg:overflow-visible">
-        <div class="flex lg:justify-between pb-1">
-          <h2 class="text-3xl text-gray-500 font-bold">Monitoreo Datos</h2>
-          <button (click)="cargarDatos()" class="">
-            <i class="material-icons">refresh</i>
-            <span *ngIf="isLoading" class="loading-spinner"></span>
-          </button>
-          <div class="text-center flex-auto"></div>
-          <div>
-
-          </div>
-
-
-        </div>
-        <div class="table-container">
-          <table class="table w-full text-md bg-white shadow-md rounded mb-4 mt-4">
-            <thead>
-              <tr class="border-b bg-white">
-                <th class="text-left p-3 px-5">Geomenbrana</th>
-                <th class="text-left p-3 px-5">Tds</th>
-                <th class="text-left p-3 px-5">Temperatura</th>
-                <th class="text-left p-3 px-5">Ph</th>
-                <th class="text-left p-3 px-5">Fecha</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let item of filteredData" class="border-b hover:bg-orange-100">
-                <td class="p-3 px-5">{{ item.LoteID }}</td>
-                <td class="p-3 px-5">{{ item.tds }}</td>
-                <td class="p-3 px-5">{{ item.Temperatura }}</td>
-                <td class="p-3 px-5">{{ item.PH }}</td>
-                <td class="p-3 px-5">{{ item.FechaHora | date:'short' }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+<div class="flex-1 p-4">
+  <div class="text-black">
+    <div class="">
+      <div class="flex lg:justify-between pb-1">
+        <h2 class="text-3xl text-gray-500 font-bold">Monitoreo Datos</h2>
+        <button (click)="cargarDatos()" class="">
+          <i class="material-icons">refresh</i>
+          <span *ngIf="isLoading" class="loading-spinner"></span>
+        </button>
+        <div class="text-center flex-auto"></div>
+        <div></div>
+      </div>
+      <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+          <thead class="text-xs text-black uppercase bg-gray-300 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+              <th scope="col" class="px-6 py-3">Geomenbrana</th>
+              <th scope="col" class="px-6 py-3">Tds</th>
+              <th scope="col" class="px-6 py-3">Temperatura</th>
+              <th scope="col" class="px-6 py-3">Ph</th>
+              <th scope="col" class="px-6 py-3">Fecha</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of filteredData" class="border-b dark:bg-gray-800 dark:border-gray-700 hover-bg-light-blue dark:hover:bg-gray-600">
+              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ item.LoteID }}</th>
+              <td class="px-6 py-4">{{ item.tds }}</td>
+              <td class="px-6 py-4">{{ item.Temperatura }}</td>
+              <td class="px-6 py-4">{{ item.PH }}</td>
+              <td class="px-6 py-4">{{ item.FechaHora | date:'short' }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
+</div>
 </div>
