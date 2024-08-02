@@ -26,6 +26,7 @@
     "flowbite": "^2.3.0",
     "flowbite-datepicker": "^1.2.6",
     "jwt-decode": "^4.0.0",
+    "lightweight-charts": "^4.2.0",
     "powerbi-client": "^2.23.1",
     "rxjs": "~7.8.0",
     "zone.js": "~0.14.3"

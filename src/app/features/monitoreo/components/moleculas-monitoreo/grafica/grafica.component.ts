@@ -1,7 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Chart } from 'chart.js/auto';
+import { Component, OnInit } from '@angular/core';
+import { createChart, IChartApi, ColorType, Time, LineData } from 'lightweight-charts';
 import { ApiService, Alerta, Monitoreo } from '../../../services/api-form/api.service';
 import { AuthService } from '../../../../../core/services/api-login/auth.service';
+
+interface ChartDataPoint extends LineData<Time> {
+  type: 'temperatura' | 'ph' | 'tds';
+}
 
 @Component({
   selector: 'app-grafica',
@@ -9,8 +13,7 @@ import { AuthService } from '../../../../../core/services/api-login/auth.service
   styleUrls: ['./grafica.component.css']
 })
 export class GraficaComponent implements OnInit {
-  @Input() data: any[] = [];
-  public chart: any;
+  public chart: IChartApi | null = null;
   public lotes: number[] = [];
   public selectedLote: number | null = null;
   alertas: Alerta[] = [];
@@ -21,18 +24,14 @@ export class GraficaComponent implements OnInit {
   fechaMasAntigua: Date = new Date();
   fechaActual: Date = new Date();
   isMenuOpen: boolean = true;
-  monitoreoData: Monitoreo[] = []; // Asegúrate de definir monitoreoData aquí
+  monitoreoData: Monitoreo[] = [];
 
-  constructor(private apiService: ApiService, private AuthService: AuthService) {
+  constructor(private apiService: ApiService, private authService: AuthService) {
     this.fechaActual.setHours(23, 59, 59, 999);
   }
 
   onMenuToggle(isOpen: boolean) {
     this.isMenuOpen = isOpen;
-  }
-
-  ngOnChanges(): void {
-    this.loadDataAndCreateChart();
   }
 
   ngOnInit(): void {
@@ -42,7 +41,7 @@ export class GraficaComponent implements OnInit {
   }
 
   obtenerFechaMasAntigua(): void {
-    this.apiService.listarMonitoreo(this.AuthService.getUserId()).subscribe(
+    this.apiService.listarMonitoreo(this.authService.getUserId()).subscribe(
       data => {
         if (data.response && data.response.length > 0) {
           this.fechaMasAntigua = new Date(Math.min(...data.response.map(item => new Date(item.FechaHora).getTime())));
@@ -55,9 +54,9 @@ export class GraficaComponent implements OnInit {
   }
 
   loadLotes() {
-    this.apiService.listarMonitoreo(this.AuthService.getUserId()).subscribe(
+    this.apiService.listarMonitoreo(this.authService.getUserId()).subscribe(
       data => {
-        this.monitoreoData = data.response; // Asigna los datos a monitoreoData
+        this.monitoreoData = data.response;
         this.lotes = [...new Set(data.response.map(item => item.LoteID))];
         if (this.lotes.length > 0) {
           this.selectedLote = this.lotes[0];
@@ -69,16 +68,17 @@ export class GraficaComponent implements OnInit {
       }
     );
   }
+
   onLoteChange(lote: number | null): void {
     this.selectedLote = lote;
     this.loadDataAndCreateChart();
     this.filtrarAlertas();
   }
-
+  
   loadDataAndCreateChart() {
-    if (this.data.length === 0) return;
+    if (this.selectedLote === null) return;
 
-    this.apiService.listarMonitoreo(this.AuthService.getUserId()).subscribe(
+    this.apiService.listarMonitoreo(this.authService.getUserId()).subscribe(
       data => {
         let filteredData = data.response.filter(item => item.LoteID === this.selectedLote);
         if (this.fechaInicio && this.fechaFin) {
@@ -87,71 +87,94 @@ export class GraficaComponent implements OnInit {
             return fecha >= this.fechaInicio! && fecha <= this.fechaFin!;
           });
         }
-        const fechas = this.data.map(item => new Date(item.FechaHora).toLocaleString());
-        const temperaturas = this.data.map(item => item.Temperatura);
-        const phs = this.data.map(item => item.PH);
-        const tds = this.data.map(item => item.tds);
-        this.createChart(fechas, temperaturas, phs, tds);
+        const chartData: ChartDataPoint[] = [];
+        filteredData.forEach(item => {
+          const time = this.dateToChartTime(new Date(item.FechaHora));
+          chartData.push(
+            { time, value: item.Temperatura, type: 'temperatura' },
+            { time, value: item.PH, type: 'ph' },
+            { time, value: item.tds, type: 'tds' }
+          );
+        });
+        this.createChart(chartData);
       },
       error => {
         console.error('Error al cargar los datos:', error);
       }
     );
   }
-  createChart(labels: string[], tempData: number[], phData: number[], tdsData: number[]) {
+
+  dateToChartTime(date: Date): Time {
+    return date.getTime() / 1000 as Time;
+  }
+
+  createChart(data: ChartDataPoint[]) {
     if (this.chart) {
-      this.chart.destroy();
+      this.chart.remove();
+    }
+    const chartContainer = document.getElementById('MyChart');
+    if (!chartContainer) {
+      console.error('No se encontró el elemento con id "MyChart"');
+      return;
     }
 
-    this.chart = new Chart("MyChart", {
-      type: 'line',
-      data: {
-        labels: labels,
-        datasets: [
-          {
-            label: "Temperatura",
-            data: tempData,
-            backgroundColor: 'red',
-            borderColor: 'red',
-            fill: false
-          },
-          {
-            label: "pH",
-            data: phData,
-            backgroundColor: 'green',
-            borderColor: 'green',
-            fill: false
-          },
-          {
-            label: "TDS",
-            data: tdsData,
-            backgroundColor: 'blue',
-            borderColor: 'blue',
-            fill: false
-          }
-        ]
+    this.chart = createChart(chartContainer, {
+      width: chartContainer.clientWidth,
+      height: 400,
+      layout: {
+        background: { type: ColorType.Solid, color: '#1E222D' },
+        textColor: '#D9D9D9'
       },
-      options: {
-        aspectRatio: 2.5,
-        scales: {
-          x: {
-            display: true,
-            title: {
-              display: true,
-              text: 'Fecha y Hora'
-            }
-          },
-          y: {
-            display: true,
-            title: {
-              display: true,
-              text: 'Valores'
-            },
-            beginAtZero: true
-          }
-        }
-      }
+      grid: {
+        vertLines: { color: '#2B2B43' },
+        horzLines: { color: '#2B2B43' }
+      },
+      rightPriceScale: {
+        borderColor: '#2B2B43',
+        scaleMargins: { top: 0.1, bottom: 0.1 },
+      },
+      timeScale: {
+        borderColor: '#2B2B43',
+        timeVisible: true,
+        secondsVisible: false
+      },
     });
+
+    const temperaturaSeries = this.chart.addAreaSeries({
+      lineColor: 'rgba(255, 0, 0, 1)',
+      topColor: 'rgba(255, 0, 0, 0.4)',
+      bottomColor: 'rgba(255, 0, 0, 0.1)',
+      lineWidth: 2,
+      title: 'Temperatura'
+    });
+
+    const phSeries = this.chart.addAreaSeries({
+      lineColor: 'rgba(0, 255, 0, 1)',
+      topColor: 'rgba(0, 255, 0, 0.4)',
+      bottomColor: 'rgba(0, 255, 0, 0.1)',
+      lineWidth: 2,
+      title: 'pH'
+    });
+
+    const tdsSeries = this.chart.addAreaSeries({
+      lineColor: 'rgba(0, 0, 255, 1)',
+      topColor: 'rgba(0, 0, 255, 0.4)',
+      bottomColor: 'rgba(0, 0, 255, 0.1)',
+      lineWidth: 2,
+      title: 'TDS',
+      crosshairMarkerVisible: true,
+      priceFormat: {
+        type: 'price',
+        precision: 2,
+        minMove: 0.01,
+      },
+    });
+
+    temperaturaSeries.setData(data.filter(d => d.type === 'temperatura'));
+    phSeries.setData(data.filter(d => d.type === 'ph'));
+    tdsSeries.setData(data.filter(d => d.type === 'tds'));
+
+    this.chart.timeScale().fitContent();
   }
 
   cargarAlertas(): void {

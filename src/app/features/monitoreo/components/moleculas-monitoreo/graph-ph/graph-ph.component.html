@@ -2,11 +2,10 @@
   <div class="relative flex items-center">
     <div class="relative">
       <app-lotes [monitoreoData]="monitoreoData" (loteSeleccionado)="onLoteChange($event)"></app-lotes>
-
     </div>
   </div>
   <app-datapicker (dateRangeSelected)="onDateRangeSelected($event)"></app-datapicker>
 </div>
 <div class="chart-container mt-4">
-  <canvas id="MyChart"></canvas>
+  <div id="MyChart"></div>
 </div>

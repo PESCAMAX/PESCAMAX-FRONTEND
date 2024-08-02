@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Chart, ChartConfiguration } from 'chart.js/auto';
-import { ApiService,Monitoreo } from '../../../services/api-form/api.service';
+import { createChart, IChartApi, ColorType, Time, LineData } from 'lightweight-charts';
+import { ApiService, Monitoreo } from '../../../services/api-form/api.service';
 import { AuthService } from '../../../../../core/services/api-login/auth.service';
 
 @Component({
@@ -9,13 +9,13 @@ import { AuthService } from '../../../../../core/services/api-login/auth.service
   styleUrls: ['./graph-ph.component.css']
 })
 export class GraphPhComponent implements OnInit {
-  public chart: Chart | null = null;
+  public chart: IChartApi | null = null;
   public lotes: number[] = [];
   public selectedLote: number | null = null;
-  public loteDropdownOpen: boolean = false; // Nueva variable
+  public loteDropdownOpen: boolean = false;
   private startDate: Date | null = null;
   private endDate: Date | null = null;
-  monitoreoData: Monitoreo[] = []; 
+  monitoreoData: Monitoreo[] = [];
 
   constructor(private apiService: ApiService, private authService: AuthService) {}
 
@@ -26,7 +26,7 @@ export class GraphPhComponent implements OnInit {
   loadLotes() {
     this.apiService.listarMonitoreo(this.authService.getUserId()).subscribe(
       data => {
-        this.monitoreoData = data.response; // Asigna los datos a monitoreoData
+        this.monitoreoData = data.response;
         this.lotes = [...new Set(data.response.map(item => item.LoteID))];
         if (this.lotes.length > 0) {
           this.selectedLote = this.lotes[0];
@@ -39,17 +39,15 @@ export class GraphPhComponent implements OnInit {
     );
   }
 
-
   toggleDropdown() {
     this.loteDropdownOpen = !this.loteDropdownOpen;
   }
 
-
   onLoteChange(lote: number | null): void {
     this.selectedLote = lote;
     this.loadDataAndCreateChart();
-   
   }
+
   onDateRangeSelected(event: { startDate: Date, endDate: Date }): void {
     this.startDate = event.startDate;
     this.endDate = event.endDate;
@@ -58,7 +56,6 @@ export class GraphPhComponent implements OnInit {
 
   loadDataAndCreateChart() {
     if (this.selectedLote === null) return;
-
     this.apiService.listarMonitoreo(this.authService.getUserId()).subscribe({
       next: (data) => {
         if (data && data.response) {
@@ -69,9 +66,11 @@ export class GraphPhComponent implements OnInit {
               return this.startDate && this.endDate && fecha >= this.startDate && fecha <= this.endDate;
             });
           }
-          const phValues = filteredData.map(item => item.PH);
-          const fechas = filteredData.map(item => new Date(item.FechaHora).toLocaleString());
-          this.createChart(fechas, phValues);
+          const phValues = filteredData.map(item => ({
+            time: this.dateToChartTime(new Date(item.FechaHora)),
+            value: item.PH
+          }));
+          this.createChart(phValues);
         } else {
           console.error('La respuesta no tiene el formato esperado:', data);
         }
@@ -80,49 +79,67 @@ export class GraphPhComponent implements OnInit {
     });
   }
 
-  createChart(labels: string[], data: number[]) {
+  dateToChartTime(date: Date): Time {
+    return date.getTime() / 1000 as Time;
+  }
+
+  createChart(data: LineData[]) {
     if (this.chart) {
-      this.chart.destroy();
+      this.chart.remove();
     }
-
-    const chartConfig: ChartConfiguration = {
-      type: 'line',
-      data: {
-        labels: labels,
-        datasets: [{
-          label: "PH",
-          data: data,
-          backgroundColor: 'green',
-          borderColor: 'green',
-          fill: false
-        }]
+    const chartContainer = document.getElementById('MyChart');
+    if (!chartContainer) {
+      console.error('No se encontró el elemento con id "MyChart"');
+      return;
+    }
+    
+    this.chart = createChart(chartContainer, {
+      width: 800,
+      height: 400,
+      layout: {
+        background: { type: ColorType.Solid, color: '#ffffff' },
+        textColor: '#D9D9D9'
       },
-      options: {
-        responsive: true,
-        aspectRatio: 2.5,
-        scales: {
-          x: {
-            title: {
-              display: true,
-              text: 'Fecha y Hora'
-            }
-          },
-          y: {
-            title: {
-              display: true,
-              text: 'PH'
-            },
-            beginAtZero: true
-          }
+      grid: {
+        vertLines: {
+          color: '#ffffff'
+        },
+        horzLines: {
+          color: '#ffffff'
         }
-      }
-    };
-
-    const canvas = document.getElementById('MyChart') as HTMLCanvasElement;
-    if (canvas) {
-      this.chart = new Chart(canvas, chartConfig);
-    } else {
-      console.error('No se encontró el elemento canvas con id "MyChart"');
-    }
+      },
+      rightPriceScale: {
+        borderColor: '#2B2B43',
+        scaleMargins: {
+          top: 0.1,
+          bottom: 0.1,
+        },
+      },
+      timeScale: {
+        borderColor: '#2B2B43',
+        timeVisible: true,
+        secondsVisible: false
+      },
+    });
+  
+    const areaSeries = this.chart.addAreaSeries({
+      lineColor: '#00FFFF',
+      topColor: 'rgba(0, 255, 255, 0.4)',
+      bottomColor: 'rgba(0, 255, 255, 0.1)',
+      lineWidth: 2,
+      priceLineVisible: false,
+      crosshairMarkerVisible: true,
+      lastValueVisible: false,
+      priceFormat: {
+        type: 'price',
+        precision: 2,
+        minMove: 0.01,
+      },
+    });
+  
+    areaSeries.setData(data);
+  
+    // Ajustar el rango visible
+    this.chart.timeScale().fitContent();
   }
 }
