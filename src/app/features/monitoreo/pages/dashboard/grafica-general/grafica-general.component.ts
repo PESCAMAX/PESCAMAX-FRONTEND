@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ApiService, Monitoreo, Alerta } from '../../../services/api-form/api.service';
 import { AuthService } from '../../../../../core/services/api-login/auth.service';
-import { CardsInfoComponent } from '../../../components/atomos-monitoreo/cards-info/cards-info.component';
+
 @Component({
   selector: 'app-grafica-general',
   templateUrl: './grafica-general.component.html',
@@ -14,38 +14,35 @@ export class GraficaGeneralComponent implements OnInit {
   alertasFiltradas: Alerta[] = [];
   isMenuOpen: boolean = true;
   isLoading: boolean = false;
-  
+  selectedLote: number | null = null;
+
   temperaturaTrend: 'up' | 'down' | 'none' = 'none';
   tdsTrend: 'up' | 'down' | 'none' = 'none';
   phTrend: 'up' | 'down' | 'none' = 'none';
-
   temperaturaValue: number = 0;
   tdsValue: number = 0;
   phValue: number = 0;
 
   constructor(
-    private apiService: ApiService, 
-    private AuthService: AuthService, 
+    private apiService: ApiService,
+    private authService: AuthService,
     private cdr: ChangeDetectorRef
-  ) {
-    this.monitoreoData = [];
-    this.alertas = [];
-    this.alertasFiltradas = [];
-  }
+  ) {}
 
   ngOnInit(): void {
     this.cargarDatos();
     this.cargarAlertas();
   }
-  
+
   cargarDatos(): void {
     this.isLoading = true;
-    this.apiService.listarMonitoreo(this.AuthService.getUserId()).subscribe(
+    this.apiService.listarMonitoreo(this.authService.getUserId()).subscribe(
       (response: { response: Monitoreo[] }) => {
         this.monitoreoData = response.response;
         this.monitoreoDataFiltrada = [...this.monitoreoData];
         this.calcularTendencias();
         this.isLoading = false;
+        this.cdr.detectChanges();
       },
       error => {
         this.isLoading = false;
@@ -53,7 +50,7 @@ export class GraficaGeneralComponent implements OnInit {
       }
     );
   }
-  
+
   cargarAlertas(): void {
     this.apiService.obtenerAlertas().subscribe(
       (alertas: Alerta[]) => {
@@ -70,8 +67,6 @@ export class GraficaGeneralComponent implements OnInit {
     this.isMenuOpen = isOpen;
   }
 
- 
-
   calcularTendencias(): void {
     if (this.monitoreoDataFiltrada.length < 2) {
       this.temperaturaTrend = 'none';
@@ -79,21 +74,18 @@ export class GraficaGeneralComponent implements OnInit {
       this.phTrend = 'none';
       return;
     }
-
     const ultimo = this.monitoreoDataFiltrada[this.monitoreoDataFiltrada.length - 1];
     const penultimo = this.monitoreoDataFiltrada[this.monitoreoDataFiltrada.length - 2];
-
     this.temperaturaTrend = ultimo.Temperatura > penultimo.Temperatura ? 'up' : 'down';
     this.tdsTrend = ultimo.tds > penultimo.tds ? 'up' : 'down';
     this.phTrend = ultimo.PH > penultimo.PH ? 'up' : 'down';
-
-    // Update card values
     this.temperaturaValue = ultimo.Temperatura;
     this.tdsValue = ultimo.tds;
     this.phValue = ultimo.PH;
   }
 
   onLoteChange(lote: number | null): void {
+    this.selectedLote = lote;
     if (lote === null) {
       this.monitoreoDataFiltrada = [...this.monitoreoData];
       this.alertasFiltradas = [...this.alertas];
@@ -104,7 +96,7 @@ export class GraficaGeneralComponent implements OnInit {
     this.calcularTendencias();
     this.cdr.detectChanges();
   }
-  
+
   filtrarAlertas(lote: number | null): void {
     if (lote === null) {
       this.alertasFiltradas = [...this.alertas];

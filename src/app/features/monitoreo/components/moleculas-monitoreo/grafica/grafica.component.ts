@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef, SimpleChanges } from '@angular/core';
 import { createChart, IChartApi, ColorType, Time, LineData } from 'lightweight-charts';
 import { ApiService, Alerta, Monitoreo } from '../../../services/api-form/api.service';
 import { AuthService } from '../../../../../core/services/api-login/auth.service';
@@ -43,6 +43,12 @@ export class GraficaComponent implements OnInit {
     this.obtenerFechaMasAntigua();
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['data'] || changes['selectedLote']) {
+      this.loadDataAndCreateChart();
+    }
+  }
+
   obtenerFechaMasAntigua(): void {
     this.apiService.listarMonitoreo(this.authService.getUserId()).subscribe(
       data => {
@@ -72,15 +78,7 @@ export class GraficaComponent implements OnInit {
     );
   }
 
-  onLoteChange(event: Event): void {
-    const selectElement = event.target as HTMLSelectElement;
-    this.selectedLote = selectElement.value ? Number(selectElement.value) : null;
-    this.loadDataAndCreateChart();
-    this.filtrarAlertas();
-    this.cdr.detectChanges();
-  }
-
- loadDataAndCreateChart() {
+  loadDataAndCreateChart() {
     if (this.data.length === 0) {
       console.log('No hay datos para mostrar');
       return;
@@ -99,7 +97,6 @@ export class GraficaComponent implements OnInit {
 
     console.log('Datos filtrados:', filteredData);
 
-    let timeIncrement = 0;
     const chartData: ChartDataPoint[] = [];
     filteredData.forEach(item => {
       const fecha = new Date(item.FechaHora);
@@ -113,7 +110,6 @@ export class GraficaComponent implements OnInit {
         { time, value: item.PH, type: 'ph' },
         { time, value: item.tds, type: 'tds' }
       );
-      timeIncrement++;
     });
 
     chartData.sort((a, b) => (a.time as number) - (b.time as number));
@@ -132,15 +128,15 @@ export class GraficaComponent implements OnInit {
   }
 
   createChart(data: ChartDataPoint[]) {
-    if (this.chart) {
-      this.chart.remove();
-    }
     const chartContainer = document.getElementById('MyChart');
     if (!chartContainer) {
       console.error('No se encontró el elemento con id "MyChart"');
       return;
     }
-    console.log('Dimensiones del contenedor:', chartContainer.clientWidth, chartContainer.clientHeight);
+
+    if (this.chart) {
+      this.chart.remove();
+    }
 
     this.chart = createChart(chartContainer, {
       width: chartContainer.clientWidth,
@@ -195,10 +191,6 @@ export class GraficaComponent implements OnInit {
     });
 
     try {
-      console.log('Datos de temperatura:', data.filter(d => d.type === 'temperatura'));
-      console.log('Datos de pH:', data.filter(d => d.type === 'ph'));
-      console.log('Datos de TDS:', data.filter(d => d.type === 'tds'));
-
       temperaturaSeries.setData(data.filter(d => d.type === 'temperatura'));
       phSeries.setData(data.filter(d => d.type === 'ph'));
       tdsSeries.setData(data.filter(d => d.type === 'tds'));
@@ -261,6 +253,7 @@ export class GraficaComponent implements OnInit {
       this.filtrarAlertas();
     }
   }
+
   disableDates = (date: Date): boolean => {
     return date > this.fechaActual || (this.fechaMasAntigua !== null && date < this.fechaMasAntigua);
   };
