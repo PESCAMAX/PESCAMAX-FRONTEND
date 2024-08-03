@@ -184,7 +184,7 @@ export class GraficaComponent implements OnInit {
       title: 'TDS',
       crosshairMarkerVisible: true,
       priceFormat: {
-        type: 'price',
+        type: 'volume',
         precision: 2,
         minMove: 0.01,
       },

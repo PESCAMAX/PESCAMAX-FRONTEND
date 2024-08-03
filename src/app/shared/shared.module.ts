@@ -48,6 +48,7 @@ import { InputsFormComponent } from '../features/monitoreo/components/atomos-mon
 import { ButtonHorarioAlertasComponent } from '../features/monitoreo/components/atomos-monitoreo/button-horario-alertas/button-horario-alertas.component';
 import { LotesComponent } from '../features/monitoreo/components/atomos-monitoreo/lotes/lotes.component';
 import { FechasMensajesComponent } from '../features/monitoreo/components/atomos-monitoreo/fechas-mensajes/fechas-mensajes.component';
+import { GraficaBarrasComponent } from '../features/monitoreo/components/moleculas-monitoreo/grafica-barras/grafica-barras.component';
 @NgModule({
   declarations: [
     ButtonEnviarComponent,
@@ -89,7 +90,8 @@ import { FechasMensajesComponent } from '../features/monitoreo/components/atomos
     InputsFormComponent,
     LotesComponent,
     ButtonHorarioAlertasComponent,
-    FechasMensajesComponent
+    FechasMensajesComponent,
+    GraficaBarrasComponent
 
 
 
@@ -135,7 +137,8 @@ import { FechasMensajesComponent } from '../features/monitoreo/components/atomos
     BtnLoginRegisterComponent,
     InputsFormComponent,
     LotesComponent,
-    FechasMensajesComponent
+    FechasMensajesComponent,
+    GraficaBarrasComponent
 
 
   ]

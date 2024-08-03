@@ -11,6 +11,7 @@ import { LotesComponent } from './components/atomos-monitoreo/lotes/lotes.compon
 import { ButtonMasrecientesComponent } from './components/atomos-monitoreo/button-masrecientes/button-masrecientes.component';
 import { ButtonHorarioAlertasComponent } from './components/atomos-monitoreo/button-horario-alertas/button-horario-alertas.component';
 import { FechasMensajesComponent } from './components/atomos-monitoreo/fechas-mensajes/fechas-mensajes.component';
+import { GraficaBarrasComponent } from './components/moleculas-monitoreo/grafica-barras/grafica-barras.component';
 
 
 
@@ -30,6 +31,7 @@ import { FechasMensajesComponent } from './components/atomos-monitoreo/fechas-me
           ButtonMasrecientesComponent,
           ButtonHorarioAlertasComponent,
           FechasMensajesComponent,
+          GraficaBarrasComponent,
           
 
 
