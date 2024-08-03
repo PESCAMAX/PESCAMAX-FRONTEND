@@ -35,10 +35,13 @@
     <div class="mt-4">
       <app-tabla-sensor [data]="monitoreoDataFiltrada"></app-tabla-sensor>
     </div>
+    <div>
+      <app-grafica-barras [data]="monitoreoData" [selectedLote]="selectedLote"></app-grafica-barras>
+    </div>
   </div>
 </div>
 
-<!-- 
-<app-lotes [monitoreoData]="monitoreoData" (loteSeleccionado)="onLoteChange($event)"></app-lotes>
 
-<app-grafica-barras [data]="monitoreoData" [selectedLote]="selectedLote"></app-grafica-barras> -->
+
+
+
