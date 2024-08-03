@@ -133,53 +133,51 @@ export class GraficaComponent implements OnInit {
       console.error('No se encontró el elemento con id "MyChart"');
       return;
     }
-
     if (this.chart) {
       this.chart.remove();
     }
-
     this.chart = createChart(chartContainer, {
       width: chartContainer.clientWidth,
       height: 400,
       layout: {
-        background: { type: ColorType.Solid, color: '#1E222D' },
-        textColor: '#D9D9D9'
+        background: { type: ColorType.Solid, color: '#F3F4F6' },
+        textColor: '#374151'
       },
       grid: {
-        vertLines: { color: '#2B2B43' },
-        horzLines: { color: '#2B2B43' }
+        vertLines: { color: '#E5E7EB' },
+        horzLines: { color: '#E5E7EB' }
       },
       rightPriceScale: {
-        borderColor: '#2B2B43',
+        borderColor: '#374151',
         scaleMargins: { top: 0.1, bottom: 0.1 },
       },
       timeScale: {
-        borderColor: '#2B2B43',
+        borderColor: '#374151',
         timeVisible: true,
         secondsVisible: false
       },
     });
 
     const temperaturaSeries = this.chart.addAreaSeries({
-      lineColor: 'rgba(255, 0, 0, 1)',
-      topColor: 'rgba(255, 0, 0, 0.4)',
-      bottomColor: 'rgba(255, 0, 0, 0.1)',
+      lineColor: '#EF4444',
+      topColor: 'rgba(239, 68, 68, 0.4)',
+      bottomColor: 'rgba(239, 68, 68, 0.1)',
       lineWidth: 2,
       title: 'Temperatura'
     });
 
     const phSeries = this.chart.addAreaSeries({
-      lineColor: 'rgba(0, 255, 0, 1)',
-      topColor: 'rgba(0, 255, 0, 0.4)',
-      bottomColor: 'rgba(0, 255, 0, 0.1)',
+      lineColor: '#10B981',
+      topColor: 'rgba(16, 185, 129, 0.4)',
+      bottomColor: 'rgba(16, 185, 129, 0.1)',
       lineWidth: 2,
       title: 'pH'
     });
 
     const tdsSeries = this.chart.addAreaSeries({
-      lineColor: 'rgba(0, 0, 255, 1)',
-      topColor: 'rgba(0, 0, 255, 0.4)',
-      bottomColor: 'rgba(0, 0, 255, 0.1)',
+      lineColor: '#3B82F6',
+      topColor: 'rgba(59, 130, 246, 0.4)',
+      bottomColor: 'rgba(59, 130, 246, 0.1)',
       lineWidth: 2,
       title: 'TDS',
       crosshairMarkerVisible: true,

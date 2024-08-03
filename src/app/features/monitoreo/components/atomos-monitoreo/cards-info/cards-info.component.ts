@@ -13,10 +13,32 @@ export class CardsInfoComponent {
 
   get cardColor(): string {
     const colorMap: { [key: string]: string } = {
-      'Temperatura': 'bg-red-100 border-red-500',
-      'TDS': 'bg-blue-100 border-blue-500',
-      'pH': 'bg-green-100 border-green-500'
+      'Temperatura': 'border-red-500',
+      'TDS': 'border-blue-500',
+      'pH': 'border-green-500'
     };
-    return colorMap[this.title] || 'bg-gray-100 border-gray-500';
+    return colorMap[this.title] || 'border-gray-500';
+  }
+
+  get trendIcon(): string {
+    switch (this.trend) {
+      case 'up':
+        return '↑';
+      case 'down':
+        return '↓';
+      default:
+        return '→';
+    }
+  }
+
+  get trendColor(): string {
+    switch (this.trend) {
+      case 'up':
+        return 'text-green-500';
+      case 'down':
+        return 'text-red-500';
+      default:
+        return 'text-gray-500';
+    }
   }
 }

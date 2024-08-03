@@ -28,15 +28,16 @@
         <app-grafica [data]="monitoreoDataFiltrada" [selectedLote]="selectedLote"></app-grafica>
       </div>
       <div class="w-1/4">
-        <app-fechas-mensajes [alertasFiltradas]="alertasFiltradas"></app-fechas-mensajes>
+        <app-grafica-barras [data]="monitoreoData" [selectedLote]="selectedLote"></app-grafica-barras>
       </div>
     </div>
     <!-- Sección de Tabla de Datos -->
     <div class="mt-4">
-      <app-tabla-sensor [data]="monitoreoDataFiltrada"></app-tabla-sensor>
+      <app-fechas-mensajes [alertasFiltradas]="alertasFiltradas"></app-fechas-mensajes>
+      
     </div>
     <div>
-      <app-grafica-barras [data]="monitoreoData" [selectedLote]="selectedLote"></app-grafica-barras>
+      
     </div>
   </div>
 </div>

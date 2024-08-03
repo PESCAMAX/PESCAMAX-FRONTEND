@@ -1,24 +1,29 @@
-<div class="flex flex-col w-full h-full">
-    <h3>Fecha y Mensajes</h3>
-    <div *ngIf="alertasFiltradas.length > 0; else noAlertas">
-      <div class="alertas-container">
-        <table>
-          <thead>
-            <tr>
-              <th>Fecha</th>
-              <th>Mensaje</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let alerta of alertasFiltradas">
-              <td>{{ alerta.FechaCreacion | date:'medium' }}</td>
-              <td>{{ alerta.Descripcion }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+<div class="container flex-1 text-gray-900 mx-auto bg-custom-gray">
+  <div class="px-3 py-4 flex justify-center">
+    <div class="table-container">
+      <table class="w-full text-md bg-white shadow-md rounded mb-4">
+        <thead>
+          <tr class="border-b sticky-header">
+            <th class="text-left p-3 px-5">Especie ID</th>
+            <th class="text-left p-3 px-5">Nombre Especie</th>
+            <th class="text-left p-3 px-5">Lote ID</th>
+            <th class="text-left p-3 px-5">Descripción</th>
+            <th class="text-left p-3 px-5">Fecha</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let alerta of alertasFiltradas" class="border-b hover:bg-orange-100">
+            <td class="p-3 px-5">{{ alerta.EspecieID }}</td>
+            <td class="p-3 px-5">{{ alerta.Nombre }}</td>
+            <td class="p-3 px-5">{{ alerta.LoteID }}</td>
+            <td class="p-3 px-5">{{ alerta.Descripcion }}</td>
+            <td class="p-3 px-5">{{ alerta.FechaCreacion | date:'medium' }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <ng-template #noAlertas>
-      <p>No hay alertas para mostrar.</p>
-    </ng-template>
   </div>
+  <div *ngIf="mensajeAlerta" class="text-center text-red-500 mt-4">
+    {{ mensajeAlerta }}
+  </div>
+</div>
