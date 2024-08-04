@@ -2,8 +2,9 @@
 <div class="flex flex-col w-full h-full">
   <!-- Contenido Principal -->
   <div class="flex-1 p-4 transition-all duration-300" [ngClass]="{'ml-64': isMenuOpen, 'ml-16': !isMenuOpen}">
+    <app-lotes [monitoreoData]="monitoreoData" (loteSeleccionado)="onLoteChange($event)"></app-lotes>
     <!-- Sección de Tarjetas -->
-    <div class="grid grid-cols-3 gap-4">
+    <div class="grid grid-cols-3 gap-4 mt-4">
       <app-cards-info
         title="Temperatura"
         [value]="temperaturaValue"
@@ -20,16 +21,16 @@
         [trend]="phTrend">
       </app-cards-info>
     </div>
-    <app-lotes class="flex-1 p-4" [monitoreoData]="monitoreoData" (loteSeleccionado)="onLoteChange($event)"></app-lotes>
+   
     <!-- Sección de Gráfica y Descriptores -->
-    <div class="flex max-w-4xl mt-4 ml-6">
+    <div class="flex mt-4">
       <div class="w-3/4 pr-4">
         <app-grafica [data]="monitoreoDataFiltrada" [selectedLote]="selectedLote"></app-grafica>
       </div>
-      <div class="w-1/5 ml-10">
-        <app-datapicker></app-datapicker>
+      <div class="w-1/4">
+        <app-grafica-barras [data]="monitoreoData" [selectedLote]="selectedLote"></app-grafica-barras>
       </div>
-  </div>
+    </div>
     <!-- Sección de Tabla de Datos -->
     <div class="mt-4">
       <app-fechas-mensajes [alertasFiltradas]="alertasFiltradas"></app-fechas-mensajes>
