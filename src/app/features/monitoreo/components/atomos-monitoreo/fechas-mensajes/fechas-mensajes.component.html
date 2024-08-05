@@ -4,7 +4,6 @@
       <table class="w-full text-md bg-white shadow-md rounded mb-4">
         <thead>
           <tr class="border-b sticky-header">
-            <th class="text-left p-3 px-5">Especie ID</th>
             <th class="text-left p-3 px-5">Nombre Especie</th>
             <th class="text-left p-3 px-5">Lote ID</th>
             <th class="text-left p-3 px-5">Descripción</th>
@@ -13,7 +12,6 @@
         </thead>
         <tbody>
           <tr *ngFor="let alerta of alertasFiltradas" class="border-b hover:bg-orange-100">
-            <td class="p-3 px-5">{{ alerta.EspecieID }}</td>
             <td class="p-3 px-5">{{ alerta.Nombre }}</td>
             <td class="p-3 px-5">{{ alerta.LoteID }}</td>
             <td class="p-3 px-5">{{ alerta.Descripcion }}</td>

@@ -1,4 +1,4 @@
-<select (change)="filtrarPorLote($event)" class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-lg">
-    <option value="null">Todos los lotes</option>
-    <option *ngFor="let lote of lotes" [value]="lote">Lote {{ lote }}</option>
-  </select>
+<select (change)="filtrarPorLote($event)" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-gray-500 block w-full p-2.5 hover:bg-gray-100 transition-all duration-300 shadow-sm">
+  <option value="null">Todos los lotes</option>
+  <option *ngFor="let lote of lotes" [value]="lote">Lote {{ lote }}</option>
+</select>

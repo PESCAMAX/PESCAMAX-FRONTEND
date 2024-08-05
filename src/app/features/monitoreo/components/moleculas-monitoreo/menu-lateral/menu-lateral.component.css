@@ -1,23 +1,64 @@
-.fixed.top-0.left-0.right-0 {
-    z-index: 10; /* Asegura que la barra superior tenga un z-index mayor */
-  }
-  .flex-1.p-4.transition-all.duration-300 {
-    margin-top: 4rem; /* Ajusta el margen superior para que el contenido no quede oculto detrás de la barra superior */
-  }
- /* src/app/shared/components/your-menu-lateral/menu-lateral.component.css */
-
+/* Estilo del menú lateral */
 .menu-lateral {
-    position: fixed;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 250px;
-    background-color: #1f2937; /* bg-gray-800 */
-    z-index: 1000; /* Ajuste del z-index si es necesario */
-  }
-  
-  .content {
-    margin-left: 250px;
-    padding: 16px;
-  }
-   
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 250px;
+  background-color: #1f2937; /* bg-gray-800 */
+  z-index: 1000; /* Ajuste del z-index si es necesario */
+}
+
+/* Estilo del contenido principal */
+.content {
+  margin-left: 250px;
+  padding: 16px;
+}
+
+/* Estilo de hover para los elementos del menú */
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  color: #000000; /* Color de texto predeterminado */
+  transition: all 0.3s ease;
+  border: 10px;
+
+}
+
+.menu-item:hover {
+  background-color: #ffffff; /* Fondo blanco */
+  color: #000000; /* Letra negra */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Sombra alrededor del borde */
+  border: 10px;
+
+}
+
+/* Estilo para el submenú */
+.submenu-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  color: #000000; /* Color de texto predeterminado */
+  transition: all 0.3s ease;
+  border: 10px;
+
+}
+
+.submenu-item:hover {
+  background-color: #ffffff; /* Fondo blanco */
+  color: #000000; /* Letra negra */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Sombra alrededor del borde */
+  border: 10px;
+
+}
+
+/* Estilo para la barra superior */
+.fixed.top-0.left-0.right-0 {
+  z-index: 10; /* Asegura que la barra superior tenga un z-index mayor */
+}
+
+/* Ajuste de margen superior para el contenido */
+.flex-1.p-4.transition-all.duration-300 {
+  margin-top: 4rem; /* Ajusta el margen superior para que el contenido no quede oculto detrás de la barra superior */
+}
