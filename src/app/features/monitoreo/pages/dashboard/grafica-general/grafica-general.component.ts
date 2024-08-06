@@ -1,13 +1,15 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { ApiService, Monitoreo, Alerta } from '../../../services/api-form/api.service';
 import { AuthService } from '../../../../../core/services/api-login/auth.service';
+import { interval, Subscription } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-grafica-general',
   templateUrl: './grafica-general.component.html',
   styleUrls: ['./grafica-general.component.css']
 })
-export class GraficaGeneralComponent implements OnInit {
+export class GraficaGeneralComponent implements OnInit, OnDestroy {
   monitoreoData: Monitoreo[] = [];
   monitoreoDataFiltrada: Monitoreo[] = [];
   alertas: Alerta[] = [];
@@ -29,6 +31,8 @@ export class GraficaGeneralComponent implements OnInit {
   ultimoRegistroHora: string = '';
   lote: number | null = null;
 
+  private updateSubscription: Subscription | null = null;
+
   constructor(
     private apiService: ApiService,
     private authService: AuthService,
@@ -38,6 +42,27 @@ export class GraficaGeneralComponent implements OnInit {
   ngOnInit(): void {
     this.cargarDatos();
     this.cargarAlertas();
+    this.startAutoUpdate();
+  }
+
+  ngOnDestroy(): void {
+    if (this.updateSubscription) {
+      this.updateSubscription.unsubscribe();
+    }
+  }
+
+  startAutoUpdate(): void {
+    this.updateSubscription = interval(5000).pipe(
+      switchMap(() => this.apiService.listarMonitoreo(this.authService.getUserId()))
+    ).subscribe(
+      (response: { response: Monitoreo[] }) => {
+        this.monitoreoData = response.response;
+        this.filtrarDatos(this.selectedLote);
+        this.calcularTendencias();
+        this.cdr.detectChanges();
+      },
+      error => console.error('Error al actualizar datos:', error)
+    );
   }
 
   cargarDatos(): void {

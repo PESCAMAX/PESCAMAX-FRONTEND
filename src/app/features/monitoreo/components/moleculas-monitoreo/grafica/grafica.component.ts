@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectorRef, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef, SimpleChanges, OnDestroy } from '@angular/core';
 import { createChart, IChartApi, ColorType, Time, LineData } from 'lightweight-charts';
 import { ApiService, Alerta, Monitoreo } from '../../../services/api-form/api.service';
 import { AuthService } from '../../../../../core/services/api-login/auth.service';
@@ -14,7 +14,7 @@ interface ChartDataPoint {
   templateUrl: './grafica.component.html',
   styleUrls: ['./grafica.component.css']
 })
-export class GraficaComponent implements OnInit {
+export class GraficaComponent implements OnInit, OnDestroy {
   @Input() data: Monitoreo[] = [];
   @Input() selectedLote: number | null = null;
   public chart: IChartApi | null = null;
@@ -28,6 +28,7 @@ export class GraficaComponent implements OnInit {
   fechaActual: Date = new Date();
   isMenuOpen: boolean = true;
   monitoreoData: Monitoreo[] = [];
+  private updateInterval: any;
 
   constructor(
     private apiService: ApiService, 
@@ -41,6 +42,13 @@ export class GraficaComponent implements OnInit {
     this.loadLotes();
     this.cargarAlertas();
     this.obtenerFechaMasAntigua();
+    this.startDataUpdates();
+  }
+
+  ngOnDestroy() {
+    if (this.updateInterval) {
+      clearInterval(this.updateInterval);
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -78,15 +86,33 @@ export class GraficaComponent implements OnInit {
     );
   }
 
+  loadLatestData() {
+    this.apiService.listarMonitoreo(this.authService.getUserId()).subscribe(
+      data => {
+        this.monitoreoData = data.response;
+        this.loadDataAndCreateChart();
+      },
+      error => {
+        console.error('Error al cargar los datos más recientes:', error);
+      }
+    );
+  }
+
+  startDataUpdates() {
+    this.updateInterval = setInterval(() => {
+      this.loadLatestData();
+    }, 5000); // Actualiza cada 5 segundos
+  }
+
   loadDataAndCreateChart() {
-    if (this.data.length === 0) {
+    if (this.monitoreoData.length === 0) {
       console.log('No hay datos para mostrar');
       return;
     }
 
-    let filteredData = this.data;
+    let filteredData = this.monitoreoData;
     if (this.selectedLote !== null) {
-      filteredData = this.data.filter(item => item.LoteID === this.selectedLote);
+      filteredData = this.monitoreoData.filter(item => item.LoteID === this.selectedLote);
     }
     if (this.fechaInicio && this.fechaFin) {
       filteredData = filteredData.filter(item => {
