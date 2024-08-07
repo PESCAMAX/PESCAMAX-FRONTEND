@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Alerta,ApiService,Especie,Monitoreo } from '../../../services/api-form/api.service';
-import { AlertService } from '../../../services/api-alert/alert.service';
+import { Alerta, ApiService, Especie, Monitoreo, EspecieLoteDTO } from '../../../services/api-form/api.service';import { AlertService } from '../../../services/api-alert/alert.service';
 import { AuthService } from '../../../../../core/services/api-login/auth.service';
 import { ActivatedRoute } from '@angular/router';
 @Component({
@@ -15,6 +14,7 @@ export class TablaSeleccionarComponent implements OnInit {
   uniqueLotes: number[] = [];
   selectedLote: { [key: number]: number } = {};
   userId: string;
+  especiePorLote: { [loteId: number]: number } = {};
 
   constructor(
     private apiService: ApiService, 
@@ -30,6 +30,7 @@ export class TablaSeleccionarComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.userId = params['userId'] || this.userId;
       this.loadData();
+      this.cargarEspeciePorLote();
     });
     
   }
@@ -37,7 +38,18 @@ export class TablaSeleccionarComponent implements OnInit {
   onMenuToggle(isOpen: boolean) {
     this.isMenuOpen = isOpen;
   }
-  
+
+  cargarEspeciePorLote() {
+    this.apiService.obtenerEspeciePorLote(this.userId).subscribe({
+      next: (data: EspecieLoteDTO[]) => {
+        this.especiePorLote = data.reduce((acc: { [key: number]: number }, item: EspecieLoteDTO) => {
+          acc[item.LoteId] = item.EspecieId;
+          return acc;
+        }, {});
+      },
+      error: (error) => console.error('Error al cargar especies por lote:', error)
+    });
+  }
   loadData() {
     // Load especies
     this.apiService.listarEspecies(this.userId).subscribe({
@@ -92,14 +104,22 @@ export class TablaSeleccionarComponent implements OnInit {
     const loteId = this.selectedLote[especieId];
   
     if (!loteId) {
-      console.error('No se ha seleccionado ningún lote para esta especie.');
       this.alertService.showAlert('warning', 'Selección incompleta', 'Seleccione un lote para la especie.');
       return;
     }
   
-    console.log(`Especie ID: ${especieId}, Lote ID: ${loteId}`);
-    this.verificarValores(especieId, loteId);
+    this.apiService.asignarEspecieALote(especieId, loteId, this.userId).subscribe({
+      next: () => {
+        this.alertService.showAlert('info', 'Asignación guardada', 'La especie ha sido asignada al lote correctamente.');
+        this.cargarEspeciePorLote();
+      },
+      error: (error) => {
+        console.error('Error al asignar especie a lote:', error);
+        this.alertService.showAlert('danger', 'Error', 'No se pudo asignar la especie al lote.');
+      }
+    });
   }
+
   
   verificarValores(especieId: number, loteId: number): void {
     console.log('Verificando valores para especie ID:', especieId, 'y lote ID:', loteId);
