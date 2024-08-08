@@ -27,13 +27,27 @@ export class MenuLateralComponent implements OnInit {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
-      this.closeMenu();
+      this.checkWindowWidth();
     });
+    this.checkWindowWidth();
+  }
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.checkWindowWidth();
+  }
+  checkWindowWidth() {
+    if (window.innerWidth <= 915) {
+      this.isMenuOpen = false;
+    } else {
+      this.isMenuOpen = true;
+    }
+    this.menuToggled.emit(this.isMenuOpen);
   }
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
     this.menuToggled.emit(this.isMenuOpen);
+    document.querySelector('.menu-lateral')?.classList.toggle('open');
   }
 
   openMenu() {
