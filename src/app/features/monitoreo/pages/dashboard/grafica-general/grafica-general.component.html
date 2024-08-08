@@ -10,11 +10,12 @@
     <div class="flex flex-wrap mt-4">
       <!-- Columna izquierda: Cards (35%) -->
       <div class="w-full lg:w-[35%] pr-0 lg:pr-4 mb-4 lg:mb-0">
+        <h2 class="text-xl font-semibold text-gray-800 mb-2">ㅤ</h2>
         <div class="grid grid-cols-2 gap-4 mb-4">
           <app-cards-info title="Temperatura" [value]="temperaturaValue" [trend]="temperaturaTrend" [trendValue]="temperaturaTrendValue"></app-cards-info>
           <app-cards-info title="TDS" [value]="tdsValue" [trend]="tdsTrend" [trendValue]="tdsTrendValue"></app-cards-info>
           <app-cards-info title="pH" [value]="phValue" [trend]="phTrend" [trendValue]="phTrendValue"></app-cards-info>
-          <app-cards-info title="ULTIMO REGISTRO" [value]="ultimoRegistroHora" trend="none"></app-cards-info>
+          <app-cards-info title="ULTIMO REGISTRO" [value]="ultimoRegistroHora" [trendValue]="phTrendValue"></app-cards-info>
         </div>
       </div>
       

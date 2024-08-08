@@ -1,16 +1,9 @@
 <app-menu-lateral (menuToggled)="onMenuToggle($event)"></app-menu-lateral>
-
-
-<div class="flex">
-    <!-- Menu Lateral -->
-    
-    <!-- Contenido Principal -->
-  <div class="flex-1 p-4 transition-all duration-300" [ngClass]="{'ml-64': isMenuOpen, 'ml-16': !isMenuOpen}">
-   
-         <h1 class="  font-bold mb-4 text-custom-blue text-custom-blue text-center font-bold text-lg font-sans">Gráfica Temperatura</h1>
-         <app-temperatura></app-temperatura>
+<div class="container">
+  <div class="content-wrapper" [ngClass]="{'menu-open': isMenuOpen, 'menu-closed': !isMenuOpen}">
+    <h1 class="content-title">Gráfica de temperatura</h1>
+    <div class="graph-container">
+      <app-temperatura></app-temperatura>
     </div>
+  </div>
 </div>
-
-
-       
