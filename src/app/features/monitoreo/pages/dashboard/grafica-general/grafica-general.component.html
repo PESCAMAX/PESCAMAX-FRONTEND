@@ -1,56 +1,40 @@
 <app-menu-lateral (menuToggled)="onMenuToggle($event)"></app-menu-lateral>
-<h1 class="text-center p-4">Control De Monitoreo</h1>
 <div class="flex flex-col w-full h-full">
-
   <div class="flex-1 p-4 transition-all duration-300" [ngClass]="{'ml-64': isMenuOpen, 'ml-2': !isMenuOpen}">
+    <h1 class="text-center p-4 text-2xl font-bold">Control De Monitoreo</h1>
     
     <div class="mb-4 shadow-md">
       <app-lotes [monitoreoData]="monitoreoData" (loteSeleccionado)="onLoteChange($event)"></app-lotes>
     </div>
-    <div class="w-1/5 ml-10">
-      
-    </div>
     
-    <div class="flex mt-4 space-x-8">
-      <div class="w-3/4">
-        <h2 class="text-2xl font-semibold text-gray-800 mb-4">Gráfica General</h2>
-        <app-grafica [data]="monitoreoDataFiltrada" [selectedLote]="selectedLote"></app-grafica>
+    <div class="flex flex-wrap mt-4">
+      <!-- Columna izquierda: Cards (35%) -->
+      <div class="w-full lg:w-[35%] pr-0 lg:pr-4 mb-4 lg:mb-0">
+        <div class="grid grid-cols-2 gap-4 mb-4">
+          <app-cards-info title="Temperatura" [value]="temperaturaValue" [trend]="temperaturaTrend" [trendValue]="temperaturaTrendValue"></app-cards-info>
+          <app-cards-info title="TDS" [value]="tdsValue" [trend]="tdsTrend" [trendValue]="tdsTrendValue"></app-cards-info>
+          <app-cards-info title="pH" [value]="phValue" [trend]="phTrend" [trendValue]="phTrendValue"></app-cards-info>
+          <app-cards-info title="ULTIMO REGISTRO" [value]="ultimoRegistroHora" trend="none"></app-cards-info>
+        </div>
       </div>
-      <div class="w-1/4">
-        <div class="grid grid-cols-2 gap-5 ">
-          <app-cards-info
-            title="Temperatura"
-            [value]="temperaturaValue"
-            [trend]="temperaturaTrend"
-            [trendValue]="temperaturaTrendValue">
-          </app-cards-info>
-          <app-cards-info
-            title="TDS"
-            [value]="tdsValue"
-            [trend]="tdsTrend"
-            [trendValue]="tdsTrendValue">
-          </app-cards-info>
-          <app-cards-info
-            title="pH"
-            [value]="phValue"
-            [trend]="phTrend"
-            [trendValue]="phTrendValue">
-          </app-cards-info>
-          <app-cards-info
-            title="ULTIMO REGISTRO"
-            [value]="ultimoRegistroHora"
-            trend="none">
-          </app-cards-info>
+      
+      <!-- Columna derecha: Gráfica General (65%) -->
+      <div class="w-full lg:w-[65%]">
+        <div class="mb-8">
+          <h2 class="text-xl font-semibold text-gray-800 mb-2">Gráfica General</h2>
+          <app-grafica [data]="monitoreoDataFiltrada" [selectedLote]="selectedLote"></app-grafica>
         </div>
       </div>
     </div>
-  
+    
+    <!-- Gráfica de Barras (debajo de las dos columnas) -->
+    <div class="mt-8">
+      <h2 class="text-xl font-semibold text-gray-800 mb-2">Gráfica de Barras</h2>
+      <app-grafica-barras [data]="monitoreoData" [selectedLote]="selectedLote"></app-grafica-barras>
+    </div>
+    
     <div class="mt-8">
       <app-fechas-mensajes [alertasFiltradas]="alertasFiltradas"></app-fechas-mensajes>
-
-    </div>
-    <div class="w-1/4">
-      <app-grafica-barras [data]="monitoreoData" [selectedLote]="selectedLote"></app-grafica-barras>
     </div>
   </div>
 </div>

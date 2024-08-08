@@ -1,64 +1,126 @@
-.card {
-    background-color: #ffffff;
-    border-radius: 8px;
-    padding: 16px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
-  }
-  
-  .card:hover {
-    transform: translateY(-5px);
-  }
-  
-  .card h5 {
-    color: #2c3e50;
-  }
-  
-  
-  .card .text-gray-700 {
-    color: #7f8c8d;
-  }
-  
-  .card i {
-    font-size: 24px;
-    color:black; 
-  }
-  
-  .card-1 {
-    background-color: #fa8578; /* Gris claro */
-  }
-  
-  .card-2 {
-    background-color: #add8e6; /* Azul claro */
-  }
-  
-  .card-3 {
-    background-color: #90ee90; /* Verde claro */
-  }
-  
-  .color-box {
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    margin-right: 8px;
-  }
-  
-  .bg-red-500 {
-    background-color: #e74c3c;
-  }
-  
-  .bg-green-500 {
-    background-color: #27ae60;
-  }
-  
-  .bg-blue-500 {
-    background-color: #2980b9;
-  }
-  /* Estilos para el título de la gráfica general */
-/* Estilos para el título general de la página */
-h2 {
-  color: #2c3e50;
-  margin-bottom: 16px;
+/* Estilos base */
+.container {
+  max-width: 100%;
+  padding: 1rem;
 }
 
+/* Estilos para los cards */
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  width: 100%;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.card-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #000;
+}
+
+.card-change {
+  font-size: 0.875rem;
+  color: #666;
+  margin-top: 0.5rem;
+}
+
+.card-link {
+  font-size: 0.875rem;
+  color: #007bff;
+  text-decoration: none;
+  margin-top: 0.5rem;
+}
+
+/* Móvil pequeño: 360x640px */
+@media (min-width: 360px) {
+  .container {
+    padding: 0.5rem;
+  }
+  .cards-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Móvil medio: 375x667px */
+@media (min-width: 375px) {
+  .container {
+    padding: 0.75rem;
+  }
+}
+
+/* Smartphone grande: 720x1280px */
+@media (min-width: 720px) {
+  .container {
+    padding: 1rem;
+  }
+  .cards-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Ordenador portátil medio: 1366x768px */
+@media (min-width: 1366px) {
+  .container {
+    padding: 1.5rem;
+  }
+  .cards-container {
+    width: 35%;
+  }
+  .card-title {
+    font-size: 1.125rem;
+  }
+  .card-value {
+    font-size: 1.75rem;
+  }
+}
+
+/* Ordenador de escritorio medio: 1440x900px */
+@media (min-width: 1440px) {
+  .container {
+    padding: 2rem;
+  }
+  .card-title {
+    font-size: 1.25rem;
+  }
+  .card-value {
+    font-size: 2rem;
+  }
+}
+
+/* PC de escritorio grande: 1920x1080px */
+@media (min-width: 1920px) {
+  .container {
+    padding: 2.5rem;
+  }
+  .card-title {
+    font-size: 1.5rem;
+  }
+  .card-value {
+    font-size: 2.25rem;
+  }
+  .card-change, .card-link {
+    font-size: 1rem;
+  }
+}
