@@ -1,0 +1,17 @@
+<form [formGroup]="updateUserForm" (ngSubmit)="onSubmit()">
+    <label for="oldPassword">Current Password:</label>
+    <input id="oldPassword" formControlName="oldPassword" type="password" required>
+  
+    <label for="newEmail">New Email:</label>
+    <input id="newEmail" formControlName="newEmail" type="email">
+  
+    <label for="newUserName">New Username:</label>
+    <input id="newUserName" formControlName="newUserName" type="text">
+  
+    <label for="newPassword">New Password:</label>
+    <input id="newPassword" formControlName="newPassword" type="password">
+  
+    <button type="submit">Update</button>
+  </form>
+  
+ 

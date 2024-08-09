@@ -12,6 +12,7 @@ import { ButtonMasrecientesComponent } from './components/atomos-monitoreo/butto
 import { ButtonHorarioAlertasComponent } from './components/atomos-monitoreo/button-horario-alertas/button-horario-alertas.component';
 import { FechasMensajesComponent } from './components/atomos-monitoreo/fechas-mensajes/fechas-mensajes.component';
 import { GraficaBarrasComponent } from './components/moleculas-monitoreo/grafica-barras/grafica-barras.component';
+import { ConfigUserComponent } from './components/moleculas-monitoreo/config-user/config-user.component';
 
 
 
@@ -32,6 +33,7 @@ import { GraficaBarrasComponent } from './components/moleculas-monitoreo/grafica
           ButtonHorarioAlertasComponent,
           FechasMensajesComponent,
           GraficaBarrasComponent,
+          ConfigUserComponent,
           
 
 
