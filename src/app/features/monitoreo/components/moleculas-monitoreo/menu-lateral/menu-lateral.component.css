@@ -22,15 +22,16 @@
   transition: margin-left 0.3s ease-in-out;
 }
 
-@media (min-width: 916px) {
+@media (min-width: 721px) {
   .content-wrapper {
     margin-left: 250px;
   }
 }
 
-@media (max-width: 915px) {
+@media (max-width: 720px) {
   .menu-lateral {
     transform: translateX(-100%);
+    width: 100%;
   }
   .menu-lateral.open {
     transform: translateX(0);
@@ -38,4 +39,17 @@
   .content-wrapper {
     margin-left: 0;
   }
+}
+
+body.menu-open .content-wrapper {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+body.menu-open .top-bar {
+  pointer-events: none;
+}
+
+.menu-lateral, .top-bar {
+  pointer-events: auto !important;
 }
