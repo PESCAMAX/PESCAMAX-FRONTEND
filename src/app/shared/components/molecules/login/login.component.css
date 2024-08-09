@@ -268,3 +268,103 @@ p{
     border-color: #f5c6cb;
     color: #721c24;
   }
+/* Responsive Styles */
+@media (max-width: 767px) {
+    .container {
+      width: 100%;
+      height: auto;
+      border-radius: 0;
+      box-shadow: none;
+      display: flex;
+      flex-direction: column;
+    }
+  
+    .form-container {
+      width: 100%;
+      padding: 20px;
+      position: static;
+      opacity: 1;
+      z-index: 2;
+    }
+  
+    .overlay-container {
+      position: static;
+      width: 100%;
+      height: auto;
+      overflow: visible;
+      transform: none;
+    }
+  
+    .overlay {
+      position: static;
+      height: auto;
+      width: 100%;
+      transform: none;
+      background: var(--linear-grad);
+      color: #fff;
+      padding: 20px;
+    }
+  
+    .overlay-panel {
+      position: static;
+      width: 100%;
+      height: auto;
+      padding: 20px;
+      transform: none;
+    }
+  
+    .sign-up-container,
+    .sign-in-container {
+      opacity: 1;
+      z-index: 2;
+      transform: none;
+    }
+  
+    .right-panel-active .sign-in-container,
+    .right-panel-active .sign-up-container {
+      transform: none;
+      opacity: 1;
+    }
+  
+    #overlayBtn {
+      display: none;
+    }
+  }
+  
+  @media (min-width: 768px) and (max-width: 1023px) {
+    /* Tablet styles */
+    .container {
+      width: 90%;
+      height: 500px;
+    }
+  
+    .form-container {
+      width: 50%;
+      padding: 30px;
+    }
+  
+    .overlay-container {
+      width: 50%;
+    }
+  
+    /* Other tablet-specific styles */
+  }
+  
+  @media (min-width: 1024px) {
+    /* Desktop styles */
+    .container {
+      width: 800px;
+      height: 500px;
+    }
+  
+    .form-container {
+      width: 60%;
+      padding: 40px;
+    }
+  
+    .overlay-container {
+      width: 40%;
+    }
+  
+    /* Other desktop-specific styles */
+  }

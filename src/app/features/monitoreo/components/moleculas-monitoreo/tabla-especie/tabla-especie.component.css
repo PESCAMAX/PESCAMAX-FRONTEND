@@ -17,3 +17,52 @@
   z-index: 50;
 }
 
+/* Responsive Styles */
+@media (max-width: 639px) {
+  /* Adjust table layout for smaller screens */
+  .table-row {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .table-cell {
+    width: 100%;
+  }
+
+  /* Adjust modal styles for smaller screens */
+  .modal {
+    padding: 1rem;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  /* Adjust table layout for medium screens */
+  .table-row {
+    display: table-row;
+  }
+
+  .table-cell {
+    width: 8.33%; /* 1/12 */
+  }
+
+  /* Adjust modal styles for larger screens */
+  .modal {
+    padding: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  /* Adjust table layout for larger screens */
+  .table-row {
+    display: table-row;
+  }
+
+  .table-cell {
+    width: 8.33%; /* 1/12 */
+  }
+
+  /* Adjust modal styles for larger screens */
+  .modal {
+    padding: 2rem;
+  }
+}
