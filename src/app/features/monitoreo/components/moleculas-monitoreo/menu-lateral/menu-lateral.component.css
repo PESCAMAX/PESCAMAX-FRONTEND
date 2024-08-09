@@ -41,6 +41,30 @@
   }
 }
 
+@media (max-width: 375px) {
+  .menu-lateral {
+    width: 100%;
+  }
+  .top-bar {
+    height: 56px; /* Reduced height for smaller screens */
+  }
+  .content-wrapper {
+    padding-top: 56px; /* Adjusted for reduced top bar height */
+  }
+}
+
+@media (max-width: 360px) {
+  .menu-lateral {
+    width: 100%;
+  }
+  .top-bar {
+    height: 52px; /* Further reduced height for even smaller screens */
+  }
+  .content-wrapper {
+    padding-top: 52px; /* Adjusted for further reduced top bar height */
+  }
+}
+
 body.menu-open .content-wrapper {
   pointer-events: none;
   opacity: 0.5;

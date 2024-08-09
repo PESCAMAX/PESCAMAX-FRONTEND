@@ -63,20 +63,16 @@ export class MenuLateralComponent implements OnInit {
       }
     }
   }
-
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
     this.menuToggled.emit(this.isMenuOpen);
     this.adjustContentWrapper();
-   
+    
     if (this.isMobileView) {
-      if (this.isMenuOpen) {
-        this.disableMainContent();
-      } else {
-        this.enableMainContent();
-      }
+      this.isMenuOpen ? this.disableMainContent() : this.enableMainContent();
     }
   }
+  
 
   openMenu() {
     if (!this.isMenuOpen) {
@@ -102,9 +98,12 @@ export class MenuLateralComponent implements OnInit {
   }
 
   toggleSubMenu(index: number) {
-    this.openMenu();
+    if (!this.isMenuOpen) {
+      this.openMenu();
+    }
     this.subMenuVisible = this.subMenuVisible === index ? null : index;
   }
+  
 
   toggleUserMenu() {
     this.isUserMenuVisible = !this.isUserMenuVisible;

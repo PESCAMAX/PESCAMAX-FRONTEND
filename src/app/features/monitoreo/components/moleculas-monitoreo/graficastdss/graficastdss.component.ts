@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Chart } from 'chart.js/auto';
-import { ApiService,Monitoreo } from '../../../services/api-form/api.service';
+import { ApiService, Monitoreo } from '../../../services/api-form/api.service';
 import { AuthService } from '../../../../../core/services/api-login/auth.service';
+import { ColorType, createChart, IChartApi, LineData, Time } from 'lightweight-charts';
 
 @Component({
   selector: 'app-graficastdss',
@@ -9,35 +9,24 @@ import { AuthService } from '../../../../../core/services/api-login/auth.service
   styleUrls: ['./graficastdss.component.css']
 })
 export class GraficastdssComponent implements OnInit {
-  public chart: any;
+  public chart: IChartApi | null = null;
   public lotes: number[] = [];
   public selectedLote: number | null = null;
+  public loteDropdownOpen: boolean = false;
   private startDate: Date | null = null;
-  public loteDropdownOpen: boolean = false; 
   private endDate: Date | null = null;
-  monitoreoData: Monitoreo[] = []; 
-  isMenuOpen: boolean = true;
-  isDropdownOpen: boolean = false;
+  monitoreoData: Monitoreo[] = [];
 
-  constructor(private apiService: ApiService, private AuthService: AuthService) {}
+  constructor(private apiService: ApiService, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.loadLotes();
   }
 
-  onMenuToggle(isOpen: boolean) {
-    this.isMenuOpen = isOpen;
-  }
-
-  toggleDropdown() {
-    this.loteDropdownOpen = !this.loteDropdownOpen;
-  }
-
-
   loadLotes() {
-    this.apiService.listarMonitoreo(this.AuthService.getUserId()).subscribe(
+    this.apiService.listarMonitoreo(this.authService.getUserId()).subscribe(
       data => {
-        this.monitoreoData = data.response; // Asigna los datos a monitoreoData
+        this.monitoreoData = data.response;
         this.lotes = [...new Set(data.response.map(item => item.LoteID))];
         if (this.lotes.length > 0) {
           this.selectedLote = this.lotes[0];
@@ -50,11 +39,15 @@ export class GraficastdssComponent implements OnInit {
     );
   }
 
+  toggleDropdown() {
+    this.loteDropdownOpen = !this.loteDropdownOpen;
+  }
+
   onLoteChange(lote: number | null): void {
     this.selectedLote = lote;
     this.loadDataAndCreateChart();
-   
   }
+
   onDateRangeSelected(event: { startDate: Date, endDate: Date }): void {
     this.startDate = event.startDate;
     this.endDate = event.endDate;
@@ -63,59 +56,90 @@ export class GraficastdssComponent implements OnInit {
 
   loadDataAndCreateChart() {
     if (this.selectedLote === null) return;
-
-    this.apiService.listarMonitoreo(this.AuthService.getUserId()).subscribe( 
-      data => {
-        const filteredData = data.response.filter(item => item.LoteID === this.selectedLote);
-        const labels = filteredData.map(item => new Date(item.FechaHora).toLocaleDateString());
-        const tdsData = filteredData.map(item => item.tds);
-        this.createChart(labels, tdsData);
+    this.apiService.listarMonitoreo(this.authService.getUserId()).subscribe({
+      next: (data) => {
+        if (data && data.response) {
+          let filteredData = data.response.filter(item => item.LoteID === this.selectedLote);
+          if (this.startDate && this.endDate) {
+            filteredData = filteredData.filter(item => {
+              const fecha = new Date(item.FechaHora);
+              return this.startDate && this.endDate && fecha >= this.startDate && fecha <= this.endDate;
+            });
+          }
+          const tdsValues = filteredData.map(item => ({
+            time: this.dateToChartTime(new Date(item.FechaHora)),
+            value: item.tds
+          }));
+          this.createChart(tdsValues);
+        } else {
+          console.error('La respuesta no tiene el formato esperado:', data);
+        }
       },
-      error => {
-        console.error('Error al cargar los datos:', error);
-      }
-    );
+      error: (error) => console.error('Error al cargar datos para el gráfico:', error)
+    });
   }
 
-  createChart(labels: string[], tdsData: number[]) {
-    if (this.chart) {
-      this.chart.destroy();
-    }
+  dateToChartTime(date: Date): Time {
+    return date.getTime() / 1000 as Time;
+  }
 
-    this.chart = new Chart("MyChart", {
-      type: 'line',
-      data: {
-        labels: labels,
-        datasets: [
-          {
-            label: "TDS",
-            data: tdsData,
-            backgroundColor: 'blue',
-            borderColor: 'blue',
-            fill: false
-          }
-        ]
+  createChart(data: LineData[]) {
+    if (this.chart) {
+      this.chart.remove();
+    }
+    const chartContainer = document.getElementById('MyChart');
+    if (!chartContainer) {
+      console.error('No se encontró el elemento con id "MyChart"');
+      return;
+    }
+    
+    this.chart = createChart(chartContainer, {
+      width: 800,
+      height: 400,
+      layout: {
+        background: { type: ColorType.Solid, color: '#ffffff' },
+        textColor: '#D9D9D9'
       },
-      options: {
-        aspectRatio: 2.5,
-        scales: {
-          x: {
-            display: true,
-            title: {
-              display: true,
-              text: 'Fecha'
-            }
-          },
-          y: {
-            display: true,
-            title: {
-              display: true,
-              text: 'TDS'
-            },
-            beginAtZero: true
-          }
+      grid: {
+        vertLines: {
+          color: '#ffffff'
+        },
+        horzLines: {
+          color: '#ffffff'
         }
-      }
+      },
+      rightPriceScale: {
+        borderColor: '#2B2B43',
+        scaleMargins: {
+          top: 0.1,
+          bottom: 0.1,
+        },
+      },
+      timeScale: {
+        borderColor: '#2B2B43',
+        timeVisible: true,
+        secondsVisible: false
+      },
     });
+  
+    const areaSeries = this.chart.addAreaSeries({
+      lineColor: '#00FFFF',
+      topColor: 'rgba(0, 255, 255, 0.4)',
+      bottomColor: 'rgba(0, 255, 255, 0.1)',
+      lineWidth: 2,
+      priceLineVisible: false,
+      crosshairMarkerVisible: true,
+      lastValueVisible: false,
+      priceFormat: {
+        type: 'price',
+        precision: 2,
+        minMove: 0.01,
+      },
+    });
+  
+    areaSeries.setData(data);
+  
+    // Ajustar el rango visible
+    this.chart.timeScale().fitContent();
   }
 }
