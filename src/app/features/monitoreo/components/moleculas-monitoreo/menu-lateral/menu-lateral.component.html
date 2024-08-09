@@ -1,7 +1,6 @@
 <!-- Menú lateral -->
-
 <div class="fixed top-0 left-0 h-full bg-[#F2F5F7] shadow-lg transition-all duration-300 overflow-hidden menu"
-     [ngClass]="{'w-64': isMenuOpen, 'w-0': !isMenuOpen}">
+     [ngClass]="{'w-64': isMenuOpen && !isMobileView, 'w-full': isMenuOpen && isMobileView, 'w-0': !isMenuOpen}">
   <div class="flex flex-col h-full">
     <div class="p-4 border-b border-blue-400">
       <a [href]="'/home/' + userId" class="flex items-center">
@@ -82,34 +81,35 @@
     </div>
   </div>
 
-  <!-- Barra superior -->
-  <div class="fixed top-0 left-0 right-0 bg-[#F2F5F7] text-[#3B82F5] p-4 h-16 flex justify-between items-center shadow-md">
-    <div class="flex items-center">
-      <button class="text-[#3B82F5] focus:outline-none mr-4 hover-effect p-2 rounded" (click)="toggleMenu()">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
-      </button>
-  
-      <a [href]="'/home/' + userId" class="flex items-center">
-        <img src="../../../../../assets/icons/Logo_pescamax.png" alt="PESCAMAX logo" class="w-8 h-8 mr-2">
-        <span class="text-lg font-semibold text-blue-500">PESCA<span class="text-black">MAX</span></span>
-      </a>
-    </div>
-    <div class="flex items-center">
-      <img src="../../../../../assets/icons/notificacion.png" alt="Notificaciones" class="w-6 h-6 mr-4 cursor-pointer hover:opacity-80 transition-opacity">
-      <img src="../../../../../assets/icons/userr.png" alt="Perfil" class="w-6 h-6 cursor-pointer hover:opacity-80 transition-opacity" (click)="toggleUserMenu()">
-    </div>
-  </div>
-  <!-- Dropdown del menú de usuario -->
-  <div *ngIf="isUserMenuVisible" class="absolute right-4 top-16 bg-white shadow-lg rounded-lg overflow-hidden">
-    <a href="#profile" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Profile</a>
-    <a href="#settings" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Settings</a>
-    <a href="http://localhost:4200/Inicio" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Logout</a>
-  </div>
+<!-- Barra superior -->
+<div class="fixed top-0 left-0 right-0 bg-[#F2F5F7] text-[#3B82F5] p-4 h-16 flex justify-between items-center shadow-md">
+  <div class="flex items-center">
+    <button class="text-[#3B82F5] focus:outline-none mr-4 hover-effect p-2 rounded" (click)="toggleMenu()">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
 
-  <!-- Contenido principal -->
-  <div class="content-wrapper">
-    <!-- Aquí va el contenido de cada página -->
-    <ng-content></ng-content>
+    <a [href]="'/home/' + userId" class="flex items-center">
+      <img src="../../../../../assets/icons/Logo_pescamax.png" alt="PESCAMAX logo" class="w-8 h-8 mr-2">
+      <span class="text-lg font-semibold text-blue-500">PESCA<span class="text-black">MAX</span></span>
+    </a>
   </div>
+  <div class="flex items-center">
+    <img src="../../../../../assets/icons/notificacion.png" alt="Notificaciones" class="w-6 h-6 mr-4 cursor-pointer hover:opacity-80 transition-opacity">
+    <img src="../../../../../assets/icons/userr.png" alt="Perfil" class="w-6 h-6 cursor-pointer hover:opacity-80 transition-opacity" (click)="toggleUserMenu()">
+  </div>
+</div>
+
+<!-- Dropdown del menú de usuario -->
+<div *ngIf="isUserMenuVisible" class="absolute right-4 top-16 bg-white shadow-lg rounded-lg overflow-hidden">
+  <a href="#profile" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Profile</a>
+  <a href="#settings" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Settings</a>
+  <a href="http://localhost:4200/Inicio" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Logout</a>
+</div>
+
+<!-- Contenido principal -->
+<div class="content-wrapper">
+  <!-- Aquí va el contenido de cada página -->
+  <ng-content></ng-content>
+</div>
