@@ -1,3 +1,4 @@
+/* Estilos generales */
 .bg-smoke-light {
   background-color: rgba(0, 0, 0, 0.4);
 }
@@ -17,42 +18,29 @@
   z-index: 50;
 }
 
-/* Responsive Styles */
+/* Estilos responsivos */
+/* Pantallas pequeñas (móviles) */
 @media (max-width: 639px) {
-  /* Adjust table layout for smaller screens */
-  .table-row {
-    display: flex;
-    flex-direction: column;
+  .hidden {
+    display: none;
   }
-
-  .table-cell {
-    width: 100%;
-  }
-
-  /* Adjust modal styles for smaller screens */
-  .modal {
-    padding: 1rem;
+  .sm\:hidden {
+    display: block;
   }
 }
 
-@media (min-width: 640px) and (max-width: 1023px) {
-  /* Adjust table layout for medium screens */
-  .table-row {
-    display: table-row;
-  }
+/* Pantallas medianas (tablets) */
 
-  .table-cell {
-    width: 8.33%; /* 1/12 */
+@media (min-width: 640px) {
+  .sm\:table-cell {
+    display: table-cell;
   }
-
-  /* Adjust modal styles for larger screens */
-  .modal {
-    padding: 2rem;
+  .sm\:hidden {
+    display: none;
   }
 }
-
+/* Pantallas grandes (escritorio) */
 @media (min-width: 1024px) {
-  /* Adjust table layout for larger screens */
   .table-row {
     display: table-row;
   }
@@ -61,7 +49,6 @@
     width: 8.33%; /* 1/12 */
   }
 
-  /* Adjust modal styles for larger screens */
   .modal {
     padding: 2rem;
   }

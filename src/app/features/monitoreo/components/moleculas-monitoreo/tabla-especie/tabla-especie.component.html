@@ -5,43 +5,43 @@
     <input
       type="text"
       id="search"
-      class="border rounded px-2 py-1"
+      class="border rounded px-2 py-1 w-full sm:w-auto"
       [(ngModel)]="searchText"
       (input)="filtrarEspecies()"
     />
   </div>
 
-  <!-- Tabla de especies con scroll -->
-  <div class="overflow-x-auto">
-    <table class="w-full border-collapse bg-gray-500 sm:table-auto md:table-auto lg:table-auto">
+  <!-- Tabla de especies con scroll (visible en pantallas medianas y grandes) -->
+  <div class="overflow-x-auto hidden sm:block">
+    <table class="w-full border-collapse bg-gray-500 table-auto">
       <thead class="bg-white">
         <tr>
-          <th class="w-1/12 sm:w-auto md:w-auto lg:w-1/12 p-2 text-left font-bold border border-grey-500 text-sm">ID</th>
-          <th class="w-2/12 sm:w-auto md:w-auto lg:w-2/12 p-2 text-left font-bold border border-grey-500 text-sm">Nombre</th>
-          <th class="w-1/12 sm:w-auto md:w-auto lg:w-1/12 p-2 text-left font-bold border border-grey-500 text-sm">TDS Mínimo</th>
-          <th class="w-1/12 sm:w-auto md:w-auto lg:w-1/12 p-2 text-left font-bold border border-grey-500 text-sm">TDS Máximo</th>
-          <th class="w-1/12 sm:w-auto md:w-auto lg:w-1/12 p-2 text-left font-bold border border-grey-500 text-sm">Temp. Mínima</th>
-          <th class="w-1/12 sm:w-auto md:w-auto lg:w-1/12 p-2 text-left font-bold border border-grey-500 text-sm">Temp. Máxima</th>
-          <th class="w-1/12 sm:w-auto md:w-auto lg:w-1/12 p-2 text-left font-bold border border-grey-500 text-sm">PH Mínimo</th>
-          <th class="w-1/12 sm:w-auto md:w-auto lg:w-1/12 p-2 text-left font-bold border border-grey-500 text-sm">PH Máximo</th>
-          <th class="w-1/12 sm:w-auto md:w-auto lg:w-1/12 p-2 text-left font-bold border border-grey-500 text-sm">Eliminar</th>
-          <th class="w-1/12 sm:w-auto md:w-auto lg:w-1/12 p-2 text-left font-bold border border-grey-500 text-sm">Editar</th>
+          <th class="p-2 text-left font-bold border border-grey-500 text-sm">ID</th>
+          <th class="p-2 text-left font-bold border border-grey-500 text-sm">Nombre</th>
+          <th class="p-2 text-left font-bold border border-grey-500 text-sm">TDS Mínimo</th>
+          <th class="p-2 text-left font-bold border border-grey-500 text-sm">TDS Máximo</th>
+          <th class="p-2 text-left font-bold border border-grey-500 text-sm">Temp. Mínima</th>
+          <th class="p-2 text-left font-bold border border-grey-500 text-sm">Temp. Máxima</th>
+          <th class="p-2 text-left font-bold border border-grey-500 text-sm">PH Mínimo</th>
+          <th class="p-2 text-left font-bold border border-grey-500 text-sm">PH Máximo</th>
+          <th class="p-2 text-left font-bold border border-grey-500 text-sm">Eliminar</th>
+          <th class="p-2 text-left font-bold border border-grey-500 text-sm">Editar</th>
         </tr>
       </thead>
       <tbody>
-        <tr class="bg-gray-100 border border-grey-500 sm:flex sm:flex-col md:flex md:flex-col lg:table-row" *ngFor="let especie of especiesFiltradas">
-          <td class="w-1/12 sm:w-auto md:w-auto lg:w-1/12 p-2 border bg-white text-left">{{ especie.Id }}</td>
-          <td class="w-2/12 sm:w-auto md:w-auto lg:w-2/12 p-2 border bg-white text-left">{{ especie.NombreEspecie }}</td>
-          <td class="w-1/12 sm:w-auto md:w-auto lg:w-1/12 p-2 border bg-white text-left">{{ especie.TdsMinimo }}</td>
-          <td class="w-1/12 sm:w-auto md:w-auto lg:w-1/12 p-2 border bg-white text-left">{{ especie.TdsMaximo }}</td>
-          <td class="w-1/12 sm:w-auto md:w-auto lg:w-1/12 p-2 border bg-white text-left">{{ especie.TemperaturaMinimo }}</td>
-          <td class="w-1/12 sm:w-auto md:w-auto lg:w-1/12 p-2 border bg-white text-left">{{ especie.TemperaturaMaximo }}</td>
-          <td class="w-1/12 sm:w-auto md:w-auto lg:w-1/12 p-2 border bg-white text-left">{{ especie.PhMinimo }}</td>
-          <td class="w-1/12 sm:w-auto md:w-auto lg:w-1/12 p-2 border bg-white text-left">{{ especie.PhMaximo }}</td>
-          <td class="w-1/12 sm:w-auto md:w-auto lg:w-1/12 p-2 border bg-white text-left">
+        <tr class="bg-gray-100 border border-grey-500" *ngFor="let especie of especiesFiltradas">
+          <td class="p-2 border bg-white text-left">{{ especie.Id }}</td>
+          <td class="p-2 border bg-white text-left">{{ especie.NombreEspecie }}</td>
+          <td class="p-2 border bg-white text-left">{{ especie.TdsMinimo }}</td>
+          <td class="p-2 border bg-white text-left">{{ especie.TdsMaximo }}</td>
+          <td class="p-2 border bg-white text-left">{{ especie.TemperaturaMinimo }}</td>
+          <td class="p-2 border bg-white text-left">{{ especie.TemperaturaMaximo }}</td>
+          <td class="p-2 border bg-white text-left">{{ especie.PhMinimo }}</td>
+          <td class="p-2 border bg-white text-left">{{ especie.PhMaximo }}</td>
+          <td class="p-2 border bg-white text-left">
             <app-button-eliminar [id]="especie.Id" (eliminar)="eliminarEspecie($event)"></app-button-eliminar>
           </td>
-          <td class="w-1/12 sm:w-auto md:w-auto lg:w-1/12 p-2 border bg-white text-left">
+          <td class="p-2 border bg-white text-left">
             <button (click)="editarEspecie(especie)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded text-xs flex items-center">
               <img src="./assets/icons/editar.png" alt="Editar Icono" class="w-4 h-4 mr-1">
               Editar
@@ -52,11 +52,29 @@
     </table>
   </div>
 
-  <div *ngIf="especieSeleccionada" class="fixed inset-0 z-50 overflow-auto bg-smoke-light flex sm:items-start md:items-center lg:items-center">
-    <div class="relative p-8 bg-white w-full max-w-md m-auto flex-col flex rounded-lg sm:max-w-sm md:max-w-md lg:max-w-lg">
+  <!-- Vista móvil (visible solo en pantallas pequeñas) -->
+  <div class="sm:hidden">
+    <div *ngFor="let especie of especiesFiltradas" class="bg-white rounded-lg shadow-md p-4 mb-4">
+      <h3 class="font-bold text-lg mb-2">{{ especie.NombreEspecie }}</h3>
+      <p><strong>ID:</strong> {{ especie.Id }}</p>
+      <p><strong>TDS:</strong> {{ especie.TdsMinimo }} - {{ especie.TdsMaximo }}</p>
+      <p><strong>Temperatura:</strong> {{ especie.TemperaturaMinimo }} - {{ especie.TemperaturaMaximo }}</p>
+      <p><strong>PH:</strong> {{ especie.PhMinimo }} - {{ especie.PhMaximo }}</p>
+      <div class="mt-4 flex justify-between">
+        <app-button-eliminar [id]="especie.Id" (eliminar)="eliminarEspecie($event)"></app-button-eliminar>
+        <button (click)="editarEspecie(especie)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded text-xs flex items-center">
+          <img src="./assets/icons/editar.png" alt="Editar Icono" class="w-4 h-4 mr-1">
+          Editar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="especieSeleccionada" class="fixed inset-0 z-50 overflow-auto bg-smoke-light flex items-center justify-center">
+    <div class="relative p-8 bg-white w-full max-w-md m-auto flex-col flex rounded-lg">
       <h3 class="text-xl font-bold mb-4 text-custom-blue">Editar Especie</h3>
       <form [formGroup]="especieForm" (ngSubmit)="onSubmit()" id="editarEspecieForm">
-        <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label for="nombreEspecie" class="block text-sm font-medium text-gray-700">Nombre</label>
             <input type="text" id="nombreEspecie" formControlName="NombreEspecie" class="mt-1 p-2 border border-gray-300 rounded w-full" />
@@ -83,22 +101,21 @@
           </div>
           <div>
             <label for="PhMaximo" class="block text-sm font-medium text-gray-700">PH Máximo</label>
-            <input type="number" id="" formControlName="PhMaximo" class="mt-1 p-2 border border-gray-300 rounded w-full" />
+            <input type="number" id="PhMaximo" formControlName="PhMaximo" class="mt-1 p-2 border border-gray-300 rounded w-full" />
           </div>
         </div>
-        <div class="mt-4 flex justify-end sm:flex-col md:flex-row lg:flex-row">
+        <div class="mt-4 flex flex-col sm:flex-row justify-end">
           <app-button-guardar
             type="submit"
             [texto]="'Guardar Cambios'"
             [color]="'green'"
-            [customClass]="'mr-2 sm:mb-2 md:mr-2 lg:mr-2'"
+            [customClass]="'mb-2 sm:mb-0 sm:mr-2'"
           >
           </app-button-guardar>
           <app-button-cancelar
             [texto]="'Cancelar'"
             [estilo]="'rojo'"
             (cancelar)="cerrarModal()"
-            [customClass]="'sm:mb-2 md:mb-0 lg:mb-0'"
           >
           </app-button-cancelar>
         </div>
@@ -106,9 +123,13 @@
     </div>
   </div>
 
-  <div *ngIf="alertState.show" class="fixed z-10 inset-0 overflow-y-auto sm:items-start md:items-center lg:items-center">
-    <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0 md:block md:p-0 lg:block lg:p-0">
-      <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full md:my-8 md:align-middle md:max-w-lg md:w-full lg:my-8 lg:align-middle lg:max-w-lg lg:w-full">
+  <div *ngIf="alertState.show" class="fixed z-10 inset-0 overflow-y-auto flex items-center justify-center">
+    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+      <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+        <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+      </div>
+      <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+      <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
         <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
           <div class="sm:flex sm:items-start">
             <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full sm:mx-0 sm:h-10 sm:w-10" [ngClass]="{'bg-green-100': alertState.iconColor === 'green', 'bg-red-100': alertState.iconColor === 'red'}">
@@ -131,7 +152,7 @@
           <app-button-cancelar
             [texto]="'Cancelar'"
             [estilo]="'blanco'"
-            [customClass]="'mt-3 w-full inline-flex justify-center sm:mt-0 sm:w-auto sm:text-sm'"
+            [customClass]="'mt-3 w-full sm:mt-0 sm:w-auto sm:text-sm'"
             (cancelar)="handleAlertCancel()"
           >
           </app-button-cancelar>
