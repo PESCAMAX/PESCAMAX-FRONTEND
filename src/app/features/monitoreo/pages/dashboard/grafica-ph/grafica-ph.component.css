@@ -29,7 +29,39 @@
     width: 100%;
     height: auto;
   }
+
+  /* estilos titulo */
+  .text-center {
+    text-align: center;
+  }
   
+  .p-4 {
+    padding: 1rem; /* 16px */
+  }
+  
+  .text-2xl {
+    font-size: 1.5rem; /* 24px */
+  }
+  
+  .font-bold {
+    font-weight: bold;
+  }
+  
+  .custom-font {
+    font-family: Arial, sans-serif;
+  }
+  
+  .custom-color {
+    color: #007bff;
+  }
+  
+  
+
+
+  
+
+
+
   /* Responsive adjustments */
   @media (min-width: 640px) {
     .content-title {
