@@ -1,33 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService, Monitoreo } from '../../../services/api-form/api.service';
+import { Chart } from 'chart.js/auto';
+import { ApiService,Monitoreo } from '../../../services/api-form/api.service';
 import { AuthService } from '../../../../../core/services/api-login/auth.service';
-import { ColorType, createChart, IChartApi, LineData, Time } from 'lightweight-charts';
-
 @Component({
   selector: 'app-temperatura',
   templateUrl: './graficas-temperatura.component.html',
   styleUrls: ['./graficas-temperatura.component.css']
 })
 export class GraficasTemperaturaComponent implements OnInit {
-  public chart: IChartApi | null = null;
+
+  public chart: any;
   public lotes: number[] = [];
   public selectedLote: number | null = null;
   private startDate: Date | null = null;
   private endDate: Date | null = null;
-  public loteDropdownOpen: boolean = false;
-  monitoreoData: Monitoreo[] = [];
+  public loteDropdownOpen: boolean = false; 
+  monitoreoData: Monitoreo[] = []; 
   isMenuOpen: boolean = true;
 
-  constructor(private apiService: ApiService, private authService: AuthService) {}
+  constructor(private apiService: ApiService, private AuthService:AuthService) {}
 
   ngOnInit(): void {
     this.loadLotes();
   }
-
   loadLotes() {
-    this.apiService.listarMonitoreo(this.authService.getUserId()).subscribe(
+    this.apiService.listarMonitoreo(this.AuthService.getUserId()).subscribe(
       data => {
-        this.monitoreoData = data.response;
+        this.monitoreoData = data.response; // Asigna los datos a monitoreoData
         this.lotes = [...new Set(data.response.map(item => item.LoteID))];
         if (this.lotes.length > 0) {
           this.selectedLote = this.lotes[0];
@@ -39,14 +38,15 @@ export class GraficasTemperaturaComponent implements OnInit {
       }
     );
   }
-
   toggleDropdown() {
     this.loteDropdownOpen = !this.loteDropdownOpen;
   }
 
+
   onLoteChange(lote: number | null): void {
     this.selectedLote = lote;
     this.loadDataAndCreateChart();
+   
   }
 
   onDateRangeSelected(event: { startDate: Date, endDate: Date }): void {
@@ -57,91 +57,75 @@ export class GraficasTemperaturaComponent implements OnInit {
 
   loadDataAndCreateChart() {
     if (this.selectedLote === null) return;
-    this.apiService.listarMonitoreo(this.authService.getUserId()).subscribe({
-      next: (data) => {
-        if (data && data.response) {
-          let filteredData = data.response.filter(item => item.LoteID === this.selectedLote);
-          if (this.startDate && this.endDate) {
-            filteredData = filteredData.filter(item => {
-              const itemDate = new Date(item.FechaHora);
-              return itemDate >= this.startDate! && itemDate <= this.endDate!;
-            });
-          }
-          if (filteredData.length === 0) {
-            console.warn('No hay datos para el rango de fechas seleccionado.');
-            return;
-          }
-          const temperaturaValues = filteredData.map(item => ({
-            time: this.dateToChartTime(new Date(item.FechaHora)),
-            value: item.Temperatura
-          }));
-          this.createChart(temperaturaValues);
-        } else {
-          console.error('La respuesta no tiene el formato esperado:', data);
+
+    this.apiService.listarMonitoreo(this.AuthService.getUserId()).subscribe( 
+      data => {
+        let filteredData = data.response.filter(item => item.LoteID === this.selectedLote);
+
+        if (this.startDate && this.endDate) {
+          filteredData = filteredData.filter(item => {
+            const itemDate = new Date(item.FechaHora);
+            return itemDate >= this.startDate! && itemDate <= this.endDate!;
+          });
         }
+
+        const labels = filteredData.map(item => new Date(item.FechaHora).toLocaleString());
+        const temperaturas = filteredData.map(item => item.Temperatura);
+
+        // Asegurarse de que hay datos para mostrar
+        if (labels.length === 0) {
+          console.warn('No hay datos para el rango de fechas seleccionado.');
+        }
+
+        this.createChart(labels, temperaturas);
       },
-      error: (error) => console.error('Error al cargar datos para el gráfico:', error)
-    });
+      error => {
+        console.error('Error al cargar los datos:', error);
+      }
+    );
   }
 
-  dateToChartTime(date: Date): Time {
-    return date.getTime() / 1000 as Time;
-  }
-
-  createChart(data: LineData[]) {
+  createChart(labels: string[], temperaturas: number[]) {
     if (this.chart) {
-      this.chart.remove();
+      this.chart.destroy();
     }
-    const chartContainer = document.getElementById('MyChart');
-    if (!chartContainer) {
-      console.error('No se encontró el elemento con id "MyChart"');
-      return;
-    }
-    
-    this.chart = createChart(chartContainer, {
-      width: 800,
-      height: 400,
-      layout: {
-        background: { type: ColorType.Solid, color: '#ffffff' },
-        textColor: '#333'
+
+    this.chart = new Chart("MyChart", {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "Temperatura",
+            data: temperaturas,
+            backgroundColor: 'pink',
+            borderColor: 'pink',
+            fill: false
+          }
+        ]
       },
-      grid: {
-        vertLines: {
-          color: '#f0f0f0'
-        },
-        horzLines: {
-          color: '#f0f0f0'
+      options: {
+        aspectRatio: 2.5,
+        scales: {
+          x: {
+            display: true,
+            title: {
+              display: true,
+              text: 'Fecha y Hora'
+            }
+          },
+          y: {
+            display: true,
+            title: {
+              display: true,
+              text: 'Temperatura'
+            },
+            beginAtZero: true
+          }
         }
-      },
-      rightPriceScale: {
-        borderColor: '#d1d4dc',
-        scaleMargins: {
-          top: 0.1,
-          bottom: 0.1,
-        },
-      },
-      timeScale: {
-        borderColor: '#d1d4dc',
-        timeVisible: true,
-        secondsVisible: false
-      },
+      }
     });
-  
-    const lineSeries = this.chart.addLineSeries({
-      color: 'pink',
-      lineWidth: 2,
-      crosshairMarkerVisible: true,
-      lastValueVisible: true,
-      priceFormat: {
-        type: 'price',
-        precision: 1,
-        minMove: 0.1,
-      },
-    });
-  
-    lineSeries.setData(data);
-  
-    // Ajustar el rango visible
-    this.chart.timeScale().fitContent();
   }
 }
+
+
