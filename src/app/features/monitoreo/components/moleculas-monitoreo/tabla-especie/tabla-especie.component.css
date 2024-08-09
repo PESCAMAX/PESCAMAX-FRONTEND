@@ -1,3 +1,4 @@
+/* Estilos generales */
 .bg-smoke-light {
   background-color: rgba(0, 0, 0, 0.4);
 }
@@ -17,3 +18,38 @@
   z-index: 50;
 }
 
+/* Estilos responsivos */
+/* Pantallas pequeñas (móviles) */
+@media (max-width: 639px) {
+  .hidden {
+    display: none;
+  }
+  .sm\:hidden {
+    display: block;
+  }
+}
+
+/* Pantallas medianas (tablets) */
+
+@media (min-width: 640px) {
+  .sm\:table-cell {
+    display: table-cell;
+  }
+  .sm\:hidden {
+    display: none;
+  }
+}
+/* Pantallas grandes (escritorio) */
+@media (min-width: 1024px) {
+  .table-row {
+    display: table-row;
+  }
+
+  .table-cell {
+    width: 8.33%; /* 1/12 */
+  }
+
+  .modal {
+    padding: 2rem;
+  }
+}
