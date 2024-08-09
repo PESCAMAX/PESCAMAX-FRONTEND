@@ -74,8 +74,22 @@ export class ApiService {
       );
   }
 
-}
+  
+    asignarEspecieALote(especieId: number, loteId: number, userId: string): Observable<any> {
+      return this.http.post(`${this.baseUrl}/EspecieLote/Asignar`, { EspecieId: especieId, LoteId: loteId, UserId: userId }, { headers: this.getHeaders() })
+        .pipe(catchError(this.handleError));
+    }
+  
+    obtenerEspeciePorLote(userId: string): Observable<EspecieLoteDTO[]> {
+      return this.http.get<EspecieLoteDTO[]>(`${this.baseUrl}/EspecieLote/Obtener/${userId}`);
+    }
+  }
 
+  export interface EspecieLoteDTO {
+    LoteId: number;
+    EspecieId: number;
+    NombreEspecie: string;
+  }
 export interface Monitoreo {
   ID_M: number;
   tds: number;
