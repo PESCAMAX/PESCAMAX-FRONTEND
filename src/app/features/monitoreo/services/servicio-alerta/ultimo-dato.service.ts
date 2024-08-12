@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ApiService,Monitoreo, Especie, Alerta } from '../api-form/api.service';
-import { AlertService } from '../api-alert/alert.service';
+import { ApiService, Monitoreo, Especie, Alerta } from '../api-form/api.service';
+import { GlobalAlertService } from '../alerta-global/global-alert.service';
 import { Observable, interval } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
 
@@ -8,13 +8,12 @@ import { switchMap, map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class UltimoDatoService {
-  private intervalTime = 60000; // 1 minuto
+  private intervalTime = 10000; // 1 minuto
 
   constructor(
     private apiService: ApiService,
-    private alertService: AlertService
+    private globalAlertService: GlobalAlertService
   ) { }
-
   iniciarMonitoreo(userId: string): Observable<void> {
     return interval(this.intervalTime).pipe(
       switchMap(() => this.verificarUltimoDato(userId))
@@ -50,7 +49,7 @@ export class UltimoDatoService {
             const problemas = this.obtenerProblemas(especie, lote);
             if (problemas.length > 0) {
               this.crearAlerta(especie, lote.LoteID, problemas, userId);
-              this.alertService.showAlert('danger', 'Parámetros fuera del rango seguro', problemas.join(', '));
+              this.globalAlertService.showAlert('danger', 'Parámetros fuera del rango seguro', problemas.join(', '));
             }
           }
         });
