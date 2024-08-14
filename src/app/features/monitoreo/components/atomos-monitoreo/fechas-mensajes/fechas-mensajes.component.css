@@ -40,3 +40,38 @@ th {
 .hover\:bg-orange-100:hover {
   background-color: #FFF5EB;
 }
+
+/* Estilos para la vista de tarjetas en móviles */
+@media (max-width: 767px) {
+  .md\:hidden {
+    display: block;
+  }
+
+  .bg-white {
+    background-color: white;
+  }
+
+  .rounded-lg {
+    border-radius: 0.5rem;
+  }
+
+  .shadow-md {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+
+  .mb-4 {
+    margin-bottom: 1rem;
+  }
+
+  .font-bold {
+    font-weight: 700;
+  }
+
+  .text-lg {
+    font-size: 1.125rem;
+  }
+
+  .mb-2 {
+    margin-bottom: 0.5rem;
+  }
+}

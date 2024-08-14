@@ -3,7 +3,7 @@
     <app-menu-lateral (menuToggled)="onMenuToggle($event)"></app-menu-lateral>
     
     <!-- Contenido Principal -->
-    <div class="iten-center flex-1 p-0 transition-all duration-300" [ngClass]="{'ml-64': isMenuOpen, 'ml-': !isMenuOpen}">
+    <div class="iten-center flex-1 p-4 transition-all duration-300" [ngClass]="{'ml-64': isMenuOpen, 'ml-': !isMenuOpen}">
         
         <app-tabla-seleccionar></app-tabla-seleccionar>
     </div>
