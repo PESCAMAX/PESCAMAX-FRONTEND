@@ -28,6 +28,7 @@ import { RegisterPageComponent } from './features/monitoreo/pages/home/register-
 import { LoginPageComponent } from './features/monitoreo/pages/home/login-page/login-page.component';
 import { RecuperarPageComponent } from './features/monitoreo/pages/home/recuperar-page/recuperar-page.component';
 import { CambiarPageComponent } from './features/monitoreo/pages/home/cambiar-page/cambiar-page.component';
+import { ConfiguracionUserComponent } from './features/monitoreo/pages/gestion-de-parametros/configuracion-user/configuracion-user.component';
 const routes: Routes = [
   {
     path: 'gestion-de-parametros',
@@ -41,7 +42,7 @@ const routes: Routes = [
     path: 'productos',
     component: ProductosComponent
   },
-
+  { path: 'user-config/:userId', component: ConfiguracionUserComponent },
   {
     path: 'data',
     component: DatapickerComponent
