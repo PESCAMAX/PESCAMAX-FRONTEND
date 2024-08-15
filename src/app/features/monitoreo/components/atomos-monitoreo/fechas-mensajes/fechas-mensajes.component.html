@@ -1,5 +1,6 @@
 <div class="container flex-1 text-gray-900 mx-auto bg-custom-gray">
-  <div class="px-3 py-4 flex justify-center">
+  <!-- Vista de tabla para pantallas medianas y grandes -->
+  <div class="hidden md:block px-3 py-4 flex justify-center">
     <div class="table-container">
       <table class="w-full text-md bg-white shadow-md rounded mb-4">
         <thead>
@@ -21,6 +22,17 @@
       </table>
     </div>
   </div>
+
+  <!-- Vista de tarjetas para dispositivos móviles -->
+  <div class="md:hidden px-3 py-4">
+    <div *ngFor="let alerta of alertasFiltradas" class="bg-white rounded-lg shadow-md p-4 mb-4">
+      <h3 class="font-bold text-lg mb-2">{{ alerta.Nombre }}</h3>
+      <p><strong>Lote ID:</strong> {{ alerta.LoteID }}</p>
+      <p><strong>Descripción:</strong> {{ alerta.Descripcion }}</p>
+      <p><strong>Fecha:</strong> {{ alerta.FechaCreacion | date:'medium' }}</p>
+    </div>
+  </div>
+
   <div *ngIf="mensajeAlerta" class="text-center text-red-500 mt-4">
     {{ mensajeAlerta }}
   </div>

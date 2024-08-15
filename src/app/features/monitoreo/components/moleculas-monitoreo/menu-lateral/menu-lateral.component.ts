@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, HostListener } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, HostListener, Renderer2 } from '@angular/core';
 import { MenuStateService } from '../../../services/menu-state/menu-state.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
@@ -15,11 +15,13 @@ export class MenuLateralComponent implements OnInit {
   subMenuVisible: number | null = null;
   userId: string = '';
   isUserMenuVisible: boolean = false;
+  isMobileView: boolean = false;
 
   constructor(
     private menuStateService: MenuStateService,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private renderer: Renderer2
   ) {}
 
   ngOnInit() {
@@ -30,43 +32,78 @@ export class MenuLateralComponent implements OnInit {
       this.checkWindowWidth();
     });
     this.checkWindowWidth();
+    this.adjustContentWrapper();
   }
+
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.checkWindowWidth();
   }
+
   checkWindowWidth() {
-    if (window.innerWidth <= 915) {
+    this.isMobileView = window.innerWidth <= 720;
+    if (this.isMobileView) {
+      this.isMenuOpen = false;
+    } else if (window.innerWidth <= 915) {
       this.isMenuOpen = false;
     } else {
       this.isMenuOpen = true;
     }
     this.menuToggled.emit(this.isMenuOpen);
+    this.adjustContentWrapper();
   }
 
+  adjustContentWrapper() {
+    const contentWrapper = document.querySelector('.content-wrapper') as HTMLElement;
+    if (contentWrapper) {
+      if (this.isMenuOpen && !this.isMobileView) {
+        contentWrapper.style.marginLeft = '250px';
+      } else {
+        contentWrapper.style.marginLeft = '0';
+      }
+    }
+  }
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
     this.menuToggled.emit(this.isMenuOpen);
-    document.querySelector('.menu-lateral')?.classList.toggle('open');
+    this.adjustContentWrapper();
+    
+    if (this.isMobileView) {
+      this.isMenuOpen ? this.disableMainContent() : this.enableMainContent();
+    }
   }
+  
 
   openMenu() {
     if (!this.isMenuOpen) {
       this.isMenuOpen = true;
       this.menuToggled.emit(this.isMenuOpen);
+      this.adjustContentWrapper();
+      if (this.isMobileView) {
+        this.disableMainContent();
+      }
     }
   }
 
   closeMenu() {
-    this.isMenuOpen = false;
-    this.subMenuVisible = null;
-    this.menuStateService.closeAllMenus();
+    if (this.isMenuOpen) {
+      this.isMenuOpen = false;
+      this.subMenuVisible = null;
+      this.menuStateService.closeAllMenus();
+      this.adjustContentWrapper();
+      if (this.isMobileView) {
+        this.enableMainContent();
+      }
+    }
   }
 
   toggleSubMenu(index: number) {
-    this.openMenu(); // Asegúrate de que el menú esté abierto
+    if (!this.isMenuOpen) {
+      this.openMenu();
+    }
     this.subMenuVisible = this.subMenuVisible === index ? null : index;
   }
+  
 
   toggleUserMenu() {
     this.isUserMenuVisible = !this.isUserMenuVisible;
@@ -81,5 +118,13 @@ export class MenuLateralComponent implements OnInit {
         !dropdownMenu.contains(event.target as Node)) {
       this.isUserMenuVisible = false;
     }
+  }
+
+  disableMainContent() {
+    this.renderer.addClass(document.body, 'menu-open');
+  }
+
+  enableMainContent() {
+    this.renderer.removeClass(document.body, 'menu-open');
   }
 }

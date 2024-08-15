@@ -92,11 +92,15 @@ export class ApiService {
       return this.http.put<any>(`${this.baseUrl}/users/${user.id}`, user);
     }
   }
+
+  }
+
   export interface EspecieLoteDTO {
     LoteId: number;
     EspecieId: number;
     NombreEspecie: string;
   }
+
   interface User {
     username: string;
     email: string;
@@ -104,6 +108,7 @@ export class ApiService {
     address?: string;
     farmName?: string;
   }
+
 export interface Monitoreo {
   ID_M: number;
   tds: number;

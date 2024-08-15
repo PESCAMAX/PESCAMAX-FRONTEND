@@ -1,16 +1,9 @@
 <app-menu-lateral (menuToggled)="onMenuToggle($event)"></app-menu-lateral>
-<div class="flex">
-    <!-- Menu Lateral -->
-
-
-
-    <!-- Contenido Principal -->
-  <div class="flex-1 p-4 transition-all duration-300" [ngClass]="{'ml-64': isMenuOpen, 'ml-16': !isMenuOpen}">
-   
-         <h1 class=" font-bold mb-4 text-custom-blue text-center font-bold text-lg font-sans">Gráfica de Ph</h1>
-         <app-graph-ph></app-graph-ph>
+<div class="container">
+  <div class="content-wrapper" [ngClass]="{'menu-open': isMenuOpen, 'menu-closed': !isMenuOpen}">
+    <h1 class="content-title text-center p-4 text-2xl font-bold custom-font custom-color">Gráfica de pH</h1>
+    <div class="graph-container">
+      <app-graph-ph></app-graph-ph>
     </div>
+  </div>
 </div>
-
-
-       

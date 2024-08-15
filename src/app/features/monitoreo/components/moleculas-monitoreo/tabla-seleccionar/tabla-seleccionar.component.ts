@@ -1,15 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Alerta, ApiService, Especie, Monitoreo, EspecieLoteDTO } from '../../../services/api-form/api.service';
 import { AlertService } from '../../../services/api-alert/alert.service';
 import { AuthService } from '../../../../../core/services/api-login/auth.service';
 import { ActivatedRoute } from '@angular/router';
+import { UltimoDatoService } from '../../../services/servicio-alerta/ultimo-dato.service';
+
 
 @Component({
   selector: 'app-tabla-seleccionar',
   templateUrl: './tabla-seleccionar.component.html',
   styleUrls: ['./tabla-seleccionar.component.css']
 })
-export class TablaSeleccionarComponent implements OnInit {
+export class TablaSeleccionarComponent implements OnInit, OnDestroy {
   isMenuOpen: boolean = true;
   especies: Especie[] = [];
   lotes: Monitoreo[] = [];
@@ -18,13 +22,18 @@ export class TablaSeleccionarComponent implements OnInit {
   userId: string;
   especiePorLote: { [loteId: number]: number } = {};
 
+  private monitoreoSubscription: Subscription | undefined;
+
+
   constructor(
     private apiService: ApiService,
     private alertService: AlertService,
     private authService: AuthService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private ultimoDatoService: UltimoDatoService
   ) {
     this.userId = this.authService.getUserId();
+    this.monitoreoSubscription = new Subscription();
   }
 
   ngOnInit() {
@@ -32,7 +41,16 @@ export class TablaSeleccionarComponent implements OnInit {
       this.userId = params['userId'] || this.userId;
       this.loadData();
       this.cargarEspeciePorLote();
+      this.iniciarMonitoreoAutomatico();
     });
+  }
+
+  ngOnDestroy() {
+    if (this.monitoreoSubscription) {
+      this.monitoreoSubscription.unsubscribe();
+      
+    }
+
   }
 
   onMenuToggle(isOpen: boolean) {
@@ -163,4 +181,9 @@ export class TablaSeleccionarComponent implements OnInit {
       error: (error) => console.error('Error al crear alerta:', error)
     });
   }
+
+  iniciarMonitoreoAutomatico() {
+    this.monitoreoSubscription = this.ultimoDatoService.iniciarMonitoreo(this.userId).subscribe();
+  }
+
 }

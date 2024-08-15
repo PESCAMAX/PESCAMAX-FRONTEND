@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { ApiService, Monitoreo, Alerta } from '../../../services/api-form/api.service';
 import { AuthService } from '../../../../../core/services/api-login/auth.service';
+import { GlobalAlertService } from '../../../services/alerta-global/global-alert.service';
 import { interval, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-
 @Component({
   selector: 'app-grafica-general',
   templateUrl: './grafica-general.component.html',
@@ -17,7 +17,8 @@ export class GraficaGeneralComponent implements OnInit, OnDestroy {
   isMenuOpen: boolean = true;
   isLoading: boolean = false;
   selectedLote: number | null = null;
-  
+  private updateSubscription: Subscription | null = null;
+  private alertSubscription: Subscription | null = null;
   temperaturaValue: number = 0;
   tdsValue: number = 0;
   phValue: number = 0;
@@ -31,24 +32,42 @@ export class GraficaGeneralComponent implements OnInit, OnDestroy {
   ultimoRegistroHora: string = '';
   lote: number | null = null;
 
-  private updateSubscription: Subscription | null = null;
 
+ 
   constructor(
     private apiService: ApiService,
     private authService: AuthService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    public globalAlertService: GlobalAlertService  // Cambiado a public
   ) {}
+
 
   ngOnInit(): void {
     this.cargarDatos();
     this.cargarAlertas();
     this.startAutoUpdate();
+    this.subscribeToAlerts();
   }
 
   ngOnDestroy(): void {
     if (this.updateSubscription) {
       this.updateSubscription.unsubscribe();
     }
+    if (this.alertSubscription) {
+      this.alertSubscription.unsubscribe();
+    }
+  }
+
+  subscribeToAlerts(): void {
+    this.alertSubscription = this.globalAlertService.alert$.subscribe(
+      message => {
+        if (message) {
+          // Aquí puedes manejar la alerta como desees, por ejemplo:
+          console.log('Nueva alerta:', message);
+          // Podrías actualizar una propiedad del componente para mostrar la alerta en el template
+        }
+      }
+    );
   }
 
   startAutoUpdate(): void {

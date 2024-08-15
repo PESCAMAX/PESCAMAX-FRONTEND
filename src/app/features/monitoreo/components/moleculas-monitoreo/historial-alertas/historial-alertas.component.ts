@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService,Alerta } from '../../../services/api-form/api.service';
+import { ApiService, Alerta } from '../../../services/api-form/api.service';
 import { AuthService } from '../../../../../core/services/api-login/auth.service';
 
 @Component({
@@ -18,9 +18,11 @@ export class HistorialAlertasComponent implements OnInit {
   ngOnInit(): void {
     this.cargarAlertas();
   }
+
   onMenuToggle(isOpen: boolean) {
     this.isMenuOpen = isOpen;
   }
+
   cargarAlertas(): void {
     if (!this.authService.isAuthenticated()) {
       console.error('Usuario no autenticado');
