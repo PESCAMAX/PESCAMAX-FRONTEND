@@ -8,28 +8,37 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  Username = '';
-  Email = '';
-  Phone = '';
-  Password = '';
-  ConfirmPassword = '';
-  successMessage = '';
-  errorMessage = '';
+  Username: string = '';
+  Email: string = '';
+  Phone: string = '';
+  Address: string = '';
+  FarmName: string = '';
+  RegistrationKey: string = '';
+  Password: string = '';
+  ConfirmPassword: string = '';
+
+  successMessage: string = '';
+  errorMessage: string = '';
 
   constructor(private authService: AuthService, private router: Router) { }
 
   register() {
     if (this.Password !== this.ConfirmPassword) {
-      this.errorMessage = 'Las contraseñas no coinciden';
+      this.errorMessage = 'Las contraseñas no coinciden.';
       return;
     }
 
     const user = {
       Username: this.Username,
       Email: this.Email,
-      Phone: this.Phone,
-      Password: this.Password
+      PhoneNumber: this.Phone,
+      Address: this.Address,
+      FarmName: this.FarmName,
+      RegistrationKey: this.RegistrationKey,
+      Password: this.Password,
     };
+
+   
 
     this.authService.register(user).subscribe(
       response => {

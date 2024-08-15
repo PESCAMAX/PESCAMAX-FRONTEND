@@ -22,13 +22,25 @@
         <label for="Phone" class="floating-label">Teléfono</label>
       </div>
       <div class="relative mb-4">
+        <input type="text" id="Address" class="border-gray-400 form-input w-full px-4 py-2 focus:outline-none focus:ring-5 focus:ring-blue-400 rounded" [(ngModel)]="Address" name="Address" required placeholder=" ">
+        <label for="Address" class="floating-label">Dirección</label>
+      </div>
+      <div class="relative mb-4">
+        <input type="text" id="FarmName" class="border-gray-400 form-input w-full px-4 py-2 focus:outline-none focus:ring-5 focus:ring-blue-400 rounded" [(ngModel)]="FarmName" name="FarmName" required placeholder=" ">
+        <label for="FarmName" class="floating-label">Nombre de la finca</label>
+      </div>
+      <div class="relative mb-4">
+        <input type="text" id="RegistrationKey" class="border-gray-400 form-input w-full px-4 py-2 focus:outline-none focus:ring-5 focus:ring-blue-400 rounded" [(ngModel)]="RegistrationKey" name="RegistrationKey" required placeholder=" ">
+        <label for="RegistrationKey" class="floating-label">Clave de Registro</label>
+      </div>
+      <div class="relative mb-4">
         <input type="password" id="Password" class="border-gray-400 form-input w-full px-4 py-2 focus:outline-none focus:ring-5 focus:ring-blue-400 rounded" [(ngModel)]="Password" name="Password" required placeholder=" ">
         <label for="Password" class="floating-label">Contraseña</label>
       </div>
-      <div class="relative mb-6">
+      <div class="relative mb-4">
         <input type="password" id="ConfirmPassword" class="border-gray-400 form-input w-full px-4 py-2 focus:outline-none focus:ring-5 focus:ring-blue-400 rounded" [(ngModel)]="ConfirmPassword" name="ConfirmPassword" required placeholder=" ">
         <label for="ConfirmPassword" class="floating-label">Confirmar Contraseña</label>
-        <p class="text-gray-600 text-xs mt-1">Mínimo 8 caracteres, un carácter no alfanumérico y un número.</p>
+         <p class="text-gray-600 text-xs mt-1">Mínimo 8 caracteres, un carácter no alfanumérico y un número.</p>
       </div>
       <button type="submit" class="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Registrar</button>
     </form>

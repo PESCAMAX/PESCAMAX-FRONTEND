@@ -42,11 +42,7 @@ const routes: Routes = [
     path: 'productos',
     component: ProductosComponent
   },
-
-  {
-    path: 'user-config',
-    component: ConfiguracionUserComponent
-  },
+  { path: 'user-config/:userId', component: ConfiguracionUserComponent },
   {
     path: 'data',
     component: DatapickerComponent

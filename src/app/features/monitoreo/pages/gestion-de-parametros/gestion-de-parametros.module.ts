@@ -6,6 +6,7 @@ import { ModificarEspecieComponent } from './modificar-especie/modificar-especie
 import { SeleccionarEspecieComponent } from './seleccionar-especie/seleccionar-especie.component';
 import { SharedModule } from '../../../../shared/shared.module';
 import { ConfiguracionUserComponent } from './configuracion-user/configuracion-user.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ConfiguracionUserComponent } from './configuracion-user/configuracion-u
   imports: [
     CommonModule,
     GestionDeParametrosRoutingModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ]
 })
 export class GestionDeParametrosModule { }
