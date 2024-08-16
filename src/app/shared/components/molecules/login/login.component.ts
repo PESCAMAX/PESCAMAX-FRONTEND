@@ -23,18 +23,14 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.loginForm = this.fb.group({
-      email: ['', Validators.required],
+      username: ['', Validators.required],
       password: ['', Validators.required]
     });
 
     this.registerForm = this.fb.group({
       UserName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      PhoneNumber: ['', Validators.required],
-      Address: ['', Validators.required],
-      FarmName: ['', Validators.required],
-      RegistrationKey: ['', Validators.required]
+      password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
@@ -85,7 +81,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
         next: (response) => {
           console.log('Registro exitoso', response);
           this.showTemporaryMessage('Registro exitoso. Por favor, inicie sesión.', false);
-          this.showSignIn(); // Cambiar al formulario de inicio de sesión
+          this.showSignIn(); // Switch to the login form
         },
         error: (error) => {
           console.error('Error en el registro', error);
@@ -103,7 +99,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
       this.showTemporaryMessage('Por favor, complete todos los campos requeridos correctamente', true);
     }
   }
-
   private showTemporaryMessage(message: string, isError: boolean, duration: number = 2000) {
     if (isError) {
       this.errorMessage = message;

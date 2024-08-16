@@ -2,16 +2,16 @@
     <nav>
         <div class="menu-container">
             <div class="logo-container">
-                <!-- Your logo here -->
+
             </div>
             <div class="icons">
                 <img src="assets/icons/notificacion.png" class="icon" alt="notificaciones">
                 <div class="user-container" (click)="toggleMenu()">
                     <img src="assets/icons/userr.png" class="icon user-icon" alt="perfil">
                     <div class="dropdown-menu" *ngIf="isMenuVisible">
-                        <a routerLink="'/user-config', userId]">Profile</a>
-                        <a routerLink="/settings">Settings</a>
-                        <a (click)="logout()">Logout</a>
+                        <a href="#profile">Profile</a>
+                        <a href="#settings">Settings</a>
+                        <a href="#logout">Logout</a>
                     </div>
                 </div>
             </div>

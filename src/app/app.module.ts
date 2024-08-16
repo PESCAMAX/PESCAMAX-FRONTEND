@@ -10,7 +10,6 @@ import { SistemaDeAlertasModule } from './features/monitoreo/pages/sistema-de-al
 import { DashboardModule } from './features/monitoreo/pages/dashboard/dashboard.module';
 import { AuthGuard } from './core/guards/auth-guard/auth-guard.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { GestionDeParametrosModule } from './features/monitoreo/pages/gestion-de-parametros/gestion-de-parametros.module';
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
@@ -29,7 +28,6 @@ export function tokenGetter() {
     BrowserAnimationsModule,
     ReactiveFormsModule,
     DashboardModule,
-    GestionDeParametrosModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
