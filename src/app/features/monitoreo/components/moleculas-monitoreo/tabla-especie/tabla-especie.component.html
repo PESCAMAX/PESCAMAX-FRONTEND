@@ -12,7 +12,7 @@
   </div>
 
   <!-- Tabla de especies con scroll (visible en pantallas medianas y grandes) -->
-  <div class="overflow-x-auto overflow-y-auto max-h-[80vh] hidden sm:block">
+  <div class="overflow-x-auto max-h-[80vh] hidden sm:block custom-scrollbar">
     <table class="w-full border-collapse bg-gray-500 table-auto">
       <thead class="bg-white sticky top-0">
         <tr>
@@ -70,59 +70,68 @@
     </div>
   </div>
 
-  <div *ngIf="especieSeleccionada" class="fixed inset-0 z-50 overflow-auto bg-smoke-light flex items-center justify-center">
-    <div class="relative p-8 bg-white w-full max-w-md m-auto flex-col flex rounded-lg">
-      <h3 class="text-xl font-bold mb-4 text-custom-blue">Editar Especie</h3>
+  <!-- Modal para editar especie -->
+  <div *ngIf="especieSeleccionada" class="modal-container">
+    <div class="modal-content">
+      <h3 class="modal-title">Editar Especie</h3>
       <form [formGroup]="especieForm" (ngSubmit)="onSubmit()" id="editarEspecieForm">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label for="nombreEspecie" class="block text-sm font-medium text-gray-700">Nombre</label>
-            <input type="text" id="nombreEspecie" formControlName="NombreEspecie" class="mt-1 p-2 border border-gray-300 rounded w-full" />
+        <div class="form-field full-width">
+          <label for="nombreEspecie" class="form-label">Nombre</label>
+          <input type="text" id="nombreEspecie" formControlName="NombreEspecie" class="form-input" />
+        </div>
+        
+        <div class="form-row">
+          <div class="form-field">
+            <label for="tdsMinimo" class="form-label">TDS Mínimo</label>
+            <input type="number" id="tdsMinimo" formControlName="TdsMinimo" class="form-input" />
           </div>
-          <div>
-            <label for="tdsMinimo" class="block text-sm font-medium text-gray-700">TDS Mínimo</label>
-            <input type="number" id="tdsMinimo" formControlName="TdsMinimo" class="mt-1 p-2 border border-gray-300 rounded w-full" />
-          </div>
-          <div>
-            <label for="tdsMaximo" class="block text-sm font-medium text-gray-700">TDS Máximo</label>
-            <input type="number" id="tdsMaximo" formControlName="TdsMaximo" class="mt-1 p-2 border border-gray-300 rounded w-full" />
-          </div>
-          <div>
-            <label for="temperaturaMinimo" class="block text-sm font-medium text-gray-700">Temperatura Mínima</label>
-            <input type="number" id="TemperaturaMinimo" formControlName="TemperaturaMinimo" class="mt-1 p-2 border border-gray-300 rounded w-full" />
-          </div>
-          <div>
-            <label for="temperaturaMaximo" class="block text-sm font-medium text-gray-700">Temperatura Máxima</label>
-            <input type="number" id="TemperaturaMaximo" formControlName="TemperaturaMaximo" class="mt-1 p-2 border border-gray-300 rounded w-full" />
-          </div>
-          <div>
-            <label for="PhMinimo" class="block text-sm font-medium text-gray-700">PH Mínimo</label>
-            <input type="number" id="PhMinimo" formControlName="PhMinimo" class="mt-1 p-2 border border-gray-300 rounded w-full" />
-          </div>
-          <div>
-            <label for="PhMaximo" class="block text-sm font-medium text-gray-700">PH Máximo</label>
-            <input type="number" id="PhMaximo" formControlName="PhMaximo" class="mt-1 p-2 border border-gray-300 rounded w-full" />
+          <div class="form-field">
+            <label for="tdsMaximo" class="form-label">TDS Máximo</label>
+            <input type="number" id="tdsMaximo" formControlName="TdsMaximo" class="form-input" />
           </div>
         </div>
-        <div class="mt-4 flex flex-col sm:flex-row justify-end">
+  
+        <div class="form-row">
+          <div class="form-field">
+            <label for="temperaturaMinimo" class="form-label">Temperatura Mínima</label>
+            <input type="number" id="TemperaturaMinimo" formControlName="TemperaturaMinimo" class="form-input" />
+          </div>
+          <div class="form-field">
+            <label for="temperaturaMaximo" class="form-label">Temperatura Máxima</label>
+            <input type="number" id="TemperaturaMaximo" formControlName="TemperaturaMaximo" class="form-input" />
+          </div>
+        </div>
+  
+        <div class="form-row">
+          <div class="form-field">
+            <label for="PhMinimo" class="form-label">PH Mínimo</label>
+            <input type="number" id="PhMinimo" formControlName="PhMinimo" class="form-input" />
+          </div>
+          <div class="form-field">
+            <label for="PhMaximo" class="form-label">PH Máximo</label>
+            <input type="number" id="PhMaximo" formControlName="PhMaximo" class="form-input" />
+          </div>
+        </div>
+  
+        <div class="form-actions">
           <app-button-guardar
-            type="submit"
-            [texto]="'Guardar Cambios'"
-            [color]="'blue'"
-            [customClass]="'mb-2 sm:mb-0 sm:mr-2'"
-          >
-          </app-button-guardar>
-          <app-button-cancelar
-            [texto]="'Cancelar'"
-            [estilo]="'rojo'"
-            (cancelar)="cerrarModal()"
-          >
-          </app-button-cancelar>
+          type="submit"
+          [texto]="'Guardar'"
+          [color]="'blue'"
+          (click)="onSubmit()"
+        >
+        </app-button-guardar>
+        <app-button-cancelar
+          [texto]="'Cancelar'"
+          [estilo]="'rojo'"
+          (cancelar)="cerrarModal()"
+        >
+        </app-button-cancelar>
         </div>
       </form>
     </div>
   </div>
-
+  <!-- Modal de alerta -->
   <div *ngIf="alertState.show" class="fixed z-10 inset-0 overflow-y-auto flex items-center justify-center">
     <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
       <div class="fixed inset-0 transition-opacity" aria-hidden="true">

@@ -1,87 +1,60 @@
-/* Estilos generales */
-.bg-smoke-light {
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-.fixed {
+.modal-container {
   position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
-.inset-0 {
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+.modal-content {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
 }
 
-.z-50 {
-  z-index: 50;
+.modal-title {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: rgb(0, 123, 255);
 }
 
-/* Estilos responsivos */
-/* Pantallas pequeñas (móviles) */
-@media (max-width: 639px) {
-  .hidden {
-    display: none;
-  }
-  .sm\:hidden {
-    display: block;
-  }
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 10px;
-  }
-  
-  .custom-scrollbar::-webkit-scrollbar-track {
-    background: #f1f1f1;
-  }
-  
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 5px;
-  }
-  
-  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #555;
-  }
+.form-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
 }
 
-/* Pantallas medianas (tablets) */
-
-@media (min-width: 640px) {
-  .sm\:table-cell {
-    display: table-cell;
-  }
-  .sm\:hidden {
-    display: none;
-  }
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 10px;
-  }
-  
-  .custom-scrollbar::-webkit-scrollbar-track {
-    background: #f1f1f1;
-  }
-  
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 5px;
-  }
-  
-  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #555;
-  }
+.form-field {
+  flex: 1;
 }
-/* Pantallas grandes (escritorio) */
-@media (min-width: 1024px) {
-  .table-row {
-    display: table-row;
-  }
 
-  .table-cell {
-    width: 8.33%; /* 1/12 */
-  }
-
-  .modal {
-    padding: 2rem;
-  }
+.full-width {
+  width: 100%;
+  margin-bottom: 1rem;
 }
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+}
+
