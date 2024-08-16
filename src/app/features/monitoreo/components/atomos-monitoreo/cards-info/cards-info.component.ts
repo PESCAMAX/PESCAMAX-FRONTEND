@@ -11,6 +11,7 @@ export class CardsInfoComponent implements OnChanges {
   @Input() trend: 'up' | 'down' | 'none' = 'none';
   @Input() trendValue: string = '';
   @Input() status: 'good' | 'bad' | 'unassigned' = 'unassigned';
+  @Input() isTimeCard: boolean = false;
   previousValue: number | string = '';
 
   ngOnChanges(changes: SimpleChanges): void {

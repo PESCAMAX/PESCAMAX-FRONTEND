@@ -30,6 +30,7 @@ export class GraficaGeneralComponent implements OnInit, OnDestroy {
   tdsTrendValue: string = '';
   phTrendValue: string = '';
   ultimoRegistroHora: string = '';
+  penultimoRegistroHora: string = '';
   lote: number | null = null;
 
   temperaturaStatus: 'good' | 'bad' | 'unassigned' = 'unassigned';
@@ -146,6 +147,8 @@ export class GraficaGeneralComponent implements OnInit, OnDestroy {
     this.tdsValue = ultimo.tds;
     this.phValue = ultimo.PH;
     this.ultimoRegistroHora = new Date(ultimo.FechaHora).toLocaleTimeString();
+    this.penultimoRegistroHora = new Date(penultimo.FechaHora).toLocaleTimeString();
+    
     this.lote = ultimo.LoteID;
 
     this.calcularEstados();
@@ -177,6 +180,7 @@ export class GraficaGeneralComponent implements OnInit, OnDestroy {
     this.temperaturaTrendValue = this.tdsTrendValue = this.phTrendValue = '';
     this.temperaturaValue = this.tdsValue = this.phValue = 0;
     this.ultimoRegistroHora = '';
+    this.penultimoRegistroHora = '';
     this.lote = null;
     this.resetearEstados();
   }
