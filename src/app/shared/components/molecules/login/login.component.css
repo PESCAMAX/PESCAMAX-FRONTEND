@@ -23,7 +23,7 @@ body {
 .container{
 right: 58%;
 position: relative;
-width: 1000px;
+width: 800px;
 height: 500px;
 background-color: #fff;
 box-shadow: 25px 30px 55px #5557;
@@ -281,7 +281,7 @@ p{
   
     .form-container {
       width: 100%;
-      padding: 50px;
+      padding: 20px;
       position: static;
       opacity: 1;
       z-index: 2;
