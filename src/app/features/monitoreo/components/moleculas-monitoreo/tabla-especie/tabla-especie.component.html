@@ -12,9 +12,9 @@
   </div>
 
   <!-- Tabla de especies con scroll (visible en pantallas medianas y grandes) -->
-  <div class="overflow-x-auto hidden sm:block">
+  <div class="overflow-x-auto overflow-y-auto max-h-[80vh] hidden sm:block">
     <table class="w-full border-collapse bg-gray-500 table-auto">
-      <thead class="bg-white">
+      <thead class="bg-white sticky top-0">
         <tr>
           <th class="p-2 text-left font-bold border border-grey-500 text-sm">ID</th>
           <th class="p-2 text-left font-bold border border-grey-500 text-sm">Nombre</th>
@@ -53,7 +53,7 @@
   </div>
 
   <!-- Vista móvil (visible solo en pantallas pequeñas) -->
-  <div class="sm:hidden">
+  <div class="sm:hidden max-h-[80vh] overflow-y-auto">
     <div *ngFor="let especie of especiesFiltradas" class="bg-white rounded-lg shadow-md p-4 mb-4">
       <h3 class="font-bold text-lg mb-2">{{ especie.NombreEspecie }}</h3>
       <p><strong>ID:</strong> {{ especie.Id }}</p>
@@ -108,7 +108,7 @@
           <app-button-guardar
             type="submit"
             [texto]="'Guardar Cambios'"
-            [color]="'green'"
+            [color]="'blue'"
             [customClass]="'mb-2 sm:mb-0 sm:mr-2'"
           >
           </app-button-guardar>
