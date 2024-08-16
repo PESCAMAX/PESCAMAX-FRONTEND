@@ -1,60 +1,55 @@
-.modal-container {
+/* Estilos generales */
+.bg-smoke-light {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.fixed {
   position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
 }
 
-.modal-content {
-  background-color: white;
-  padding: 2rem;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 500px;
+.inset-0 {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 
-.modal-title {
-  text-align: center;
-  margin-bottom: 1.5rem;
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: rgb(0, 123, 255);
+.z-50 {
+  z-index: 50;
 }
 
-.form-row {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
+/* Estilos responsivos */
+/* Pantallas pequeñas (móviles) */
+@media (max-width: 639px) {
+  .hidden {
+    display: none;
+  }
+  .sm\:hidden {
+    display: block;
+  }
 }
 
-.form-field {
-  flex: 1;
-}
+/* Pantallas medianas (tablets) */
 
-.full-width {
-  width: 100%;
-  margin-bottom: 1rem;
+@media (min-width: 640px) {
+  .sm\:table-cell {
+    display: table-cell;
+  }
+  .sm\:hidden {
+    display: none;
+  }
 }
+/* Pantallas grandes (escritorio) */
+@media (min-width: 1024px) {
+  .table-row {
+    display: table-row;
+  }
 
-.form-label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
+  .table-cell {
+    width: 8.33%; /* 1/12 */
+  }
+
+  .modal {
+    padding: 2rem;
+  }
 }
-
-.form-input {
-  width: 100%;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.form-actions {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 1.5rem;
-}
-
