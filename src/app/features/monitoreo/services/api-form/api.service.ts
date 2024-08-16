@@ -93,7 +93,7 @@ export class ApiService {
     }
   }
 
-  }
+  
 
   export interface EspecieLoteDTO {
     LoteId: number;
