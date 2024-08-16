@@ -1,4 +1,3 @@
-
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Alerta, ApiService, Especie, Monitoreo, EspecieLoteDTO } from '../../../services/api-form/api.service';
@@ -6,7 +5,6 @@ import { AlertService } from '../../../services/api-alert/alert.service';
 import { AuthService } from '../../../../../core/services/api-login/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { UltimoDatoService } from '../../../services/servicio-alerta/ultimo-dato.service';
-
 
 @Component({
   selector: 'app-tabla-seleccionar',
@@ -21,9 +19,7 @@ export class TablaSeleccionarComponent implements OnInit, OnDestroy {
   selectedLote: { [key: number]: number } = {};
   userId: string;
   especiePorLote: { [loteId: number]: number } = {};
-
   private monitoreoSubscription: Subscription | undefined;
-
 
   constructor(
     private apiService: ApiService,
@@ -50,7 +46,6 @@ export class TablaSeleccionarComponent implements OnInit, OnDestroy {
       this.monitoreoSubscription.unsubscribe();
       
     }
-
   }
 
   onMenuToggle(isOpen: boolean) {
@@ -68,7 +63,7 @@ export class TablaSeleccionarComponent implements OnInit, OnDestroy {
       error: (error) => console.error('Error al cargar especies por lote:', error)
     });
   }
-
+  
   loadData() {
     // Load especies
     this.apiService.listarEspecies(this.userId).subscribe({
@@ -185,5 +180,4 @@ export class TablaSeleccionarComponent implements OnInit, OnDestroy {
   iniciarMonitoreoAutomatico() {
     this.monitoreoSubscription = this.ultimoDatoService.iniciarMonitoreo(this.userId).subscribe();
   }
-
 }

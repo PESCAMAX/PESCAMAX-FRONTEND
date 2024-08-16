@@ -8,17 +8,10 @@
         <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
         <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
       </div>
-      <span>Usa tu email para registrarte</span>
-      
-      <!-- Campo Nombre de Usuario -->
-      <app-inputs-form formControlName="UserName" placeholder="Nombre de Usuario"></app-inputs-form>
-      <app-inputs-form formControlName="email" type="email" placeholder="Correo Electrónico"></app-inputs-form>
-      <app-inputs-form formControlName="PhoneNumber" type="tel" placeholder="Teléfono"></app-inputs-form>
-      <app-inputs-form formControlName="Address" placeholder="Dirección"></app-inputs-form>
-      <app-inputs-form formControlName="FarmName" placeholder="Nombre de la Finca"></app-inputs-form>
-      <app-inputs-form formControlName="RegistrationKey" placeholder="Clave de Registro"></app-inputs-form>
+      <span>usa tu email para registrarte</span>
+      <app-inputs-form formControlName="UserName" placeholder="Nombre"></app-inputs-form>
+      <app-inputs-form formControlName="email" type="email" placeholder="Email"></app-inputs-form>
       <app-inputs-form formControlName="password" type="password" placeholder="Contraseña"></app-inputs-form>
-      
       <button type="submit" [disabled]="!registerForm.valid">Registrarse</button>
     </form>
   </div>
@@ -33,12 +26,9 @@
         <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
         <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
       </div>
-      <span>Usa tu cuenta</span>
-      
-      <!-- Campo Usuario -->
-      <app-inputs-form formControlName="email" placeholder="email"></app-inputs-form>
+      <span>usa tu cuenta</span>
+      <app-inputs-form formControlName="username" placeholder="Usuario"></app-inputs-form>
       <app-inputs-form formControlName="password" type="password" placeholder="Contraseña"></app-inputs-form>
-
       <a href="http://localhost:4200/forgot-password" class="forgot">Olvidaste tu contraseña?</a>
       <button class="boton-enviar" type="submit">Ingresar</button>
     </form>

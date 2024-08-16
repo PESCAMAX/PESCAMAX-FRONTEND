@@ -10,7 +10,7 @@ export class CardsInfoComponent implements OnChanges {
   @Input() value: number | string = '';
   @Input() trend: 'up' | 'down' | 'none' = 'none';
   @Input() trendValue: string = '';
-
+  @Input() status: 'good' | 'bad' | 'unassigned' = 'unassigned';
   previousValue: number | string = '';
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -21,12 +21,11 @@ export class CardsInfoComponent implements OnChanges {
 
   get cardColor(): string {
     const colorMap: { [key: string]: string } = {
-      'Temperatura': 'border-red-500',
-      'TDS': 'border-blue-500',
-      'pH': 'border-green-500',
-      'ULTIMO REGISTRO': 'border-gray-500'
+      'good': 'border-green-500',
+      'bad': 'border-red-500',
+      'unassigned': 'border-blue-500'
     };
-    return colorMap[this.title] || 'border-gray-500';
+    return colorMap[this.status] || 'border-gray-500';
   }
 
   get trendIcon(): string {

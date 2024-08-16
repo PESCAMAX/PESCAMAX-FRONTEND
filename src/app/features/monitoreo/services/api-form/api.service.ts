@@ -84,6 +84,7 @@ export class ApiService {
       return this.http.get<EspecieLoteDTO[]>(`${this.baseUrl}/EspecieLote/Obtener/${userId}`);
     }
 
+
     getCurrentUser(userId: string): Observable<any> {
       return this.http.get<any>(`${this.baseUrl}/users/${userId}`);
     }
@@ -100,15 +101,6 @@ export class ApiService {
     EspecieId: number;
     NombreEspecie: string;
   }
-
-  interface User {
-    username: string;
-    email: string;
-    phoneNumber?: string;
-    address?: string;
-    farmName?: string;
-  }
-
 export interface Monitoreo {
   ID_M: number;
   tds: number;

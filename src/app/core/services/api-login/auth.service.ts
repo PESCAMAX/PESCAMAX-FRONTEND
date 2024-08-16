@@ -34,28 +34,26 @@ export class AuthService {
   }
 
   register(user: any): Observable<any> {
-    console.log('Datos enviados al servidor:', user);
+    console.log('Datos enviados al servidor:', user); // Agrega este log
     return this.http.post(`${this.apiUrl}/register`, user).pipe(
       catchError(this.handleError)
     );
   }
-
-  private handleError(error: HttpErrorResponse) {
-    let errorMessage = 'An unknown error occurred!';
-    if (error.error instanceof ErrorEvent) {
-      // Error del lado del cliente
-      errorMessage = `Error: ${error.error.message}`;
-    } else {
-      // El backend devolvió un código de respuesta sin éxito
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-      if (error.error) {
-        errorMessage += `\nDetails: ${JSON.stringify(error.error)}`;
+    private handleError(error: HttpErrorResponse) {
+      let errorMessage = 'An unknown error occurred!';
+      if (error.error instanceof ErrorEvent) {
+        // Error del lado del cliente
+        errorMessage = `Error: ${error.error.message}`;
+      } else {
+        // El backend devolvió un código de respuesta sin éxito
+        errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+        if (error.error) {
+          errorMessage += `\nDetails: ${JSON.stringify(error.error)}`;
+        }
       }
+      console.error(errorMessage);
+      return throwError(() => new Error(errorMessage));
     }
-    console.error(errorMessage);
-    return throwError(() => new Error(errorMessage));
-  }
-
   forgotPassword(email: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/forgot-password`, { email });
   }
@@ -70,6 +68,7 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('token');
+    localStorage.removeItem('username');
     localStorage.removeItem('userId');
     this.router.navigate(['/login']);
   }
