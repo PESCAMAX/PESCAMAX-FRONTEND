@@ -7,7 +7,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class ButtonGuardarComponent {
   @Input() type: 'button' | 'submit' = 'button';
-  @Input() texto: string = 'Guardar';
+  @Input() texto: string = ' Guardar ';
   @Input() color: 'blue' | 'green' = 'blue';
   @Input() customClass: string = '';
   @Input() fullWidth: boolean = false;
