@@ -185,25 +185,25 @@ export class GraficaComponent implements OnInit, OnDestroy {
     });
 
     const temperaturaSeries = this.chart.addAreaSeries({
-      lineColor: '#EF4444',
-      topColor: 'rgba(239, 68, 68, 0.4)',
-      bottomColor: 'rgba(239, 68, 68, 0.1)',
+      lineColor: '#FDA172',
+      topColor: 'rgba(253, 161, 114, 0.4)',
+      bottomColor: 'rgba(253, 161, 114, 0.1)',
       lineWidth: 2,
       title: 'Temperatura'
     });
 
     const phSeries = this.chart.addAreaSeries({
-      lineColor: '#10B981',
-      topColor: 'rgba(16, 185, 129, 0.4)',
-      bottomColor: 'rgba(16, 185, 129, 0.1)',
+      lineColor: '#B39DDB',
+      topColor: 'rgba(179, 157, 219, 0.4)',
+      bottomColor: 'rgba(179, 157, 219, 0.1)',
       lineWidth: 2,
       title: 'pH'
     });
 
     const tdsSeries = this.chart.addAreaSeries({
-      lineColor: '#3B82F6',
-      topColor: 'rgba(59, 130, 246, 0.4)',
-      bottomColor: 'rgba(59, 130, 246, 0.1)',
+      lineColor: '#4DD0E1',
+      topColor: 'rgba(77, 208, 225, 0.4)',
+      bottomColor: 'rgba(77, 208, 225, 0.1)',
       lineWidth: 2,
       title: 'TDS',
       crosshairMarkerVisible: true,
