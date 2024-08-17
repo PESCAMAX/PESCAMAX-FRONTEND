@@ -127,22 +127,19 @@ export class GraficasTemperaturaComponent implements OnInit {
       },
     });
   
-    const areaSeries = this.chart.addAreaSeries({
-      lineColor: '#00FFFF',
-      topColor: 'rgba(0, 255, 255, 0.4)',
-      bottomColor: 'rgba(0, 255, 255, 0.1)',
+    const lineSeries = this.chart.addLineSeries({
+      color: 'pink',
       lineWidth: 2,
-      priceLineVisible: false,
       crosshairMarkerVisible: true,
-      lastValueVisible: false,
+      lastValueVisible: true,
       priceFormat: {
         type: 'price',
-        precision: 2,
-        minMove: 0.01,
+        precision: 1,
+        minMove: 0.1,
       },
     });
   
-    areaSeries.setData(data);
+    lineSeries.setData(data);
   
     // Ajustar el rango visible
     this.chart.timeScale().fitContent();
