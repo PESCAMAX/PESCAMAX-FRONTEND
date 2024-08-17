@@ -5,11 +5,11 @@
     <div *ngIf="(globalAlertService.alert$ | async) as alertMessage" class="alert alert-danger">
       {{ alertMessage }}
     </div>
-   
+
     <div class="mb-4 shadow-md">
       <app-lotes [monitoreoData]="monitoreoData" (loteSeleccionado)="onLoteChange($event)"></app-lotes>
     </div>
-   
+
     <div class="flex flex-wrap mt-4">
       <!-- Columna izquierda: Cards (35%) -->
       <div class="w-full lg:w-[35%] pr-0 lg:pr-4 mb-4 lg:mb-0">
@@ -23,18 +23,18 @@
             [status]="temperaturaStatus"
             [isTimeCard]="false">
         </app-cards-info>
-          <app-cards-info 
-            title="TDS" 
-            [value]="tdsValue" 
-            [trend]="tdsTrend" 
+          <app-cards-info
+            title="TDS"
+            [value]="tdsValue"
+            [trend]="tdsTrend"
             [trendValue]="tdsTrendValue"
             [status]="tdsStatus"
             [isTimeCard]="false">
           </app-cards-info>
-          <app-cards-info 
-            title="pH" 
-            [value]="phValue" 
-            [trend]="phTrend" 
+          <app-cards-info
+            title="pH"
+            [value]="phValue"
+            [trend]="phTrend"
             [trendValue]="phTrendValue"
             [status]="phStatus"
             [isTimeCard]="false">
@@ -48,7 +48,7 @@
           </app-cards-info>
         </div>
       </div>
-     
+
       <!-- Columna derecha: Gráfica General (65%) -->
       <div class="w-full lg:w-[65%]">
         <div class="mb-8">
@@ -57,14 +57,16 @@
         </div>
       </div>
     </div>
-   
+
     <!-- Gráfica de Barras (debajo de las dos columnas) -->
     <div class="mt-8 lg:w-[65%] flex-wrap ">
- 
+
     </div>
- 
+
     <div class="mt-8">
+      <h2 class="text-xl font-semibold text-gray-800 mb-2">Historial De Alertas</h2>
       <app-fechas-mensajes [alertasFiltradas]="alertasFiltradas"></app-fechas-mensajes>
     </div>
   </div>
 </div>
+
