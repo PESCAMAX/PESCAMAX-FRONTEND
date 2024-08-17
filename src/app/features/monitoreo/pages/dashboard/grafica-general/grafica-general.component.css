@@ -55,8 +55,8 @@
 
 
 /* estilos titulo */
-.text-left {
-  text-align: left;
+.text-center {
+  text-align: center;
 }
 
 .p-4 {
@@ -78,22 +78,6 @@
 .custom-color {
   color: #007bff;
 }
-
-/* subtitulo */
-
- .text-left h2 {
-  text-align: left;
- }
-
- .p-2 {
-  padding: 1rem; /* 16px */
-}
-
-
-.custom-font {
-  font-family: Arial, sans-serif;
-}
-
 
 
 
