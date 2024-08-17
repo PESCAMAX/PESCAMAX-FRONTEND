@@ -2,13 +2,17 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ApiService, Alerta } from '../../../services/api-form/api.service';
 import { AuthService } from '../../../../../core/services/api-login/auth.service';
 
+interface AlertaExtendida extends Alerta {
+  showDetails?: boolean;
+}
+
 @Component({
   selector: 'app-fechas-mensajes',
   templateUrl: './fechas-mensajes.component.html',
   styleUrls: ['./fechas-mensajes.component.css']
 })
 export class FechasMensajesComponent implements OnInit {
-  @Input() alertasFiltradas: Alerta[] = [];
+  @Input() alertasFiltradas: AlertaExtendida[] = [];
   isMenuOpen: boolean = true;
   mensajeAlerta: string = '';
 
@@ -29,7 +33,7 @@ export class FechasMensajesComponent implements OnInit {
     }
     this.apiService.obtenerAlertas().subscribe({
       next: (alertas) => {
-        this.alertasFiltradas = alertas;
+        this.alertasFiltradas = alertas.map(alerta => ({...alerta, showDetails: false}));
       },
       error: (error) => {
         console.error('Error al cargar alertas:', error);
@@ -54,5 +58,10 @@ export class FechasMensajesComponent implements OnInit {
     } else {
       this.mensajeAlerta = '';
     }
+  }
+
+  toggleDetails(index: number, event: Event): void {
+    event.preventDefault();
+    this.alertasFiltradas[index].showDetails = !this.alertasFiltradas[index].showDetails;
   }
 }

@@ -75,3 +75,22 @@ th {
     margin-bottom: 0.5rem;
   }
 }
+/* Keep your existing CSS and add these new styles */
+
+@media (max-width: 767px) {
+  .md\:hidden {
+    display: block;
+  }
+
+  .hidden.md\:block {
+    display: none;
+  }
+}
+
+.text-blue-500 {
+  color: #3b82f6;
+}
+
+.mt-2 {
+  margin-top: 0.5rem;
+}
