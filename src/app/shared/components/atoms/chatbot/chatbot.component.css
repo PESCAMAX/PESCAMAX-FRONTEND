@@ -1,13 +1,14 @@
+/* chatbot.component.css */
 .chatbot-container {
   position: fixed;
   bottom: 20px;
-  right: 23px;
+  right: 23px; /* Ajustado para separar 3px más del lado derecho */
   z-index: 1000;
 }
 
 .chat-toggle {
-  width: 70px;
-  height: 70px;
+  width: 70px; /* Ajustado para ser más grande */
+  height: 70px; /* Ajustado para ser más grande */
   border-radius: 50%;
   background-color: #c7e0ff;
   border: none;
@@ -15,10 +16,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  overflow: hidden;
-  /* Sombra degradada directa */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden; /* Asegura que la imagen se recorte dentro del botón */
 }
 
 .chat-logo {
@@ -31,12 +30,12 @@
 .chat-window {
   position: fixed;
   bottom: 90px;
-  right: 23px;
+  right: 23px; /* Ajustado para mantener la misma separación del botón */
   width: 350px;
   height: 500px;
   background-color: white;
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   overflow: hidden;
 }
 

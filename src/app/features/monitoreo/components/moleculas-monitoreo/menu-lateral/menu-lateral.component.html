@@ -13,25 +13,25 @@
         <div class="px-2">
           <button (click)="toggleSubMenu(1)" class="flex items-center w-full py-4 menu-item">
             <img src="../../../../../assets/icons/grafico-de-negocios.png" alt="Dashboard" class="w-8 h-8 mr-3">
-            <span class="text-sm font-medium">Panel de control</span>
+            <span class="text-sm font-medium">Panel De Control</span>
           </button>
           <!-- Submenú -->
           <div *ngIf="subMenuVisible === 1" class="ml-10 mt-2">
             <a [href]="'/home/' + userId" class="flex items-center py-2 menu-item">
               <img src="../../../../../assets/icons/grafico-de-linea.png" alt="Gráfica General" class="w-5 h-5 mr-2 ml-5">
-              <span>General</span>
+              <span>Gráfica General</span>
             </a>
             <a [href]="'/temperatura/' + userId" class="flex items-center py-2 menu-item">
               <img src="../../../../../assets/icons/temperatura.png" alt="Temperatura" class="w-5 h-5 mr-2 ml-5">
-              <span>Temperatura</span>
+              <span>Gráfica Temperatura</span>
             </a>
             <a [href]="'/grafica-tds/' + userId" class="flex items-center py-2 menu-item">
               <img src="../../../../../assets/icons/medidor-de-ph-digital.png" alt="TDS" class="w-5 h-5 mr-2 ml-5">
-              <span>TDS</span>
+              <span>Gráfica de TDS</span>
             </a>
             <a [href]="'/grafica-ph/' + userId" class="flex items-center py-2 menu-item">
               <img src="../../../../../assets/icons/metros.png" alt="Ph" class="w-5 h-5 mr-2 ml-5">
-              <span>Ph</span>
+              <span>Gráfica de Ph</span>
             </a><!-- ..
             <a [href]="'/tabla-datos/' + userId" class="flex items-center py-2 menu-item">
               <img src="../../../../../assets/icons/mesa.png" alt="Tablas" class="w-5 h-5 mr-2 ml-5">
@@ -48,15 +48,15 @@
           <div *ngIf="subMenuVisible === 2" class="ml-10 mt-2">
             <a [href]="'/crear-especie/' + userId" class="flex items-center py-2 menu-item">
               <img src="../../../../../assets/icons/crear-especie.png" alt="Crear especie" class="w-5 h-5 mr-2 ml-5">
-              <span>Crear</span>
+              <span>Crear especie</span>
             </a>
             <a [href]="'/seleccionar-especie/' + userId" class="flex items-center py-2 menu-item">
               <img src="../../../../../assets/icons/seleccion-de-caracteristicas.png" alt="Seleccionar especie" class="w-5 h-5 mr-2 ml-5">
-              <span>Seleccionar</span>
+              <span>Seleccionar especie</span>
             </a>
             <a [href]="'/modificar-especie/' + userId" class="flex items-center py-2 menu-item">
               <img src="../../../../../assets/icons/editar.png" alt="Modificar especie" class="w-5 h-5 mr-2 ml-5">
-              <span>Modificar</span>
+              <span>Modificar especie</span>
             </a>
           </div>
         </div>
@@ -69,13 +69,13 @@
           <div *ngIf="subMenuVisible === 3" class="ml-10 mt-2">
             <a [href]="'/alertas-recientes/' + userId" class="flex items-center py-2 menu-item">
               <img src="../../../../../assets/icons/configuracion.png" alt="Configuracion De Alertas" class="w-5 h-5 mr-2 ml-5">
-              <span>Configuración de alertas</span>
+              <span>Configuracion De Alertas</span>
             </a>
             <a [href]="'/historial-alertas/' + userId" class="flex items-center py-2 menu-item">
               <img src="../../../../../assets/icons/regulacion.png" alt="Historial de alertas" class="w-5 h-5 mr-2 ml-5">
               <span>Historial de alertas</span>
             </a>
-          </div> 
+          </div>
         </div>
       </nav>
     </div>
@@ -91,7 +91,7 @@
     </button>
 
     <a [href]="'/home/' + userId" class="flex items-center">
-      <img src="assets/icons/Favicon.png" alt="PESCAMAX logo" class="w-8 h-8 mr-2">
+      <img src="../../../../../assets/icons/Logo_pescamax.png" alt="PESCAMAX logo" class="w-8 h-8 mr-2">
       <span class="text-lg font-semibold text-blue-500">PESCA<span class="text-black">MAX</span></span>
     </a>
   </div>

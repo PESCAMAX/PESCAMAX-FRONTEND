@@ -46,24 +46,8 @@ h1 {
     width: 100%;
   }
 
-
-
-  /* estilos titulo */
-  .text-left {
-    text-align: left;
-  }
-  
-  .p-4 {
-    padding: 0; /* 16px */
-  }
-  
-  .text-2xl {
-    font-size: 1.5rem; /* 24px */
-  }
-  
-  .font-bold {
-    font-weight: bold;
-
+  .title {
+    font-size: 1.25rem;
   }
 }
 
