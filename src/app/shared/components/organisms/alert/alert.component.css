@@ -1,12 +1,21 @@
-/* src/app/shared/components/molecules/alertas/alertas.component.css */
-
-.alert {
+.alert-container {
   padding: 1rem;
   margin-bottom: 1rem;
   border-radius: 0.5rem;
-  z-index: 1100; /* Ajuste del z-index para estar por encima de otros elementos */
+  z-index: 1100;
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  max-width: 400px;
+  background-color: #fff; /* Añadir un fondo blanco para mejor visibilidad */
 }
 
+.alert-content {
+  display: flex;
+  align-items: center;
+}
+
+/* Clases para diferentes tipos de alertas */
 .danger {
   @apply text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-red-50 dark:text-red-400 dark:border-red-800;
 }
@@ -19,9 +28,31 @@
   @apply text-blue-800 border border-blue-300 rounded-lg bg-blue-50 dark:bg-blue-50 dark:text-blue-400 dark:border-blue-800;
 }
 
-.fixed-alert {
-  position: fixed;
-  top: 1rem; /* Ajusta la distancia desde la parte superior */
-  right: 1rem; /* Ajusta la distancia desde la parte derecha */
-  z-index: 1100; /* Ajuste del z-index para estar por encima de otros elementos */
+/* Media Queries para pantallas pequeñas */
+@media (max-width: 768px) {
+  .alert-container {
+    right: 50%;
+    transform: translateX(50%); /* Centra horizontalmente la alerta */
+    top: 1rem;
+    width: 60%; /* Asegura que la alerta ocupe el 90% de la pantalla en móviles */
+    max-width: none; /* Anula el max-width para que pueda usar el ancho completo disponible */
+    padding: 0.5rem;
+  }
+
+  .alert-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .alert-content img {
+    margin-bottom: 0.5rem;
+  }
+
+  .alert-content h3 {
+    font-size: 1rem;
+  }
+
+  .alert-content div.text-sm {
+    font-size: 0.875rem;
+  }
 }

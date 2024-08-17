@@ -1,12 +1,10 @@
 <div class="container" id="container">
   <!-- Formulario de Registro -->
-  <div class="form-container sign-up-container">
+  <div class="form-container sign-up-container" id="signUpContainer">
     <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
       <h1>Crear Cuenta</h1>
       <div class="social-container">
-        <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
         <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-        <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
       </div>
       <span>usa tu email para registrarte</span>
       <app-inputs-form formControlName="UserName" placeholder="Nombre"></app-inputs-form>
@@ -17,14 +15,12 @@
   </div>
 
   <!-- Formulario de Inicio de Sesión -->
-  <div class="form-container sign-in-container">
+  <div class="form-container sign-in-container" id="signInContainer">
     <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
       <h1>Iniciar sesión</h1>
       <app-alert-form [successMessage]="successMessage" [errorMessage]="errorMessage"></app-alert-form>
       <div class="social-container">
-        <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
         <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-        <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
       </div>
       <span>usa tu cuenta</span>
       <app-inputs-form formControlName="username" placeholder="Usuario"></app-inputs-form>
@@ -38,16 +34,23 @@
   <div class="overlay-container" id="overlayCon">
     <div class="overlay">
       <div class="overlay-panel overlay-left">
-        <h1>Bienvenido de nuevo a <span class="text-lg font-semibold text-blue-500">PESCA<span class="text-black text-lg font-semibold">MAX</span></span></h1>
+        <h1>Bienvenido de nuevo a <span class="text-lg font-semibold text-white-500">PESCA<span class="text-black text-lg font-semibold">MAX</span></span></h1>
         <p>Para mantenerte conectado con nosotros, por favor inicia sesión con tu información personal</p>
         <button class="ghost" id="signIn" (click)="showSignIn()">Iniciar Sesión</button>
       </div>
       <div class="overlay-panel overlay-right">
-        <h1>Bienvenido  a <span class="text-lg font-semibold text-blue-500">PESCA<span class="text-black text-lg font-semibold">MAX</span></span></h1>
+        <h1>Bienvenido a <span class="text-lg font-semibold text-white-500">PESCA<span class="text-black text-lg font-semibold">MAX</span></span></h1>
         <p>Ingresa tus datos personales y comienza tu viaje con nosotros</p>
         <button class="ghost" id="signUp" (click)="showSignUp()">Registrarse</button>
       </div>
     </div>
-    <button id="overlayBtn" style="display: none;"><span>Click!</span></button>
+  </div>
+
+  <div class="overlay-container-mobile" id="overlayContainerMobile" style="display: none;">
+    <div class="overlay-panel-mobile">
+      <h1>Bienvenido a <span>PESCA<span>MAX</span></span></h1>
+      <p>Ingresa tus datos personales y comienza tu viaje con nosotros</p>
+      <button class="ghost" id="mobileToggle">Registrarse</button>
+    </div>
   </div>
 </div>
