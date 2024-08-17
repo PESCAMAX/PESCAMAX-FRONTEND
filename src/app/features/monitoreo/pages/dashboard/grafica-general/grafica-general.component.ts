@@ -5,6 +5,14 @@ import { GlobalAlertService } from '../../../services/alerta-global/global-alert
 import { interval, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
+interface MonitoreoItem {
+  title: string;
+  loteId: number;
+  fecha: string;
+  descripcion: string;
+  showDetails: boolean;
+}
+
 @Component({
   selector: 'app-grafica-general',
   templateUrl: './grafica-general.component.html',
@@ -38,6 +46,9 @@ export class GraficaGeneralComponent implements OnInit, OnDestroy {
   phStatus: 'good' | 'bad' | 'unassigned' = 'unassigned';
 
   private especies: Especie[] = [];
+
+  // Nueva propiedad para los items de monitoreo
+  monitoreoItems: MonitoreoItem[] = [];
 
   constructor(
     private apiService: ApiService,
@@ -81,6 +92,7 @@ export class GraficaGeneralComponent implements OnInit, OnDestroy {
         this.monitoreoData = response.response;
         this.filtrarDatos(this.selectedLote);
         this.calcularTendencias();
+        this.actualizarMonitoreoItems();
         this.cdr.detectChanges();
       },
       error => console.error('Error al actualizar datos:', error)
@@ -94,6 +106,7 @@ export class GraficaGeneralComponent implements OnInit, OnDestroy {
         this.monitoreoData = response.response;
         this.monitoreoDataFiltrada = [...this.monitoreoData];
         this.calcularTendencias();
+        this.actualizarMonitoreoItems();
         this.isLoading = false;
         this.cdr.detectChanges();
       },
@@ -148,7 +161,7 @@ export class GraficaGeneralComponent implements OnInit, OnDestroy {
     this.phValue = ultimo.PH;
     this.ultimoRegistroHora = new Date(ultimo.FechaHora).toLocaleTimeString();
     this.penultimoRegistroHora = new Date(penultimo.FechaHora).toLocaleTimeString();
-    
+
     this.lote = ultimo.LoteID;
 
     this.calcularEstados();
@@ -190,28 +203,28 @@ export class GraficaGeneralComponent implements OnInit, OnDestroy {
       this.resetearEstados();
       return;
     }
-  
+
     const ultimoMonitoreo = this.monitoreoDataFiltrada[this.monitoreoDataFiltrada.length - 1];
-    
-    // Buscar la alerta correspondiente al último monitoreo
+
     const alertaCorrespondiente = this.alertas.find(alerta => alerta.LoteID === ultimoMonitoreo.LoteID);
-  
+
     if (!alertaCorrespondiente) {
       this.resetearEstados();
       return;
     }
-  
+
     const especieAsociada = this.especies.find(e => e.Id === alertaCorrespondiente.EspecieID);
-  
+
     if (!especieAsociada) {
       this.resetearEstados();
       return;
     }
-  
+
     this.temperaturaStatus = this.determinarEstado(ultimoMonitoreo.Temperatura, especieAsociada.TemperaturaMinimo, especieAsociada.TemperaturaMaximo);
     this.tdsStatus = this.determinarEstado(ultimoMonitoreo.tds, especieAsociada.TdsMinimo, especieAsociada.TdsMaximo);
     this.phStatus = this.determinarEstado(ultimoMonitoreo.PH, especieAsociada.PhMinimo, especieAsociada.PhMaximo);
   }
+
   private determinarEstado(valor: number, min: number, max: number): 'good' | 'bad' | 'unassigned' {
     return valor >= min && valor <= max ? 'good' : 'bad';
   }
@@ -225,12 +238,13 @@ export class GraficaGeneralComponent implements OnInit, OnDestroy {
     this.filtrarDatos(lote);
     this.filtrarAlertas(lote);
     this.calcularTendencias();
-    this.calcularEstados();  // Añade esta línea
+    this.calcularEstados();
+    this.actualizarMonitoreoItems();
     this.cdr.detectChanges();
   }
 
   private filtrarDatos(lote: number | null): void {
-    this.monitoreoDataFiltrada = lote === null 
+    this.monitoreoDataFiltrada = lote === null
       ? [...this.monitoreoData]
       : this.monitoreoData.filter(data => data.LoteID === lote);
   }
@@ -239,5 +253,21 @@ export class GraficaGeneralComponent implements OnInit, OnDestroy {
     this.alertasFiltradas = lote === null
       ? [...this.alertas]
       : this.alertas.filter(alerta => alerta.LoteID === lote);
+  }
+
+  // Nuevo método para actualizar los items de monitoreo
+  private actualizarMonitoreoItems(): void {
+    this.monitoreoItems = this.monitoreoDataFiltrada.map(monitoreo => ({
+      title: 'trucha', // Asumiendo que todos son truchas, ajusta según necesites
+      loteId: monitoreo.LoteID,
+      fecha: new Date(monitoreo.FechaHora).toLocaleString(),
+      descripcion: `TDS: ${monitoreo.tds}, Temperatura: ${monitoreo.Temperatura}, pH: ${monitoreo.PH}`,
+      showDetails: false
+    }));
+  }
+
+  // Nuevo método para alternar la visibilidad de los detalles
+  toggleDetails(index: number): void {
+    this.monitoreoItems[index].showDetails = !this.monitoreoItems[index].showDetails;
   }
 }
