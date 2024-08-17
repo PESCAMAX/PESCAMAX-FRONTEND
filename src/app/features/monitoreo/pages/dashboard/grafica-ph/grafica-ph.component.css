@@ -1,121 +1,65 @@
-/* CSS */
-
-/* Estilos generales */
-body, html {
-  margin: 0;
-  padding: 0;
-  overflow: hidden; /* Evitar desplazamiento en toda la página */
-  height: 100%; /* Asegurar que html y body ocupen toda la altura */
-}
-
+/* Estilos para el contenedor principal */
 .main-container {
-  width: 100%;
-  height: 100%; /* Asegurar que el contenedor ocupe toda la altura de la ventana */
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  padding: 1rem;
-  box-sizing: border-box; /* Incluir padding y border en el cálculo del tamaño */
-}
-
-.content {
+  justify-content: flex-start;
+  padding-top: 2rem; /* Espacio adicional en la parte superior */
+  box-sizing: border-box;
   width: 100%;
-  max-width: 1200px;
-  height: 100%; /* Asegurar que el contenido ocupe toda la altura disponible */
-  box-sizing: border-box; /* Incluir padding en el cálculo del tamaño */
-  padding: 1rem;
-  display: flex;
-  flex-direction: column; /* Permitir que el contenido y el gráfico se apilen verticalmente */
-  justify-content: center; /* Centrar el contenido verticalmente */
+  height: 100%;
 }
 
-/* Título de la gráfica */
-.title {
-  text-align: center;
+/* Estilos para el título de la gráfica */
+.graph-title {
+  font-size: 2rem; /* Tamaño más grande del título */
   font-weight: bold;
-  color: #007bff;
-  margin-bottom: 1rem;
-  font-family: Arial, sans-serif;
-  font-size: 4vw; /* Tamaño adaptativo */
+  color: #1f12d7;
+  text-align: right;
+  margin-bottom: 1rem; /* Espacio debajo del título */
 }
 
-/* Contenedor de la gráfica */
-.graph-container {
-  width: 100%;
-  height: 60%; /* Ajustar altura en relación con el contenedor padre */
+/* Estilos para la gráfica y el contenedor de cards */
+.graph-and-card-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 
-/* Estilos para el menú lateral */
-app-menu-lateral {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 2;
+/* Estilos para la gráfica */
+.graph-container {
+  width: 75%; /* Ajustar la anchura de la gráfica */
+  height: auto;
 }
 
-/* Media Queries */
-@media (max-width: 640px) { /* Móviles pequeños */
-  .title {
-      font-size: 5vw; /* Ajuste adaptativo para pantallas pequeñas */
-  }
-  .graph-container {
-      height: 50%; /* Ajustar altura en relación con el contenedor padre */
-  }
+.title{
+  text-align:  center;
+  color: #1f12d7;
 }
 
-@media (max-width: 768px) { /* Móviles medios */
-  .title {
-      font-size: 4.5vw; /* Ajuste adaptativo para pantallas medianas */
-  }
-  .graph-container {
-      height: 55%; /* Ajustar altura en relación con el contenedor padre */
-  }
+.mm{
+  margin-top: 100px;
 }
 
-@media (max-width: 1024px) { /* Tablets y smartphones grandes */
-  .content {
-      padding: 1.5rem;
+.cards{
+  padding-right:100px ;
+}
+
+/* Media queries para pantallas pequeñas */
+@media (max-width: 720px) {
+  .graph-and-card-container {
+    flex-direction: column;
   }
-  .title {
-      font-size: 4vw;
+
+  .graph-container, .card-container {
+    width: 100%;
   }
-  .graph-container {
-      height: 60%; /* Ajustar altura en relación con el contenedor padre */
+
+  .main-container {
+    padding-top: 1rem; /* Espacio superior más pequeño en móviles */
   }
 }
 
-@media (max-width: 1280px) { /* Laptops y desktops medianos */
-  .content {
-      padding: 2rem;
-  }
-  .title {
-      font-size: 3.5vw;
-  }
-  .graph-container {
-      height: 65%; /* Ajustar altura en relación con el contenedor padre */
-  }
-}
-
-@media (max-width: 1440px) { /* Desktops medianos */
-  .title {
-      font-size: 3vw;
-  }
-  .graph-container {
-      height: 70%; /* Ajustar altura en relación con el contenedor padre */
-  }
-}
-
-@media (max-width: 1920px) { /* Desktops grandes */
-  .content {
-      padding: 2.5rem;
-  }
-  .title {
-      font-size: 2.5vw;
-  }
-  .graph-container {
-      height: 75%; /* Ajustar altura en relación con el contenedor padre */
-  }
-}
