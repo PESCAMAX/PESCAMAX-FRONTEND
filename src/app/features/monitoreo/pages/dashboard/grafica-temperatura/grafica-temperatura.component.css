@@ -51,9 +51,22 @@
   }
 }
 
+  /* estilos titulo */
+  .text-left {
+    text-align: left;
+  }
+  
+  .p-4 {
+    padding: 0; /* 16px */
+  }
+  
+  .text-2xl {
+    font-size: 1.5rem; /* 24px */
+
 @media (min-width: 641px) and (max-width: 768px) {
   .container {
     padding: 1.5rem;
+
   }
   .content-title {
     font-size: 1.5rem;

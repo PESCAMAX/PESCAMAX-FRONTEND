@@ -1,9 +1,11 @@
 <app-menu-lateral (menuToggled)="onMenuToggle($event)"></app-menu-lateral>
+
 <div class="container">
   <div class="content-wrapper" [ngClass]="{'menu-open': isMenuOpen, 'menu-closed': !isMenuOpen}">
-    <h1 class="content-title text-center p-4 text-2xl font-bold custom-font custom-color">Gráfica de pH</h1>
+    <h1 class="text-left p-4 text-2xl font-bold custom-font custom-color">Gráfica de ph</h1>
     <div class="graph-container">
       <app-graph-ph></app-graph-ph>
     </div>
   </div>
 </div>
+
