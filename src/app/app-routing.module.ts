@@ -62,9 +62,7 @@ const routes: Routes = [
     component: ModificarEspecieComponent, 
     canActivate: [AuthGuard] },
 
-  { path: 'seleccionar-especie/:userId',
-   component: SeleccionarEspecieComponent, 
-   canActivate: [AuthGuard] },
+  { path: 'seleccionar-especie/:userId', component: SeleccionarEspecieComponent, canActivate: [AuthGuard] },
 
   { path: 'temperatura/:userId', component: GraficaTemperaturaComponent, canActivate: [AuthGuard] },
    
