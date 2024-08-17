@@ -29,4 +29,13 @@
       </table>
     </div>
   </div>
+  <div class="md:hidden px-3 py-4">
+    <div *ngFor="let Alertas of alertasFiltradas" class="bg-white rounded-lg shadow-md p-4 mb-4">
+      <h3 class="font-bold text-lg mb-2">{{ Alertas.Nombre }}</h3>
+      <p><strong>Especie ID:</strong> {{ Alertas.EspecieID }}</p>
+      <p><strong>Lote ID:</strong> {{ Alertas.LoteID }}</p>
+      <p><strong>Descripción:</strong> {{ Alertas.Descripcion }}</p>
+      <p><strong>Fecha:</strong> {{ Alertas.FechaCreacion | date:'medium' }}</p>
+    </div>
+  </div>
 </div>

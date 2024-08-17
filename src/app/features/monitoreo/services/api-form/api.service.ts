@@ -83,7 +83,18 @@ export class ApiService {
     obtenerEspeciePorLote(userId: string): Observable<EspecieLoteDTO[]> {
       return this.http.get<EspecieLoteDTO[]>(`${this.baseUrl}/EspecieLote/Obtener/${userId}`);
     }
+
+
+    getCurrentUser(userId: string): Observable<any> {
+      return this.http.get<any>(`${this.baseUrl}/users/${userId}`);
+    }
+  
+    updateUser(user: any): Observable<any> {
+      return this.http.put<any>(`${this.baseUrl}/users/${user.id}`, user);
+    }
   }
+
+  
 
   export interface EspecieLoteDTO {
     LoteId: number;

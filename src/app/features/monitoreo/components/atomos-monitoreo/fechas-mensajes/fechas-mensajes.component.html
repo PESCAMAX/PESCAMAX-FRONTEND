@@ -1,5 +1,6 @@
 <div class="container flex-1 text-gray-900 mx-auto bg-custom-gray">
-  <div class="px-3 py-4 flex justify-center">
+  <!-- Vista de tabla para pantallas medianas y grandes -->
+  <div class="hidden md:block px-3 py-4 flex justify-center">
     <div class="table-container">
       <table class="w-full text-md bg-white shadow-md rounded mb-4">
         <thead>
@@ -21,6 +22,24 @@
       </table>
     </div>
   </div>
+
+  <!-- Vista de tarjetas para dispositivos móviles -->
+  <div class="table-container">
+  <div class="md:hidden px-3 py-4">
+    <div *ngFor="let alerta of alertasFiltradas; let i = index" class="bg-white rounded-lg shadow-md p-4 mb-4">
+      <p><strong>Lote ID:</strong> {{ alerta.LoteID }}</p>
+      <p><strong>Fecha:</strong> {{ alerta.FechaCreacion | date:'medium' }}</p>
+      <div *ngIf="alerta.showDetails" class="mt-2">
+        <p><strong>Nombre Especie:</strong> {{ alerta.Nombre }}</p>
+        <p><strong>Descripción:</strong> {{ alerta.Descripcion }}</p>
+      </div>
+      <div class="mt-2 text-center">
+        <a *ngIf="!alerta.showDetails" href="#" class="text-blue-500" (click)="toggleDetails(i, $event)">Ver más</a>
+        <a *ngIf="alerta.showDetails" href="#" class="text-blue-500" (click)="toggleDetails(i, $event)">Ver menos</a>
+      </div>
+    </div>
+  </div>
+</div>
   <div *ngIf="mensajeAlerta" class="text-center text-red-500 mt-4">
     {{ mensajeAlerta }}
   </div>

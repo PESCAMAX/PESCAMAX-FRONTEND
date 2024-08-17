@@ -63,7 +63,7 @@ export class TablaSeleccionarComponent implements OnInit, OnDestroy {
       error: (error) => console.error('Error al cargar especies por lote:', error)
     });
   }
-
+  
   loadData() {
     // Load especies
     this.apiService.listarEspecies(this.userId).subscribe({
