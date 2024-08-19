@@ -2,20 +2,29 @@
 .bg-smoke-light {
   background-color: rgba(0, 0, 0, 0.4);
 }
-
 .fixed {
   position: fixed;
 }
-
 .inset-0 {
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
 }
-
 .z-50 {
   z-index: 50;
+}
+
+/* Nuevos estilos para el scroll */
+
+.overflow-y-auto {
+  overflow-y: auto;
+}
+.sticky {
+  position: sticky;
+}
+.top-0 {
+  top: 0;
 }
 
 /* Estilos responsivos */
@@ -44,11 +53,9 @@
   .table-row {
     display: table-row;
   }
-  
   .table-cell {
     width: 8.33%; /* 1/12 */
   }
-  
   .modal {
     padding: 2rem;
   }
