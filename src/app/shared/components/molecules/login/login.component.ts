@@ -24,14 +24,16 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.loginForm = this.fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
-    });
-
-    this.registerForm = this.fb.group({
-      UserName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
+    });
+  
+
+    this.registerForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      PhoneNumber: ['', Validators.required], // Añadido desde el segundo componente
+      Address: ['', Validators.required], // Añadido desde el segundo componente
+      FarmName: ['', Validators.required] // Añadido desde el segundo componente
     });
 
     this.checkScreenSize();
@@ -40,6 +42,18 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.initializeOverlayToggle();
+
+    const container = document.getElementById('container');
+    const overlayBtn = document.getElementById('overlayBtn');
+    if (overlayBtn) {
+      overlayBtn.addEventListener('click', () => {
+        container?.classList.toggle('right-panel-active');
+        overlayBtn.classList.remove('btnScaled');
+        window.requestAnimationFrame(() => {
+          overlayBtn.classList.add('btnScaled');
+        });
+      });
+    }
   }
 
   initializeOverlayToggle() {
@@ -48,47 +62,67 @@ export class LoginComponent implements OnInit, AfterViewInit {
     const mobileToggle = document.getElementById('mobileToggle') as HTMLElement;
     const signUpButton = document.getElementById('signUp') as HTMLElement;
     const signInButton = document.getElementById('signIn') as HTMLElement;
-    
+
     if (mobileToggle) {
       mobileToggle.addEventListener('click', () => this.toggleMobileForm());
     }
-    
+
     if (signUpButton) {
       signUpButton.addEventListener('click', () => this.showSignUp());
     }
-    
+
     if (signInButton) {
       signInButton.addEventListener('click', () => this.showSignIn());
     }
   }
   onLogin() {
     if (this.loginForm.valid) {
-      this.authService.login(this.loginForm.value).subscribe({
-        next: (response) => {
-          this.showTemporaryMessage('Inicio de sesión exitoso', false);
-          this.router.navigate(['/home', response.userId]);
-        },
-        error: (error) => {
-          this.handleError(error, 'Error en el inicio de sesión');
-        }
-      });
+        this.authService.login(this.loginForm.value).subscribe(
+            (response) => {
+                if (response.success) {
+                    const userId = this.authService.getUserId();
+                    if (response.RequirePasswordChange) {
+                      this.router.navigate(['/change-password', response.userId]);
+                    } else {
+                        this.router.navigate(['/home']);
+                    }
+                } else {
+                    this.errorMessage = response.message || 'Error en el inicio de sesión';
+                }
+            },
+            (error) => {
+                this.errorMessage = error.message || 'Ocurrió un error durante el inicio de sesión';
+            }
+        );
     } else {
-      this.showTemporaryMessage('Por favor, complete todos los campos requeridos', true);
+        this.errorMessage = 'Por favor, complete todos los campos correctamente';
     }
-  }
+}
+
+
 
   onRegister() {
     if (this.registerForm.valid) {
+      console.log('Registrando usuario:', this.registerForm.value);
       this.authService.register(this.registerForm.value).subscribe({
         next: (response) => {
+          console.log('Registro exitoso', response);
           this.showTemporaryMessage('Registro exitoso. Por favor, inicie sesión.', false);
-          this.showSignIn();
+          this.showSignIn(); // Cambiar al formulario de inicio de sesión
         },
         error: (error) => {
-          this.handleError(error, 'Error en el registro');
+          console.error('Error en el registro', error);
+          let errorMsg = 'Error en el registro';
+          if (error.error instanceof ErrorEvent) {
+            errorMsg = `Error: ${error.error.message}`;
+          } else {
+            errorMsg = `Código de Error: ${error.status}\nMensaje: ${error.message}`;
+          }
+          this.showTemporaryMessage(errorMsg, true);
         }
       });
     } else {
+      console.log('El formulario de registro es inválido', this.registerForm.errors);
       this.showTemporaryMessage('Por favor, complete todos los campos requeridos correctamente', true);
     }
   }
@@ -107,61 +141,20 @@ export class LoginComponent implements OnInit, AfterViewInit {
     }, duration);
   }
 
-  private handleError(error: any, defaultMessage: string) {
-    let errorMsg = defaultMessage;
-    if (error.error instanceof ErrorEvent) {
-      errorMsg = `Error: ${error.error.message}`;
-    } else {
-      errorMsg = `Código de Error: ${error.status}\nMensaje: ${error.message}`;
-    }
-    this.showTemporaryMessage(errorMsg, true);
-  }
-
   showSignIn() {
-    const container = document.getElementById('container') as HTMLElement;
-    if (container) {
-      container.classList.remove('right-panel-active');
-    }
-    
-    const signUpContainer = document.getElementById('signUpContainer') as HTMLElement;
-    const signInContainer = document.getElementById('signInContainer') as HTMLElement;
-    const overlayContainerMobile = document.getElementById('overlayContainerMobile') as HTMLElement;
-  
-    if (signUpContainer && signInContainer) {
-      signUpContainer.style.display = 'none';
-      signInContainer.style.display = 'block';
-    }
-  
-    if (overlayContainerMobile) {
-      overlayContainerMobile.style.display = this.isMobileView ? 'block' : 'none';
-    }
+    const container = document.getElementById('container');
+    container?.classList.remove('right-panel-active');
   }
 
   showSignUp() {
-    const container = document.getElementById('container') as HTMLElement;
-    if (container) {
-      container.classList.add('right-panel-active');
-    }
-    
-    const signUpContainer = document.getElementById('signUpContainer') as HTMLElement;
-    const signInContainer = document.getElementById('signInContainer') as HTMLElement;
-    const overlayContainerMobile = document.getElementById('overlayContainerMobile') as HTMLElement;
-  
-    if (signUpContainer && signInContainer) {
-      signUpContainer.style.display = 'block';
-      signInContainer.style.display = 'none';
-    }
-  
-    if (overlayContainerMobile) {
-      overlayContainerMobile.style.display = this.isMobileView ? 'block' : 'none';
-    }
+    const container = document.getElementById('container');
+    container?.classList.add('right-panel-active');
   }
-  
 
   updateMobileFormsDisplay(formToShow: 'sign-in' | 'sign-up') {
     const signUpContainer = document.querySelector('.sign-up-container') as HTMLElement;
     const signInContainer = document.querySelector('.sign-in-container') as HTMLElement;
-  
+
     if (this.isMobileView) {
       if (formToShow === 'sign-up') {
         signUpContainer.style.display = 'block';
@@ -190,19 +183,29 @@ export class LoginComponent implements OnInit, AfterViewInit {
       overlayContainerMobile.style.display = this.isMobileView ? 'block' : 'none';
     }
   }
+   private handleError(error: any, defaultMessage: string) {
+    let errorMsg = defaultMessage;
+    if (error.error instanceof ErrorEvent) {
+      errorMsg = `Error: ${error.error.message}`;
+    } else {
+      errorMsg = `Código de Error: ${error.status}\nMensaje: ${error.message}`;
+    }
+    this.showTemporaryMessage(errorMsg, true);
+  }
+
 
   toggleMobileForm() {
     const signUpContainer = document.getElementById('signUpContainer') as HTMLElement;
     const signInContainer = document.getElementById('signInContainer') as HTMLElement;
 
     if (signUpContainer && signInContainer) {
-        if (signUpContainer.style.display === 'none' || signUpContainer.style.display === '') {
-            signUpContainer.style.display = 'block';
-            signInContainer.style.display = 'none';
-        } else {
-            signUpContainer.style.display = 'none';
-            signInContainer.style.display = 'block';
-        }
+      if (signUpContainer.style.display === 'none' || signUpContainer.style.display === '') {
+        signUpContainer.style.display = 'block';
+        signInContainer.style.display = 'none';
+      } else {
+        signUpContainer.style.display = 'none';
+        signInContainer.style.display = 'block';
+      }
     }
-}
+  }
 }

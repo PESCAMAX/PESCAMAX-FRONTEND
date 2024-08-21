@@ -33,7 +33,8 @@ import { GlobalAlertComponent } from './components/atomos-monitoreo/global-alert
           ButtonHorarioAlertasComponent,
           FechasMensajesComponent,
           GraficaBarrasComponent,
-          GlobalAlertComponent,
+          GlobalAlertComponent
+          
           
 
 

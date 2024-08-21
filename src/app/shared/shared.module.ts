@@ -50,6 +50,9 @@ import { LotesComponent } from '../features/monitoreo/components/atomos-monitore
 import { FechasMensajesComponent } from '../features/monitoreo/components/atomos-monitoreo/fechas-mensajes/fechas-mensajes.component';
 import { GraficaBarrasComponent } from '../features/monitoreo/components/moleculas-monitoreo/grafica-barras/grafica-barras.component';
 import { GlobalAlertComponent } from '../features/monitoreo/components/atomos-monitoreo/global-alert/global-alert.component';
+import { ConfigUserComponent } from '../features/monitoreo/components/moleculas-monitoreo/config-user/config-user.component';
+import { ChangePasswordComponent } from './components/molecules/change-password/change-password.component';
+import { PasswordChangeComponent } from '../features/monitoreo/pages/home/password-change/password-change.component';
 @NgModule({
   declarations: [
     ButtonEnviarComponent,
@@ -93,7 +96,11 @@ import { GlobalAlertComponent } from '../features/monitoreo/components/atomos-mo
     ButtonHorarioAlertasComponent,
     FechasMensajesComponent,
     GraficaBarrasComponent,
-    GlobalAlertComponent
+    GlobalAlertComponent,
+    ConfigUserComponent,
+    ChangePasswordComponent,
+    PasswordChangeComponent
+    
 
 
 
@@ -141,7 +148,12 @@ import { GlobalAlertComponent } from '../features/monitoreo/components/atomos-mo
     LotesComponent,
     FechasMensajesComponent,
     GraficaBarrasComponent,
-    GlobalAlertComponent
+    GlobalAlertComponent,
+    ConfigUserComponent,
+    ChangePasswordComponent,
+    PasswordChangeComponent
+    
+    
 
 
   ]
