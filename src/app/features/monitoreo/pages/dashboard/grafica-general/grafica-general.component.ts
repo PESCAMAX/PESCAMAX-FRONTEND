@@ -4,6 +4,7 @@ import { AuthService } from '../../../../../core/services/api-login/auth.service
 import { GlobalAlertService } from '../../../services/alerta-global/global-alert.service';
 import { interval, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { UltimoDatoService } from '../../../services/servicio-alerta/ultimo-dato.service';
 
 interface MonitoreoItem {
   title: string;
@@ -19,6 +20,8 @@ interface MonitoreoItem {
   styleUrls: ['./grafica-general.component.css']
 })
 export class GraficaGeneralComponent implements OnInit, OnDestroy {
+  private monitoreoSubscription: Subscription | undefined;
+  private userId: string;
   monitoreoData: Monitoreo[] = [];
   monitoreoDataFiltrada: Monitoreo[] = [];
   alertas: Alerta[] = [];
@@ -41,6 +44,8 @@ export class GraficaGeneralComponent implements OnInit, OnDestroy {
   penultimoRegistroHora: string = '';
   lote: number | null = null;
 
+ 
+
   temperaturaStatus: 'good' | 'bad' | 'unassigned' = 'unassigned';
   tdsStatus: 'good' | 'bad' | 'unassigned' = 'unassigned';
   phStatus: 'good' | 'bad' | 'unassigned' = 'unassigned';
@@ -54,8 +59,12 @@ export class GraficaGeneralComponent implements OnInit, OnDestroy {
     private apiService: ApiService,
     private authService: AuthService,
     private cdr: ChangeDetectorRef,
-    public globalAlertService: GlobalAlertService
-  ) {}
+    public globalAlertService: GlobalAlertService,
+    private ultimoDatoService: UltimoDatoService,
+    
+  ) {
+    this.userId = this.authService.getUserId();
+  }
 
   ngOnInit(): void {
     this.cargarDatos();
@@ -63,6 +72,7 @@ export class GraficaGeneralComponent implements OnInit, OnDestroy {
     this.cargarEspecies();
     this.startAutoUpdate();
     this.subscribeToAlerts();
+    this.iniciarMonitoreoAutomatico();
   }
 
   ngOnDestroy(): void {
@@ -72,6 +82,13 @@ export class GraficaGeneralComponent implements OnInit, OnDestroy {
     if (this.alertSubscription) {
       this.alertSubscription.unsubscribe();
     }
+    if (this.monitoreoSubscription) {
+      this.monitoreoSubscription.unsubscribe();
+    }
+  }
+
+  iniciarMonitoreoAutomatico() {
+    this.monitoreoSubscription = this.ultimoDatoService.iniciarMonitoreo(this.userId).subscribe();
   }
 
   subscribeToAlerts(): void {
@@ -236,38 +253,30 @@ export class GraficaGeneralComponent implements OnInit, OnDestroy {
   onLoteChange(lote: number | null): void {
     this.selectedLote = lote;
     this.filtrarDatos(lote);
-    this.filtrarAlertas(lote);
-    this.calcularTendencias();
-    this.calcularEstados();
-    this.actualizarMonitoreoItems();
-    this.cdr.detectChanges();
   }
 
   private filtrarDatos(lote: number | null): void {
-    this.monitoreoDataFiltrada = lote === null
-      ? [...this.monitoreoData]
-      : this.monitoreoData.filter(data => data.LoteID === lote);
+    if (lote === null) {
+      this.monitoreoDataFiltrada = [...this.monitoreoData];
+      this.alertasFiltradas = [...this.alertas];
+    } else {
+      this.monitoreoDataFiltrada = this.monitoreoData.filter(item => item.LoteID === lote);
+      this.alertasFiltradas = this.alertas.filter(alerta => alerta.LoteID === lote);
+    }
   }
 
-  private filtrarAlertas(lote: number | null): void {
-    this.alertasFiltradas = lote === null
-      ? [...this.alertas]
-      : this.alertas.filter(alerta => alerta.LoteID === lote);
-  }
-
-  // Nuevo método para actualizar los items de monitoreo
   private actualizarMonitoreoItems(): void {
-    this.monitoreoItems = this.monitoreoDataFiltrada.map(monitoreo => ({
-      title: 'trucha', // Asumiendo que todos son truchas, ajusta según necesites
-      loteId: monitoreo.LoteID,
-      fecha: new Date(monitoreo.FechaHora).toLocaleString(),
-      descripcion: `TDS: ${monitoreo.tds}, Temperatura: ${monitoreo.Temperatura}, pH: ${monitoreo.PH}`,
+    this.monitoreoItems = this.monitoreoDataFiltrada.map(item => ({
+      title: `Lote ${item.LoteID}`,
+      loteId: item.LoteID,
+      fecha: new Date(item.FechaHora).toLocaleString(),  // Convertir Date a string
+      descripcion: `Temperatura: ${item.Temperatura}°C, TDS: ${item.tds}, pH: ${item.PH}`,
       showDetails: false
     }));
-  }
+}
 
-  // Nuevo método para alternar la visibilidad de los detalles
-  toggleDetails(index: number): void {
-    this.monitoreoItems[index].showDetails = !this.monitoreoItems[index].showDetails;
+
+  toggleDetails(item: MonitoreoItem): void {
+    item.showDetails = !item.showDetails;
   }
 }

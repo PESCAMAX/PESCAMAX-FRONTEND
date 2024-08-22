@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TablaSeleccionarComponent } from './tabla-seleccionar.component';
-import { ApiService } from '../../../../features/monitoreo/services/api-form/api.service';
+import { ApiService } from '../../../services/api-form/api.service';
 
 describe('TablaSeleccionarComponent', () => {
   let component: TablaSeleccionarComponent;

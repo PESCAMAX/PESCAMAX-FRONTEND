@@ -1,13 +1,11 @@
 <div class="flex">
-    <!-- Menu Lateral -->
-    <app-menu-lateral (menuToggled)="onMenuToggle($event)"></app-menu-lateral>
-    </div>
+  <!-- Menu Lateral -->
+  <app-menu-lateral (menuToggled)="onMenuToggle($event)"></app-menu-lateral>
+</div>
 
-    <!-- Contenido Principal -->
-    <div class="flex-1 p-4 transition-all duration-300" [ngClass]="{'ml-64': isMenuOpen, 'ml-': !isMenuOpen}">
-      <app-card-alerts></app-card-alerts>
-    </div>
+<!-- Contenido Principal -->
+<div class="flex-1 p-4 transition-all duration-300" [ngClass]="{'ml-64': isMenuOpen, 'ml-': !isMenuOpen}">
+  <app-global-alert></app-global-alert>
 
-
-
-    
+  <app-card-alerts></app-card-alerts>
+</div>

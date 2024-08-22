@@ -1,17 +1,16 @@
- 
-  
-  <!-- Table for medium and large screens -->
-  <div class="px-3 py-1 flex items-center hidden sm:block">
+<!-- Table for medium and large screens -->
+<div class="px-3 py-1 flex items-center hidden sm:block">
+  <div class="max-h-[500px] overflow-y-auto">
     <table class="w-full text-md bg-white shadow-md rounded mb-4">
       <thead>
         <tr class="bg-gray-200 border-b">
-          <th class="text-left p-3 px-5">Nombre</th>
-          <th class="text-left p-3 px-5">Lote</th>
-          <th></th>
+          <th class="text-left p-3 px-5 sticky top-0 bg-gray-200">Nombre</th>
+          <th class="text-left p-3 px-5 sticky top-0 bg-gray-200">Lote</th>
+          <th class="sticky top-0 bg-gray-200"></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let especie of especies" class=" bg-white border-b hover:bg-orange-100">
+        <tr *ngFor="let especie of especies" class="bg-white border-b hover:bg-orange-100">
           <td class="p-3 px-5">{{ especie.NombreEspecie }}</td>
           <td class="p-3 px-5">
             <select (change)="onLoteChange($event, especie.Id)" class="bg-transparent">
@@ -32,30 +31,31 @@
       </tbody>
     </table>
   </div>
+</div>
 
-  <!-- Card view for small screens -->
-  <div class="sm:hidden">
-    <div *ngFor="let especie of especies" class="bg-white rounded-lg shadow-md p-4 mb-4">
-      <h3 class="font-bold text-lg mb-2">{{ especie.NombreEspecie }}</h3>
-      <div class="mb-3">
-        <label for="lote-{{ especie.Id }}" class="block text-sm font-medium text-gray-700">Lote</label>
-        <select 
-          id="lote-{{ especie.Id }}"
-          (change)="onLoteChange($event, especie.Id)" 
-          class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
-        >
-          <option value="">Seleccione un lote</option>
-          <option *ngFor="let loteId of uniqueLotes" [value]="loteId" [selected]="especiePorLote[loteId] === especie.Id">
-            {{ loteId }}
-          </option>
-        </select>
-      </div>
-      <div class="mt-4">
-        <app-button-guardar
-          [texto]="'Guardar'"
-          (clickBoton)="guardarSeleccion(especie.Id)"
-          [customClass]="'w-full text-sm py-2 px-4'">
-        </app-button-guardar>
-      </div>
+<!-- Card view for small screens -->
+<div class="sm:hidden">
+  <div *ngFor="let especie of especies" class="bg-white rounded-lg shadow-md p-4 mb-4">
+    <h3 class="font-bold text-lg mb-2">{{ especie.NombreEspecie }}</h3>
+    <div class="mb-3">
+      <label for="lote-{{ especie.Id }}" class="block text-sm font-medium text-gray-700">Lote</label>
+      <select
+        id="lote-{{ especie.Id }}"
+        (change)="onLoteChange($event, especie.Id)"
+        class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+      >
+        <option value="">Seleccione un lote</option>
+        <option *ngFor="let loteId of uniqueLotes" [value]="loteId" [selected]="especiePorLote[loteId] === especie.Id">
+          {{ loteId }}
+        </option>
+      </select>
+    </div>
+    <div class="mt-4">
+      <app-button-guardar
+        [texto]="'Guardar'"
+        (clickBoton)="guardarSeleccion(especie.Id)"
+        [customClass]="'w-full text-sm py-2 px-4'">
+      </app-button-guardar>
     </div>
   </div>
+</div>
