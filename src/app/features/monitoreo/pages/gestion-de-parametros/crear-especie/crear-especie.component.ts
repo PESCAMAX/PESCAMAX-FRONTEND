@@ -21,7 +21,7 @@ export class CrearEspecieComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.iniciarMonitoreoAutomatico();
+    this.iniciarMonitoreoAutomatico();//falta
   }
 
   ngOnDestroy() {
