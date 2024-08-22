@@ -53,6 +53,8 @@ import { GlobalAlertComponent } from '../features/monitoreo/components/atomos-mo
 import { ConfigUserComponent } from '../features/monitoreo/components/moleculas-monitoreo/config-user/config-user.component';
 import { ChangePasswordComponent } from './components/molecules/change-password/change-password.component';
 import { PasswordChangeComponent } from '../features/monitoreo/pages/home/password-change/password-change.component';
+import { GlobalAlertaComponent } from '../features/monitoreo/components/moleculas-monitoreo/global-alerta/global-alerta.component';
+
 @NgModule({
   declarations: [
     ButtonEnviarComponent,
@@ -99,8 +101,9 @@ import { PasswordChangeComponent } from '../features/monitoreo/pages/home/passwo
     GlobalAlertComponent,
     ConfigUserComponent,
     ChangePasswordComponent,
-    PasswordChangeComponent
-    
+    PasswordChangeComponent,
+    GlobalAlertaComponent
+
 
 
 
@@ -151,9 +154,8 @@ import { PasswordChangeComponent } from '../features/monitoreo/pages/home/passwo
     GlobalAlertComponent,
     ConfigUserComponent,
     ChangePasswordComponent,
-    PasswordChangeComponent
-    
-    
+    PasswordChangeComponent,
+    GlobalAlertaComponent
 
 
   ]

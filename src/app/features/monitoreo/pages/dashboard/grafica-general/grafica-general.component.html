@@ -1,15 +1,17 @@
 <app-menu-lateral (menuToggled)="onMenuToggle($event)"></app-menu-lateral>
 <div class="flex flex-col w-full h-full">
-  <div class="flex-1 p-4 transition-all duration-300" [ngClass]="{'ml-64': isMenuOpen, 'ml-': !isMenuOpen}">
-    <h1 class="text-center p-4 text-2xl font-bold custom-font custom-color">Control De monitoreo</h1>
-    <div *ngIf="(globalAlertService.alert$ | async) as alertMessage" class="alert alert-danger">
-      {{ alertMessage }}
-    </div>
+  <!-- Contenedor de la alerta -->
+  <div class="alert-container">
+    <app-global-alerta></app-global-alerta>
+  </div>
 
+  <div class="flex-1 p-4 transition-all duration-300" [ngClass]="{'ml-64': isMenuOpen, 'ml-': !isMenuOpen}">
+    <h1 class="text-center p-4 text-2xl font-bold custom-font custom-color">Control De Monitoreo</h1>
+   
+    <!-- Selección de Lote -->
     <div class="mb-4 shadow-md">
       <app-lotes [monitoreoData]="monitoreoData" (loteSeleccionado)="onLoteChange($event)"></app-lotes>
     </div>
-
     <div class="flex flex-wrap mt-4">
       <!-- Columna izquierda: Cards (35%) -->
       <div class="w-full lg:w-[35%] pr-0 lg:pr-4 mb-4 lg:mb-0">
@@ -22,7 +24,7 @@
             [trendValue]="temperaturaTrendValue"
             [status]="temperaturaStatus"
             [isTimeCard]="false">
-        </app-cards-info>
+          </app-cards-info>
           <app-cards-info
             title="TDS"
             [value]="tdsValue"
@@ -40,7 +42,7 @@
             [isTimeCard]="false">
           </app-cards-info>
           <app-cards-info
-            title="ULTIMO REGISTRO"
+            title="ÚLTIMO REGISTRO"
             [value]="ultimoRegistroHora"
             [trendValue]="penultimoRegistroHora"
             [status]="'unassigned'"
@@ -48,7 +50,7 @@
           </app-cards-info>
         </div>
       </div>
-
+     
       <!-- Columna derecha: Gráfica General (65%) -->
       <div class="w-full lg:w-[65%]">
         <div class="mb-8">
@@ -57,16 +59,13 @@
         </div>
       </div>
     </div>
-
     <!-- Gráfica de Barras (debajo de las dos columnas) -->
     <div class="mt-8 lg:w-[65%] flex-wrap ">
-
     </div>
-
+    <!-- Historial De Alertas -->
     <div class="mt-8">
       <h2 class="text-xl font-semibold text-gray-800 mb-2">Historial De Alertas</h2>
       <app-fechas-mensajes [alertasFiltradas]="alertasFiltradas"></app-fechas-mensajes>
     </div>
   </div>
 </div>
-
