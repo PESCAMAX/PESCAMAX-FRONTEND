@@ -23,15 +23,15 @@ export class AuthService {
           localStorage.setItem('token', response.Token);
           localStorage.setItem('userId', response.UserId);
           this.requirePasswordChangeSubject.next(response.RequirePasswordChange);
-      
           if (response.RequirePasswordChange) {
-            if (response.userId) {
-              this.router.navigate(['/change-password', response.userId]);
+            if (response.UserId) {  // Asegúrate de usar "UserId" si ese es el nombre en el backend
+              this.router.navigate(['/change-password', response.UserId]);
             } else {
               console.error('El userId es undefined');
-            }            
+            }
+          } else {
             this.router.navigate(['/crear-especie', response.UserId]);
-          }
+          }                 
         } else {
           throw new Error('No se recibió la información de autenticación esperada');
         }
@@ -42,11 +42,11 @@ export class AuthService {
   }
 
   changePassword(currentPassword: string, newPassword: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/change-password`, { currentPassword, newPassword }).pipe(
+    const userId = this.getUserId();
+    return this.http.post<any>(`${this.apiUrl}/change-password`, { userId, currentPassword, newPassword }).pipe(
       tap(response => {
         if (response.success) {
-          this.requirePasswordChangeSubject.next(false);
-          this.router.navigate(['/dashboard']);
+          this.setRequirePasswordChange(false);
         }
       }),
       catchError(this.handleError)

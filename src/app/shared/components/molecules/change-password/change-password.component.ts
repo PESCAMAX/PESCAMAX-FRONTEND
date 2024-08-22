@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthService } from '../../../../core/services/api-login/auth.service';
 
 @Component({
@@ -10,15 +10,13 @@ import { AuthService } from '../../../../core/services/api-login/auth.service';
 })
 export class ChangePasswordComponent implements OnInit {
   changePasswordForm: FormGroup;
-  userId!: string;
   errorMessage: string = '';
   successMessage: string = '';
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router,
-    private route: ActivatedRoute
+    private router: Router
   ) {
     this.changePasswordForm = this.fb.group({
       currentPassword: ['', Validators.required],
@@ -28,16 +26,13 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userId = this.authService.getUserId();
-    if (!this.userId) {
+    if (!this.authService.isAuthenticated()) {
       this.router.navigate(['/login']);
     }
   }
 
   passwordMatchValidator(g: FormGroup) {
-    const newPassword = g.get('newPassword');
-    const confirmPassword = g.get('confirmPassword');
-    return newPassword && confirmPassword && newPassword.value === confirmPassword.value
+    return g.get('newPassword')?.value === g.get('confirmPassword')?.value
       ? null : { 'mismatch': true };
   }
 
@@ -45,13 +40,21 @@ export class ChangePasswordComponent implements OnInit {
     if (this.changePasswordForm.valid) {
       const { currentPassword, newPassword } = this.changePasswordForm.value;
       this.authService.changePassword(currentPassword, newPassword).subscribe(
-        () => {
+        (response) => {
           this.successMessage = 'Password changed successfully!';
-          this.router.navigate(['/crear-especie', this.userId]);
+          setTimeout(() => {
+            const userId = this.authService.getUserId();
+            if (userId) {
+              this.router.navigate(['/crear-especie', userId]);
+            } else {
+              console.error('User ID not found');
+              this.router.navigate(['/dashboard']); // Navigate to a default route if userId is not available
+            }
+          }, 2000);
         },
         (error) => {
           console.error('Error changing password:', error);
-          this.errorMessage = 'Error changing password. Please try again.';
+          this.errorMessage = error.error?.message || 'Error changing password. Please try again.';
         }
       );
     }
