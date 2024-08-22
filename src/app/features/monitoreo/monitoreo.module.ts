@@ -35,7 +35,8 @@ import { GlobalAlertaComponent } from './components/moleculas-monitoreo/global-a
           FechasMensajesComponent,
           GraficaBarrasComponent,
           GlobalAlertComponent,
-          GlobalAlertaComponent,
+          GlobalAlertaComponent
+
           
 
 

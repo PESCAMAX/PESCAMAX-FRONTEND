@@ -85,21 +85,27 @@ export class ApiService {
     }
 
 
-    getCurrentUser(userId: string): Observable<any> {
-      return this.http.get<any>(`${this.baseUrl}/users/${userId}`);
+    getCurrentUser(): Observable<any> {
+      return this.http.get(`${this.baseUrl}/Users/current`, { headers: this.getHeaders() })
+        .pipe(catchError(this.handleError));
     }
   
     updateUser(user: any): Observable<any> {
-      return this.http.put<any>(`${this.baseUrl}/users/${user.id}`, user);
+      return this.http.put<any>(`${this.baseUrl}/Users/update`, user, { headers: this.getHeaders() })
+        .pipe(catchError(this.handleError));
     }
   }
-
-  
-
   export interface EspecieLoteDTO {
     LoteId: number;
     EspecieId: number;
     NombreEspecie: string;
+  }
+  interface User {
+    username: string;
+    email: string;
+    phoneNumber?: string;
+    address?: string;
+    farmName?: string;
   }
 export interface Monitoreo {
   ID_M: number;

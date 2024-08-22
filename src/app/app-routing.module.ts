@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TablaEspecieComponent } from './features/monitoreo/components/moleculas-monitoreo/tabla-especie/tabla-especie.component';
 import { SeleccionarEspecieComponent } from './features/monitoreo/pages/gestion-de-parametros/seleccionar-especie/seleccionar-especie.component';
@@ -28,6 +28,9 @@ import { RegisterPageComponent } from './features/monitoreo/pages/home/register-
 import { LoginPageComponent } from './features/monitoreo/pages/home/login-page/login-page.component';
 import { RecuperarPageComponent } from './features/monitoreo/pages/home/recuperar-page/recuperar-page.component';
 import { CambiarPageComponent } from './features/monitoreo/pages/home/cambiar-page/cambiar-page.component';
+import { PasswordChangeComponent } from './features/monitoreo/pages/home/password-change/password-change.component';
+import { ConfiguracionUserComponent } from './features/monitoreo/pages/gestion-de-parametros/configuracion-user/configuracion-user.component';
+
 const routes: Routes = [
   {
     path: 'gestion-de-parametros',
@@ -41,13 +44,18 @@ const routes: Routes = [
     path: 'productos',
     component: ProductosComponent
   },
-
+  { path: 'user-config/:userId', component: ConfiguracionUserComponent },
+  
   {
     path: 'data',
     component: DatapickerComponent
   },
 
-
+{
+path: 'change-password/:userId',
+component: PasswordChangeComponent,
+canActivate: [AuthGuard] 
+},
 
   {
     path: 'Inicio',
@@ -56,8 +64,8 @@ const routes: Routes = [
 
   { path: 'crear-especie/:userId', 
     component: CrearEspecieComponent,
-     canActivate: [AuthGuard] },
-
+    canActivate: [AuthGuard] 
+  },
   { path: 'modificar-especie/:userId', 
     component: ModificarEspecieComponent, 
     canActivate: [AuthGuard] },
