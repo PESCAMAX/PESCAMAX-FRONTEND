@@ -95,10 +95,11 @@
       <span class="text-lg font-semibold text-blue-500">PESCA<span class="text-black">MAX</span></span>
     </a>
   </div>
-  <div class="flex items-center">
-    <img src="../../../../../assets/icons/notificacion.png" alt="Notificaciones" class="w-6 h-6 mr-4 cursor-pointer hover:opacity-80 transition-opacity">
-    <img src="../../../../../assets/icons/userr.png" alt="Perfil" class="w-6 h-6 cursor-pointer hover:opacity-80 transition-opacity" (click)="toggleUserMenu()">
-  </div>
+<!-- En tu archivo de menú -->
+<div class="flex items-center">
+  <app-notification></app-notification>
+  <img src="../../../../../assets/icons/userr.png" alt="Perfil" class="w-6 h-6 cursor-pointer hover:opacity-80 transition-opacity" (click)="toggleUserMenu()">
+</div>
 </div>
 
 <!-- Dropdown del menú de usuario -->

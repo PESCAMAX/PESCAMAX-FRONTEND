@@ -1,0 +1,17 @@
+<div class="relative">
+    <img src="../../../../../assets/icons/notificacion.png" alt="Notificaciones" 
+         class="w-6 h-6 mr-4 cursor-pointer hover:opacity-80 transition-opacity"
+         (click)="toggleNotifications()">
+    <span *ngIf="unreadCount > 0" class="absolute top-0 right-0 bg-red-500 text-white rounded-full px-2 text-xs">
+      {{unreadCount}}
+    </span>
+    <div *ngIf="showNotifications" class="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-xl z-10">
+      <div class="p-2 border-b" *ngFor="let notification of notifications">
+        <p class="text-sm">{{notification.message}}</p>
+        <small class="text-gray-500">{{notification.time | date:'short'}}</small>
+      </div>
+      <div *ngIf="notifications.length === 0" class="p-2 text-center text-gray-500">
+        No hay notificaciones
+      </div>
+    </div>
+  </div>
