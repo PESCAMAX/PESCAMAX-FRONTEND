@@ -11,46 +11,46 @@
     />
   </div>
 
-  <!-- Tabla de especies con scroll (visible en pantallas medianas y grandes) -->
-  <div class="overflow-x-auto max-h-[80vh] hidden sm:block custom-scrollbar">
-    <table class="w-full border-collapse bg-gray-500 table-auto">
-      <thead class="bg-white sticky top-0">
-        <tr>
-          <th class="p-2 text-left font-bold border border-grey-500 text-sm">ID</th>
-          <th class="p-2 text-left font-bold border border-grey-500 text-sm">Nombre</th>
-          <th class="p-2 text-left font-bold border border-grey-500 text-sm">TDS Mínimo</th>
-          <th class="p-2 text-left font-bold border border-grey-500 text-sm">TDS Máximo</th>
-          <th class="p-2 text-left font-bold border border-grey-500 text-sm">Temp. Mínima</th>
-          <th class="p-2 text-left font-bold border border-grey-500 text-sm">Temp. Máxima</th>
-          <th class="p-2 text-left font-bold border border-grey-500 text-sm">PH Mínimo</th>
-          <th class="p-2 text-left font-bold border border-grey-500 text-sm">PH Máximo</th>
-          <th class="p-2 text-left font-bold border border-grey-500 text-sm">Eliminar</th>
-          <th class="p-2 text-left font-bold border border-grey-500 text-sm">Editar</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="bg-gray-100 border border-grey-500" *ngFor="let especie of especiesFiltradas">
-          <td class="p-2 border bg-white text-left">{{ especie.Id }}</td>
-          <td class="p-2 border bg-white text-left">{{ especie.NombreEspecie }}</td>
-          <td class="p-2 border bg-white text-left">{{ especie.TdsMinimo }}</td>
-          <td class="p-2 border bg-white text-left">{{ especie.TdsMaximo }}</td>
-          <td class="p-2 border bg-white text-left">{{ especie.TemperaturaMinimo }}</td>
-          <td class="p-2 border bg-white text-left">{{ especie.TemperaturaMaximo }}</td>
-          <td class="p-2 border bg-white text-left">{{ especie.PhMinimo }}</td>
-          <td class="p-2 border bg-white text-left">{{ especie.PhMaximo }}</td>
-          <td class="p-2 border bg-white text-left">
-            <app-button-eliminar [id]="especie.Id" (eliminar)="eliminarEspecie($event)"></app-button-eliminar>
-          </td>
-          <td class="p-2 border bg-white text-left">
-            <button (click)="editarEspecie(especie)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded text-xs flex items-center">
-              <img src="./assets/icons/editar.png" alt="Editar Icono" class="w-4 h-4 mr-1">
-              Editar
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+ <!-- Tabla de especies con scroll (visible en pantallas medianas y grandes) -->
+<div class="overflow-x-auto max-h-[80vh] hidden sm:block custom-scrollbar">
+  <table class="w-full border-collapse bg-gray-500 table-auto">
+    <thead class="bg-white sticky top-0">
+      <tr>
+        <th class="p-2 text-left font-bold border border-grey-500 text-sm">ID</th>
+        <th class="p-2 text-left font-bold border border-grey-500 text-sm">Nombre</th>
+        <th class="p-2 text-left font-bold border border-grey-500 text-sm">TDS Mínimo</th>
+        <th class="p-2 text-left font-bold border border-grey-500 text-sm">TDS Máximo</th>
+        <th class="p-2 text-left font-bold border border-grey-500 text-sm">Temp. Mínima</th>
+        <th class="p-2 text-left font-bold border border-grey-500 text-sm">Temp. Máxima</th>
+        <th class="p-2 text-left font-bold border border-grey-500 text-sm">PH Mínimo</th>
+        <th class="p-2 text-left font-bold border border-grey-500 text-sm">PH Máximo</th>
+        <th class="p-2 text-left font-bold border border-grey-500 text-sm">Eliminar</th>
+        <th class="p-2 text-left font-bold border border-grey-500 text-sm">Editar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="bg-gray-100 border border-grey-500" *ngFor="let especie of especiesFiltradas">
+        <td class="p-2 border bg-white text-left">{{ especie.Id }}</td>
+        <td class="p-2 border bg-white text-left">{{ especie.NombreEspecie }}</td>
+        <td class="p-2 border bg-white text-left">{{ especie.TdsMinimo }}</td>
+        <td class="p-2 border bg-white text-left">{{ especie.TdsMaximo }}</td>
+        <td class="p-2 border bg-white text-left">{{ especie.TemperaturaMinimo }}</td>
+        <td class="p-2 border bg-white text-left">{{ especie.TemperaturaMaximo }}</td>
+        <td class="p-2 border bg-white text-left">{{ especie.PhMinimo }}</td>
+        <td class="p-2 border bg-white text-left">{{ especie.PhMaximo }}</td>
+        <td class="p-2 border bg-white text-left">
+          <app-button-eliminar [id]="especie.Id" (eliminar)="eliminarEspecie($event)"></app-button-eliminar>
+        </td>
+        <td class="p-2 border bg-white text-left">
+          <button (click)="editarEspecie(especie)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded text-xs flex items-center">
+            <img src="./assets/icons/editar.png" alt="Editar Icono" class="w-4 h-4 mr-1">
+            Editar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
   <!-- Vista móvil (visible solo en pantallas pequeñas) -->
   <div class="sm:hidden max-h-[80vh] overflow-y-auto">

@@ -11,7 +11,7 @@ import { CambiarPageComponent } from './cambiar-page/cambiar-page.component';
 import { ForgotPasswordComponent } from '../../../../shared/components/molecules/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from '../../../../shared/components/molecules/reset-password/reset-password.component';
 import { SharedModule } from '../../../../shared/shared.module';
-
+import { PasswordChangeComponent } from './password-change/password-change.component';
 @NgModule({
   declarations: [
     PageNotFoundComponent,
@@ -22,7 +22,8 @@ import { SharedModule } from '../../../../shared/shared.module';
     CambiarPageComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
-    CambiarPageComponent
+    CambiarPageComponent,
+    PasswordChangeComponent
     
   ],
   imports: [
