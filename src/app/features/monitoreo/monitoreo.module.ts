@@ -14,6 +14,7 @@ import { FechasMensajesComponent } from './components/atomos-monitoreo/fechas-me
 import { GraficaBarrasComponent } from './components/moleculas-monitoreo/grafica-barras/grafica-barras.component';
 import { GlobalAlertComponent } from './components/atomos-monitoreo/global-alert/global-alert.component';
 import { GlobalAlertaComponent } from './components/moleculas-monitoreo/global-alerta/global-alerta.component';
+import { NotificationComponent } from './components/moleculas-monitoreo/notification/notification.component';
 
 
 
@@ -35,7 +36,8 @@ import { GlobalAlertaComponent } from './components/moleculas-monitoreo/global-a
           FechasMensajesComponent,
           GraficaBarrasComponent,
           GlobalAlertComponent,
-          GlobalAlertaComponent
+          GlobalAlertaComponent,
+          NotificationComponent
 
           
 
