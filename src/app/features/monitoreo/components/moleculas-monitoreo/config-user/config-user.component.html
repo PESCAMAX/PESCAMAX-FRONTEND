@@ -16,19 +16,31 @@
           <label class="block text-gray-700 text-sm font-bold mb-2" for="phoneNumber">
             Teléfono:
           </label>
-          <input class="w-full px-3 py-2 bg-gray-100 text-gray-700 focus:outline-none focus:ring-2" id="phoneNumber" type="tel" formControlName="phoneNumber" placeholder="Teléfono">
+          <app-inputs-form
+            type="tel"
+            placeholder="Teléfono"
+            formControlName="phoneNumber"
+          ></app-inputs-form>
         </div>
         <div class="mb-4">
           <label class="block text-gray-700 text-sm font-bold mb-2" for="address">
             Dirección:
           </label>
-          <input class="w-full px-3 py-2 bg-gray-100 text-gray-700 focus:outline-none focus:ring-2" id="address" type="text" formControlName="address" placeholder="Dirección">
+          <app-inputs-form
+            type="text"
+            placeholder="Dirección"
+            formControlName="address"
+          ></app-inputs-form>
         </div>
         <div class="mb-6">
           <label class="block text-gray-700 text-sm font-bold mb-2" for="farmName">
             Nombre de la finca:
           </label>
-          <input class="w-full px-3 py-2 bg-gray-100 text-gray-700 focus:outline-none focus:ring-2" id="farmName" type="text" formControlName="farmName" placeholder="Nombre de la finca">
+          <app-inputs-form
+            type="text"
+            placeholder="Nombre de la finca"
+            formControlName="farmName"
+          ></app-inputs-form>
         </div>
         <div class="flex items-center justify-center">
           <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" [disabled]="userForm.invalid">

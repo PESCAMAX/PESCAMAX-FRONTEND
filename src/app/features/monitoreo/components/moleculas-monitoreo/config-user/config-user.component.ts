@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../../services/api-form/api.service';
 import { AlertService } from '../../../services/api-alert/alert.service';
 import { AuthService } from '../../../../../core/services/api-login/auth.service';
+
 @Component({
   selector: 'app-config-user',
   templateUrl: './config-user.component.html',
@@ -32,28 +32,32 @@ export class ConfigUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.userId = this.authService.getUserId();
-    this.loadUserData();
+    if (this.userId) {
+      this.loadUserData();
+    } else {
+      this.errorMessage = 'No se pudo obtener el ID del usuario';
+    }
   }
 
   loadUserData(): void {
     this.apiService.getCurrentUser().subscribe(
       (data: any) => {
+        console.log('Datos recibidos del servidor:', data); // Para depuración
         this.userForm.patchValue({
-          username: data.userName,
-          email: data.email,
-          phoneNumber: data.phoneNumber,
-          address: data.address,
-          farmName: data.farmName
+          username: data.userName || '',
+          email: data.email || '',
+          phoneNumber: data.phoneNumber || '',
+          address: data.address || '',
+          farmName: data.farmName || ''
         });
       },
       (error) => {
         console.error('Error loading user data', error);
         this.errorMessage = 'No se pudo cargar la información del usuario';
+        this.alertService.showAlert('danger', 'Error', this.errorMessage);
       }
     );
-  
   }
-  
 
   updateUserData(): void {
     if (this.userForm.valid) {
@@ -62,18 +66,23 @@ export class ConfigUserComponent implements OnInit {
         (response) => {
           console.log('User data updated successfully', response);
           this.successMessage = 'Datos actualizados correctamente';
-          this.errorMessage = ''; // Limpiar el mensaje de error si lo hubiera
+          this.errorMessage = '';
+          this.alertService.showAlert('info', 'Éxito', this.successMessage);
         },
         (error) => {
           console.error('Error updating user data', error);
           this.errorMessage = 'No se pudieron actualizar los datos';
-          this.successMessage = ''; // Limpiar el mensaje de éxito si lo hubiera
+          this.successMessage = '';
+          this.alertService.showAlert('danger', 'Error', this.errorMessage);
         }
       );
+    } else {
+      this.errorMessage = 'Por favor, complete todos los campos requeridos correctamente';
+      this.alertService.showAlert('warning', 'Advertencia', this.errorMessage);
     }
   }
 
   onMenuToggle(isOpen: boolean) {
-    // Lógica para manejar el menú
+    // Lógica para manejar el menú (si es necesario)
   }
 }
