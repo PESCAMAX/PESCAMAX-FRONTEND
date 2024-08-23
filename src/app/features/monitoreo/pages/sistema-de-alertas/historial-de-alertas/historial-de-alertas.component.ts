@@ -6,7 +6,7 @@ import { AuthService } from '../../../../../core/services/api-login/auth.service
 @Component({
   selector: 'app-historial-de-alertas',
   templateUrl: './historial-de-alertas.component.html',
-  styleUrls: ['./historial-de-alertas.component.css']  // Corregido "styleUrl" a "styleUrls"
+  styleUrls: ['./historial-de-alertas.component.css']
 })
 export class HistorialDeAlertasComponent implements OnInit, OnDestroy {
   isMenuOpen: boolean = true;

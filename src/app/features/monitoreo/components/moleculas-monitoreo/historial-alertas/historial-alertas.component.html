@@ -1,41 +1,26 @@
-<div class="container flex-1 text-gray-900 mx-auto bg-custom-gray">
-  <div class="p-4 flex justify-between items-center">
-    <div class="datepicker-container ml-19">
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Especie ID</th>
+        <th>Nombre Especie</th>
+        <th>Lote ID</th>
+        <th>Descripción</th>
+        <th>Fecha</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let alerta of alertasFiltradas">
+        <td>{{ alerta.EspecieID }}</td>
+        <td>{{ alerta.Nombre }}</td>
+        <td>{{ alerta.LoteID }}</td>
+        <td>{{ alerta.Descripcion }}</td>
+        <td>{{ alerta.FechaCreacion | date:'medium' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-    </div>
-  </div>
-
-  <div class="px-3 py-4 flex justify-center">
-    <div class="table-container">
-      <table class="w-full text-md bg-white shadow-md rounded mb-4">
-        <thead>
-          <tr class="border-b sticky-header">
-            <th class="text-left p-3 px-5">Especie ID</th>
-            <th class="text-left p-3 px-5">Nombre Especie</th>
-            <th class="text-left p-3 px-5">Lote ID</th>
-            <th class="text-left p-3 px-5">Descripción</th>
-            <th class="text-left p-3 px-5">Fecha</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let Alertas of alertasFiltradas" class="border-b hover:bg-orange-100">
-            <td class="p-3 px-5">{{ Alertas.EspecieID }}</td>
-            <td class="p-3 px-5">{{ Alertas.Nombre }}</td>
-            <td class="p-3 px-5">{{ Alertas.LoteID }}</td>
-            <td class="p-3 px-5">{{ Alertas.Descripcion }}</td>
-            <td class="p-3 px-5">{{ Alertas.FechaCreacion | date:'medium' }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <div class="md:hidden px-3 py-4">
-    <div *ngFor="let Alertas of alertasFiltradas" class="bg-white rounded-lg shadow-md p-4 mb-4">
-      <h3 class="font-bold text-lg mb-2">{{ Alertas.Nombre }}</h3>
-      <p><strong>Especie ID:</strong> {{ Alertas.EspecieID }}</p>
-      <p><strong>Lote ID:</strong> {{ Alertas.LoteID }}</p>
-      <p><strong>Descripción:</strong> {{ Alertas.Descripcion }}</p>
-      <p><strong>Fecha:</strong> {{ Alertas.FechaCreacion | date:'medium' }}</p>
-    </div>
-  </div>
+<div *ngIf="mensajeAlerta" class="alert alert-info">
+  {{ mensajeAlerta }}
 </div>
