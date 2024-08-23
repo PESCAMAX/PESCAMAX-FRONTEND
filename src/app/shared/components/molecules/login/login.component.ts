@@ -101,33 +101,33 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
 
 
-  onRegister() {
-    if (this.registerForm.valid) {
-      console.log('Registrando usuario:', this.registerForm.value);
-      this.authService.register(this.registerForm.value).subscribe({
-        next: (response) => {
-          console.log('Registro exitoso', response);
-          this.showTemporaryMessage('Registro exitoso. Por favor, inicie sesión.', false);
-          this.showSignIn(); // Cambiar al formulario de inicio de sesión
-        },
-        error: (error) => {
-          console.error('Error en el registro', error);
-          let errorMsg = 'Error en el registro';
-          if (error.error instanceof ErrorEvent) {
-            errorMsg = `Error: ${error.error.message}`;
-          } else {
-            errorMsg = `Código de Error: ${error.status}\nMensaje: ${error.message}`;
-          }
-          this.showTemporaryMessage(errorMsg, true);
+onRegister() {
+  if (this.registerForm.valid) {
+    console.log('Registrando usuario:', this.registerForm.value);
+    this.authService.register(this.registerForm.value).subscribe({
+      next: (response) => {
+        console.log('Registro exitoso', response);
+        this.showTemporaryMessage('Registro exitoso. Se ha enviado tu contraseña a tu correo electrónico. Por favor, revisa tu bandeja de entrada e inicia sesión.', false, 10000);
+        this.showSignIn(); // Cambiar al formulario de inicio de sesión
+      },
+      error: (error) => {
+        console.error('Error en el registro', error);
+        let errorMsg = 'Error en el registro';
+        if (error.error instanceof ErrorEvent) {
+          errorMsg = `Error: ${error.error.message}`;
+        } else {
+          errorMsg = `Código de Error: ${error.status}\nMensaje: ${error.message}`;
         }
-      });
-    } else {
-      console.log('El formulario de registro es inválido', this.registerForm.errors);
-      this.showTemporaryMessage('Por favor, complete todos los campos requeridos correctamente', true);
-    }
+        this.showTemporaryMessage(errorMsg, true, 10000);
+      }
+    });
+  } else {
+    console.log('El formulario de registro es inválido', this.registerForm.errors);
+    this.showTemporaryMessage('Por favor, complete todos los campos requeridos correctamente', true, 5000);
   }
+}
 
-  private showTemporaryMessage(message: string, isError: boolean, duration: number = 2000) {
+  private showTemporaryMessage(message: string, isError: boolean, duration: number = 10000) {
     if (isError) {
       this.errorMessage = message;
       this.successMessage = '';
@@ -135,7 +135,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
       this.successMessage = message;
       this.errorMessage = '';
     }
-
+  
     setTimeout(() => {
       this.clearMessages();
     }, duration);
