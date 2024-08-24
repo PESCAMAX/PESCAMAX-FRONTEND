@@ -14,7 +14,7 @@
 
 body {
     height: 100vh;
-    background: #f6f5f7;
+    background: rgba(93, 137, 189, 0.986);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,6 +23,9 @@ body {
 
 .container {
     position: relative;
+    top: 0; /* Asegúrate de que no haya desplazamiento vertical */
+    left: 50%; /* Centrar horizontalmente */
+    transform: translateX(-50%); /* Mover a la izquierda por la mitad del ancho del contenedor */
     width: 800px;
     height: 500px;
     background-color: #fff;
@@ -30,7 +33,6 @@ body {
     border-radius: 13px;
     overflow: hidden;
 }
-
 .form-container {
     position: absolute;
     width: 60%;
