@@ -1,6 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService, Alerta } from '../../../services/api-form/api.service';
+import { ApiService } from '../../../services/api-form/api.service';
 import { AuthService } from '../../../../../core/services/api-login/auth.service';
+
+export interface Alerta {
+  Id?: number;
+  EspecieID: number;
+  Nombre: string;
+  LoteID: number;
+  Descripcion: string;
+  FechaCreacion?: Date; // Asegúrate de que este campo es de tipo Date
+  UserId: string;
+}
+
+interface AlertState {
+  show: boolean;
+  type: 'success' | 'danger' | 'warning';
+  title: string;
+  content: string;
+  iconColor: 'red' | 'green';
+}
 
 @Component({
   selector: 'app-historial-alertas',
@@ -12,6 +30,17 @@ export class HistorialAlertasComponent implements OnInit {
   alertas: Alerta[] = [];
   alertasFiltradas: Alerta[] = [];
   mensajeAlerta: string = '';
+  
+  alertConfirmAction: (() => void) | null = null;
+  alertCancelAction: () => void = () => this.cerrarAlerta();
+  
+  alertState: AlertState = {
+    show: false,
+    type: 'warning',
+    title: '',
+    content: '',
+    iconColor: 'red'
+  };
 
   constructor(private apiService: ApiService, private authService: AuthService) {}
 
@@ -28,30 +57,17 @@ export class HistorialAlertasComponent implements OnInit {
       console.error('Usuario no autenticado');
       return;
     }
+
     this.apiService.obtenerAlertas().subscribe({
       next: (alertas) => {
-        // Filtrar alertas únicas basadas en EspecieID, LoteID y Descripcion
-        this.alertas = this.filtrarAlertasUnicas(alertas);
-        this.alertasFiltradas = this.alertas;
+        this.alertas = alertas;
+        this.alertasFiltradas = alertas;
       },
       error: (error) => {
         console.error('Error al cargar alertas:', error);
         this.mensajeAlerta = 'Error al cargar las alertas. Por favor, intente nuevamente.';
       }
     });
-  }
-
-  filtrarAlertasUnicas(alertas: Alerta[]): Alerta[] {
-    const alertasUnicas = new Map<string, Alerta>();
-    alertas.forEach(alerta => {
-      const key = `${alerta.EspecieID}-${alerta.LoteID}-${alerta.Descripcion}`;
-      if (!alertasUnicas.has(key) || new Date(alerta.FechaCreacion!) > new Date(alertasUnicas.get(key)!.FechaCreacion!)) {
-        alertasUnicas.set(key, alerta);
-      }
-    });
-    return Array.from(alertasUnicas.values()).sort((a, b) => 
-      new Date(b.FechaCreacion!).getTime() - new Date(a.FechaCreacion!).getTime()
-    );
   }
 
   filtrarPorFecha(fechaInicio: Date, fechaFin: Date): void {
@@ -61,6 +77,7 @@ export class HistorialAlertasComponent implements OnInit {
       finDelDia.setHours(23, 59, 59, 999);
       return fechaAlerta >= fechaInicio && fechaAlerta <= finDelDia;
     });
+
     if (this.alertasFiltradas.length === 0) {
       this.mensajeAlerta = "No hay datos disponibles para el rango de fechas seleccionado.";
     } else {
@@ -70,5 +87,56 @@ export class HistorialAlertasComponent implements OnInit {
 
   onDateRangeSelected(event: { startDate: Date, endDate: Date }): void {
     this.filtrarPorFecha(event.startDate, event.endDate);
+  }
+
+  eliminarAlerta(id: number): void {
+    this.mostrarAlertaConfirmacion(id);
+  }
+
+  mostrarAlertaConfirmacion(id: number): void {
+    this.alertState = {
+      show: true,
+      type: 'warning',
+      title: 'Confirmar eliminación',
+      content: '¿Estás seguro de eliminar la alerta?',
+      iconColor: 'red'
+    };
+    this.alertConfirmAction = () => this.confirmarEliminacion(id);
+    this.alertCancelAction = () => this.cancelarEliminacion();
+  }
+
+  confirmarEliminacion(id: number): void {
+    this.apiService.eliminarAlerta(id).subscribe(
+      () => {
+        this.cargarAlertas();
+        this.mostrarAlerta('success', 'Éxito', 'La alerta fue borrada exitosamente', 'green');
+      },
+      (error) => {
+        console.error('Error al eliminar la alerta:', error);
+        this.mostrarAlerta('danger', 'Error', 'Error al eliminar la alerta', 'red');
+      }
+    );
+  }
+
+  cancelarEliminacion(): void {
+    this.mostrarAlerta('danger', 'Cancelado', 'Has cancelado la eliminación', 'red');
+  }
+
+  mostrarAlerta(type: 'success' | 'danger' | 'warning', title: string, content: string, iconColor: 'red' | 'green'): void {
+    this.alertState = {
+      show: true,
+      type,
+      title,
+      content,
+      iconColor
+    };
+
+    setTimeout(() => {
+      this.cerrarAlerta();
+    }, 1000);
+  }
+
+  cerrarAlerta(): void {
+    this.alertState.show = false;
   }
 }

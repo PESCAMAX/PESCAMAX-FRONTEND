@@ -94,6 +94,13 @@ export class ApiService {
       return this.http.put<any>(`${this.baseUrl}/Users/update`, user, { headers: this.getHeaders() })
         .pipe(catchError(this.handleError));
     }
+    eliminarAlerta(id: number): Observable<void> {
+      return this.http.delete<void>(`${this.baseUrl}/historial-alerta/${id}`, { headers: this.getHeaders() })
+        .pipe(catchError(this.handleError));
+  }
+  
+    
+  
   }
   export interface EspecieLoteDTO {
     LoteId: number;

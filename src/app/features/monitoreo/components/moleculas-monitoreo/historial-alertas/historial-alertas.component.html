@@ -1,26 +1,54 @@
-<div class="table-responsive">
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Especie ID</th>
-        <th>Nombre Especie</th>
-        <th>Lote ID</th>
-        <th>Descripción</th>
-        <th>Fecha</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let alerta of alertasFiltradas">
-        <td>{{ alerta.EspecieID }}</td>
-        <td>{{ alerta.Nombre }}</td>
-        <td>{{ alerta.LoteID }}</td>
-        <td>{{ alerta.Descripcion }}</td>
-        <td>{{ alerta.FechaCreacion | date:'medium' }}</td>
-      </tr>
-    </tbody>
-  </table>
+<div class="container mx-auto p-4 bg-custom-gray">
+  <!-- Tabla de alertas con scroll (visible en pantallas medianas y grandes) -->
+  <div class="overflow-x-auto max-h-[80vh] hidden sm:block custom-scrollbar">
+    <table class="w-full border-collapse bg-gray-500 table-auto">
+      <thead class="bg-white sticky top-0">
+        <tr>
+          <th class="text-left p-3 px-5">Especie ID</th>
+          <th class="text-left p-3 px-5">Nombre Especie</th>
+          <th class="text-left p-3 px-5">Lote ID</th>
+          <th class="text-left p-3 px-5">Descripción</th>
+          <th class="text-left p-3 px-5">Fecha</th>
+          <th class="p-2 text-left font-bold border border-grey-500 text-sm">Eliminar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="bg-gray-100 border border-grey-500" *ngFor="let alerta of alertasFiltradas">
+          <td class="p-3 px-5">{{ alerta.EspecieID }}</td>
+          <td class="p-3 px-5">{{ alerta.Nombre }}</td>
+          <td class="p-3 px-5">{{ alerta.LoteID }}</td>
+          <td class="p-3 px-5">{{ alerta.Descripcion }}</td>
+          <td class="p-3 px-5">{{ alerta.FechaCreacion | date:'medium' }}</td>
+          <td class="p-2 border bg-white text-left">
+            <app-button-eliminar [id]="alerta.Id" (eliminar)="eliminarAlerta(alerta.Id)"></app-button-eliminar>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Vista móvil (visible solo en pantallas pequeñas) -->
+  <div class="sm:hidden max-h-[80vh] overflow-y-auto">
+    <div *ngFor="let alerta of alertasFiltradas" class="bg-white rounded-lg shadow-md p-4 mb-4">
+      <h3 class="font-bold text-lg mb-2">{{ alerta.TipoAlerta }}</h3>
+      <p><strong>ID:</strong> {{ alerta.Id }}</p>
+      <p><strong>Descripción:</strong> {{ alerta.Descripcion }}</p>
+      <p><strong>Fecha:</strong> {{ alerta.Fecha | date:'medium' }}</p>
+
+      <div class="mt-4 flex justify-between">
+        <app-button-eliminar [id]="alerta.Id" (eliminar)="eliminarAlerta(alerta.Id)"></app-button-eliminar>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div *ngIf="mensajeAlerta" class="alert alert-info">
-  {{ mensajeAlerta }}
+<!-- Modal de Confirmación -->
+<div *ngIf="alertState.show" class="modal">
+  <div class="modal-content">
+    <span class="close" (click)="handleAlertCancel()">&times;</span>
+    <h2>{{ alertState.title }}</h2>
+    <p>{{ alertState.content }}</p>
+    <button (click)="alertConfirmAction()">Confirmar</button>
+    <button (click)="handleAlertCancel()">Cancelar</button>
+  </div>
 </div>

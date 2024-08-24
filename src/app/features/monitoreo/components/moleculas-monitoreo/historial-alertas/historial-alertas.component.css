@@ -47,36 +47,45 @@ tr.hover:bg-orange-100:hover {
 }
 
 /* Estilos para la vista de tarjetas en móviles */
-@media (max-width: 767px) {
-  .md\:hidden {
+@media (max-width: 720px) {
+  .table-responsive {
+    display: none;
+  }
+
+  .card-view {
     display: block;
   }
 
-  .bg-white {
+  .card {
     background-color: white;
-  }
-
-  .rounded-lg {
     border-radius: 0.5rem;
-  }
-
-  .shadow-md {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  }
-
-  .mb-4 {
     margin-bottom: 1rem;
+    padding: 1rem;
   }
 
-  .font-bold {
+  .card-title {
     font-weight: 700;
-  }
-
-  .text-lg {
     font-size: 1.125rem;
+    margin-bottom: 0.5rem;
   }
 
-  .mb-2 {
+  .card-content {
     margin-bottom: 0.5rem;
+  }
+
+  .card-content strong {
+    font-weight: 600;
+  }
+}
+
+/* Mantener la tabla visible en pantallas más grandes */
+@media (min-width: 721px) {
+  .table-responsive {
+    display: block;
+  }
+
+  .card-view {
+    display: none;
   }
 }
