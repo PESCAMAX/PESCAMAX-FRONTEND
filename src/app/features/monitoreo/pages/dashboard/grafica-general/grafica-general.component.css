@@ -1,137 +1,56 @@
-/* Estilos base */
-.container {
-  max-width: 100%;
-  padding: 1rem;
+app-menu-lateral {
+  overflow: hidden;
 }
 
-/* Estilos para los cards */
-.cards-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1rem;
-  width: 100%;
+app-global-alerta {
+  min-height: 30px; /* Adjust this value as needed */
 }
 
-.card {
-  background-color: #ffffff;
-  border-radius: 8px;
-  padding: 1rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
+.alert-container {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-}
-
-.card-title {
-  font-size: 1.25rem;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 0.5rem;
-}
-
-.card-info {
-  font-size: 0.9rem;
-  color: #666;
-  margin-bottom: 0.25rem;
-}
-
-.card-link {
-  font-size: 0.875rem;
-  color: #007bff;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.card-details {
-  margin-top: 0.5rem;
-  font-size: 0.875rem;
-  color: #333;
-}
-
-/* Estilos para las estadísticas */
-.stats-container {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 2rem;
-}
-
-.stat-card {
-  background-color: #f8f9fa;
-  border-radius: 8px;
-  padding: 1rem;
-  flex: 1;
-  margin: 0 0.5rem;
-  text-align: center;
-}
-
-.stat-card h3 {
-  font-size: 1.25rem;
-  margin-bottom: 0.5rem;
-}
-
-.trend-up {
-  color: #28a745;
-}
-
-.trend-down {
-  color: #dc3545;
-}
-
-.status-good {
-  color: #28a745;
-}
-
-.status-bad {
-  color: #dc3545;
-}
-
-/* Estilos del título */
-.text-center {
-  text-align: center;
-}
-
-.p-4 {
-  padding: 1rem;
-}
-
-.text-2xl {
+/* Existing styles */
+.content-title {
   font-size: 1.5rem;
-}
-
-.font-bold {
   font-weight: bold;
-}
-
-.custom-font {
+  color: #007bff;
+  margin-bottom: 1rem;
   font-family: Arial, sans-serif;
 }
 
-.custom-color {
-  color: #007bff;
+.title {
+  text-align: center;
+  color: #1f12d7;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .cards-container {
-    grid-template-columns: 1fr;
-  }
+.mm {
+  margin-top: 100px;
+}
 
-  .stats-container {
+.cards {
+  padding-right: 100px;
+}
+
+/* Media queries */
+@media (max-width: 720px) {
+  .graph-and-card-container {
     flex-direction: column;
   }
 
-  .stat-card {
-    margin: 0.5rem 0;
+  .graph-container, .card-container {
+    width: 100%;
   }
 
-  .card-details {
-    display: none;
+  .main-container {
+    padding-top: 1rem;
   }
+}
 
-  .card.expanded .card-details {
-    display: block;
+@media (min-width: 1281px) {
+  .container {
+    padding: 2.5rem;
   }
 }
