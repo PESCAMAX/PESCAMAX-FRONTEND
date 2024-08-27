@@ -6,14 +6,6 @@ import { interval, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { UltimoDatoService } from '../../../services/servicio-alerta/ultimo-dato.service';
 
-interface MonitoreoItem {
-  title: string;
-  loteId: number;
-  fecha: string;
-  descripcion: string;
-  showDetails: boolean;
-}
-
 @Component({
   selector: 'app-grafica-general',
   templateUrl: './grafica-general.component.html',
@@ -44,24 +36,18 @@ export class GraficaGeneralComponent implements OnInit, OnDestroy {
   penultimoRegistroHora: string = '';
   lote: number | null = null;
 
- 
-
   temperaturaStatus: 'good' | 'bad' | 'unassigned' = 'unassigned';
   tdsStatus: 'good' | 'bad' | 'unassigned' = 'unassigned';
   phStatus: 'good' | 'bad' | 'unassigned' = 'unassigned';
 
   private especies: Especie[] = [];
 
-  // Nueva propiedad para los items de monitoreo
-  monitoreoItems: MonitoreoItem[] = [];
-
   constructor(
     private apiService: ApiService,
     private authService: AuthService,
     private cdr: ChangeDetectorRef,
     public globalAlertService: GlobalAlertService,
-    private ultimoDatoService: UltimoDatoService,
-    
+    private ultimoDatoService: UltimoDatoService
   ) {
     this.userId = this.authService.getUserId();
   }
@@ -87,6 +73,10 @@ export class GraficaGeneralComponent implements OnInit, OnDestroy {
     }
   }
 
+  onMenuToggle(isOpen: boolean) {
+    this.isMenuOpen = isOpen;
+  }
+
   iniciarMonitoreoAutomatico() {
     this.monitoreoSubscription = this.ultimoDatoService.iniciarMonitoreo(this.userId).subscribe();
   }
@@ -109,7 +99,6 @@ export class GraficaGeneralComponent implements OnInit, OnDestroy {
         this.monitoreoData = response.response;
         this.filtrarDatos(this.selectedLote);
         this.calcularTendencias();
-        this.actualizarMonitoreoItems();
         this.cdr.detectChanges();
       },
       error => console.error('Error al actualizar datos:', error)
@@ -123,7 +112,6 @@ export class GraficaGeneralComponent implements OnInit, OnDestroy {
         this.monitoreoData = response.response;
         this.monitoreoDataFiltrada = [...this.monitoreoData];
         this.calcularTendencias();
-        this.actualizarMonitoreoItems();
         this.isLoading = false;
         this.cdr.detectChanges();
       },
@@ -154,10 +142,6 @@ export class GraficaGeneralComponent implements OnInit, OnDestroy {
       },
       error => console.error('Error al cargar especies:', error)
     );
-  }
-
-  onMenuToggle(isOpen: boolean) {
-    this.isMenuOpen = isOpen;
   }
 
   calcularTendencias(): void {
@@ -222,7 +206,6 @@ export class GraficaGeneralComponent implements OnInit, OnDestroy {
     }
 
     const ultimoMonitoreo = this.monitoreoDataFiltrada[this.monitoreoDataFiltrada.length - 1];
-
     const alertaCorrespondiente = this.alertas.find(alerta => alerta.LoteID === ultimoMonitoreo.LoteID);
 
     if (!alertaCorrespondiente) {
@@ -263,20 +246,5 @@ export class GraficaGeneralComponent implements OnInit, OnDestroy {
       this.monitoreoDataFiltrada = this.monitoreoData.filter(item => item.LoteID === lote);
       this.alertasFiltradas = this.alertas.filter(alerta => alerta.LoteID === lote);
     }
-  }
-
-  private actualizarMonitoreoItems(): void {
-    this.monitoreoItems = this.monitoreoDataFiltrada.map(item => ({
-      title: `Lote ${item.LoteID}`,
-      loteId: item.LoteID,
-      fecha: new Date(item.FechaHora).toLocaleString(),  // Convertir Date a string
-      descripcion: `Temperatura: ${item.Temperatura}°C, TDS: ${item.tds}, pH: ${item.PH}`,
-      showDetails: false
-    }));
-}
-
-
-  toggleDetails(item: MonitoreoItem): void {
-    item.showDetails = !item.showDetails;
   }
 }

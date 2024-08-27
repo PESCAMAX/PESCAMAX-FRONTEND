@@ -11,8 +11,10 @@
         <div class="mm"></div>
           <h1 class=" p-4 text-2xl font-bold custom-font custom-color">Gráfica de temperatura</h1>
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
-          <div class="lg:col-span-3">
-            <app-temperatura></app-temperatura>
+          <div class="w-full lg:col-span-3">
+            <div class="mb-8">
+              <app-temperatura></app-temperatura>
+            </div>
           </div>
           <div class="cards">
             <app-cards-info title="Temperatura" [value]="temperaturaValue" [trend]="temperaturaTrend" [trendValue]="temperaturaTrendValue"></app-cards-info>
