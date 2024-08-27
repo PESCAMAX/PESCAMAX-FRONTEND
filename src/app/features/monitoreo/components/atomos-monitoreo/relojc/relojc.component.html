@@ -4,28 +4,37 @@
       <h2 class="text-xl font-bold">Configuración de Parámetros</h2>
       <a href="/alertas-recientes" class="text-gray-400 hover:text-gray-600">&#x2715;</a>
     </div>
-
     <div class="mb-4">
       <label for="numHours" class="block text-sm font-medium text-gray-700 mb-2">Número de horas a monitorear:</label>
-      <select id="numHours" [(ngModel)]="numHoursToMonitor" (change)="updateMonitoringHours()" 
-              class="w-full p-2 border border-gray-300 rounded-md">
+      <select id="numHours" [(ngModel)]="numHoursToMonitor" (change)="updateMonitoringHours()" class="w-full p-2 border border-gray-300 rounded-md">
         <option *ngFor="let option of numHoursOptions" [value]="option">{{ option }}</option>
       </select>
     </div>
-
     <div class="clock relative w-64 h-64 rounded-full border-2 border-gray-300 mx-auto mb-4">
-      <div *ngFor="let hour of hours; let i = index" 
-           class="hour absolute w-8 h-8 text-center"
-           [ngStyle]="getStyle(i)">
-        <button 
-          (click)="toggleHour(hour, 'am')" 
-          class="w-full h-full rounded-full focus:outline-none transition-colors duration-200 ease-in-out"
-          [ngClass]="{'bg-blue-500 text-white': isHourSelected(hour, 'am'), 'bg-gray-200': !isHourSelected(hour, 'am')}">
+      <svg class="absolute inset-0 w-full h-full">
+        <line *ngFor="let hour of selectedHours"
+              x1="50%"
+              y1="50%"
+              [attr.x2]="50 + 60 * getArrowEndX(hour.hour) + '%'"
+              [attr.y2]="50 + 60 * getArrowEndY(hour.hour) + '%'"
+              stroke="#4b5563"
+              stroke-width="2"
+              [attr.marker-end]="'url(#arrowhead)'"
+              [style.display]="hour.am || hour.pm ? 'block' : 'none'">
+        </line>
+        <defs>
+          <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#4b5563" />
+          </marker>
+        </defs>
+      </svg>
+      <div *ngFor="let hour of hours; let i = index" class="hour absolute w-8 h-8 text-center" [ngStyle]="getStyle(i)">
+        <button (click)="toggleHour(hour, 'am')" class="w-full h-full rounded-full focus:outline-none transition-colors duration-200 ease-in-out"
+                [ngClass]="{'bg-blue-500 text-white': isHourSelected(hour, 'am'), 'bg-gray-200': !isHourSelected(hour, 'am')}">
           {{ hour }}
         </button>
       </div>
     </div>
-
     <div class="mb-4 text-center">
       <p class="text-sm text-gray-600">Horas seleccionadas:</p>
       <table class="w-full border-collapse border border-gray-300">
@@ -50,17 +59,12 @@
       </table>
       <p class="mt-4 text-sm text-gray-600">Total de horas seleccionadas: {{ getTotalSelectedHours() }}</p>
     </div>
-
     <div class="flex justify-between">
       <button type="button" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300" (click)="clearSelection()">
         Limpiar Selección
       </button>
-      <app-button-guardar 
-      [type]="'button'"
-      [texto]="'Guardar horas'"
-      [color]="'blue'"
-      (clickBoton)="saveHours()">
-    </app-button-guardar>
+      <app-button-guardar [type]="'button'" [texto]="'Guardar horas'" [color]="'blue'" (clickBoton)="saveHours()">
+      </app-button-guardar>
     </div>
   </div>
 </div>
