@@ -5,6 +5,12 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AlertService {
+  showSuccess(successMessage: string) {
+    throw new Error('Method not implemented.');
+  }
+  showError(errorMessage: string) {
+    throw new Error('Method not implemented.');
+  }
   private alertSubject = new BehaviorSubject<AlertMessage | null>(null);
 
   showAlert(type: 'info' | 'danger' | 'warning', label: string, message: string): void {

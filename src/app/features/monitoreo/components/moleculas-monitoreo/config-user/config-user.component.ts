@@ -32,57 +32,53 @@ export class ConfigUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.userId = this.authService.getUserId();
-    if (this.userId) {
-      this.loadUserData();
-    } else {
-      this.errorMessage = 'No se pudo obtener el ID del usuario';
-    }
+    this.loadUserData();
   }
 
   loadUserData(): void {
     this.apiService.getCurrentUser().subscribe(
       (data: any) => {
-        console.log('Datos recibidos del servidor:', data); // Para depuración
         this.userForm.patchValue({
-          username: data.userName || '',
-          email: data.email || '',
-          phoneNumber: data.phoneNumber || '',
-          address: data.address || '',
-          farmName: data.farmName || ''
+          username: data.userName,
+          email: data.email,
+          phoneNumber: data.phoneNumber,
+          address: data.address,
+          farmName: data.farmName
         });
       },
       (error) => {
         console.error('Error loading user data', error);
         this.errorMessage = 'No se pudo cargar la información del usuario';
-        this.alertService.showAlert('danger', 'Error', this.errorMessage);
+        this.alertService.showError(this.errorMessage);
       }
     );
   }
 
   updateUserData(): void {
     if (this.userForm.valid) {
-      const userData = { ...this.userForm.value, id: this.userId };
+      const userData = {
+        id: this.userId,
+        userName: this.userForm.get('username')?.value,
+        email: this.userForm.get('email')?.value,
+        phoneNumber: this.userForm.get('phoneNumber')?.value,
+        address: this.userForm.get('address')?.value,
+        farmName: this.userForm.get('farmName')?.value
+      };
+
       this.apiService.updateUser(userData).subscribe(
         (response) => {
           console.log('User data updated successfully', response);
           this.successMessage = 'Datos actualizados correctamente';
           this.errorMessage = '';
-          this.alertService.showAlert('info', 'Éxito', this.successMessage);
+          this.alertService.showSuccess(this.successMessage);
         },
         (error) => {
           console.error('Error updating user data', error);
           this.errorMessage = 'No se pudieron actualizar los datos';
           this.successMessage = '';
-          this.alertService.showAlert('danger', 'Error', this.errorMessage);
+          this.alertService.showError(this.errorMessage);
         }
       );
-    } else {
-      this.errorMessage = 'Por favor, complete todos los campos requeridos correctamente';
-      this.alertService.showAlert('warning', 'Advertencia', this.errorMessage);
     }
-  }
-
-  onMenuToggle(isOpen: boolean) {
-    // Lógica para manejar el menú (si es necesario)
   }
 }

@@ -1,10 +1,24 @@
-<app-menu-lateral (menuToggled)="onMenuToggle($event)"></app-menu-lateral>
-<div class="container">
-  <div class="content-wrapper" [ngClass]="{'menu-open': isMenuOpen, 'menu-closed': !isMenuOpen}">
-    <h1 class=" p-4 text-2xl font-bold custom-font custom-color">Gráfica de temperatura</h1>
-    <div class="graph-container">
-      <app-global-alert></app-global-alert>
-      <app-temperatura></app-temperatura>
-    </div>
+
+<div class="flex h-screen overflow-hidden">
+  <app-menu-lateral (menuToggled)="onMenuToggle($event)" class="z-20"></app-menu-lateral>
+  <div class="flex-1 flex flex-col overflow-hidden">
+    <main class="flex-1 overflow-x-hidden overflow-y-auto transition-all duration-300"
+          [ngClass]="{'ml-64': isMenuOpen, 'ml-16': !isMenuOpen}">
+      <div class="container mx-auto px-4 py-8">
+        <div class="mb-4">
+          <!-- You can add any additional content here if needed -->
+        </div>
+        <div class="mm"></div>
+          <h1 class=" p-4 text-2xl font-bold custom-font custom-color">Gráfica de temperatura</h1>
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+          <div class="lg:col-span-3">
+            <app-temperatura></app-temperatura>
+          </div>
+          <div class="cards">
+            <app-cards-info title="Temperatura" [value]="temperaturaValue" [trend]="temperaturaTrend" [trendValue]="temperaturaTrendValue"></app-cards-info>
+          </div>
+        </div>
+      </div>
+    </main>
   </div>
 </div>
