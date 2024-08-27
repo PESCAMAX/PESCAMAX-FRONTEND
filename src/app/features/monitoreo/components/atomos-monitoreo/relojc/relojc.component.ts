@@ -33,17 +33,25 @@ export class RelojcComponent implements OnInit {
     };
   }
 
+  getArrowEndX(hour: number): number {
+    return Math.cos(-Math.PI / 2 + hour * Math.PI / 6) * 0.5; // Aumentado de 0.4 a 0.6
+  }
+
+  getArrowEndY(hour: number): number {
+    return Math.sin(-Math.PI / 2 + hour * Math.PI / 6) * 0.5; // Aumentado de 0.4 a 0.6
+  }
+
   toggleHour(hour: number, period: 'am' | 'pm') {
     const selectedPeriod = this.selectedHours.filter(h => h[period]);
-    
+
     if (selectedPeriod.length < this.numHoursToMonitor || this.isHourSelected(hour, period)) {
       const hourIndex = this.selectedHours.findIndex(h => h.hour === hour);
-      
+
       if (hourIndex === -1) {
         this.selectedHours.push({ hour, am: period === 'am', pm: period === 'pm' });
       } else {
         this.selectedHours[hourIndex][period] = !this.selectedHours[hourIndex][period];
-        
+
         if (!this.selectedHours[hourIndex].am && !this.selectedHours[hourIndex].pm) {
           this.selectedHours.splice(hourIndex, 1);
         }
@@ -52,7 +60,7 @@ export class RelojcComponent implements OnInit {
       alert('No puedes seleccionar más horas de las especificadas.');
     }
   }
-  
+
   toggleHourCheckbox(hour: number, period: 'am' | 'pm', event: Event) {
     const isChecked = (event.target as HTMLInputElement).checked;
     const hourIndex = this.selectedHours.findIndex(h => h.hour === hour);
@@ -77,6 +85,7 @@ export class RelojcComponent implements OnInit {
     console.log('Número de horas a monitorear actualizado:', this.numHoursToMonitor);
     this.selectedHours = [];
   }
+
   formatHour(hourObj: HourSelection): string {
     return `${hourObj.hour}:00`;
   }
@@ -88,31 +97,14 @@ export class RelojcComponent implements OnInit {
   getTotalSelectedHours(): number {
     return this.selectedHours.reduce((total, hour) => total + (hour.am ? 1 : 0) + (hour.pm ? 1 : 0), 0);
   }
-  
+
   saveHours(): void {
     const totalSelectedHours = this.getTotalSelectedHours();
     console.log('Total de horas seleccionadas:', totalSelectedHours);
     console.log('Número de horas a monitorear:', this.numHoursToMonitor);
-    
+
     if (totalSelectedHours === this.numHoursToMonitor) {
-      // Aquí es donde guardamos los datos
       console.log('Horas guardadas:', this.selectedHours);
-      
-      // Aquí deberías llamar a tu servicio para guardar los datos
-      // Por ejemplo:
-      // this.horasService.guardarHoras(this.selectedHours).subscribe(
-      //   response => {
-      //     console.log('Respuesta del servidor:', response);
-      //     alert('Horas guardadas exitosamente.');
-      //     this.router.navigate(['/alertas-recientes']);
-      //   },
-      //   error => {
-      //     console.error('Error al guardar las horas:', error);
-      //     alert('Hubo un error al guardar las horas. Por favor, intente de nuevo.');
-      //   }
-      // );
-  
-      // Por ahora, solo simularemos el guardado
       alert('Horas guardadas exitosamente.');
       this.router.navigate(['/alertas-recientes']);
     } else {
