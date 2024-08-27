@@ -7,10 +7,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 })
 export class LoginPageComponent implements OnInit, OnDestroy {
   carouselImages: string[] = [
-    'assets/images/imagen-login.jpg',
-    'assets/images/imagen-login2.jpg',
-    'assets/images/imagen-login3.jpg',
-    'assets/images/imagen-login4.jpg'
   ];
   activeImageIndex: number = 0;
   carouselInterval: any;
