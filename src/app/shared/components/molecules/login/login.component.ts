@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   registerForm!: FormGroup;
   successMessage: string = '';
   errorMessage: string = '';
-  isMobileView: boolean = false;
+  isLoginVisible: boolean = true;
 
   constructor(
     private fb: FormBuilder,
@@ -25,24 +25,19 @@ export class LoginComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', Validators.required]
     });
-  
 
     this.registerForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      PhoneNumber: ['', Validators.required], // Añadido desde el segundo componente
-      Address: ['', Validators.required], // Añadido desde el segundo componente
-      FarmName: ['', Validators.required] // Añadido desde el segundo componente
+      PhoneNumber: ['', Validators.required],
+      Address: ['', Validators.required],
+      FarmName: ['', Validators.required]
     });
-
-    this.checkScreenSize();
-    window.addEventListener('resize', () => this.checkScreenSize());
   }
 
   ngAfterViewInit() {
-    this.initializeOverlayToggle();
-
+    this.updateFormVisibility();
     const container = document.getElementById('container');
     const overlayBtn = document.getElementById('overlayBtn');
     if (overlayBtn) {
@@ -56,78 +51,59 @@ export class LoginComponent implements OnInit, AfterViewInit {
     }
   }
 
-  initializeOverlayToggle() {
-    const signUpContainer = document.getElementById('signUpContainer') as HTMLElement;
-    const signInContainer = document.getElementById('signInContainer') as HTMLElement;
-    const mobileToggle = document.getElementById('mobileToggle') as HTMLElement;
-    const signUpButton = document.getElementById('signUp') as HTMLElement;
-    const signInButton = document.getElementById('signIn') as HTMLElement;
-
-    if (mobileToggle) {
-      mobileToggle.addEventListener('click', () => this.toggleMobileForm());
-    }
-
-    if (signUpButton) {
-      signUpButton.addEventListener('click', () => this.showSignUp());
-    }
-
-    if (signInButton) {
-      signInButton.addEventListener('click', () => this.showSignIn());
-    }
-  }
   onLogin() {
     if (this.loginForm.valid) {
-        this.authService.login(this.loginForm.value).subscribe(
-            (response) => {
-                if (response.success) {
-                    const userId = this.authService.getUserId();
-                    if (response.RequirePasswordChange) {
-                      this.router.navigate(['/change-password', response.userId]);
-                    } else {
-                        this.router.navigate(['/home']);
-                    }
-                } else {
-                    this.errorMessage = response.message || 'Error en el inicio de sesión';
-                }
-            },
-            (error) => {
-                this.errorMessage = error.message || 'Ocurrió un error durante el inicio de sesión';
-            }
-        );
-    } else {
-        this.errorMessage = 'Por favor, complete todos los campos correctamente';
-    }
-}
-
-
-
-onRegister() {
-  if (this.registerForm.valid) {
-    console.log('Registrando usuario:', this.registerForm.value);
-    this.authService.register(this.registerForm.value).subscribe({
-      next: (response) => {
-        console.log('Registro exitoso', response);
-        this.showTemporaryMessage('Registro exitoso. Se ha enviado tu contraseña a tu correo electrónico. Por favor, revisa tu bandeja de entrada e inicia sesión.', false, 10000);
-        this.showSignIn(); // Cambiar al formulario de inicio de sesión
-      },
-      error: (error) => {
-        console.error('Error en el registro', error);
-        let errorMsg = 'Error en el registro';
-        if (error.error instanceof ErrorEvent) {
-          errorMsg = `Error: ${error.error.message}`;
-        } else {
-          errorMsg = `Código de Error: ${error.status}\nMensaje: ${error.message}`;
+      console.log('Intentando iniciar sesión con:', this.loginForm.value);
+      this.authService.login(this.loginForm.value).subscribe({
+        next: (response) => {
+          console.log('Inicio de sesión exitoso', response);
+          this.showTemporaryMessage('Inicio de sesión exitoso', false);
+          this.router.navigate(['/home', response.userId]);
+        },
+        error: (error) => {
+          console.error('Error en el inicio de sesión', error);
+          let errorMsg = 'Error en el inicio de sesión';
+          if (error.error instanceof ErrorEvent) {
+            errorMsg = `Error: ${error.error.message}`;
+          } else {
+            errorMsg = `Código de Error: ${error.status}\nMensaje: ${error.message}`;
+          }
+          this.showTemporaryMessage(errorMsg, true);
         }
-        this.showTemporaryMessage(errorMsg, true, 10000);
-      }
-    });
-  } else {
-    console.log('El formulario de registro es inválido', this.registerForm.errors);
-    this.showTemporaryMessage('Por favor, complete todos los campos requeridos correctamente', true, 5000);
+      });
+    } else {
+      console.log('El formulario es inválido', this.loginForm.errors);
+      this.showTemporaryMessage('Por favor, complete todos los campos requeridos', true);
+    }
   }
-}
+  
+  onRegister() {
+    if (this.registerForm.valid) {
+      console.log('Registrando usuario:', this.registerForm.value);
+      this.authService.register(this.registerForm.value).subscribe({
+        next: (response) => {
+          console.log('Registro exitoso', response);
+          this.showTemporaryMessage('Registro exitoso. Por favor, inicie sesión.', false);
+          this.showSignIn();
+        },
+        error: (error) => {
+          console.error('Error en el registro', error);
+          let errorMsg = 'Error en el registro';
+          if (error.error instanceof ErrorEvent) {
+            errorMsg = `Error: ${error.error.message}`;
+          } else {
+            errorMsg = `Código de Error: ${error.status}\nMensaje: ${error.message}`;
+          }
+          this.showTemporaryMessage(errorMsg, true);
+        }
+      });
+    } else {
+      console.log('El formulario de registro es inválido', this.registerForm.errors);
+      this.showTemporaryMessage('Por favor, complete todos los campos requeridos correctamente', true);
+    }
+  }
 
-  private showTemporaryMessage(message: string, isError: boolean, duration: number = 10000) {
+  private showTemporaryMessage(message: string, isError: boolean, duration: number = 2000) {
     if (isError) {
       this.errorMessage = message;
       this.successMessage = '';
@@ -142,28 +118,13 @@ onRegister() {
   }
 
   showSignIn() {
-    const container = document.getElementById('container');
-    container?.classList.remove('right-panel-active');
+    this.isLoginVisible = true;
+    this.updateFormVisibility();
   }
 
   showSignUp() {
-    const container = document.getElementById('container');
-    container?.classList.add('right-panel-active');
-  }
-
-  updateMobileFormsDisplay(formToShow: 'sign-in' | 'sign-up') {
-    const signUpContainer = document.querySelector('.sign-up-container') as HTMLElement;
-    const signInContainer = document.querySelector('.sign-in-container') as HTMLElement;
-
-    if (this.isMobileView) {
-      if (formToShow === 'sign-up') {
-        signUpContainer.style.display = 'block';
-        signInContainer.style.display = 'none';
-      } else {
-        signUpContainer.style.display = 'none';
-        signInContainer.style.display = 'block';
-      }
-    }
+    this.isLoginVisible = false;
+    this.updateFormVisibility();
   }
 
   clearMessages() {
@@ -171,41 +132,23 @@ onRegister() {
     this.errorMessage = '';
   }
 
-  checkScreenSize() {
-    this.isMobileView = window.innerWidth <= 767;
-
-    if (this.isMobileView) {
-      this.showSignIn(); // Muestra siempre el formulario de inicio de sesión en móviles
-    }
-
-    const overlayContainerMobile = document.querySelector('.overlay-container-mobile') as HTMLElement;
-    if (overlayContainerMobile) {
-      overlayContainerMobile.style.display = this.isMobileView ? 'block' : 'none';
-    }
+  toggleForm() {
+    this.isLoginVisible = !this.isLoginVisible;
+    this.updateFormVisibility();
   }
-   private handleError(error: any, defaultMessage: string) {
-    let errorMsg = defaultMessage;
-    if (error.error instanceof ErrorEvent) {
-      errorMsg = `Error: ${error.error.message}`;
+  private updateFormVisibility() {
+    const signInContainer = document.querySelector('.sign-in-container') as HTMLElement;
+    const signUpContainer = document.querySelector('.sign-up-container') as HTMLElement;
+    const container = document.getElementById('container');
+
+    if (this.isLoginVisible) {
+      signInContainer?.classList.add('active');
+      signUpContainer?.classList.remove('active');
+      container?.classList.remove('right-panel-active');
     } else {
-      errorMsg = `Código de Error: ${error.status}\nMensaje: ${error.message}`;
-    }
-    this.showTemporaryMessage(errorMsg, true);
-  }
-
-
-  toggleMobileForm() {
-    const signUpContainer = document.getElementById('signUpContainer') as HTMLElement;
-    const signInContainer = document.getElementById('signInContainer') as HTMLElement;
-
-    if (signUpContainer && signInContainer) {
-      if (signUpContainer.style.display === 'none' || signUpContainer.style.display === '') {
-        signUpContainer.style.display = 'block';
-        signInContainer.style.display = 'none';
-      } else {
-        signUpContainer.style.display = 'none';
-        signInContainer.style.display = 'block';
-      }
+      signInContainer?.classList.remove('active');
+      signUpContainer?.classList.add('active');
+      container?.classList.add('right-panel-active');
     }
   }
 }

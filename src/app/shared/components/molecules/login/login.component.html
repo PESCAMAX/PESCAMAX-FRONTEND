@@ -8,7 +8,6 @@
       </div>
       <span>Usa tu email para registrarte</span>
       
-      <!-- Campo Nombre de Usuario -->
       <app-inputs-form formControlName="email" type="email" placeholder="Correo Electrónico"></app-inputs-form>
       <app-inputs-form formControlName="PhoneNumber" type="tel" placeholder="Teléfono"></app-inputs-form>
       <app-inputs-form formControlName="Address" placeholder="Dirección"></app-inputs-form>
@@ -28,7 +27,6 @@
       </div>
       <span>Usa tu cuenta</span>
       
-      <!-- Campo Usuario -->
       <app-inputs-form formControlName="email" placeholder="email"></app-inputs-form>
       <app-inputs-form formControlName="password" type="password" placeholder="Contraseña"></app-inputs-form>
 
@@ -51,6 +49,14 @@
         <button class="ghost" id="signUp" (click)="showSignUp()">Registrarse</button>
       </div>
     </div>
-    <button id="overlayBtn" style="display: none;"><span>Click!</span></button>
+  </div>
+
+  <!-- Panel de superposición móvil -->
+  <div class="overlay-container-mobile">
+    <div class="overlay-panel-mobile">
+      <h1>Bienvenido a <span class="text-lg font-semibold text-white-500">PESCA<span class="text-black text-lg font-semibold">MAX</span></span></h1>
+      <p>{{ isLoginVisible ? 'Ingresa tus datos personales y comienza tu viaje con nosotros' : 'Para mantenerte conectado con nosotros, por favor inicia sesión con tu información personal' }}</p>
+      <button (click)="toggleForm()">{{ isLoginVisible ? 'Registrarse' : 'Iniciar Sesión' }}</button>
+    </div>
   </div>
 </div>
