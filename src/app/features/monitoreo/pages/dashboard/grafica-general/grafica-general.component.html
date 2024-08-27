@@ -6,14 +6,14 @@
   </div>
 
   <div class="flex-1 p-4 transition-all duration-300" [ngClass]="{'ml-64': isMenuOpen, 'ml-': !isMenuOpen}">
-    <h1 class=" p-4 text-2xl font-bold custom-font custom-color">Control De Monitoreo</h1>
+    <h1 class=" p-4 text-2xl font-bold custom-font custom-color">Control de monitoreo</h1>
 
     <!-- Selección de Lote -->
     <div class="mb-4 shadow-md">
       <app-lotes [monitoreoData]="monitoreoData" (loteSeleccionado)="onLoteChange($event)"></app-lotes>
 
     </div>
-    <h2 class="text-xl font-semibold text-gray-800 mb-2">Gráfica General</h2>
+    <h2 class="text-xl font-semibold text-gray-800 mb-2">Gráfica general</h2>
     <div class="flex flex-wrap mt-4">
       <!-- Columna izquierda: Cards (35%) -->
       <div class="w-full lg:w-[35%] pr-0 lg:pr-4 mb-4 lg:mb-0">
@@ -56,7 +56,7 @@
       <!-- Columna derecha: Gráfica General (65%) -->
       <div class="w-full lg:w-[65%]">
         <div class="mb-8">
-    
+
           <app-grafica [data]="monitoreoDataFiltrada" [selectedLote]="selectedLote"></app-grafica>
         </div>
       </div>
@@ -66,7 +66,7 @@
     </div>
     <!-- Historial De Alertas -->
     <div class="mt-8">
-      <h2 class="text-xl font-semibold text-gray-800 mb-2">Historial De Alertas</h2>
+      <h2 class="text-xl font-semibold text-gray-800 mb-2">Historial de alertas</h2>
       <app-fechas-mensajes [alertasFiltradas]="alertasFiltradas"></app-fechas-mensajes>
     </div>
   </div>
