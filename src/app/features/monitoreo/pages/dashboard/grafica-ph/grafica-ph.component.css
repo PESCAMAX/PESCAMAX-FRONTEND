@@ -1,6 +1,7 @@
 /* Estilos para el contenedor principal */
 .main-container {
   display: flex;
+
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
@@ -8,6 +9,7 @@
   box-sizing: border-box;
   width: 100%;
   height: 100%;
+
 }
 
 /* Estilos para el título de la gráfica */
@@ -35,9 +37,19 @@
   height: auto;
 }
 
+
+.content-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #007bff;
+  
+  margin-bottom: 1rem;
+  font-family: Arial, sans-serif;
+
 .title{
   text-align:  center;
   color: #1f12d7;
+
 }
 
 .mm{
@@ -60,6 +72,13 @@
 
   .main-container {
     padding-top: 1rem; /* Espacio superior más pequeño en móviles */
+  }
+}
+
+
+@media (min-width: 1281px) {
+  .container {
+    padding: 2.5rem;
   }
 }
 

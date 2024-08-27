@@ -1,6 +1,10 @@
 /* Estilos para el contenedor principal */
 .main-container {
   display: flex;
+
+
+.content-wrapper {
+  transition: width 0.3s ease, margin-left 0.3s ease;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
@@ -29,7 +33,17 @@
   height: 100%;
 }
 
-/* Estilos para la gráfica */
+
+h1 {
+
+  padding: 1rem 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+  color: #007bff;
+}
+
+
 .graph-container {
   width: 75%;
   height: auto;
