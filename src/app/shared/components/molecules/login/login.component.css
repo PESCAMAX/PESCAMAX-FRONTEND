@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 * {
-    padding: 0px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
     box-sizing: border-box;
 }
 
@@ -14,7 +14,7 @@
 
 body {
     height: 100vh;
-    background:#b7e2fff5;
+    background: #b7e2fff5;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -31,12 +31,16 @@ body {
     border-radius: 13px;
     overflow: hidden;
 }
+
 .form-container {
     position: absolute;
     width: 60%;
     height: 100%;
-    padding: 0px 40px;
+    padding: 0 40px;
     transition: all 0.6s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .sign-up-container {
@@ -49,12 +53,12 @@ body {
 }
 
 form {
-    height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 0px 50px;
+    padding: 0 50px;
 }
 
 h1 {
@@ -65,7 +69,7 @@ h1 {
 }
 
 .social-container {
-    margin: 20px 0px;
+    margin: 20px 0;
 }
 
 .social-container a {
@@ -74,7 +78,7 @@ h1 {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    margin: 0px 5px;
+    margin: 0 5px;
     height: 40px;
     width: 40px;
 }
@@ -85,7 +89,7 @@ span {
 
 .infield {
     position: relative;
-    margin: 8px 0px;
+    margin: 8px 0;
     width: 100%;
 }
 
@@ -116,7 +120,7 @@ a {
     color: #333;
     font-size: 14px;
     text-decoration: none;
-    margin: 15px 0px;
+    margin: 15px 0;
 }
 
 a.forgot {
@@ -126,7 +130,7 @@ a.forgot {
 
 button {
     border-radius: 20px;
-    border: 1px #eee;
+    border: 1px solid #eee;
     background: #3B82F6;
     color: #fff;
     font-size: 12px;
@@ -168,7 +172,7 @@ button {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 0px 40px;
+    padding: 0 40px;
     text-align: center;
     height: 100%;
     width: 340px;
@@ -196,7 +200,7 @@ p {
     font-weight: 300;
     line-height: 20px;
     letter-spacing: 0.5px;
-    margin: 25px 0px 35px;
+    margin: 25px 0 35px;
 }
 
 .overlay-panel button {
@@ -285,20 +289,21 @@ p {
         height: auto;
         box-shadow: none;
         border-radius: 13px;
-        position: relative;
     }
+
     .form-container {
         position: static;
         width: 100%;
         padding: 20px;
-        display: block;
-        opacity: 1; /* Asegura que el formulario sea visible */
-        transition: opacity 0.6s ease-in-out; /* Añade transición para visibilidad */
+        display: none;
+        opacity: 1;
+        transition: opacity 0.6s ease-in-out;
+        justify-content: center;
     }
 
-    .sign-in-container,
-    .sign-up-container {
-        display: block; /* Asegura que ambos formularios estén visibles en móvil */
+    .sign-in-container.active,
+    .sign-up-container.active {
+        display: flex;
     }
 
     #overlayBtn, .overlay-container {
@@ -315,7 +320,6 @@ p {
         margin-top: 20px;
     }
 
-
     .overlay-panel-mobile h1 {
         color: white;
         font-size: 1.5em;
@@ -329,44 +333,81 @@ p {
     .overlay-panel-mobile button {
         background-color: white;
         color: #3B82F6;
+        border: none;
+        padding: 12px 45px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        text-transform: uppercase;
     }
 }
-@media (min-width: 768px) and (max-width: 1023px) {
+
+@media (min-width: 768px) {
     .container {
         width: 90%;
         height: 500px;
     }
 
     .form-container {
-        width: 50%;
-        padding: 30px;
+        position: absolute;
+        width: 60%;
+        padding: 0 40px;
+        transition: all 0.6s ease-in-out;
+        display: flex;
+    }
+
+    .sign-up-container {
+        opacity: 0;
+        z-index: 1;
+    }
+
+    .sign-in-container {
+        z-index: 2;
     }
 
     .overlay-container {
-        width: 50%;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 60%;
+        width: 40%;
+        height: 100%;
+        overflow: hidden;
+        transition: transform 0.6s ease-in-out;
+        z-index: 9;
+    }
+
+    .overlay-container-mobile {
+        display: none;
+    }
+
+    .right-panel-active .sign-in-container {
+        transform: translateX(20%);
+        opacity: 0;
+    }
+
+    .right-panel-active .sign-up-container {
+        transform: translateX(66.7%);
+        opacity: 1;
+        z-index: 5;
+        animation: show 0.6s;
     }
 }
 
 @media (min-width: 1024px) {
-  .container {
+    .container {
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%); /* Centra tanto horizontal como verticalmente */
+        transform: translate(-50%, -50%);
         width: 800px;
         height: 500px;
     }
 
     .form-container {
         width: 60%;
-        padding: 40px;
-    }
-
-    .sign-in-container,
-    .sign-up-container {
-        display: flex; /* Asegura que los formularios se muestran como flex containers */
-        justify-content: center;
-        align-items: center;
-        height: 100%;
+        padding: 0 40px;
     }
 }
