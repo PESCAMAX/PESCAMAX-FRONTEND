@@ -1,24 +1,25 @@
-
 <div class="flex h-screen overflow-hidden">
   <app-menu-lateral (menuToggled)="onMenuToggle($event)" class="z-20"></app-menu-lateral>
   <div class="flex-1 flex flex-col overflow-hidden">
     <main class="flex-1 overflow-x-hidden overflow-y-auto transition-all duration-300"
-          [ngClass]="{'ml-64': isMenuOpen, 'ml-16': !isMenuOpen}">
+          [ngClass]="{'ml-': isMenuOpen, 'ml-0': !isMenuOpen}">
       <div class="container mx-auto px-4 py-8">
-        <div class="mb-4">
-          <!-- You can add any additional content here if needed -->
-        </div>
         <div class="mm"></div>    
         <h1 class="p-4 text-2xl font-bold custom-font custom-color">Gráfica TDS</h1>
-        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
-          <div class="lg:col-span-3">
+        <div class="graph-and-card-container">
+          <div class="graph-container">
             <app-graficastdss></app-graficastdss>
           </div>
           <div class="cards">
-            <app-cards-info title="TDS" [value]="tdsValue" [trend]="tdsTrend" [trendValue]="tdsTrendValue"></app-cards-info>
+            <app-cards-info 
+              title="TDS" 
+              [value]="tdsValue" 
+              [trend]="tdsTrend" 
+              [trendValue]="tdsTrendValue">
+            </app-cards-info>
           </div>
         </div>
       </div>
-    </main>¿
+    </main>
   </div>
 </div>

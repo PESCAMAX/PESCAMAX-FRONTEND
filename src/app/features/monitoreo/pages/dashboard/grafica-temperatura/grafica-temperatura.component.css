@@ -53,8 +53,6 @@
   margin-bottom: 1rem;
 }
 
-
-
 /* Estilos responsivos */
 @media (max-width: 768px) {
   .main-container {
@@ -89,6 +87,7 @@
   .cards-grid {
     grid-template-columns: 1fr;
   }
+
   .title {
     font-size: 1.25rem;
   }
@@ -96,5 +95,4 @@
   .section-title {
     font-size: 1.1rem;
   }
-
 }
