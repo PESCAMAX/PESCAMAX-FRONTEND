@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError, BehaviorSubject  } from 'rxjs';
+import { Observable, throwError, BehaviorSubject, of } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +22,7 @@ export class AuthService {
           localStorage.setItem('userId', response.UserId);
           this.requirePasswordChangeSubject.next(response.RequirePasswordChange);
           if (response.RequirePasswordChange) {
-            if (response.UserId) {  // Asegúrate de usar "UserId" si ese es el nombre en el backend
+            if (response.UserId) {
               this.router.navigate(['/change-password', response.UserId]);
             } else {
               console.error('El userId es undefined');
@@ -36,7 +34,6 @@ export class AuthService {
           throw new Error('No se recibió la información de autenticación esperada');
         }
       }),
-      
       catchError(this.handleError)
     );
   }
@@ -53,10 +50,9 @@ export class AuthService {
     );
   }
 
-  
   private decodeToken(token: string): any {
     try {
-      return JSON.parse(atob(token.split('.')[1]));
+      return jwtDecode(token);
     } catch (error) {
       console.error('Error al decodificar el token:', error);
       throw error;
@@ -71,9 +67,23 @@ export class AuthService {
     return this.requirePasswordChangeSubject.asObservable();
   }
 
-  logout(): void {
+  logout(): Observable<any> {
+    // Si tienes un endpoint de logout en el backend, usa esto:
+    // return this.http.post<any>(`${this.apiUrl}/logout`, {}).pipe(
+    //   tap(() => this.handleLogoutSuccess()),
+    //   catchError(this.handleError)
+    // );
+
+    // Si no tienes un endpoint de logout, puedes usar esto:
+    return of(null).pipe(
+      tap(() => this.handleLogoutSuccess())
+    );
+  }
+
+  private handleLogoutSuccess(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
+    this.requirePasswordChangeSubject.next(false);
     this.router.navigate(['/login']);
   }
 
@@ -86,7 +96,6 @@ export class AuthService {
     return localStorage.getItem('userId') || '';
   }
 
-
   register(user: any): Observable<any> {
     console.log('Datos enviados al servidor:', user);
     return this.http.post<any>(`${this.apiUrl}/register`, user).pipe(
@@ -98,15 +107,11 @@ export class AuthService {
     );
   }
 
-  
-
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'An unknown error occurred!';
     if (error.error instanceof ErrorEvent) {
-      // Error del lado del cliente
       errorMessage = `Error: ${error.error.message}`;
     } else {
-      // El backend devolvió un código de respuesta sin éxito
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
       if (error.error) {
         errorMessage += `\nDetails: ${JSON.stringify(error.error)}`;
@@ -115,8 +120,6 @@ export class AuthService {
     console.error(errorMessage);
     return throwError(() => new Error(errorMessage));
   }
-
-
 
   forgotPassword(email: string): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/forgot-password`, { email }).pipe(
@@ -133,5 +136,4 @@ export class AuthService {
   getAuthToken(): string | null {
     return localStorage.getItem('token');
   }
- 
 }
