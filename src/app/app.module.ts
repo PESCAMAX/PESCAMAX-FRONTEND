@@ -10,13 +10,16 @@ import { SistemaDeAlertasModule } from './features/monitoreo/pages/sistema-de-al
 import { DashboardModule } from './features/monitoreo/pages/dashboard/dashboard.module';
 import { AuthGuard } from './core/guards/auth-guard/auth-guard.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NotFountComponent } from './shared/components/molecules/not-fount/not-fount.component';
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NotFountComponent
+    
   ],
   imports: [
     BrowserModule,

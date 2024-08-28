@@ -55,6 +55,7 @@ import { ChangePasswordComponent } from './components/molecules/change-password/
 import { PasswordChangeComponent } from '../features/monitoreo/pages/home/password-change/password-change.component';
 import { GlobalAlertaComponent } from '../features/monitoreo/components/moleculas-monitoreo/global-alerta/global-alerta.component';
 import { NotificationComponent } from '../features/monitoreo/components/moleculas-monitoreo/notification/notification.component';
+import { NotFountComponent } from './components/molecules/not-fount/not-fount.component';
 @NgModule({
   declarations: [
     ButtonEnviarComponent,
@@ -103,7 +104,8 @@ import { NotificationComponent } from '../features/monitoreo/components/molecula
     ChangePasswordComponent,
     PasswordChangeComponent,
     GlobalAlertaComponent,
-    NotificationComponent
+    NotificationComponent,
+    NotFountComponent
 
 
 

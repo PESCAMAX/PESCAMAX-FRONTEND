@@ -30,6 +30,7 @@ import { RecuperarPageComponent } from './features/monitoreo/pages/home/recupera
 import { CambiarPageComponent } from './features/monitoreo/pages/home/cambiar-page/cambiar-page.component';
 import { PasswordChangeComponent } from './features/monitoreo/pages/home/password-change/password-change.component';
 import { ConfiguracionUserComponent } from './features/monitoreo/pages/gestion-de-parametros/configuracion-user/configuracion-user.component';
+import { NotFountComponent } from './shared/components/molecules/not-fount/not-fount.component';
 
 const routes: Routes = [
   {
@@ -51,11 +52,11 @@ const routes: Routes = [
     component: DatapickerComponent
   },
 
-{
-path: 'change-password/:userId',
-component: PasswordChangeComponent,
-canActivate: [AuthGuard] 
-},
+  {
+    path: 'change-password/:userId',
+    component: PasswordChangeComponent,
+    canActivate: [AuthGuard] 
+  },
 
   {
     path: 'Inicio',
@@ -76,44 +77,36 @@ canActivate: [AuthGuard]
 
   { path: 'temperatura/:userId', component: GraficaTemperaturaComponent, canActivate: [AuthGuard] },
    
-   
-  
   {
     path: 'home/:userId',
     component: GraficaGeneralComponent
-
   },
   
   {
     path: 'grafica-tds/:userId',
     component: GraficaTdsComponent,
     canActivate: [AuthGuard]
-
   },
 
   {
     path: 'grafica-ph/:userId',
     component: GraficaPhComponent,
     canActivate: [AuthGuard]
-
   },
   {
     path: 'tabla-datos/:userId',
     component: TablaDatosComponent,
     canActivate: [AuthGuard]
-
   },
   {
     path: 'alertas-recientes/:userId',
     component: AlertasRecientesComponent,
     canActivate: [AuthGuard]
-
   },
   {
     path: 'historial-alertas/:userId',
     component: HistorialDeAlertasComponent,
     canActivate: [AuthGuard]
-
   },
   {
     path: '',
@@ -133,6 +126,10 @@ canActivate: [AuthGuard]
   { path: 'reset-password',
     component: CambiarPageComponent 
   },
+  // Wildcard route for 404 - Not Found
+  { path: '**',
+     component: NotFountComponent 
+  }
 ];
 
 @NgModule({
