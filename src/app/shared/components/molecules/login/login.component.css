@@ -42,7 +42,6 @@ body {
     justify-content: center;
     align-items: center;
 }
-
 .sign-up-container {
     opacity: 0;
     z-index: 1;
@@ -279,7 +278,7 @@ p {
 }
 
 /* Responsive Styles */
-@media (max-width: 767px) {
+@media (max-width: 1024px) {
     body {
         padding: 20px;
     }
@@ -287,8 +286,10 @@ p {
     .container {
         width: 100%;
         height: auto;
+        min-height: 500px; /* Add this line */
         box-shadow: none;
         border-radius: 13px;
+        overflow: visible; /* Add this line */
     }
 
     .form-container {
@@ -344,7 +345,8 @@ p {
     }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 920px) {
+    
     .container {
         width: 90%;
         height: 500px;
