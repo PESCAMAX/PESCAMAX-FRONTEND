@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../../../services/api-form/api.service';
 import { AlertService } from '../../../services/api-alert/alert.service';
@@ -37,9 +37,13 @@ export class ConfigUserComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.alertSubscription) {
-      this.alertSubscription.unsubscribe();
-    }
+    this.clearAlertTimeout();
+  }
+
+  @HostListener('document:click')
+  @HostListener('document:keydown')
+  onInteraction() {
+    this.dismissAlert();
   }
 
   loadUserData(): void {
@@ -78,7 +82,7 @@ export class ConfigUserComponent implements OnInit, OnDestroy {
         (response) => {
           console.log('User data updated successfully', response);
           this.showSuccess('Datos actualizados correctamente');
-          this.loadUserData(); // Recargar los datos actualizados
+          this.loadUserData();
         },
         (error) => {
           console.error('Error updating user data', error);
@@ -105,10 +109,8 @@ export class ConfigUserComponent implements OnInit, OnDestroy {
   }
 
   setAlertTimeout(): void {
-    if (this.alertSubscription) {
-      this.alertSubscription.unsubscribe();
-    }
-    this.alertSubscription = timer(1000).subscribe(() => {
+    this.clearAlertTimeout();
+    this.alertSubscription = timer(2000).subscribe(() => {
       this.dismissAlert();
     });
   }
@@ -117,8 +119,13 @@ export class ConfigUserComponent implements OnInit, OnDestroy {
     this.successMessage = '';
     this.errorMessage = '';
     this.alertService.clearAlert();
+    this.clearAlertTimeout();
+  }
+
+  private clearAlertTimeout(): void {
     if (this.alertSubscription) {
       this.alertSubscription.unsubscribe();
+      this.alertSubscription = null;
     }
   }
 }
