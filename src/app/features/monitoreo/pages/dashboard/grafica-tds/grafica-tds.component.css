@@ -2,7 +2,7 @@
 .main-container {
   display: flex;
 
-
+}
 .content-wrapper {
   transition: width 0.3s ease, margin-left 0.3s ease;
   flex-direction: column;

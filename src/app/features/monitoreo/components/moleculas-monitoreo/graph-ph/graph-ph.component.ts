@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { createChart, IChartApi, ColorType, Time, LineData } from 'lightweight-charts';
 import { ApiService, Monitoreo } from '../../../services/api-form/api.service';
 import { AuthService } from '../../../../../core/services/api-login/auth.service';
@@ -16,6 +16,7 @@ export class GraphPhComponent implements OnInit {
   private startDate: Date | null = null;
   private endDate: Date | null = null;
   monitoreoData: Monitoreo[] = [];
+
 
   constructor(private apiService: ApiService, private authService: AuthService) {}
 

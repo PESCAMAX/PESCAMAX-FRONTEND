@@ -7,5 +7,16 @@
   <p class="text-sm text-gray-600 mt-2" *ngIf="trendValue">
     {{ isTimeCard ? 'Anterior:' : 'Cambio:' }} {{trendValue}}
   </p>
-  <a *ngIf="!isTimeCard" [href]="'/graficas?lote=' + selectedLot" class="text-blue-600 hover:text-blue-800 text-sm mt-2 inline-block">Ver reporte →</a>
+   <ng-container [ngSwitch]="title.toLowerCase()">
+    <a *ngSwitchCase="'temperatura'" 
+       [routerLink]="['/temperatura', authService.getUserId()]" 
+       class="text-blue-600 hover:text-blue-800 text-sm mt-2 inline-block">Ver reporte →</a>
+    <a *ngSwitchCase="'tds'" 
+       [routerLink]="['/grafica-tds', authService.getUserId()]" 
+       class="text-blue-600 hover:text-blue-800 text-sm mt-2 inline-block">Ver reporte →</a>
+    <a *ngSwitchCase="'ph'" 
+       [routerLink]="['/grafica-ph', authService.getUserId()]" 
+       class="text-blue-600 hover:text-blue-800 text-sm mt-2 inline-block">Ver reporte →</a>
+  </ng-container>
+
 </div>

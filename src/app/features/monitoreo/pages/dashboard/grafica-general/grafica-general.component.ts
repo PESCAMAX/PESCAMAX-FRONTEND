@@ -5,6 +5,7 @@ import { GlobalAlertService } from '../../../services/alerta-global/global-alert
 import { interval, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { UltimoDatoService } from '../../../services/servicio-alerta/ultimo-dato.service';
+import { Router } from '@angular/router';
 
 interface MonitoreoItem {
   title: string;
@@ -44,7 +45,6 @@ export class GraficaGeneralComponent implements OnInit, OnDestroy {
   penultimoRegistroHora: string = '';
   lote: number | null = null;
 
- 
 
   temperaturaStatus: 'good' | 'bad' | 'unassigned' = 'unassigned';
   tdsStatus: 'good' | 'bad' | 'unassigned' = 'unassigned';
@@ -56,12 +56,12 @@ export class GraficaGeneralComponent implements OnInit, OnDestroy {
   monitoreoItems: MonitoreoItem[] = [];
 
   constructor(
+    private router: Router,
     private apiService: ApiService,
     private authService: AuthService,
     private cdr: ChangeDetectorRef,
     public globalAlertService: GlobalAlertService,
     private ultimoDatoService: UltimoDatoService,
-    
   ) {
     this.userId = this.authService.getUserId();
   }
@@ -275,7 +275,10 @@ export class GraficaGeneralComponent implements OnInit, OnDestroy {
     }));
 }
 
-
+ 
+onViewReport(graphId: string) {
+  this.router.navigate([`/${graphId}`, this.selectedLote]);
+}
   toggleDetails(item: MonitoreoItem): void {
     item.showDetails = !item.showDetails;
   }
