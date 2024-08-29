@@ -12,6 +12,8 @@ export class CardsInfoComponent implements OnChanges {
   @Input() trendValue: string = '';
   @Input() status: 'good' | 'bad' | 'unassigned' = 'unassigned';
   @Input() isTimeCard: boolean = false;
+  @Input() selectedLot: string = ''; // Agregar esta línea
+
   previousValue: number | string = '';
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -30,12 +32,20 @@ export class CardsInfoComponent implements OnChanges {
   }
 
   get trendIcon(): string {
-    return this.trend === 'up' ? '↑' : this.trend === 'down' ? '↓' : '';
+    const iconMap: { [key: string]: string } = {
+      'up': '↑',
+      'down': '↓',
+      'none': ''
+    };
+    return iconMap[this.trend] || '';
   }
 
   get trendColor(): string {
-    return this.trend === 'up' ? 'text-green-500' :
-           this.trend === 'down' ? 'text-red-500' :
-           'text-gray-500';
+    const colorMap: { [key: string]: string } = {
+      'up': 'text-green-500',
+      'down': 'text-red-500',
+      'none': 'text-gray-500'
+    };
+    return colorMap[this.trend] || 'text-gray-500';
   }
 }

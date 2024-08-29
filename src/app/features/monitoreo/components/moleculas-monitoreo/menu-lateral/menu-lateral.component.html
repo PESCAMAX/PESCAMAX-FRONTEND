@@ -104,9 +104,9 @@
 
 <!-- Dropdown del menú de usuario -->
 <div *ngIf="isUserMenuVisible" class="absolute right-4 top-16 bg-white shadow-lg rounded-lg overflow-hidden">
-  <a [href]="'/user-config/' + userId" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Profile</a>
-  <a href="#settings" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Settings</a>
-  <a href="http://localhost:4200/Inicio" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Logout</a>
+  <a [href]="'/user-config/' + userId" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Perfil</a>
+  <a href="#settings" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Ajustes</a>
+  <button (click)="cerrarSesion()">Cerrar Sesión</button>
 </div>
 
 <!-- Contenido principal -->

@@ -23,6 +23,7 @@ export class MenuLateralComponent implements OnInit {
     private authService: AuthService,
     private renderer: Renderer2
   ) {}
+  
 
   ngOnInit() {
     this.userId = localStorage.getItem('userId') || '';
@@ -38,6 +39,18 @@ export class MenuLateralComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.checkWindowWidth();
+  }
+  cerrarSesion() {
+    this.authService.logout().subscribe({
+      next: () => {
+        console.log('Sesión cerrada exitosamente');
+        // Aquí puedes agregar cualquier lógica adicional después del cierre de sesión
+      },
+      error: (error) => {
+        console.error('Error al cerrar sesión:', error);
+        // Maneja el error apropiadamente
+      }
+    });
   }
 
   checkWindowWidth() {
@@ -84,6 +97,7 @@ export class MenuLateralComponent implements OnInit {
       }
     }
   }
+  
 
   closeMenu() {
     if (this.isMenuOpen) {
