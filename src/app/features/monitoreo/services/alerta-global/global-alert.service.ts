@@ -6,6 +6,18 @@ import { AlertService } from '../api-alert/alert.service';
   providedIn: 'root'
 })
 export class GlobalAlertService {
+  getUnreadCount(): number {
+    throw new Error('Method not implemented.');
+  }
+  getStoredNotifications(): { message: string; time: Date; }[] {
+    throw new Error('Method not implemented.');
+  }
+  setUnreadCount(unreadCount: number) {
+    throw new Error('Method not implemented.');
+  }
+  storeNotification(newNotification: { message: string; time: Date; }) {
+    throw new Error('Method not implemented.');
+  }
   private alertSubject = new BehaviorSubject<string | null>(null);
   alert$ = this.alertSubject.asObservable();
 
