@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../../../services/api-form/api.service';
 import { AuthService } from '../../../../../core/services/api-login/auth.service';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse} from '@angular/common/http';
+import { Subscription } from 'rxjs';
 
 interface Especie {
   Id: number;
@@ -13,10 +14,9 @@ interface Especie {
   TemperaturaMaximo: number;
   PhMinimo: number;
   PhMaximo: number;
-  Cantidad: number; // Add Cantidad property
+  Cantidad?: number; // Hacer esta propiedad opcional
   UserId: string;
 }
-
 interface AlertState {
   show: boolean;
   type: 'success' | 'danger' | 'warning';
@@ -82,7 +82,7 @@ export class TablaEspecieComponent implements OnInit {
         console.error('Error al obtener las especies:', error);
         this.mostrarAlerta('danger', 'Error', 'Error al obtener las especies', 'red');
       }
-    );
+    ) as Subscription;
   }
 
   filtrarEspecies(): void {

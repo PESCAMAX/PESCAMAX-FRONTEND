@@ -15,6 +15,7 @@ import { GraficaBarrasComponent } from './components/moleculas-monitoreo/grafica
 import { GlobalAlertComponent } from './components/atomos-monitoreo/global-alert/global-alert.component';
 import { GlobalAlertaComponent } from './components/moleculas-monitoreo/global-alerta/global-alerta.component';
 import { NotificationComponent } from './components/moleculas-monitoreo/notification/notification.component';
+import { FormularioMortalidadComponent } from './components/moleculas-monitoreo/formulario-mortalidad/formulario-mortalidad.component';
 
 
 
@@ -37,7 +38,8 @@ import { NotificationComponent } from './components/moleculas-monitoreo/notifica
           GraficaBarrasComponent,
           GlobalAlertComponent,
           GlobalAlertaComponent,
-          NotificationComponent
+          NotificationComponent,
+          FormularioMortalidadComponent
 
           
 
