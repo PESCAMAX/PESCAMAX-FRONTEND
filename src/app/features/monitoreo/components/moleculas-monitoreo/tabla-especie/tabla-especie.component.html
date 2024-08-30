@@ -24,6 +24,7 @@
         <th class="p-2 text-left font-bold border border-grey-500 text-sm">Temp. Máxima</th>
         <th class="p-2 text-left font-bold border border-grey-500 text-sm">PH Mínimo</th>
         <th class="p-2 text-left font-bold border border-grey-500 text-sm">PH Máximo</th>
+        <th class="p-2 text-left font-bold border border-grey-500 text-sm">Cantidad</th>
         <th class="p-2 text-left font-bold border border-grey-500 text-sm">Eliminar</th>
         <th class="p-2 text-left font-bold border border-grey-500 text-sm">Editar</th>
       </tr>
@@ -38,6 +39,7 @@
         <td class="p-2 border bg-white text-left">{{ especie.TemperaturaMaximo }}</td>
         <td class="p-2 border bg-white text-left">{{ especie.PhMinimo }}</td>
         <td class="p-2 border bg-white text-left">{{ especie.PhMaximo }}</td>
+        <td class="p-2 border bg-white text-left">{{ especie.Cantidad }}</td>
         <td class="p-2 border bg-white text-left">
           <app-button-eliminar [id]="especie.Id" (eliminar)="eliminarEspecie($event)"></app-button-eliminar>
         </td>
@@ -60,6 +62,7 @@
       <p><strong>TDS:</strong> {{ especie.TdsMinimo }} - {{ especie.TdsMaximo }}</p>
       <p><strong>Temperatura:</strong> {{ especie.TemperaturaMinimo }} - {{ especie.TemperaturaMaximo }}</p>
       <p><strong>PH:</strong> {{ especie.PhMinimo }} - {{ especie.PhMaximo }}</p>
+      <p><strong>Cantidad:</strong> {{ especie.Cantidad }}</p>
       <div class="mt-4 flex justify-between">
         <app-button-eliminar [id]="especie.Id" (eliminar)="eliminarEspecie($event)"></app-button-eliminar>
         <button (click)="editarEspecie(especie)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded text-xs flex items-center">
@@ -111,6 +114,11 @@
             <label for="PhMaximo" class="form-label">PH Máximo</label>
             <input type="number" id="PhMaximo" formControlName="PhMaximo" class="form-input" />
           </div>
+        </div>
+
+        <div class="form-field full-width">
+          <label for="cantidad" class="form-label">Cantidad</label>
+          <input type="number" id="cantidad" formControlName="Cantidad" class="form-input" />
         </div>
   
         <div class="form-actions">

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../../services/api-form/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpErrorResponse } from '@angular/common/http';
+import { ApiService } from '../../../services/api-form/api.service';
 import { AuthService } from '../../../../../core/services/api-login/auth.service';
-import { ActivatedRoute } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+
 interface Especie {
   Id: number;
   NombreEspecie: string;
@@ -13,6 +13,7 @@ interface Especie {
   TemperaturaMaximo: number;
   PhMinimo: number;
   PhMaximo: number;
+  Cantidad: number; // Add Cantidad property
   UserId: string;
 }
 
@@ -45,16 +46,12 @@ export class TablaEspecieComponent implements OnInit {
     content: '',
     iconColor: 'red'
   };
-  
-  cerrarModal(): void {
-    this.especieSeleccionada = null;
-    this.especieForm.reset();
-  }
 
   especieForm: FormGroup;
   especieSeleccionada: Especie | null = null;
 
-  constructor(private apiService: ApiService, private fb: FormBuilder, private AuthService: AuthService) {    this.especieForm = this.fb.group({
+  constructor(private apiService: ApiService, private fb: FormBuilder, private authService: AuthService) {
+    this.especieForm = this.fb.group({
       NombreEspecie: ['', Validators.required],
       TdsMinimo: ['', Validators.required],
       TdsMaximo: ['', Validators.required],
@@ -62,6 +59,7 @@ export class TablaEspecieComponent implements OnInit {
       TemperaturaMaximo: ['', Validators.required],
       PhMinimo: ['', Validators.required],
       PhMaximo: ['', Validators.required],
+      Cantidad: ['', Validators.required] // Add Cantidad control
     });
   }
 
@@ -69,13 +67,14 @@ export class TablaEspecieComponent implements OnInit {
     this.obtenerEspecies();
   }
 
-  onMenuToggle(isOpen: boolean) {
-    this.isMenuOpen = isOpen;
+  cerrarModal(): void {
+    this.especieSeleccionada = null;
+    this.especieForm.reset();
   }
 
   obtenerEspecies(): void {
-    this.apiService.listarEspecies(this.AuthService.getUserId()).subscribe( 
-      (response: Especie[]) => {
+    this.apiService.listarEspecies(this.authService.getUserId()).subscribe(
+      (response: Especie[]) => { 
         this.especies = response;
         this.filtrarEspecies();
       },
@@ -100,7 +99,7 @@ export class TablaEspecieComponent implements OnInit {
     this.mostrarAlertaConfirmacion(id);
   }
 
- mostrarAlertaConfirmacion(id: number): void {
+  mostrarAlertaConfirmacion(id: number): void {
     this.alertState = {
       show: true,
       type: 'warning',
@@ -150,7 +149,7 @@ export class TablaEspecieComponent implements OnInit {
   editarEspecie(especie: Especie) {
     this.especieSeleccionada = especie;
     this.especieForm.patchValue(especie);
-    
+
     setTimeout(() => {
       const element = document.getElementById('editarEspecieForm');
       if (element) {
@@ -170,7 +169,7 @@ export class TablaEspecieComponent implements OnInit {
       const especieModificada: Especie = {
         ...this.especieSeleccionada,
         ...this.especieForm.value,
-        UserId: this.AuthService.getUserId() // Asegúrate de que sea UserId
+        UserId: this.authService.getUserId() // Asegúrate de que sea UserId
       };
       console.log('Datos de la especie a modificar:', especieModificada);
       this.apiService.modificarEspecie(especieModificada).subscribe(
