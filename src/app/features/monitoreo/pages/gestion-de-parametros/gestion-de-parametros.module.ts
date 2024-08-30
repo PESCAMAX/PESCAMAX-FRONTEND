@@ -6,15 +6,14 @@ import { ModificarEspecieComponent } from './modificar-especie/modificar-especie
 import { SeleccionarEspecieComponent } from './seleccionar-especie/seleccionar-especie.component';
 import { SharedModule } from '../../../../shared/shared.module';
 import { ConfiguracionUserComponent } from './configuracion-user/configuracion-user.component';
-import { MortalidadPageComponent } from './mortalidad-page/mortalidad-page.component';
+
 
 @NgModule({
   declarations: [
     CrearEspecieComponent,
     ModificarEspecieComponent,
     SeleccionarEspecieComponent,
-    ConfiguracionUserComponent,
-    MortalidadPageComponent
+    ConfiguracionUserComponent
   ],
   imports: [
     CommonModule,

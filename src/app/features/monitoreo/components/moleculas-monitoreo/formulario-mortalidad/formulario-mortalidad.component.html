@@ -1,1 +1,11 @@
-<p>formulario-mortalidad works!</p>
+<form (ngSubmit)="onSubmit()" #mortalidadForm="ngForm" class="form-container">
+  <div class="form-group">
+    <label for="loteId">Lote ID:</label>
+    <input type="number" id="loteId" required [(ngModel)]="mortalidad.loteId" name="loteId" class="form-input">
+  </div>
+  <div class="form-group">
+    <label for="cantidadMuertos">Cantidad de Muertos:</label>
+    <input type="number" id="cantidadMuertos" required [(ngModel)]="mortalidad.cantidadMuertos" name="cantidadMuertos" class="form-input">
+  </div>
+  <button type="submit" [disabled]="!mortalidadForm.form.valid" class="form-button">Registrar Mortalidad</button>
+</form>

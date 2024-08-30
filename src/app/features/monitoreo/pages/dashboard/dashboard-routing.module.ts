@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { GraficaTemperaturaComponent } from './grafica-temperatura/grafica-temperatura.component';
 import { GraficaPhComponent } from './grafica-ph/grafica-ph.component';
 import { GraficaTdsComponent } from './grafica-tds/grafica-tds.component';
-import { TablaDatosComponent } from './tabla-datos/tabla-datos.component';
+import { TablaDatosComponent } from '../gestion-de-parametros/tabla-datos/tabla-datos.component';
 
 const routes: Routes = [
   { path: 'grafica-temperatura', component: GraficaTemperaturaComponent },

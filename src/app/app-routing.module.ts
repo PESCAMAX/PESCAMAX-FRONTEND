@@ -7,7 +7,7 @@ import { ModificarEspecieComponent } from './features/monitoreo/pages/gestion-de
 import { GraficaTemperaturaComponent } from './features/monitoreo/pages/dashboard/grafica-temperatura/grafica-temperatura.component';
 import { GraficaTdsComponent } from './features/monitoreo/pages/dashboard/grafica-tds/grafica-tds.component';
 import { GraficaPhComponent } from './features/monitoreo/pages/dashboard/grafica-ph/grafica-ph.component';
-import { TablaDatosComponent } from './features/monitoreo/pages/dashboard/tabla-datos/tabla-datos.component';
+import { TablaDatosComponent } from './features/monitoreo/pages/gestion-de-parametros/tabla-datos/tabla-datos.component';
 import { AlertasRecientesComponent } from './features/monitoreo/pages/sistema-de-alertas/alertas-recientes/alertas-recientes.component';
 import { HistorialDeAlertasComponent } from './features/monitoreo/pages/sistema-de-alertas/historial-de-alertas/historial-de-alertas.component';
 import { CardAlertsComponent } from './features/monitoreo/components/moleculas-monitoreo/card-alerts/card-alerts.component';
