@@ -102,15 +102,15 @@ export class GraficasTemperaturaComponent implements OnInit {
       width: 800,
       height: 400,
       layout: {
-        background: { type: ColorType.Solid, color: '#ffffff' },
-        textColor: '#333'
+        background: { type: ColorType.Solid, color: '#F3F4F6' },
+        textColor: '#374151'
       },
       grid: {
         vertLines: {
-          color: '#f0f0f0'
+          color: '#E5E7EB'
         },
         horzLines: {
-          color: '#f0f0f0'
+          color: '#E5E7EB'
         }
       },
       rightPriceScale: {
@@ -121,15 +121,16 @@ export class GraficasTemperaturaComponent implements OnInit {
         },
       },
       timeScale: {
-        borderColor: '#d1d4dc',
+        borderColor: '#374151',
         timeVisible: true,
         secondsVisible: false
       },
     });
   
-    const lineSeries = this.chart.addLineSeries({
-      color: 'pink',
-      lineWidth: 2,
+    const areaSeries = this.chart.addAreaSeries({
+      lineColor: '#FDA172',
+      topColor: 'rgba(253, 161, 114, 0.4)',
+      bottomColor: 'rgba(253, 161, 114, 0.1)',
       crosshairMarkerVisible: true,
       lastValueVisible: true,
       priceFormat: {
@@ -139,7 +140,7 @@ export class GraficasTemperaturaComponent implements OnInit {
       },
     });
   
-    lineSeries.setData(data);
+    areaSeries.setData(data);
   
     // Ajustar el rango visible
     this.chart.timeScale().fitContent();
