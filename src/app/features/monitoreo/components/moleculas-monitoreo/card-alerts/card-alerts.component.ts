@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ApiService } from '../../../services/api-form/api.service';
 
 @Component({
   selector: 'app-card-alerts',
@@ -11,14 +12,35 @@ export class CardAlertsComponent {
   numHoursToMonitor: number | null = null; // Inicialmente null para verificar si se ha ingresado un número
   hours: number[] = Array.from({ length: 12 }, (_, i) => i + 1); // Horas del día (de 1 a 12)
   selectedHours: number[] = []; // Horas seleccionadas
+  mortalidadPorLote: any[] = [];
 
+  constructor(private apiService: ApiService) {}
   // Función para mostrar u ocultar el modal
+  
+  ngOnInit() {
+    this.obtenerMortalidadPorLote();
+  }
+  
   toggleModal() {
     this.modalOpen = !this.modalOpen;
   }
   onMenuToggle(isOpen: boolean) {
     this.isMenuOpen = isOpen;
   }
+
+
+  obtenerMortalidadPorLote(){
+  
+      this.apiService.obtenerMortalidadPorLote().subscribe(
+        (response: any) => {
+          console.log('Mortalidad por lote:', response);
+          this.mortalidadPorLote = response;
+        },
+        (error: any) => {
+          console.error('Error al obtener mortalidad por lote:', error);
+        }
+      );
+    }
   // Función para agregar o quitar horas seleccionadas
   toggleHour(hour: number) {
     if (!this.isClockEnabled()) {
@@ -37,6 +59,7 @@ export class CardAlertsComponent {
     }
   }
 
+  
   // Función para limpiar las horas seleccionadas
   clearSelection() {
     this.selectedHours = [];

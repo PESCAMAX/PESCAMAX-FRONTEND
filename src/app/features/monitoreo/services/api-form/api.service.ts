@@ -42,11 +42,17 @@ export class ApiService {
       catchError(this.handleError)
     );
   }
+  obtenerMortalidadPorLote(){
+    return this.http.get(`${this.baseUrl}/Mortalidad/Obtener`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   registrarMortalidad(mortalidad: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/Mortalidad/Registrar`, mortalidad, { headers: this.getHeaders() })
       .pipe(catchError(this.handleError));
   }
-
+  
   modificarEspecie(especie: Especie): Observable<any> {
     const url = `${this.baseUrl}/CrearEspecie/Modificar/${especie.UserId}`;
     return this.http.put(url, especie, { headers: this.getHeaders() })

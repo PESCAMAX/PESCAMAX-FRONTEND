@@ -9,3 +9,17 @@
   </p>
   <a *ngIf="!isTimeCard" [href]="'/graficas?lote=' + selectedLot" class="text-blue-600 hover:text-blue-800 text-sm mt-2 inline-block">Ver reporte →</a>
 </div>
+
+<!-- Mostrar la tasa de mortalidad por lote -->
+<div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+  <div *ngFor="let lote of mortalidadPorLote" class="card bg-white p-4 rounded-lg shadow-md">
+    <div class="card-header mb-2">
+      <h3 class="text-lg font-semibold">Lote ID: {{ lote.loteId }}</h3>
+    </div>
+    <div class="card-body">
+      <p class="text-gray-700">Tasa de Mortalidad: {{ lote.tasaMortalidad }}%</p>
+      <p class="text-gray-700">Cantidad de Muertos: {{ lote.cantidadMuertos }}</p>
+    </div>
+  </div>
+</div>
+<!-- Llamar al componente de la tarjeta de alertas -->

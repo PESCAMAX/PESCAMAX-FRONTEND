@@ -43,6 +43,13 @@ export class GraficaGeneralComponent implements OnInit, OnDestroy {
   ultimoRegistroHora: string = '';
   penultimoRegistroHora: string = '';
   lote: number | null = null;
+  mortalidadValue: any;
+
+  mortalidadTrend: any;
+
+  mortalidadTrendValue: any;
+
+  mortalidadStatus: any;
 
  
 

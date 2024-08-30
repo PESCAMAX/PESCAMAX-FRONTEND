@@ -13,6 +13,7 @@ export class CardsInfoComponent implements OnChanges {
   @Input() status: 'good' | 'bad' | 'unassigned' = 'unassigned';
   @Input() isTimeCard: boolean = false;
   @Input() selectedLot: string = ''; // Agregar esta línea
+  @Input() mortalidadPorLote: any[] = []; // Agregar esta línea para los datos de mortalidad
 
   previousValue: number | string = '';
 
