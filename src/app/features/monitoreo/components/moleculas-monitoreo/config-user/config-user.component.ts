@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ApiService } from '../../../services/api-form/api.service';
 import { AlertService } from '../../../services/api-alert/alert.service';
 import { AuthService } from '../../../../../core/services/api-login/auth.service';
@@ -25,9 +25,9 @@ export class ConfigUserComponent implements OnInit, OnDestroy {
     private alertService: AlertService
   ) {
     this.userForm = this.fb.group({
-      phoneNumber: ['', Validators.required],
-      address: ['', Validators.required],
-      farmName: ['', Validators.required]
+      phoneNumber: [''],
+      address: [''],
+      farmName: ['']
     });
   }
 
@@ -42,6 +42,12 @@ export class ConfigUserComponent implements OnInit, OnDestroy {
     }
   }
   
+
+  @HostListener('document:click')
+  @HostListener('document:input')
+  onDocumentInteraction() {
+    this.dismissAlert();
+  }
 
   loadUserData(): void {
     this.apiService.getCurrentUser().subscribe(
@@ -72,9 +78,10 @@ export class ConfigUserComponent implements OnInit, OnDestroy {
       }
     });
 
-    if (hasChanges) {
-      changedData.id = this.userId;
+    // Limpiar el formulario inmediatamente después de presionar el botón
+    this.clearForm();
 
+    if (hasChanges) {
       this.apiService.updateUser(changedData).subscribe(
         (response) => {
           console.log('User data updated successfully', response);
@@ -87,8 +94,16 @@ export class ConfigUserComponent implements OnInit, OnDestroy {
         }
       );
     } else {
-      this.showError('No se han realizado cambios');
+      this.showSuccess('No se realizaron cambios');
     }
+  }
+
+  clearForm(): void {
+    this.userForm.reset({
+      phoneNumber: '',
+      address: '',
+      farmName: ''
+    });
   }
 
   showSuccess(message: string): void {
@@ -109,7 +124,7 @@ export class ConfigUserComponent implements OnInit, OnDestroy {
     if (this.alertSubscription) {
       this.alertSubscription.unsubscribe();
     }
-    this.alertSubscription = timer(1000).subscribe(() => {
+    this.alertSubscription = timer(3000).subscribe(() => {
       this.dismissAlert();
     });
   }

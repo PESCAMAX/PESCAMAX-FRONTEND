@@ -12,8 +12,8 @@ export class CardsInfoComponent implements OnChanges {
   @Input() trendValue: string = '';
   @Input() status: 'good' | 'bad' | 'unassigned' = 'unassigned';
   @Input() isTimeCard: boolean = false;
-  @Input() selectedLot: string = ''; // Agregar esta línea
-  @Input() mortalidadPorLote: any[] = []; // Agregar esta línea para los datos de mortalidad
+  @Input() selectedLot: string = '';
+  @Input() mortalidadPorLote: any[] = [];
 
   previousValue: number | string = '';
 
@@ -24,6 +24,9 @@ export class CardsInfoComponent implements OnChanges {
   }
 
   get cardColor(): string {
+    if (this.title.toLowerCase().includes('mortalidad')) {
+      return 'border-black';
+    }
     const colorMap: { [key: string]: string } = {
       'good': 'border-green-500',
       'bad': 'border-red-500',
@@ -33,6 +36,9 @@ export class CardsInfoComponent implements OnChanges {
   }
 
   get trendIcon(): string {
+    if (this.title.toLowerCase().includes('mortalidad')) {
+      return '%';
+    }
     const iconMap: { [key: string]: string } = {
       'up': '↑',
       'down': '↓',
@@ -42,6 +48,9 @@ export class CardsInfoComponent implements OnChanges {
   }
 
   get trendColor(): string {
+    if (this.title.toLowerCase().includes('mortalidad')) {
+      return 'text-black';
+    }
     const colorMap: { [key: string]: string } = {
       'up': 'text-green-500',
       'down': 'text-red-500',
