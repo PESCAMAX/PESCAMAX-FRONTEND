@@ -8,6 +8,9 @@ import { AuthService } from '../../../../core/services/api-login/auth.service';
   providedIn: 'root'
 })
 export class ApiService {
+  obtenerLotes() {
+    throw new Error('Method not implemented.');
+  }
   private baseUrl = 'http://localhost:6754/api';
 
   constructor(
@@ -21,6 +24,9 @@ export class ApiService {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     });
+  }
+  public getUserId(): string {
+    return this.authService.getUserId();
   }
   private handleError(error: HttpErrorResponse): Observable<never> {
     console.error('Error occurred:', error);
