@@ -32,6 +32,7 @@ body {
     overflow: hidden;
 }
 
+
 .form-container {
     position: absolute;
     width: 60%;
@@ -62,7 +63,7 @@ form {
 
 h1 {
     color: #3B82F6;
-    font-size: 2em;
+    font-size:  2.5em;
     margin: 0.67em 0;
     font-weight: bold;
 }
@@ -127,22 +128,95 @@ a.forgot {
     border-bottom: 2px solid #eee;
 }
 
-button {
+.boton-enviar {
+    background-color: #3b82f6; /* Color azul original */
+    color: white;
     border-radius: 20px;
-    border: 1px solid #eee;
-    background: #3B82F6;
-    color: #fff;
-    font-size: 12px;
-    font-weight: bold;
     padding: 12px 45px;
+    font-size: 12px;
+    font-weight: 500;
+    border: 1px solid #eee;
+    cursor: pointer;
+    transition: all 0.3s ease;
     letter-spacing: 1px;
     text-transform: uppercase;
-}
+  }
+  
+  .boton-enviar:hover {
+    background-color: #2563eb; /* Color azul más oscuro al pasar el cursor */
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3); /* Sombra para efecto 3D */
+  }
 
-.form-container button:hover {
-    background: #fff;
-    color: var(--grad-clr2);
-}
+
+  .blue-hover {
+    color: #3b82f6; /* Este es el color de text-blue-600 */
+    transition: color 0.3s ease-in-out; /* Transición suave */
+  }
+  
+  .blue-hover:hover {
+    color: #2563eb; /* Un tono más oscuro de azul */
+  }
+
+
+  /* Estilos para el botón */
+   .ghost {
+    background: transparent; /* Fondo transparente */
+    color: white; /* Texto blanco */
+    border: 2px solid white; /* Borde blanco */
+    border-radius: 20px;
+    padding: 8px 16px; /* Espaciado interno */
+    font-size: 16px; /* Tamaño de fuente */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    transition: background-color 0.3s, color 0.3s; /* Transición suave */
+   
+    }
+  
+   .ghost:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Fondo blanco transparente */
+    color: white; /* Texto blanco */
+    }
+
+
+.ghost2 {
+     background: transparent; /* Fondo transparente */
+     color: white; /* Texto blanco */
+     border: 2px solid white; /* Borde blanco */
+     border-radius: 20px;
+     padding: 8px 16px; /* Espaciado interno */
+     font-size: 16px; /* Tamaño de fuente */
+     cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+     transition: background-color 0.3s, color 0.3s; /* Transición suave */
+     margin-top: 170px;
+          
+  }
+
+    .ghost2:hover {
+     background-color: rgba(255, 255, 255, 0.1); /* Fondo blanco transparente */
+     color: white; /* Texto blanco */
+
+   }
+   
+
+
+   .btn-enviar {
+    margin-top: 78px; /* Ajusta este valor según el espacio que desees */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centrar el contenido horizontalmente */
+    width: 100%; /* Asegura que el ancho sea del 100% para centrado */
+
+   }
+
+
+
+
+
+    .no-cuenta{
+        margin-top: 77px;
+    }
+  
+
+  
 
 .overlay-container {
     position: absolute;
@@ -169,7 +243,6 @@ button {
     position: absolute;
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-direction: column;
     padding: 0 40px;
     text-align: center;
@@ -183,6 +256,12 @@ button {
     right: 60%;
     transform: translateX(-12%);
 }
+
+.overlay-panel img {
+    margin-bottom: 30px; /* Ajusta este valor según el espacio que desees */
+    margin-top: 30px;
+  }
+  
 
 .overlay-right {
     background-color: #3B82F6;
@@ -203,7 +282,6 @@ p {
 }
 
 .overlay-panel button {
-    border: none;
     background-color: transparent;
 }
 

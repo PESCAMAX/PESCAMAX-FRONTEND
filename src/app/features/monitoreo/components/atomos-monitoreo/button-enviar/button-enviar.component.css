@@ -1,0 +1,17 @@
+.boton-enviar {
+    background-color: #1d4ed8; /* Color azul original */
+    color: white;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .boton-enviar:hover {
+    background-color: #1e40af; /* Color azul más oscuro al pasar el cursor */
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3); /* Sombra para efecto 3D */
+  }
+  
