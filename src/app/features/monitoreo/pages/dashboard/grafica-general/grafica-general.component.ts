@@ -49,9 +49,7 @@ export class GraficaGeneralComponent implements OnInit, OnDestroy {
   mortalidadTrendValue: string = '';
   mortalidadStatus: 'good' | 'bad' | 'unassigned' = 'unassigned';
   totalPeces: number = 1000; // Suponiendo que tienes el total de peces
-  loteId: number = 2;
- 
-
+  mortalidadData: any[] = []; // 
   temperaturaStatus: 'good' | 'bad' | 'unassigned' = 'unassigned';
   tdsStatus: 'good' | 'bad' | 'unassigned' = 'unassigned';
   phStatus: 'good' | 'bad' | 'unassigned' = 'unassigned';
@@ -79,22 +77,16 @@ export class GraficaGeneralComponent implements OnInit, OnDestroy {
     this.startAutoUpdate();
     this.subscribeToAlerts();
     this.iniciarMonitoreoAutomatico();
-    this.obtenerMortalidadTotal();
+
   }
 
   ngOnDestroy(): void {
-    if (this.updateSubscription) {
-      this.updateSubscription.unsubscribe();
-    }
-    if (this.alertSubscription) {
-      this.alertSubscription.unsubscribe();
-    }
-    if (this.monitoreoSubscription) {
-      this.monitoreoSubscription.unsubscribe();
-    }
+    this.monitoreoSubscription?.unsubscribe();
+    this.updateSubscription?.unsubscribe();
+    this.alertSubscription?.unsubscribe();
   }
-  obtenerMortalidadTotal() {
-    this.apiService.obtenerMortalidadTotal(this.loteId).subscribe(
+  private obtenerMortalidadTotal(loteId: number): void {
+    this.apiService.obtenerMortalidadTotal(loteId).subscribe(
       data => {
         const totalMuertos = data.totalMortalidad;
         this.mortalidadValue = (totalMuertos / this.totalPeces) * 100;
@@ -154,6 +146,7 @@ export class GraficaGeneralComponent implements OnInit, OnDestroy {
       }
     );
   }
+
 
   cargarAlertas(): void {
     this.apiService.obtenerAlertas().subscribe(
@@ -237,13 +230,12 @@ export class GraficaGeneralComponent implements OnInit, OnDestroy {
   }
 
   calcularEstados(): void {
-    if (this.monitoreoDataFiltrada.length === 0 || this.especies.length === 0) {
+        if (this.monitoreoDataFiltrada.length === 0 || this.especies.length === 0) {
       this.resetearEstados();
       return;
     }
 
     const ultimoMonitoreo = this.monitoreoDataFiltrada[this.monitoreoDataFiltrada.length - 1];
-
     const alertaCorrespondiente = this.alertas.find(alerta => alerta.LoteID === ultimoMonitoreo.LoteID);
 
     if (!alertaCorrespondiente) {
@@ -274,8 +266,10 @@ export class GraficaGeneralComponent implements OnInit, OnDestroy {
   onLoteChange(lote: number | null): void {
     this.selectedLote = lote;
     this.filtrarDatos(lote);
+    if (lote !== null) {
+      this.obtenerMortalidadTotal(lote);
+    }
   }
-
   private filtrarDatos(lote: number | null): void {
     if (lote === null) {
       this.monitoreoDataFiltrada = [...this.monitoreoData];
