@@ -41,7 +41,6 @@ export class ConfigUserComponent implements OnInit, OnDestroy {
       this.alertSubscription.unsubscribe();
     }
   }
-  
 
   @HostListener('document:click')
   @HostListener('document:input')
@@ -67,6 +66,11 @@ export class ConfigUserComponent implements OnInit, OnDestroy {
   }
 
   updateUserData(): void {
+    if (this.isFormEmpty()) {
+      this.showError('Por favor, complete al menos un campo antes de actualizar');
+      return;
+    }
+
     const changedData: any = {};
     let hasChanges = false;
 
@@ -77,9 +81,6 @@ export class ConfigUserComponent implements OnInit, OnDestroy {
         hasChanges = true;
       }
     });
-
-    // Limpiar el formulario inmediatamente después de presionar el botón
-    this.clearForm();
 
     if (hasChanges) {
       this.apiService.updateUser(changedData).subscribe(
@@ -96,6 +97,15 @@ export class ConfigUserComponent implements OnInit, OnDestroy {
     } else {
       this.showSuccess('No se realizaron cambios');
     }
+
+    // Limpiar el formulario inmediatamente después de procesar los datos
+    this.clearForm();
+  }
+
+  isFormEmpty(): boolean {
+    return Object.keys(this.userForm.controls).every(key =>
+      this.userForm.get(key)?.value === ''
+    );
   }
 
   clearForm(): void {
@@ -108,16 +118,12 @@ export class ConfigUserComponent implements OnInit, OnDestroy {
 
   showSuccess(message: string): void {
     this.successMessage = message;
-    setTimeout(() => {
-      this.successMessage = '';
-    }, 3000);
+    this.setAlertTimeout();
   }
 
   showError(message: string): void {
     this.errorMessage = message;
-    setTimeout(() => {
-      this.errorMessage = '';
-    }, 3000);
+    this.setAlertTimeout();
   }
 
   setAlertTimeout(): void {
