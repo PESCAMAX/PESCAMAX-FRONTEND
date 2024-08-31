@@ -101,7 +101,7 @@ export class GraficaComponent implements OnInit, OnDestroy {
   startDataUpdates() {
     this.updateInterval = setInterval(() => {
       this.loadLatestData();
-    }, 5000); // Actualiza cada 5 segundos
+    }, ); // Actualiza cada 5 segundos
   }
 
   loadDataAndCreateChart() {

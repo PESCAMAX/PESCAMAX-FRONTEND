@@ -94,18 +94,18 @@ export class GraficastdssComponent implements OnInit {
     }
     
     this.chart = createChart(chartContainer, {
-      width: 800,
+      
       height: 400,
       layout: {
-        background: { type: ColorType.Solid, color: '#ffffff' },
-        textColor: '#D9D9D9'
+        background: { type: ColorType.Solid, color: '#F3F4F6' },
+        textColor: '#333'
       },
       grid: {
         vertLines: {
-          color: '#ffffff'
+          color: '#E5E7EB'
         },
         horzLines: {
-          color: '#ffffff'
+          color: '#E5E7EB'
         }
       },
       rightPriceScale: {
@@ -123,13 +123,12 @@ export class GraficastdssComponent implements OnInit {
     });
   
     const areaSeries = this.chart.addAreaSeries({
-      lineColor: '#00FFFF',
-      topColor: 'rgba(0, 255, 255, 0.4)',
-      bottomColor: 'rgba(0, 255, 255, 0.1)',
-      lineWidth: 2,
-      priceLineVisible: false,
-      crosshairMarkerVisible: true,
-      lastValueVisible: false,
+      lineColor: '#4DD0E1',
+      topColor: 'rgba(77, 208, 225, 0.4)',
+      bottomColor: 'rgba(77, 208, 225, 0.1)',
+    
+      priceLineVisible: true,
+      lastValueVisible: true,
       priceFormat: {
         type: 'price',
         precision: 2,

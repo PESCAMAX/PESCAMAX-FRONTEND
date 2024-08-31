@@ -17,11 +17,13 @@ export class GraficasTemperaturaComponent implements OnInit {
   public loteDropdownOpen: boolean = false;
   monitoreoData: Monitoreo[] = [];
   isMenuOpen: boolean = true;
+  loadLatestData: any;
 
   constructor(private apiService: ApiService, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.loadLotes();
+    this.startDataUpdates();
   }
 
   loadLotes() {
@@ -39,6 +41,11 @@ export class GraficasTemperaturaComponent implements OnInit {
       }
     );
   }
+
+  startDataUpdates() {
+  }
+
+
 
   toggleDropdown() {
     this.loteDropdownOpen = !this.loteDropdownOpen;
@@ -99,18 +106,18 @@ export class GraficasTemperaturaComponent implements OnInit {
     }
     
     this.chart = createChart(chartContainer, {
-      width: 800,
+      width: chartContainer.clientWidth,
       height: 400,
       layout: {
-        background: { type: ColorType.Solid, color: '#ffffff' },
-        textColor: '#333'
+        background: { type: ColorType.Solid, color: '#F3F4F6' },
+        textColor: '#374151'
       },
       grid: {
         vertLines: {
-          color: '#f0f0f0'
+          color: '#E5E7EB'
         },
         horzLines: {
-          color: '#f0f0f0'
+          color: '#E5E7EB'
         }
       },
       rightPriceScale: {
@@ -121,15 +128,16 @@ export class GraficasTemperaturaComponent implements OnInit {
         },
       },
       timeScale: {
-        borderColor: '#d1d4dc',
+        borderColor: '#374151',
         timeVisible: true,
         secondsVisible: false
       },
     });
   
-    const lineSeries = this.chart.addLineSeries({
-      color: 'pink',
-      lineWidth: 2,
+    const areaSeries = this.chart.addAreaSeries({
+      lineColor: '#FDA172',
+      topColor: 'rgba(253, 161, 114, 0.4)',
+      bottomColor: 'rgba(253, 161, 114, 0.1)',
       crosshairMarkerVisible: true,
       lastValueVisible: true,
       priceFormat: {
@@ -139,9 +147,10 @@ export class GraficasTemperaturaComponent implements OnInit {
       },
     });
   
-    lineSeries.setData(data);
+    areaSeries.setData(data);
   
     // Ajustar el rango visible
     this.chart.timeScale().fitContent();
   }
+  
 }
