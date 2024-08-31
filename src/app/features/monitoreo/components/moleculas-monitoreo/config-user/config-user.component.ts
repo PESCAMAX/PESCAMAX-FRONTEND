@@ -41,6 +41,7 @@ export class ConfigUserComponent implements OnInit, OnDestroy {
       this.alertSubscription.unsubscribe();
     }
   }
+  
 
   loadUserData(): void {
     this.apiService.getCurrentUser().subscribe(
@@ -92,16 +93,16 @@ export class ConfigUserComponent implements OnInit, OnDestroy {
 
   showSuccess(message: string): void {
     this.successMessage = message;
-    this.errorMessage = '';
-    this.alertService.showSuccess(message);
-    this.setAlertTimeout();
+    setTimeout(() => {
+      this.successMessage = '';
+    }, 3000);
   }
 
   showError(message: string): void {
     this.errorMessage = message;
-    this.successMessage = '';
-    this.alertService.showError(message);
-    this.setAlertTimeout();
+    setTimeout(() => {
+      this.errorMessage = '';
+    }, 3000);
   }
 
   setAlertTimeout(): void {
