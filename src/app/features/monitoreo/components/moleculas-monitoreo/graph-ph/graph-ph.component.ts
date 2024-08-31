@@ -94,7 +94,7 @@ export class GraphPhComponent implements OnInit {
     }
     
     this.chart = createChart(chartContainer, {
-      width: 800,
+      width: chartContainer.clientWidth,
       height: 400,
       layout: {
         background: { type: ColorType.Solid, color: '#ffffff' },
