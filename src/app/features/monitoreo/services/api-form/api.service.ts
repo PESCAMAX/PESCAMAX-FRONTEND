@@ -52,7 +52,15 @@ export class ApiService {
     return this.http.post(`${this.baseUrl}/Mortalidad/Registrar`, mortalidad, { headers: this.getHeaders() })
       .pipe(catchError(this.handleError));
   }
-  
+
+
+  obtenerMortalidadTotal(loteId: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/Mortalidad/ObtenerTotal/${loteId}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+
   modificarEspecie(especie: Especie): Observable<any> {
     const url = `${this.baseUrl}/CrearEspecie/Modificar/${especie.UserId}`;
     return this.http.put(url, especie, { headers: this.getHeaders() })
@@ -76,7 +84,7 @@ export class ApiService {
     return this.http.post<Alerta>(`${this.baseUrl}/Alerta`, alerta, { headers: this.getHeaders() })
       .pipe(catchError(this.handleError));
   }
-
+  
   obtenerAlertas(): Observable<Alerta[]> {
     return this.http.get<Alerta[]>(`${this.baseUrl}/Alerta`, { headers: this.getHeaders() })
       .pipe(

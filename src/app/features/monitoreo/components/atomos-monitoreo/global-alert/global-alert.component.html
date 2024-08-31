@@ -1,7 +1,7 @@
 <div *ngIf="alertMessage" class="alert" [ngClass]="{'alert-info': alertMessage.type === 'info', 'alert-danger': alertMessage.type === 'danger', 'alert-warning': alertMessage.type === 'warning'}">
     <strong>{{ alertMessage.label }}</strong> {{ alertMessage.message }}
     <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
-      <span aria-hidden="true">&times;</span>
+      
     </button>
   </div>
   

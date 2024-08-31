@@ -5,6 +5,7 @@ import { GlobalAlertService } from '../../../services/alerta-global/global-alert
 import { interval, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { UltimoDatoService } from '../../../services/servicio-alerta/ultimo-dato.service';
+import { Subscriber } from 'rxjs';
 
 interface MonitoreoItem {
   title: string;
@@ -43,14 +44,12 @@ export class GraficaGeneralComponent implements OnInit, OnDestroy {
   ultimoRegistroHora: string = '';
   penultimoRegistroHora: string = '';
   lote: number | null = null;
-  mortalidadValue: any;
-
-  mortalidadTrend: any;
-
-  mortalidadTrendValue: any;
-
-  mortalidadStatus: any;
-
+  mortalidadValue: number = 0;
+  mortalidadTrend: 'up' | 'down' | 'none' = 'none';
+  mortalidadTrendValue: string = '';
+  mortalidadStatus: 'good' | 'bad' | 'unassigned' = 'unassigned';
+  totalPeces: number = 1000; // Suponiendo que tienes el total de peces
+  loteId: number = 2;
  
 
   temperaturaStatus: 'good' | 'bad' | 'unassigned' = 'unassigned';
@@ -80,6 +79,7 @@ export class GraficaGeneralComponent implements OnInit, OnDestroy {
     this.startAutoUpdate();
     this.subscribeToAlerts();
     this.iniciarMonitoreoAutomatico();
+    this.obtenerMortalidadTotal();
   }
 
   ngOnDestroy(): void {
@@ -92,6 +92,20 @@ export class GraficaGeneralComponent implements OnInit, OnDestroy {
     if (this.monitoreoSubscription) {
       this.monitoreoSubscription.unsubscribe();
     }
+  }
+  obtenerMortalidadTotal() {
+    this.apiService.obtenerMortalidadTotal(this.loteId).subscribe(
+      data => {
+        const totalMuertos = data.totalMortalidad;
+        this.mortalidadValue = (totalMuertos / this.totalPeces) * 100;
+        this.mortalidadTrend = this.mortalidadValue > 5 ? 'up' : 'down'; // Ejemplo de lógica para la tendencia
+        this.mortalidadTrendValue = `${this.mortalidadValue.toFixed(2)}%`;
+        this.mortalidadStatus = this.mortalidadValue > 5 ? 'bad' : 'good'; // Ejemplo de lógica para el estado
+      },
+      error => {
+        console.error('Error al obtener la mortalidad total:', error);
+      }
+    );
   }
 
   iniciarMonitoreoAutomatico() {
