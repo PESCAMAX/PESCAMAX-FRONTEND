@@ -1,0 +1,11 @@
+button {
+    background-color: transparent; /* Sin fondo */
+    transition: all 0.1s ease-in-out; /* Transición suave */
+  }
+  
+  button:hover {
+    background-color: #2563eb; /* Fondo azul más oscuro al pasar el cursor */
+    color: white; /* Texto blanco al pasar el cursor */
+    border-color: #1d4ed8; /* Borde más oscuro al pasar el cursor */
+  }
+  

@@ -65,7 +65,7 @@
       <p><strong>Cantidad:</strong> {{ especie.Cantidad }}</p>
       <div class="mt-4 flex justify-between">
         <app-button-eliminar [id]="especie.Id" (eliminar)="eliminarEspecie($event)"></app-button-eliminar>
-        <button (click)="editarEspecie(especie)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded text-xs flex items-center">
+        <button (click)="editarEspecie(especie)" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded text-xs flex items-center">
           <img src="./assets/icons/editar.png" alt="Editar Icono" class="w-4 h-4 mr-1">
           Editar
         </button>
@@ -76,7 +76,7 @@
   <!-- Modal para editar especie -->
   <div *ngIf="especieSeleccionada" class="modal-container">
     <div class="modal-content">
-      <h3 class="modal-title">Editar Especie</h3>
+      <h3 class="modal-title">Editar especie</h3>
       <form [formGroup]="especieForm" (ngSubmit)="onSubmit()" id="editarEspecieForm">
         <div class="form-field full-width">
           <label for="nombreEspecie" class="form-label">Nombre</label>
@@ -131,10 +131,10 @@
         </app-button-guardar>
         <app-button-cancelar
           [texto]="'Cancelar'"
-          [estilo]="'rojo'"
+          [estilo]="'azul'"
           (cancelar)="cerrarModal()"
-        >
-        </app-button-cancelar>
+         >
+         </app-button-cancelar>
         </div>
       </form>
     </div>

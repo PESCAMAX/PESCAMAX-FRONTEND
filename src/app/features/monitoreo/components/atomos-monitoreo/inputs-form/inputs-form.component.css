@@ -5,12 +5,22 @@
   }
   
   input {
-    width: 100%;
-    padding: 12px 8px;
+    width: 100%; /* Mantiene el ancho al 100% del contenedor padre */
+    max-width: 400px; /* Establece un ancho máximo para hacer el input más ancho */
+    padding: 12px 16px; /* Aumenta el padding lateral para hacerlo más espacioso */
     background-color: #f3f3f3;
-    border: none;
+    border-radius: 4px;
     outline: none;
   }
+
+  .infield input {
+    width: 100%;
+    padding: 12px 16px;
+    background-color: #f3f3f3;
+    border-radius: 4px;
+    outline: none;
+  }
+  
   
   label {
     position: absolute;

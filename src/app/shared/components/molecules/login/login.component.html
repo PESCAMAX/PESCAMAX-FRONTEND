@@ -2,18 +2,17 @@
   <!-- Formulario de Registro -->
   <div class="form-container sign-up-container">
     <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
-      <h1>Crear Cuenta</h1>
-      <div class="social-container">
-        <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-      </div>
+      <h1>Crear cuenta</h1>
       <span>Usa tu email para registrarte</span>
       
-      <app-inputs-form formControlName="email" type="email" placeholder="Correo Electrónico"></app-inputs-form>
+      <app-inputs-form formControlName="email" type="email" placeholder="Correo electrónico"></app-inputs-form>
       <app-inputs-form formControlName="PhoneNumber" type="tel" placeholder="Teléfono"></app-inputs-form>
       <app-inputs-form formControlName="Address" placeholder="Dirección"></app-inputs-form>
       <app-inputs-form formControlName="FarmName" placeholder="Nombre de la Finca"></app-inputs-form>
-      
-      <button type="submit" [disabled]="!registerForm.valid">Registrarse</button>
+        
+      <div class="btn-enviar">
+      <button class="boton-enviar" type="submit" [disabled]="!registerForm.valid">Registrarse</button>
+      </div>
     </form>
   </div>
 <!--E-->
@@ -22,16 +21,15 @@
     <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
       <h1>Iniciar sesión</h1>
       <app-alert-form [successMessage]="successMessage" [errorMessage]="errorMessage"></app-alert-form>
-      <div class="social-container">
-        <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-      </div>
       <span>Usa tu cuenta</span>
       
-      <app-inputs-form formControlName="email" placeholder="email"></app-inputs-form>
+      <app-inputs-form formControlName="email" placeholder="Correo electrónico"></app-inputs-form>
       <app-inputs-form formControlName="password" type="password" placeholder="Contraseña"></app-inputs-form>
-
-      <a href="http://localhost:4200/forgot-password" class="forgot">Olvidaste tu contraseña?</a>
-      <button class="boton-enviar" type="submit">Ingresar</button>
+       
+       <div class="btn-enviar">
+        <a href="http://localhost:4200/forgot-password" class="blue-hover">¿Has olvidado la contraseña?</a>
+        <button class="boton-enviar" type="submit">Ingresar</button>
+       </div>
     </form>
   </div>
 
@@ -39,14 +37,19 @@
   <div class="overlay-container" id="overlayCon">
     <div class="overlay">
       <div class="overlay-panel overlay-left">
-        <h1>Bienvenido de nuevo a <span class="text-lg font-semibold text-white-500">PESCA<span class="text-black text-lg font-semibold">MAX</span></span></h1>
+        <img src="../../../../../assets/icons/Favicon.png" alt="Miimagen" class="w-12 h-12"><!-- Imagen cambiada -->
+        <h1>Bienvenido a <span class="text-lg font-semibold text-white-500">PESCA<span class="text-black text-lg font-semibold">MAX</span></span></h1>
         <p>Para mantenerte conectado con nosotros, por favor inicia sesión con tu información personal</p>
-        <button class="ghost" id="signIn" (click)="showSignIn()">Iniciar Sesión</button>
+        <button class="ghost2" id="signIn" (click)="showSignIn()">Iniciar sesión</button>
       </div>
       <div class="overlay-panel overlay-right">
-        <h1>Bienvenido  a <span class="text-lg font-semibold text-white-500">PESCA<span class="text-black text-lg font-semibold">MAX</span></span></h1>
-        <p>Ingresa tus datos personales y comienza tu viaje con nosotros</p>
-        <button class="ghost" id="signUp" (click)="showSignUp()">Registrarse</button>
+        <img src="../../../../../assets/icons/Favicon.png" alt="Miimagen" class="w-12 h-12"><!-- Imagen cambiada -->
+        <h1>Bienvenido de nuevo a <span class="text-lg font-semibold text-white-500">PESCA<span class="text-black text-lg font-semibold">MAX</span></span></h1>
+        <p>Inicia sesión para continuar disfrutando de todo lo que tenemos preparado para ti.</p>
+        <div class="no-cuenta">
+          <p style="margin-top: 20px;">¿No tienes una cuenta?</p>
+          <button class="ghost" id="signUp" (click)="showSignUp()">Registrarse</button>
+        </div>
       </div>
     </div>
   </div>
