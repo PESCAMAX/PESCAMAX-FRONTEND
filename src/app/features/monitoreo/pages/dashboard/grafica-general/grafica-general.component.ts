@@ -89,17 +89,27 @@ export class GraficaGeneralComponent implements OnInit, OnDestroy {
     this.apiService.obtenerMortalidadTotal(loteId).subscribe(
       data => {
         const totalMuertos = data.totalMortalidad;
-        this.mortalidadValue = (totalMuertos / this.totalPeces) * 100;
-        this.mortalidadTrend = this.mortalidadValue > 5 ? 'up' : 'down'; // Ejemplo de lógica para la tendencia
-        this.mortalidadTrendValue = `${this.mortalidadValue.toFixed(2)}%`;
-        this.mortalidadStatus = this.mortalidadValue > 5 ? 'bad' : 'good'; // Ejemplo de lógica para el estado
+        if (typeof totalMuertos === 'number' && this.totalPeces > 0) {
+          const mortalidadPorcentaje = (totalMuertos / this.totalPeces) * 100;
+          this.mortalidadValue = Math.min(mortalidadPorcentaje, 100); 
+          this.mortalidadTrend = this.mortalidadValue > 5 ? 'up' : 'down';
+          this.mortalidadTrendValue = `${this.mortalidadValue.toFixed(2)}%`;
+          this.mortalidadStatus = this.mortalidadValue > 5 ? 'bad' : 'good';
+        } else {
+          console.error('Datos inválidos para el cálculo de mortalidad.');
+          this.mortalidadValue = 0;
+          this.mortalidadTrendValue = '0%';
+          this.mortalidadStatus = 'unassigned';
+        }
       },
       error => {
         console.error('Error al obtener la mortalidad total:', error);
       }
     );
   }
-
+  
+  
+  
   iniciarMonitoreoAutomatico() {
     this.monitoreoSubscription = this.ultimoDatoService.iniciarMonitoreo(this.userId).subscribe();
   }
@@ -119,7 +129,7 @@ export class GraficaGeneralComponent implements OnInit, OnDestroy {
       switchMap(() => this.apiService.listarMonitoreo(this.authService.getUserId()))
     ).subscribe(
       (response: { response: Monitoreo[] }) => {
-        this.monitoreoData = response.response;
+        this.monitoreoData = response.response || [];
         this.filtrarDatos(this.selectedLote);
         this.calcularTendencias();
         this.actualizarMonitoreoItems();
@@ -128,7 +138,7 @@ export class GraficaGeneralComponent implements OnInit, OnDestroy {
       error => console.error('Error al actualizar datos:', error)
     );
   }
-
+  
   cargarDatos(): void {
     this.isLoading = true;
     this.apiService.listarMonitoreo(this.authService.getUserId()).subscribe(
