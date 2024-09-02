@@ -1,65 +1,60 @@
 /* Estilos para el contenedor principal */
 .main-container {
   display: flex;
-
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding-top: 2rem; /* Espacio adicional en la parte superior */
+  padding-top: 2rem;
   box-sizing: border-box;
   width: 100%;
   height: 100%;
-
 }
 
 /* Estilos para el título de la gráfica */
 .graph-title {
-  font-size: 2rem; /* Tamaño más grande del título */
+  font-size: 2rem;
   font-weight: bold;
   color: #1f12d7;
   text-align: right;
-  margin-bottom: 1rem; /* Espacio debajo del título */
+  margin-bottom: 1rem;
 }
 
 /* Estilos para la gráfica y el contenedor de cards */
 .graph-and-card-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
   width: 100%;
   height: 100%;
 }
 
 /* Estilos para la gráfica */
 .graph-container {
-  width: 75%; /* Ajustar la anchura de la gráfica */
+  width: 75%;
   height: auto;
 }
-
 
 .content-title {
   font-size: 1.5rem;
   font-weight: bold;
   color: #007bff;
-  
   margin-bottom: 1rem;
   font-family: Arial, sans-serif;
-
 }
 
-.title{
-  text-align:  center;
+.title {
+  text-align: center;
   color: #1f12d7;
-
 }
 
-.mm{
-  margin-top: 100px;
+.mm {
+  margin-top: 30px;
 }
 
-.cards{
-  padding-right:100px ;
+.cards {
+  width: 25%;
+  padding-left: 20px;
 }
 
 /* Media queries para pantallas pequeñas */
@@ -68,19 +63,22 @@
     flex-direction: column;
   }
 
-  .graph-container, .card-container {
+  .graph-container, .cards {
     width: 100%;
   }
 
+  .cards {
+    padding-left: 0;
+    margin-top: 20px;
+  }
+
   .main-container {
-    padding-top: 1rem; /* Espacio superior más pequeño en móviles */
+    padding-top: 1rem;
   }
 }
-
 
 @media (min-width: 1281px) {
   .container {
     padding: 2.5rem;
   }
 }
-
