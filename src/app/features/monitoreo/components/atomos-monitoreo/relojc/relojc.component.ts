@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { RelojService } from '../../../services/Reloj/reloj.service';
 interface HourSelection {
   hour: number;
   am: boolean;
@@ -19,7 +19,7 @@ export class RelojcComponent implements OnInit {
   modalOpen = false;
   selectedHours: HourSelection[] = [];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private relojService: RelojService) {}
 
   ngOnInit(): void {
     this.updateMonitoringHours();
@@ -34,11 +34,11 @@ export class RelojcComponent implements OnInit {
   }
 
   getArrowEndX(hour: number): number {
-    return Math.cos(-Math.PI / 2 + hour * Math.PI / 6) * 0.5; // Aumentado de 0.4 a 0.6
+    return Math.cos(-Math.PI / 2 + hour * Math.PI / 6) * 0.5;
   }
 
   getArrowEndY(hour: number): number {
-    return Math.sin(-Math.PI / 2 + hour * Math.PI / 6) * 0.5; // Aumentado de 0.4 a 0.6
+    return Math.sin(-Math.PI / 2 + hour * Math.PI / 6) * 0.5;
   }
 
   toggleHour(hour: number, period: 'am' | 'pm') {
@@ -105,8 +105,28 @@ export class RelojcComponent implements OnInit {
 
     if (totalSelectedHours === this.numHoursToMonitor) {
       console.log('Horas guardadas:', this.selectedHours);
-      alert('Horas guardadas exitosamente.');
-      this.router.navigate(['/alertas-recientes']);
+      
+      // Format the hours data as expected by the ESP8266
+      const formattedHours = this.selectedHours.flatMap(hour => {
+        const result = [];
+        if (hour.am) result.push({ hour: hour.hour, period: 'AM' });
+        if (hour.pm) result.push({ hour: hour.hour, period: 'PM' });
+        return result;
+      });
+
+      const hoursData = { hours: formattedHours };
+      
+      this.relojService.setHours(hoursData).subscribe(
+        response => {
+          console.log('Horas enviadas al ESP8266:', response);
+          alert('Horas guardadas exitosamente.');
+          this.router.navigate(['/alertas-recientes']);
+        },
+        error => {
+          console.error('Error al enviar las horas al ESP8266:', error);
+          alert('Error al guardar las horas. Por favor, intente de nuevo.');
+        }
+      );
     } else {
       alert(`Por favor, seleccione exactamente ${this.numHoursToMonitor} horas en total. Actualmente tiene ${totalSelectedHours} horas seleccionadas.`);
     }

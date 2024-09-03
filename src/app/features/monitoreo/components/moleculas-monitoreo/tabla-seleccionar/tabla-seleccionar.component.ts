@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, interval } from 'rxjs';
 import { Alerta, ApiService, Especie, Monitoreo, EspecieLoteDTO } from '../../../services/api-form/api.service';
 import { AlertService } from '../../../services/api-alert/alert.service';
 import { AuthService } from '../../../../../core/services/api-login/auth.service';
@@ -20,6 +20,8 @@ export class TablaSeleccionarComponent implements OnInit, OnDestroy {
   userId: string;
   especiePorLote: { [loteId: number]: number } = {};
   private monitoreoSubscription: Subscription | undefined;
+  private clockSubscription: Subscription | undefined;
+  currentTime: string;
 
   constructor(
     private apiService: ApiService,
@@ -30,6 +32,7 @@ export class TablaSeleccionarComponent implements OnInit, OnDestroy {
   ) {
     this.userId = this.authService.getUserId();
     this.monitoreoSubscription = new Subscription();
+    this.currentTime = new Date().toLocaleTimeString();
   }
 
   ngOnInit() {
@@ -38,13 +41,16 @@ export class TablaSeleccionarComponent implements OnInit, OnDestroy {
       this.loadData();
       this.cargarEspeciePorLote();
       this.iniciarMonitoreoAutomatico();
+      this.startClock();
     });
   }
 
   ngOnDestroy() {
     if (this.monitoreoSubscription) {
       this.monitoreoSubscription.unsubscribe();
-      
+    }
+    if (this.clockSubscription) {
+      this.clockSubscription.unsubscribe();
     }
   }
 
@@ -108,7 +114,7 @@ export class TablaSeleccionarComponent implements OnInit, OnDestroy {
     const especie = this.especies.find(e => e.Id === especieId);
     const lotesFiltrados = this.lotes.filter(l => l.LoteID === loteId);
     const ultimoLote = lotesFiltrados.reduce((prev, current) =>
-      (new Date(prev.FechaHora) > new Date(current.FechaHora)) ? prev : current
+      (new Date(prev.FechaHora) > new Date(current.FechaHora)) ? prev : current, lotesFiltrados[0]
     );
 
     if (!especie) {
@@ -179,5 +185,11 @@ export class TablaSeleccionarComponent implements OnInit, OnDestroy {
 
   iniciarMonitoreoAutomatico() {
     this.monitoreoSubscription = this.ultimoDatoService.iniciarMonitoreo(this.userId).subscribe();
+  }
+
+  startClock() {
+    this.clockSubscription = interval(1000).subscribe(() => {
+      this.currentTime = new Date().toLocaleTimeString();
+    });
   }
 }

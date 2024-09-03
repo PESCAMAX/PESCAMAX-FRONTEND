@@ -12,6 +12,8 @@ export class ApiService {
     throw new Error('Method not implemented.');
   }
   private baseUrl = 'http://localhost:6754/api';
+  private esp8266Url = 'http://192.168.1.12/random'; // Make sure this is the correct IP
+
 
   constructor(
     private http: HttpClient,
@@ -24,6 +26,12 @@ export class ApiService {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     });
+  }
+  setHours(hours: any): Observable<any> {
+    return this.http.post(`${this.esp8266Url}/setHours`, hours).pipe(
+      tap(response => console.log('Hours sent to ESP8266:', response)),
+      catchError(this.handleError)
+    );
   }
   public getUserId(): string {
     return this.authService.getUserId();
@@ -61,9 +69,10 @@ export class ApiService {
 
 
   obtenerMortalidadTotal(loteId: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/Mortalidad/ObtenerTotal/${loteId}`).pipe(
-      catchError(this.handleError)
-    );
+    return this.http.get(`${this.baseUrl}/Mortalidad/ObtenerTotal/${loteId}`)
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
 
