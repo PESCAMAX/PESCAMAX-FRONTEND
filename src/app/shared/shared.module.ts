@@ -56,6 +56,7 @@ import { PasswordChangeComponent } from '../features/monitoreo/pages/home/passwo
 import { GlobalAlertaComponent } from '../features/monitoreo/components/moleculas-monitoreo/global-alerta/global-alerta.component';
 import { NotificationComponent } from '../features/monitoreo/components/moleculas-monitoreo/notification/notification.component';
 import { FormularioMortalidadComponent } from '../features/monitoreo/components/moleculas-monitoreo/formulario-mortalidad/formulario-mortalidad.component';
+import { ClimaFormuluarioComponent } from '../features/monitoreo/components/moleculas-monitoreo/clima-formuluario/clima-formuluario.component';
 @NgModule({
   declarations: [
     ButtonEnviarComponent,
@@ -105,12 +106,8 @@ import { FormularioMortalidadComponent } from '../features/monitoreo/components/
     PasswordChangeComponent,
     GlobalAlertaComponent,
     NotificationComponent,
-    FormularioMortalidadComponent
-
-
-
-
-
+    FormularioMortalidadComponent,
+    ClimaFormuluarioComponent
   ],
   imports: [
     CommonModule,
@@ -160,7 +157,8 @@ import { FormularioMortalidadComponent } from '../features/monitoreo/components/
     PasswordChangeComponent,
     GlobalAlertaComponent,
     NotificationComponent,
-    FormularioMortalidadComponent
+    FormularioMortalidadComponent,
+    ClimaFormuluarioComponent
 
 
   ]

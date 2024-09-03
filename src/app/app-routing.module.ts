@@ -30,11 +30,15 @@ import { RecuperarPageComponent } from './features/monitoreo/pages/home/recupera
 import { CambiarPageComponent } from './features/monitoreo/pages/home/cambiar-page/cambiar-page.component';
 import { PasswordChangeComponent } from './features/monitoreo/pages/home/password-change/password-change.component';
 import { ConfiguracionUserComponent } from './features/monitoreo/pages/gestion-de-parametros/configuracion-user/configuracion-user.component';
-
+import { PaginaClimaComponent } from './features/monitoreo/pages/dashboard/pagina-clima/pagina-clima.component';
 const routes: Routes = [
   {
     path: 'gestion-de-parametros',
     loadChildren: () => import('./features/monitoreo/pages/gestion-de-parametros/gestion-de-parametros.module').then(m => m.GestionDeParametrosModule)
+  },
+  {
+    path: 'pagina-clima/:userId',
+    component: PaginaClimaComponent
   },
   {
     path: 'historial/:userId',

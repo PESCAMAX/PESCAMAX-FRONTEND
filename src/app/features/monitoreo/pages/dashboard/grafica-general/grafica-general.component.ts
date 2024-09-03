@@ -5,7 +5,7 @@ import { GlobalAlertService } from '../../../services/alerta-global/global-alert
 import { interval, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { UltimoDatoService } from '../../../services/servicio-alerta/ultimo-dato.service';
-import { Subscriber } from 'rxjs';
+
 
 interface MonitoreoItem {
   title: string;

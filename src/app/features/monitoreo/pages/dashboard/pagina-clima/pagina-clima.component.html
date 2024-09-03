@@ -2,7 +2,6 @@
     <app-menu-lateral (menuToggled)="onMenuToggle($event)"></app-menu-lateral>
     
     <div class="flex-1 p-4 transition-all duration-300" [ngClass]="{'ml-64': isMenuOpen, 'ml-16': !isMenuOpen}">
-      <app-config-user></app-config-user>
       <app-clima-formuluario></app-clima-formuluario>
     </div>
   </div>
