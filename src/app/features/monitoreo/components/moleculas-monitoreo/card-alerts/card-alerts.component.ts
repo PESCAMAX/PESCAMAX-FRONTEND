@@ -66,17 +66,30 @@ export class CardAlertsComponent {
   }
 
   // Función para guardar las horas seleccionadas (simulación de almacenamiento)
-  saveHours() {
+  aveHours() {
     if (this.numHoursToMonitor === null || this.numHoursToMonitor < 4 || this.numHoursToMonitor > 24) {
       console.log('Por favor, ingrese un número válido de horas a monitorear.');
       return;
     }
 
-    console.log('Horas seleccionadas:', this.selectedHours);
-    // Lógica para guardar this.selectedHours en un servicio o realizar otras acciones necesarias
-    this.selectedHours = [];
-    this.toggleModal();
+    const hoursToSend = this.selectedHours.map(hour => ({
+      hour: hour,
+      am: hour < 12,
+      pm: hour >= 12
+    }));
+
+    this.apiService.setHours({ hours: hoursToSend }).subscribe(
+      response => {
+        console.log('Horas guardadas exitosamente:', response);
+        this.selectedHours = [];
+        this.toggleModal();
+      },
+      error => {
+        console.error('Error al guardar las horas:', error);
+      }
+    );
   }
+
 
   // Función para obtener estilos dinámicos para las horas en el reloj
   getStyle(index: number) {

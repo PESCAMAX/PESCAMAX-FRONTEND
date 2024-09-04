@@ -12,7 +12,7 @@ export class ApiService {
     throw new Error('Method not implemented.');
   }
   private baseUrl = 'http://localhost:6754/api';
-  private esp8266Url = 'http://192.168.1.12/random'; // Make sure this is the correct IP
+  private esp8266Url = 'http://192.168.50.155'; // Make sure this is the correct IP
 
 
   constructor(
@@ -33,6 +33,13 @@ export class ApiService {
       catchError(this.handleError)
     );
   }
+  getHours(): Observable<any> {
+    return this.http.get(`${this.esp8266Url}/getHours`)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   public getUserId(): string {
     return this.authService.getUserId();
   }
@@ -40,14 +47,13 @@ export class ApiService {
     console.error('Error occurred:', error);
     let errorMsg = 'An unknown error occurred!';
     if (error.error instanceof ErrorEvent) {
-      errorMsg = `Client-side error: ${error.error.message}`;
-    } else if (error.error && typeof error.error === 'object' && 'mensaje' in error.error) {
-      errorMsg = `Server-side error: ${error.status} - ${error.error.mensaje}`;
+        errorMsg = `Client-side error: ${error.error.message}`;
     } else if (error.status) {
-      errorMsg = `Server-side error: ${error.status} - ${error.statusText}`;
+        errorMsg = `Server-side error: ${error.status} - ${error.message}`;
     }
     return throwError(() => new Error(errorMsg));
-  }
+}
+
   crearEspecie(userId: string, especieData: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/CrearEspecie/Crear/${userId}`, especieData, { headers: this.getHeaders() });
   }

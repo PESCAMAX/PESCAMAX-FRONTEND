@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RelojService } from '../../../services/Reloj/reloj.service';
+
 interface HourSelection {
   hour: number;
   am: boolean;
@@ -100,13 +101,8 @@ export class RelojcComponent implements OnInit {
 
   saveHours(): void {
     const totalSelectedHours = this.getTotalSelectedHours();
-    console.log('Total de horas seleccionadas:', totalSelectedHours);
-    console.log('Número de horas a monitorear:', this.numHoursToMonitor);
 
     if (totalSelectedHours === this.numHoursToMonitor) {
-      console.log('Horas guardadas:', this.selectedHours);
-      
-      // Format the hours data as expected by the ESP8266
       const formattedHours = this.selectedHours.flatMap(hour => {
         const result = [];
         if (hour.am) result.push({ hour: hour.hour, period: 'AM' });
@@ -115,12 +111,26 @@ export class RelojcComponent implements OnInit {
       });
 
       const hoursData = { hours: formattedHours };
-      
+
       this.relojService.setHours(hoursData).subscribe(
         response => {
           console.log('Horas enviadas al ESP8266:', response);
-          alert('Horas guardadas exitosamente.');
-          this.router.navigate(['/alertas-recientes']);
+          // Verificar las horas guardadas
+          this.relojService.getHours().subscribe(
+            (savedHours) => {
+              console.log('Horas guardadas:', savedHours);
+              if (savedHours?.horas && this.areHoursCorrectlySaved(formattedHours, savedHours.horas)) {
+                alert('Horas guardadas y verificadas exitosamente.');
+                this.router.navigate(['/alertas-recientes']);
+              } else {
+                alert('Las horas guardadas no coinciden con las seleccionadas o no se pudieron obtener. Por favor, intente de nuevo.');
+              }
+            },
+            error => {
+              console.error('Error al verificar las horas guardadas:', error);
+              alert('Error al verificar las horas guardadas. Por favor, verifique manualmente.');
+            }
+          );               
         },
         error => {
           console.error('Error al enviar las horas al ESP8266:', error);
@@ -131,4 +141,15 @@ export class RelojcComponent implements OnInit {
       alert(`Por favor, seleccione exactamente ${this.numHoursToMonitor} horas en total. Actualmente tiene ${totalSelectedHours} horas seleccionadas.`);
     }
   }
+
+  private areHoursCorrectlySaved(selectedHours: any[], savedHours: any[]): boolean {
+    if (selectedHours.length !== savedHours.length) return false;
+  
+    return selectedHours.every(selected =>
+      savedHours.some(saved =>
+        saved.hour === selected.hour &&
+        ((selected.period === 'AM' && saved.am) || (selected.period === 'PM' && saved.pm))
+      )
+    );  
+  }  
 }
