@@ -12,11 +12,25 @@ export class ClimaFormuluarioComponent {
   pais: string = 'Co';
   climaData: any;
   userId: string = '';
+  currentDate: Date = new Date();
+  forecast: any[] = [];
+  otherCities: any[] = [
+    { name: 'Rawaheng', weather: 'Mostly Sunny', temp: 20 },
+    { name: 'Ranjingan', weather: 'Mostly Sunny', temp: 21 }
+  ];
 
   @Output() climaObtenido = new EventEmitter<any>();
 
   constructor(private climaService: ClimaService, private authService: AuthService) {
-    this.userId = this.authService.getUserId(); // Obtener el userId real
+    this.userId = this.authService.getUserId();
+  }
+
+  buscarCiudad(): void {
+    if (this.ciudad.trim() !== '') {
+      this.obtenerClima();
+    } else {
+      console.error('Por favor, ingrese una ciudad para buscar.');
+    }
   }
 
   obtenerClima(): void {
@@ -24,7 +38,8 @@ export class ClimaFormuluarioComponent {
       data => {
         this.climaData = data;
         console.log('Clima data:', this.climaData);
-        this.climaObtenido.emit(this.climaData); // Emitir el evento con los datos del clima
+        this.climaObtenido.emit(this.climaData);
+        this.generarPronostico();
         this.guardarClima();
       },
       error => {
@@ -36,7 +51,7 @@ export class ClimaFormuluarioComponent {
   guardarClima(): void {
     const clima = {
       NombreCiudad: this.climaData.name,
-      TemperaturaActual: this.climaData.main.temp - 273.15, // Convertir de Kelvin a Celsius
+      TemperaturaActual: this.climaData.main.temp - 273.15,
       EstadoMeteoro: this.climaData.weather[0].main,
       Humedad: this.climaData.main.humidity,
       Nubes: this.climaData.clouds.all,
@@ -51,5 +66,26 @@ export class ClimaFormuluarioComponent {
         console.error('Error al guardar el clima:', error);
       }
     );
+  }
+
+  generarPronostico(): void {
+    // This is a mock function. In a real scenario, you would get this data from an API
+    const dias = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    const iconos = ['☀️', '☁️', '🌤️', '❄️', '☀️'];
+    this.forecast = [];
+    for (let i = 0; i < 5; i++) {
+      const fecha = new Date(this.currentDate);
+      fecha.setDate(fecha.getDate() + i);
+      this.forecast.push({
+        weekday: dias[fecha.getDay()],
+        icon: iconos[i],
+        temperature: Math.round(Math.random() * 20 + 10)
+      });
+    }
+  }
+
+  getFormattedDate(): string {
+    const options: Intl.DateTimeFormatOptions = { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric' };
+    return this.currentDate.toLocaleDateString('en-US', options);
   }
 }
