@@ -1,6 +1,7 @@
 .container-clima{
     width: 1000px;
     height: 1000px;
+   
 }
 
 
@@ -18,7 +19,7 @@ body {
     background-color: white;
     border-radius: 10px;
     padding: 20px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px rgba(5, 21, 237, 0.5);
   }
   
   .header {
@@ -120,7 +121,8 @@ body {
   
   .city-list {
     display: flex;
-    justify-content: space-between;
+    justify-content:center;
+    
   }
   
   .city {
@@ -141,4 +143,9 @@ body {
   .city-temp {
     font-weight: bold;
     font-size: 18px;
+  }
+
+  .container2{
+    margin: 90px 20px 60px 0px;
+  
   }

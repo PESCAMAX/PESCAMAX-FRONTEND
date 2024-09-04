@@ -16,7 +16,6 @@ export class ClimaFormuluarioComponent {
   forecast: any[] = [];
   otherCities: any[] = [
     { name: 'Rawaheng', weather: 'Mostly Sunny', temp: 20 },
-    { name: 'Ranjingan', weather: 'Mostly Sunny', temp: 21 }
   ];
 
   @Output() climaObtenido = new EventEmitter<any>();
