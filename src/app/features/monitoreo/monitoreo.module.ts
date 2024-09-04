@@ -17,6 +17,8 @@ import { GlobalAlertaComponent } from './components/moleculas-monitoreo/global-a
 import { NotificationComponent } from './components/moleculas-monitoreo/notification/notification.component';
 import { FormularioMortalidadComponent } from './components/moleculas-monitoreo/formulario-mortalidad/formulario-mortalidad.component';
 import { ClimaFormuluarioComponent } from './components/moleculas-monitoreo/clima-formuluario/clima-formuluario.component';
+import { CardsClimaComponent } from './components/atomos-monitoreo/cards-clima/cards-clima.component';
+import { TarjetaClimaComponent } from './components/moleculas-monitoreo/tarjeta-clima/tarjeta-clima.component';
 
 
 
@@ -41,7 +43,9 @@ import { ClimaFormuluarioComponent } from './components/moleculas-monitoreo/clim
           GlobalAlertaComponent,
           NotificationComponent,
           FormularioMortalidadComponent,
-          ClimaFormuluarioComponent
+          ClimaFormuluarioComponent,
+          CardsClimaComponent,
+          TarjetaClimaComponent
 
           
 

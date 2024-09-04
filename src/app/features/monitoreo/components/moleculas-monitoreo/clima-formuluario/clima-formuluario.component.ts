@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { ClimaService } from '../../../services/clima/clima.service';
 import { AuthService } from '../../../../../core/services/api-login/auth.service';
 
@@ -13,6 +13,8 @@ export class ClimaFormuluarioComponent {
   climaData: any;
   userId: string = '';
 
+  @Output() climaObtenido = new EventEmitter<any>();
+
   constructor(private climaService: ClimaService, private authService: AuthService) {
     this.userId = this.authService.getUserId(); // Obtener el userId real
   }
@@ -22,6 +24,7 @@ export class ClimaFormuluarioComponent {
       data => {
         this.climaData = data;
         console.log('Clima data:', this.climaData);
+        this.climaObtenido.emit(this.climaData); // Emitir el evento con los datos del clima
         this.guardarClima();
       },
       error => {

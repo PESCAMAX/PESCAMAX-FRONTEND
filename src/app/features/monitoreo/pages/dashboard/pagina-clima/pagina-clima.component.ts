@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PaginaClimaComponent {
   isMenuOpen: boolean = false;
+  climaData: any;
 
   constructor() {}
 
@@ -17,6 +18,9 @@ export class PaginaClimaComponent {
   }
   onMenuToggle(isOpen: boolean) {
     this.isMenuOpen = isOpen;
+  }
+  actualizarClima(data: any): void {
+    this.climaData = data;
   }
 
 }

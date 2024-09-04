@@ -1,7 +1,12 @@
 <div class="flex">
-    <app-menu-lateral (menuToggled)="onMenuToggle($event)"></app-menu-lateral>
-    
-    <div class="flex-1 p-4 transition-all duration-300" [ngClass]="{'ml-64': isMenuOpen, 'ml-16': !isMenuOpen}">
-      <app-clima-formuluario></app-clima-formuluario>
+  <app-menu-lateral (menuToggled)="onMenuToggle($event)"></app-menu-lateral>
+  
+  <div class="flex-1 p-4 transition-all duration-300" [ngClass]="{'ml-64': isMenuOpen, 'ml-16': !isMenuOpen}">
+    <div class="flex justify-center items-center min-h-screen">
+      <div>
+        <app-tarjeta-clima [climaData]="climaData"></app-tarjeta-clima>
+        <app-clima-formuluario (climaObtenido)="actualizarClima($event)"></app-clima-formuluario>
+      </div>
     </div>
   </div>
+</div>

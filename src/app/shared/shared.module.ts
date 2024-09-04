@@ -57,6 +57,8 @@ import { GlobalAlertaComponent } from '../features/monitoreo/components/molecula
 import { NotificationComponent } from '../features/monitoreo/components/moleculas-monitoreo/notification/notification.component';
 import { FormularioMortalidadComponent } from '../features/monitoreo/components/moleculas-monitoreo/formulario-mortalidad/formulario-mortalidad.component';
 import { ClimaFormuluarioComponent } from '../features/monitoreo/components/moleculas-monitoreo/clima-formuluario/clima-formuluario.component';
+import { TarjetaClimaComponent } from '../features/monitoreo/components/moleculas-monitoreo/tarjeta-clima/tarjeta-clima.component';
+import { CardsClimaComponent } from '../features/monitoreo/components/atomos-monitoreo/cards-clima/cards-clima.component';
 @NgModule({
   declarations: [
     ButtonEnviarComponent,
@@ -107,7 +109,9 @@ import { ClimaFormuluarioComponent } from '../features/monitoreo/components/mole
     GlobalAlertaComponent,
     NotificationComponent,
     FormularioMortalidadComponent,
-    ClimaFormuluarioComponent
+    ClimaFormuluarioComponent,
+    TarjetaClimaComponent,
+    CardsClimaComponent
   ],
   imports: [
     CommonModule,
@@ -158,7 +162,9 @@ import { ClimaFormuluarioComponent } from '../features/monitoreo/components/mole
     GlobalAlertaComponent,
     NotificationComponent,
     FormularioMortalidadComponent,
-    ClimaFormuluarioComponent
+    ClimaFormuluarioComponent,
+    TarjetaClimaComponent,
+    CardsClimaComponent
 
 
   ]
