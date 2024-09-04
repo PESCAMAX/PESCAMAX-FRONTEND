@@ -1,41 +1,68 @@
-<form (ngSubmit)="obtenerClima()">
-  <div class="mb-4">
-    <label for="ciudad" class="block text-2xl font-bold mb-2">Ciudad</label>
-    <select id="ciudad" [(ngModel)]="ciudad" name="ciudad" class="full-width p-2 border border-gray-300 rounded" required>
-      <option value="">-</option>
-      <option value="Arauca">Arauca</option>
-      <option value="Armenia">Armenia</option>
-      <option value="Barranquilla">Barranquilla</option>
-      <option value="Bogotá">Bogotá</option>
-      <option value="Bucaramanga">Bucaramanga</option>
-      <option value="Cali">Cali</option>
-      <option value="Cartagena">Cartagena</option>
-      <option value="Cúcuta">Cúcuta</option>
-      <option value="Florencia">Florencia</option>
-      <option value="Ibagué">Ibagué</option>
-      <option value="Leticia">Leticia</option>
-      <option value="Manizales">Manizales</option>
-      <option value="Medellín">Medellín</option>
-      <option value="Mitú">Mitú</option>
-      <option value="Mocoa">Mocoa</option>
-      <option value="Montería">Montería</option>
-      <option value="Neiva">Neiva</option>
-      <option value="Pasto">Pasto</option>
-      <option value="Pereira">Pereira</option>
-      <option value="Popayán">Popayán</option>
-      <option value="Puerto Carreño">Puerto Carreño</option>
-      <option value="Puerto Inírida">Puerto Inírida</option>
-      <option value="Quibdó">Quibdó</option>
-      <option value="Riohacha">Riohacha</option>
-      <option value="San Andrés">San Andrés</option>
-      <option value="San José del Guaviare">San José del Guaviare</option>
-      <option value="Santa Marta">Santa Marta</option>
-      <option value="Sincelejo">Sincelejo</option>
-      <option value="Tunja">Tunja</option>
-      <option value="Valledupar">Valledupar</option>
-      <option value="Villavicencio">Villavicencio</option>
-      <option value="Yopal">Yopal</option>
-    </select>
+<div class="weather-container">
+  <div class="header">
+    <h2 class="month">January 2023</h2>
+    <div class="search-bar">
+      <input type="text" placeholder="Search City...">
+      <button class="search-icon">🔍</button>
+    </div>
   </div>
-  <button type="submit" class="bg-blue-500 text-white p-2 rounded">Obtener Clima</button>
-</form>
+
+  <div class="date-nav">
+    <p class="current-date">Monday, 20 Jan 2023</p>
+    <div class="nav-buttons">
+      <button>Today</button>
+      <button>Tomorrow</button>
+      <button class="active">Next 7 day</button>
+    </div>
+  </div>
+
+  <div class="forecast">
+    <div class="day">
+      <p class="weekday">Tue</p>
+      <p class="weather-icon">☀️</p>
+      <p class="temperature">16°</p>
+    </div>
+    <div class="day">
+      <p class="weekday">Wed</p>
+      <p class="weather-icon">☁️</p>
+      <p class="temperature">20°</p>
+    </div>
+    <div class="day">
+      <p class="weekday">Thu</p>
+      <p class="weather-icon">🌤️</p>
+      <p class="temperature">23°</p>
+    </div>
+    <div class="day">
+      <p class="weekday">Fri</p>
+      <p class="weather-icon">❄️</p>
+      <p class="temperature">13°</p>
+    </div>
+    <div class="day">
+      <p class="weekday">Sat</p>
+      <p class="weather-icon">☀️</p>
+      <p class="temperature">29°</p>
+    </div>
+  </div>
+
+  <div class="other-cities">
+    <div class="cities-header">
+      <h3>Other large cities</h3>
+      <div class="nav-arrows">
+        <button class="arrow left">←</button>
+        <button class="arrow right">→</button>
+      </div>
+    </div>
+    <div class="city-list">
+      <div class="city">
+        <h4>Rawaheng</h4>
+        <p class="city-weather">Mostly Sunny</p>
+        <p class="city-temp">20°</p>
+      </div>
+      <div class="city">
+        <h4>Ranjingan</h4>
+        <p class="city-weather">Mostly Sunny</p>
+        <p class="city-temp">21°</p>
+      </div>
+    </div>
+  </div>
+</div>
