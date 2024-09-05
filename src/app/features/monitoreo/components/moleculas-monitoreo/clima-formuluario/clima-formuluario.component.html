@@ -1,52 +1,48 @@
-
-<div class="container2">
-    <div class="container-clima">
-      <div class="weather-container">
-        <div class="header">
-          <h2 class="month">{{ currentDate | date:'MMMM yyyy' }}</h2>
-          <div class="search-bar">
-            <input type="text" [(ngModel)]="ciudad" placeholder="Search City...">
-            <button class="search-icon" (click)="buscarCiudad()">🔍</button>
-          </div>
-        </div>
-        
-        <div class="date-nav">
-          <p class="current-date">{{ getFormattedDate() }}</p>
-          <div class="nav-buttons">
-            <button>Today</button>
-            <button>Tomorrow</button>
-            <button class="active">Next 7 day</button>
-          </div>
-        </div>  
-
-        
-        
-        <div class="forecast">
-          <div class="day" *ngFor="let day of forecast">
-            <p class="weekday">{{ day.weekday }}</p>
-            <p class="weather-icon">{{ day.icon }}</p>
-            <p class="temperature">{{ day.temperature }}°</p>
-          </div>
-        </div>
-        
-        <div class="other-cities">
-          <div class="cities-header">
-            <h3>Other large cities</h3>
-            <div class="nav-arrows">
-              <button class="arrow left">←</button>
-              <button class="arrow right">→</button>
-            </div>
-          </div>
-          
-          <div class="city-list">
-            <div class="city" *ngFor="let city of otherCities">
-              <h4>{{ city.name }}</h4>
-              <p class="city-weather">{{ city.weather }}</p>
-              <p class="city-temp">{{ city.temp }}°</p>
-              <app-tarjeta-clima [climaData]="climaData"></app-tarjeta-clima>
-            </div>
-          </div>
-        </div>
+<div class="weather-container">
+  <div class="header">
+    <h2 class="month">{{ currentDate | date:'MMMM yyyy' }}</h2>
+    <form (ngSubmit)="buscarCiudad()" class="search-bar">
+      <select [(ngModel)]="ciudad" name="ciudad" required>
+        <option value="">Select a city</option>
+        <option *ngFor="let city of colombianCities" [value]="city">{{ city }}</option>
+      </select>
+      <button type="submit" class="search-icon">🔍</button>
+    </form>
+  </div>
+  
+  <div class="date-nav">
+    <p class="current-date">{{ getFormattedDate() }}</p>
+    <div class="nav-buttons">
+      <button (click)="setForecastType('today')" [class.active]="forecastType === 'today'">Today</button>
+      <button (click)="setForecastType('tomorrow')" [class.active]="forecastType === 'tomorrow'">Tomorrow</button>
+      <button (click)="setForecastType('week')" [class.active]="forecastType === 'week'">Next 7 days</button>
+    </div>
+  </div>
+  
+  <div class="forecast">
+    <div class="day" *ngFor="let day of getForecast()">
+      <p class="weekday">{{ day.weekday }}</p>
+      <p class="weather-icon">{{ day.icon }}</p>
+      <p class="temperature">{{ day.temperature }}°</p>
+    </div>
+  </div>
+  
+  <div class="other-cities">
+    <div class="cities-header">
+      <h3>Other large cities</h3>
+      <div class="nav-arrows">
+        <button class="arrow left" (click)="scrollCities('left')">←</button>
+        <button class="arrow right" (click)="scrollCities('right')">→</button>
+      </div>
+    </div>
+    
+    <div class="city-list" #cityList>
+      <app-tarjeta-clima [climaData]="climaData"></app-tarjeta-clima>
+      <div class="city" *ngFor="let city of otherCities">
+        <h4>{{ city.name }}</h4>
+        <p class="city-weather">{{ city.weather }}</p>
+        <p class="city-temp">{{ city.temp }}°</p>
       </div>
     </div>
   </div>
+</div>
