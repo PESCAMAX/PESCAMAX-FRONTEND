@@ -1,10 +1,11 @@
-<div class="container mx-auto flex items-center justify-between space-x-4">
+<div class="container mx-auto flex flex-col md:flex-row items-center justify-between space-y-4 md:space-x-4">
   <div class="relative flex items-center">
     <div class="reforts">
       <app-lotes [monitoreoData]="monitoreoData" (loteSeleccionado)="onLoteChange($event)"></app-lotes>
     </div>
   </div>
 </div>
-<div class="chart-container mt-4">
-  <div id="MyChart"></div>
+
+<div class="chart-container mt-4 mx-auto w-full max-w-4xl p-4 bg-white shadow-md rounded-lg">
+  <div id="MyChart" class="w-full h-96"></div> <!-- Asegúrate de que el div ocupe el 100% del ancho y una altura específica -->
 </div>

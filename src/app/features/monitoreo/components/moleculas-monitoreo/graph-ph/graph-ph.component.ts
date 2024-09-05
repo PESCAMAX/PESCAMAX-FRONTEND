@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { createChart, IChartApi, ColorType, Time, LineData } from 'lightweight-charts';
 import { ApiService, Monitoreo } from '../../../services/api-form/api.service';
 import { AuthService } from '../../../../../core/services/api-login/auth.service';
@@ -8,7 +8,7 @@ import { AuthService } from '../../../../../core/services/api-login/auth.service
   templateUrl: './graph-ph.component.html',
   styleUrls: ['./graph-ph.component.css']
 })
-export class GraphPhComponent implements OnInit {
+export class GraphPhComponent implements OnInit, AfterViewInit, OnDestroy {
   public chart: IChartApi | null = null;
   public lotes: number[] = [];
   public selectedLote: number | null = null;
@@ -16,11 +16,20 @@ export class GraphPhComponent implements OnInit {
   private startDate: Date | null = null;
   private endDate: Date | null = null;
   monitoreoData: Monitoreo[] = [];
+  private resizeObserver: ResizeObserver | null = null;
 
   constructor(private apiService: ApiService, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.loadLotes();
+  }
+
+  ngAfterViewInit() {
+    this.setupResizeListener();
+  }
+
+  ngOnDestroy() {
+    this.cleanupResizeListener();
   }
 
   loadLotes() {
@@ -92,40 +101,33 @@ export class GraphPhComponent implements OnInit {
       console.error('No se encontró el elemento con id "MyChart"');
       return;
     }
-    
-    this.chart = createChart(chartContainer, {
+
+    const chartOptions = {
       width: chartContainer.clientWidth,
-      height: 400,
+      height: chartContainer.clientHeight,
       layout: {
         background: { type: ColorType.Solid, color: '#F3F4F6' },
         textColor: '#333'
       },
       grid: {
-        vertLines: {
-          color: '#E5E7EB'
-        },
-        horzLines: {
-          color: '#E5E7EB'
-        }
+        vertLines: { color: '#E5E7EB' },
+        horzLines: { color: '#E5E7EB' }
       },
-      rightPriceScale: {
-        visible: false,
-      },
+      rightPriceScale: { visible: false },
       leftPriceScale: {
         visible: true,
         borderColor: '#2B2B43',
-        scaleMargins: {
-          top: 0.1,
-          bottom: 0.1,
-        },
+        scaleMargins: { top: 0.1, bottom: 0.1 },
       },
       timeScale: {
         borderColor: '#2B2B43',
         timeVisible: true,
         secondsVisible: false
       },
-    });
-  
+    };
+
+    this.chart = createChart(chartContainer, chartOptions);
+
     const areaSeries = this.chart.addAreaSeries({
       lineColor: '#B39DDB',
       topColor: 'rgba(179, 157, 219, 0.4)',
@@ -140,10 +142,29 @@ export class GraphPhComponent implements OnInit {
         minMove: 0.01,
       },
     });
-  
+
     areaSeries.setData(data);
-  
+
     // Ajustar el rango visible
     this.chart.timeScale().fitContent();
+  }
+
+  private setupResizeListener() {
+    const chartContainer = document.getElementById('MyChart');
+    if (chartContainer) {
+      this.resizeObserver = new ResizeObserver(entries => {
+        for (let entry of entries) {
+          const { width, height } = entry.contentRect;
+          this.chart?.applyOptions({ width, height });
+        }
+      });
+      this.resizeObserver.observe(chartContainer);
+    }
+  }
+
+  private cleanupResizeListener() {
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+    }
   }
 }

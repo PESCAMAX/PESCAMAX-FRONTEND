@@ -92,9 +92,9 @@ export class GraficastdssComponent implements OnInit {
       console.error('No se encontró el elemento con id "MyChart"');
       return;
     }
-    
+
     this.chart = createChart(chartContainer, {
-      
+
       height: 400,
       layout: {
         background: { type: ColorType.Solid, color: '#F3F4F6' },
@@ -121,12 +121,12 @@ export class GraficastdssComponent implements OnInit {
         secondsVisible: false
       },
     });
-  
+
     const areaSeries = this.chart.addAreaSeries({
       lineColor: '#4DD0E1',
       topColor: 'rgba(77, 208, 225, 0.4)',
       bottomColor: 'rgba(77, 208, 225, 0.1)',
-    
+
       priceLineVisible: true,
       lastValueVisible: true,
       priceFormat: {
@@ -135,9 +135,9 @@ export class GraficastdssComponent implements OnInit {
         minMove: 0.01,
       },
     });
-  
+
     areaSeries.setData(data);
-  
+
     // Ajustar el rango visible
     this.chart.timeScale().fitContent();
   }
