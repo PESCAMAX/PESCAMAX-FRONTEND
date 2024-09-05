@@ -3,22 +3,22 @@
     <h2 class="month">{{ currentDate | date:'MMMM yyyy' }}</h2>
     <form (ngSubmit)="buscarCiudad()" class="search-bar">
       <select [(ngModel)]="ciudad" name="ciudad" required>
-        <option value="">Select a city</option>
+        <option value="">Seleccione una ciudad</option>
         <option *ngFor="let city of colombianCities" [value]="city">{{ city }}</option>
       </select>
       <button type="submit" class="search-icon">🔍</button>
     </form>
   </div>
-  
+    
   <div class="date-nav">
     <p class="current-date">{{ getFormattedDate() }}</p>
     <div class="nav-buttons">
-      <button (click)="setForecastType('today')" [class.active]="forecastType === 'today'">Today</button>
-      <button (click)="setForecastType('tomorrow')" [class.active]="forecastType === 'tomorrow'">Tomorrow</button>
-      <button (click)="setForecastType('week')" [class.active]="forecastType === 'week'">Next 7 days</button>
+      <button (click)="setForecastType('today')" [class.active]="forecastType === 'today'">Hoy</button>
+      <button (click)="setForecastType('tomorrow')" [class.active]="forecastType === 'tomorrow'">Mañana</button>
+      <button (click)="setForecastType('week')" [class.active]="forecastType === 'week'">Próximos 7 días</button>
     </div>
   </div>
-  
+   
   <div class="forecast">
     <div class="day" *ngFor="let day of getForecast()">
       <p class="weekday">{{ day.weekday }}</p>
@@ -26,22 +26,22 @@
       <p class="temperature">{{ day.temperature }}°</p>
     </div>
   </div>
-  
+   
   <div class="other-cities">
     <div class="cities-header">
-      <h3>Other large cities</h3>
+      <h3>Otras ciudades grandes</h3>
       <div class="nav-arrows">
         <button class="arrow left" (click)="scrollCities('left')">←</button>
         <button class="arrow right" (click)="scrollCities('right')">→</button>
       </div>
     </div>
-    
+       
     <div class="city-list" #cityList>
       <app-tarjeta-clima [climaData]="climaData"></app-tarjeta-clima>
       <div class="city" *ngFor="let city of otherCities">
         <h4>{{ city.name }}</h4>
         <p class="city-weather">{{ city.weather }}</p>
-        <p class="city-temp">{{ city.temp }}°</p>
+        <p class="city-temp">{{ city.temp }}°C</p>
       </div>
     </div>
   </div>

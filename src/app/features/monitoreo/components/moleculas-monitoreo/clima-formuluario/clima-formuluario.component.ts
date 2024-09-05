@@ -1,7 +1,7 @@
 import { Component, Output, EventEmitter, ViewChild, ElementRef  } from '@angular/core';
 import { ClimaService } from '../../../services/clima/clima.service';
 import { AuthService } from '../../../../../core/services/api-login/auth.service';
-
+import { forkJoin } from 'rxjs';
 @Component({
   selector: 'app-clima-formuluario',
   templateUrl: './clima-formuluario.component.html',
@@ -16,13 +16,7 @@ export class ClimaFormuluarioComponent {
   userId: string = '';
   currentDate: Date = new Date();
   forecast: any[] = [];
-  otherCities: any[] = [
-    { name: 'Bogotá', weather: 'Cloudy', temp: 18 },
-    { name: 'Medellín', weather: 'Sunny', temp: 25 },
-    { name: 'Cali', weather: 'Partly Cloudy', temp: 28 },
-    { name: 'Barranquilla', weather: 'Hot', temp: 32 },
-    { name: 'Cartagena', weather: 'Sunny', temp: 30 },
-  ];
+  otherCities: any[] = [];
   forecastType: 'today' | 'tomorrow' | 'week' = 'week';
 
   colombianCities: string[] = [
@@ -33,10 +27,32 @@ export class ClimaFormuluarioComponent {
     'Tunja', 'Valledupar', 'Villavicencio', 'Yopal'
   ];
 
+  mainCities: string[] = ['Bogotá', 'Medellín', 'Cali', 'Barranquilla', 'Cartagena'];
+
   @Output() climaObtenido = new EventEmitter<any>();
 
   constructor(private climaService: ClimaService, private authService: AuthService) {
     this.userId = this.authService.getUserId();
+  }
+
+  ngOnInit() {
+    this.fetchMainCitiesWeather();
+  }
+
+  fetchMainCitiesWeather() {
+    const requests = this.mainCities.map(city => this.climaService.obtenerClima(city, this.pais));
+    forkJoin(requests).subscribe(
+      results => {
+        this.otherCities = results.map(data => ({
+          name: data.name,
+          weather: data.weather[0].main,
+          temp: Math.round(data.main.temp - 273.15)
+        }));
+      },
+      error => {
+        console.error('Error fetching main cities weather:', error);
+      }
+    );
   }
 
   buscarCiudad(): void {
@@ -83,6 +99,8 @@ export class ClimaFormuluarioComponent {
   }
 
   generarPronostico(): void {
+    // This method should be updated to use real forecast data from the API
+    // For now, we'll keep the mock data generation
     const dias = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     const iconos = ['☀️', '☁️', '🌤️', '🌧️', '❄️', '⛈️', '🌩️'];
     this.forecast = [];
