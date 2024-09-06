@@ -6,31 +6,30 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./tarjeta-clima.component.css']
 })
 export class TarjetaClimaComponent implements OnInit {
-  @Input() climaData: any;
-  currentDate: string = '';
-
+  @Input() datosClima: any;
+  fechaActual: string = '';
 
   ngOnInit(): void {
-    this.currentDate = new Date().toLocaleDateString();
+    this.fechaActual = new Date().toLocaleDateString();
   }
 
   get temperaturaActual(): number {
-    return this.climaData?.main?.temp ? this.climaData.main.temp - 273.15 : 0;
+    return this.datosClima?.main?.temp ? this.datosClima.main.temp - 273.15 : 0;
   }
 
   get nombreCiudad(): string {
-    return this.climaData?.name || '';
+    return this.datosClima?.name || '';
   }
 
   get estadoMeteoro(): string {
-    return this.climaData?.weather?.[0]?.main || '';
+    return this.datosClima?.weather?.[0]?.main || '';
   }
 
   get humedad(): number {
-    return this.climaData?.main?.humidity || 0;
+    return this.datosClima?.main?.humidity || 0;
   }
 
   get nubes(): number {
-    return this.climaData?.clouds?.all || 0;
+    return this.datosClima?.clouds?.all || 0;
   }
 }

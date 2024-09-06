@@ -8,18 +8,18 @@ import { forkJoin } from 'rxjs';
   styleUrls: ['./clima-formuluario.component.css']
 })
 export class ClimaFormuluarioComponent {
-  @ViewChild('cityList') cityList!: ElementRef;
+  @ViewChild('listaCiudades') listaCiudades!: ElementRef;
 
   ciudad: string = '';
   pais: string = 'Co';
-  climaData: any;
+  datosClima: any;
   userId: string = '';
-  currentDate: Date = new Date();
-  forecast: any[] = [];
-  otherCities: any[] = [];
-  forecastType: 'today' | 'tomorrow' | 'week' = 'week';
+  fechaActual: Date = new Date();
+  pronostico: any[] = [];
+  otrasCiudades: any[] = [];
+  tipoPronostico: 'hoy' | 'manana' | 'semana' = 'semana';
 
-  colombianCities: string[] = [
+  ciudadesColombianas: string[] = [
     'Arauca', 'Armenia', 'Barranquilla', 'Bogotá', 'Bucaramanga', 'Cali', 'Cartagena', 
     'Cúcuta', 'Florencia', 'Ibagué', 'Leticia', 'Manizales', 'Medellín', 'Mitú', 'Mocoa', 
     'Montería', 'Neiva', 'Pasto', 'Pereira', 'Popayán', 'Puerto Carreño', 'Puerto Inírida', 
@@ -27,7 +27,7 @@ export class ClimaFormuluarioComponent {
     'Tunja', 'Valledupar', 'Villavicencio', 'Yopal'
   ];
 
-  mainCities: string[] = ['Bogotá', 'Medellín', 'Cali', 'Barranquilla', 'Cartagena'];
+  ciudadesPrincipales: string[] = ['Bogotá', 'Medellín', 'Cali', 'Barranquilla', 'Cartagena'];
 
   @Output() climaObtenido = new EventEmitter<any>();
 
@@ -36,21 +36,21 @@ export class ClimaFormuluarioComponent {
   }
 
   ngOnInit() {
-    this.fetchMainCitiesWeather();
+    this.obtenerClimaCiudadesPrincipales();
   }
 
-  fetchMainCitiesWeather() {
-    const requests = this.mainCities.map(city => this.climaService.obtenerClima(city, this.pais));
-    forkJoin(requests).subscribe(
-      results => {
-        this.otherCities = results.map(data => ({
-          name: data.name,
-          weather: data.weather[0].main,
-          temp: Math.round(data.main.temp - 273.15)
+  obtenerClimaCiudadesPrincipales() {
+    const peticiones = this.ciudadesPrincipales.map(ciudad => this.climaService.obtenerClima(ciudad, this.pais));
+    forkJoin(peticiones).subscribe(
+      resultados => {
+        this.otrasCiudades = resultados.map(datos => ({
+          nombre: datos.name,
+          clima: datos.weather[0].main,
+          temp: Math.round(datos.main.temp - 273.15)
         }));
       },
       error => {
-        console.error('Error fetching main cities weather:', error);
+        console.error('Error al obtener el clima de las ciudades principales:', error);
       }
     );
   }
@@ -65,10 +65,10 @@ export class ClimaFormuluarioComponent {
 
   obtenerClima(): void {
     this.climaService.obtenerClima(this.ciudad, this.pais).subscribe(
-      data => {
-        this.climaData = data;
-        console.log('Clima data:', this.climaData);
-        this.climaObtenido.emit(this.climaData);
+      datos => {
+        this.datosClima = datos;
+        console.log('Datos del clima:', this.datosClima);
+        this.climaObtenido.emit(this.datosClima);
         this.generarPronostico();
         this.guardarClima();
       },
@@ -80,17 +80,17 @@ export class ClimaFormuluarioComponent {
 
   guardarClima(): void {
     const clima = {
-      NombreCiudad: this.climaData.name,
-      TemperaturaActual: this.climaData.main.temp - 273.15,
-      EstadoMeteoro: this.climaData.weather[0].main,
-      Humedad: this.climaData.main.humidity,
-      Nubes: this.climaData.clouds.all,
+      NombreCiudad: this.datosClima.name,
+      TemperaturaActual: this.datosClima.main.temp - 273.15,
+      EstadoMeteoro: this.datosClima.weather[0].main,
+      Humedad: this.datosClima.main.humidity,
+      Nubes: this.datosClima.clouds.all,
       UserId: this.userId
     };
 
     this.climaService.guardarClima(clima).subscribe(
-      response => {
-        console.log('Clima guardado:', response);
+      respuesta => {
+        console.log('Clima guardado:', respuesta);
       },
       error => {
         console.error('Error al guardar el clima:', error);
@@ -99,50 +99,50 @@ export class ClimaFormuluarioComponent {
   }
 
   generarPronostico(): void {
-    // This method should be updated to use real forecast data from the API
-    // For now, we'll keep the mock data generation
-    const dias = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    // Este método debería actualizarse para usar datos reales del pronóstico de la API
+    // Por ahora, mantendremos la generación de datos simulados
+    const dias = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
     const iconos = ['☀️', '☁️', '🌤️', '🌧️', '❄️', '⛈️', '🌩️'];
-    this.forecast = [];
+    this.pronostico = [];
     for (let i = 0; i < 7; i++) {
-      const fecha = new Date(this.currentDate);
+      const fecha = new Date(this.fechaActual);
       fecha.setDate(fecha.getDate() + i);
-      this.forecast.push({
-        weekday: dias[fecha.getDay()],
-        icon: iconos[Math.floor(Math.random() * iconos.length)],
-        temperature: Math.round(Math.random() * 20 + 10)
+      this.pronostico.push({
+        diaSemana: dias[fecha.getDay()],
+        icono: iconos[Math.floor(Math.random() * iconos.length)],
+        temperatura: Math.round(Math.random() * 20 + 10)
       });
     }
   }
 
-  getFormattedDate(): string {
-    const options: Intl.DateTimeFormatOptions = { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric' };
-    return this.currentDate.toLocaleDateString('en-US', options);
+  obtenerFechaFormateada(): string {
+    const opciones: Intl.DateTimeFormatOptions = { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric' };
+    return this.fechaActual.toLocaleDateString('es-ES', opciones);
   }
 
-  setForecastType(type: 'today' | 'tomorrow' | 'week'): void {
-    this.forecastType = type;
+  establecerTipoPronostico(tipo: 'hoy' | 'manana' | 'semana'): void {
+    this.tipoPronostico = tipo;
   }
 
-  getForecast(): any[] {
-    switch (this.forecastType) {
-      case 'today':
-        return [this.forecast[0]];
-      case 'tomorrow':
-        return [this.forecast[1]];
-      case 'week':
+  obtenerPronostico(): any[] {
+    switch (this.tipoPronostico) {
+      case 'hoy':
+        return [this.pronostico[0]];
+      case 'manana':
+        return [this.pronostico[1]];
+      case 'semana':
       default:
-        return this.forecast;
+        return this.pronostico;
     }
   }
 
-  scrollCities(direction: 'left' | 'right'): void {
-    const container = this.cityList.nativeElement;
-    const scrollAmount = container.clientWidth / 2;
-    if (direction === 'left') {
-      container.scrollLeft -= scrollAmount;
+  desplazarCiudades(direccion: 'izquierda' | 'derecha'): void {
+    const contenedor = this.listaCiudades.nativeElement;
+    const cantidadDesplazamiento = contenedor.clientWidth / 2;
+    if (direccion === 'izquierda') {
+      contenedor.scrollLeft -= cantidadDesplazamiento;
     } else {
-      container.scrollLeft += scrollAmount;
+      contenedor.scrollLeft += cantidadDesplazamiento;
     }
   }
 }
