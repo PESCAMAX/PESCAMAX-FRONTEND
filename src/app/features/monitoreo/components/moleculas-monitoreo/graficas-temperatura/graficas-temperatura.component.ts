@@ -18,6 +18,7 @@ export class GraficasTemperaturaComponent implements OnInit {
   monitoreoData: Monitoreo[] = [];
   isMenuOpen: boolean = true;
   loadLatestData: any;
+  private updateInterval: any;
 
   constructor(private apiService: ApiService, private authService: AuthService) {}
 
@@ -42,8 +43,6 @@ export class GraficasTemperaturaComponent implements OnInit {
     );
   }
 
-  startDataUpdates() {
-  }
 
 
 
@@ -89,6 +88,12 @@ export class GraficasTemperaturaComponent implements OnInit {
       },
       error: (error) => console.error('Error al cargar datos para el gráfico:', error)
     });
+  }
+
+  startDataUpdates() {
+    this.updateInterval = setInterval(() => {
+      this.loadLatestData();
+    }, ); // Actualiza cada 5 segundos
   }
 
   dateToChartTime(date: Date): Time {
