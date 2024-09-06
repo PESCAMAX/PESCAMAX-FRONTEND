@@ -46,6 +46,8 @@ export class GraficasTemperaturaComponent implements OnInit {
 
 
 
+
+
   toggleDropdown() {
     this.loteDropdownOpen = !this.loteDropdownOpen;
   }
@@ -60,7 +62,6 @@ export class GraficasTemperaturaComponent implements OnInit {
     this.endDate = event.endDate;
     this.loadDataAndCreateChart();
   }
-
   loadDataAndCreateChart() {
     if (this.selectedLote === null) return;
     this.apiService.listarMonitoreo(this.authService.getUserId()).subscribe({
@@ -69,13 +70,9 @@ export class GraficasTemperaturaComponent implements OnInit {
           let filteredData = data.response.filter(item => item.LoteID === this.selectedLote);
           if (this.startDate && this.endDate) {
             filteredData = filteredData.filter(item => {
-              const itemDate = new Date(item.FechaHora);
-              return itemDate >= this.startDate! && itemDate <= this.endDate!;
+              const fecha = new Date(item.FechaHora);
+              return this.startDate && this.endDate && fecha >= this.startDate && fecha <= this.endDate;
             });
-          }
-          if (filteredData.length === 0) {
-            console.warn('No hay datos para el rango de fechas seleccionado.');
-            return;
           }
           const temperaturaValues = filteredData.map(item => ({
             time: this.dateToChartTime(new Date(item.FechaHora)),
@@ -90,11 +87,6 @@ export class GraficasTemperaturaComponent implements OnInit {
     });
   }
 
-  startDataUpdates() {
-    this.updateInterval = setInterval(() => {
-      this.loadLatestData();
-    }, ); // Actualiza cada 5 segundos
-  }
 
   dateToChartTime(date: Date): Time {
     return date.getTime() / 1000 as Time;
@@ -157,5 +149,9 @@ export class GraficasTemperaturaComponent implements OnInit {
     // Ajustar el rango visible
     this.chart.timeScale().fitContent();
   }
-  
+  startDataUpdates() {
+    this.updateInterval = setInterval(() => {
+      this.loadDataAndCreateChart();
+    },); // Actualiza cada 5 segundos
+  }
 }

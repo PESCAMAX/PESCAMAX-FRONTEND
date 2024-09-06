@@ -17,11 +17,13 @@ export class GraphPhComponent implements OnInit, AfterViewInit, OnDestroy {
   private endDate: Date | null = null;
   monitoreoData: Monitoreo[] = [];
   private resizeObserver: ResizeObserver | null = null;
+  private updateInterval: any;
 
   constructor(private apiService: ApiService, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.loadLotes();
+    this.startDataUpdates();
   }
 
   ngAfterViewInit() {
@@ -30,6 +32,9 @@ export class GraphPhComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy() {
     this.cleanupResizeListener();
+    if (this.updateInterval) {
+      clearInterval(this.updateInterval);
+    }
   }
 
   loadLotes() {
@@ -166,5 +171,11 @@ export class GraphPhComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.resizeObserver) {
       this.resizeObserver.disconnect();
     }
+  }
+
+  startDataUpdates() {
+    this.updateInterval = setInterval(() => {
+      this.loadDataAndCreateChart();
+    }); // Actualiza cada 5 segundos
   }
 }

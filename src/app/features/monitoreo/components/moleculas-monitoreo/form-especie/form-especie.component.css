@@ -1,3 +1,22 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden; /* Evita el scroll */
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.h-screen {
+  height: 100vh; /* Altura completa de la ventana */
+}
+
+.w-screen {
+  width: 100vw; /* Ancho completo de la ventana */
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -8,7 +27,7 @@
 }
 
 .max-w-550px {
-  max-width: 550px;
+  max-width: 100%; /* Asegura que el ancho máximo se ajuste al ancho de la pantalla */
 }
 
 .bg-white {
@@ -27,90 +46,54 @@
   padding: 2rem;
 }
 
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Asegura que el formulario se ajuste al ancho de la pantalla */
+form {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Altura completa para el formulario */
+}
+
+/* Estilos específicos para el formulario */
 .form-field {
   margin-bottom: 1rem;
 }
 
 .form-row {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
-  margin-left: -0.5rem;
-  margin-right: -0.5rem;
 }
 
 .half-width {
-  width: 100%;
+  width: 50%;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }
 
-.block {
-  display: block;
-}
-
-.mb-2 {
-  margin-bottom: 0.5rem;
-}
-
-.font-medium {
-  font-weight: 500;
-}
-
-.text-gray-700 {
-  color: #4a5568;
-}
-
-.text-red-500 {
-  color: #f56565;
-}
-
-.text-sm {
-  font-size: 0.875rem;
-}
-
-.mt-1 {
-  margin-top: 0.25rem;
+@media (max-width: 640px) {
+  .half-width {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0; 
+  }
 }
 
 .mt-6 {
   margin-top: 1.5rem;
 }
-
-input[type="text"] {
-  width: 100%;
-  padding: 0.5rem 0.75rem;
-  border: 1px solid #e2e8f0;
-  border-radius: 0.25rem;
-}
-
-input[type="text"]:focus {
-  outline: none;
-  ring: 2px solid #4299e1;
-  border-color: #4299e1;
-}
-
-button[type="submit"] {
-  width: 100%;
-  padding: 0.75rem 1rem;
-  background-color: #4299e1;
-  color: white;
-  font-weight: 700;
-  border-radius: 0.25rem;
-  transition: background-color 0.2s;
-}
-
-button[type="submit"]:hover {
-  background-color: #3182ce;
-}
-
-button[type="submit"]:focus {
-  outline: none;
-  ring: 2px solid #4299e1;
-  ring-offset: 2px;
-}
-
-@media (min-width: 640px) {
-  .half-width {
-    width: 50%;
-  }
-} 
