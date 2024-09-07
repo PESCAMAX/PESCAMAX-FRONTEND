@@ -1,4 +1,4 @@
-.weather-container {
+.contenedor-clima {
   max-width: 1000px;
   margin: 20px auto;
   background-color: white;
@@ -8,24 +8,21 @@
   font-family: 'Arial', sans-serif;
 }
 
-.header {
+.encabezado {
   display: flex;
-  justify-content: space-between;
+  justify-content:space-between;
   align-items: center;
   margin-bottom: 30px;
 }
 
-.month {
-  font-size: 28px;
-  margin: 0;
-  color: #333;
-}
 
-.search-bar {
+
+.barra-busqueda {
   position: relative;
+  
 }
 
-.search-bar input {
+.barra-busqueda select {
   padding: 10px 40px 10px 15px;
   border: 2px solid #1a73e8;
   border-radius: 25px;
@@ -34,12 +31,12 @@
   transition: all 0.3s ease;
 }
 
-.search-bar input:focus {
+.barra-busqueda select:focus {
   outline: none;
   box-shadow: 0 0 10px rgba(26, 115, 232, 0.3);
 }
 
-.search-icon {
+.icono-busqueda {
   position: absolute;
   right: 15px;
   top: 50%;
@@ -50,19 +47,21 @@
   font-size: 18px;
 }
 
-.date-nav {
+.navegacion-fecha {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 30px;
 }
 
-.current-date {
+.fecha-actual {
   font-size: 18px;
   color: #666;
 }
-
-.nav-buttons button {
+.botones-navegacion{
+  justify-content:center;
+}
+.botones-navegacion button {
   padding: 10px 20px;
   margin-left: 10px;
   border: 2px solid #1a73e8;
@@ -72,15 +71,16 @@
   cursor: pointer;
   transition: all 0.3s ease;
   font-size: 16px;
+  justify-content:center;
 }
 
-.nav-buttons button.active,
-.nav-buttons button:hover {
+.botones-navegacion button.activo,
+.botones-navegacion button:hover {
   background-color: #1a73e8;
   color: white;
 }
 
-.forecast {
+.pronostico {
   display: flex;
   justify-content: space-between;
   margin-bottom: 30px;
@@ -88,7 +88,7 @@
   padding-bottom: 10px;
 }
 
-.day {
+.dia {
   text-align: center;
   min-width: 100px;
   padding: 15px;
@@ -98,45 +98,45 @@
   transition: all 0.3s ease;
 }
 
-.day:hover {
+.dia:hover {
   transform: translateY(-5px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-.weekday {
+.dia-semana {
   font-weight: bold;
   color: #333;
 }
 
-.weather-icon {
+.icono-clima {
   font-size: 36px;
   margin: 10px 0;
 }
 
-.temperature {
+.temperatura {
   font-size: 24px;
   font-weight: bold;
   color: #1a73e8;
 }
 
-.other-cities {
+.otras-ciudades {
   margin-top: 30px;
 }
 
-.cities-header {
+.encabezado-ciudades {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
 
-.cities-header h3 {
+.encabezado-ciudades h3 {
   font-size: 24px;
   margin: 0;
   color: #333;
 }
 
-.nav-arrows button {
+.flechas-navegacion button {
   background: none;
   border: none;
   font-size: 24px;
@@ -145,18 +145,18 @@
   transition: all 0.3s ease;
 }
 
-.nav-arrows button:hover {
+.flechas-navegacion button:hover {
   transform: scale(1.2);
 }
 
-.city-list {
+.lista-ciudades {
   display: flex;
   overflow-x: auto;
   scroll-behavior: smooth;
   padding-bottom: 10px;
 }
 
-.city {
+.ciudad {
   background-color: #f8f8f8;
   padding: 20px;
   border-radius: 10px;
@@ -165,23 +165,23 @@
   transition: all 0.3s ease;
 }
 
-.city:hover {
+.ciudad:hover {
   transform: translateY(-5px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-.city h4 {
+.ciudad h4 {
   margin: 0 0 10px 0;
   font-size: 20px;
   color: #333;
 }
 
-.city-weather {
+.clima-ciudad {
   margin: 5px 0;
   color: #666;
 }
 
-.city-temp {
+.temp-ciudad {
   margin: 5px 0;
   font-weight: bold;
   font-size: 24px;
@@ -190,44 +190,44 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .weather-container {
+  .contenedor-clima {
     padding: 20px;
   }
 
-  .header {
+  .encabezado {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .search-bar {
+  .barra-busqueda {
     margin-top: 20px;
     width: 100%;
   }
 
-  .search-bar input {
+  .barra-busqueda select {
     width: calc(100% - 55px);
   }
 
-  .date-nav {
+  .navegacion-fecha {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .nav-buttons {
+  .botones-navegacion {
     margin-top: 15px;
   }
 
-  .nav-buttons button {
+  .botones-navegacion button {
     margin-left: 0;
     margin-right: 10px;
     margin-bottom: 10px;
   }
 
-  .forecast {
+  .pronostico {
     justify-content: flex-start;
   }
 
-  .day {
+  .dia {
     min-width: 80px;
   }
 }
