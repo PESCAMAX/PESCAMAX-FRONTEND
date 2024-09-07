@@ -26,7 +26,6 @@ export class EspecieFormComponent implements OnInit {
       temperaturaMaximo: ['', [Validators.required, this.numberValidator]],
       phMinimo: ['', [Validators.required, this.numberValidator, Validators.min(0)]],
       phMaximo: ['', [Validators.required, this.numberValidator, Validators.min(0)]],
-      cantidad: ['', [Validators.required, Validators.min(1), this.integerValidator]] // Nuevo campo
     }, { validators: [this.minMaxValidator] });
   }
 
@@ -40,11 +39,7 @@ export class EspecieFormComponent implements OnInit {
         this.showError('No se pudo obtener el nombre de usuario. Por favor, inicie sesión nuevamente.');
         return;
       }
-      const formData = {
-        ...this.especieForm.value,
-        cantidad: parseInt(this.especieForm.value.cantidad, 10) // Aseguramos que sea un entero
-      };
-      this.apiService.crearEspecie(username, formData).subscribe({
+      this.apiService.crearEspecie(username, this.especieForm.value).subscribe({
         next: (response) => {
           this.showSuccess('Especie guardada exitosamente');
           this.especieForm.reset();
@@ -80,17 +75,6 @@ export class EspecieFormComponent implements OnInit {
     return null;
   }
 
-  integerValidator(control: AbstractControl): ValidationErrors | null {
-    const value = control.value;
-    if (value === null || value === undefined || value === '') {
-      return null;
-    }
-    if (!Number.isInteger(Number(value))) {
-      return { notInteger: true };
-    }
-    return null;
-  }
-
   minMaxValidator(group: FormGroup): ValidationErrors | null {
     const fields = ['tds', 'temperatura', 'ph'];
     let hasError = false;
@@ -120,16 +104,13 @@ export class EspecieFormComponent implements OnInit {
         return 'Este campo es requerido.';
       }
       if (control.errors['min']) {
-        return controlName === 'cantidad' ? 'El valor debe ser al menos 1.' : 'El valor debe ser mayor que cero.';
+        return 'El valor debe ser mayor que cero.';
       }
       if (control.errors['pattern']) {
         return 'Solo se permiten letras en este campo.';
       }
       if (control.errors['notANumber']) {
         return 'Este campo solo acepta números.';
-      }
-      if (control.errors['notInteger']) {
-        return 'Este campo solo acepta números enteros.';
       }
       if (control.errors['equal']) {
         return control.errors['equal'];

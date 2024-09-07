@@ -1,22 +1,3 @@
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  overflow: hidden; /* Evita el scroll */
-}
-
-.overflow-hidden {
-  overflow: hidden;
-}
-
-.h-screen {
-  height: 100vh; /* Altura completa de la ventana */
-}
-
-.w-screen {
-  width: 100vw; /* Ancho completo de la ventana */
-}
-
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -27,11 +8,11 @@ html, body {
 }
 
 .max-w-550px {
-  max-width: 100%; /* Asegura que el ancho máximo se ajuste al ancho de la pantalla */
+  max-width: 550px;
 }
 
 .bg-white {
-  background-color: white;
+  background-color: rgb(255, 255, 255);
 }
 
 .shadow-lg {
@@ -56,44 +37,83 @@ html, body {
 
 .font-bold {
   font-weight: 700;
+  
 }
 
 .text-center {
   text-align: center;
 }
 
-/* Asegura que el formulario se ajuste al ancho de la pantalla */
-form {
-  display: flex;
-  flex-direction: column;
-  height: 100%; /* Altura completa para el formulario */
-}
-
-/* Estilos específicos para el formulario */
 .form-field {
   margin-bottom: 1rem;
+  
 }
 
 .form-row {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
+  margin-left: -0.5rem;
+  margin-right: -0.5rem;
+  
 }
 
 .half-width {
-  width: 50%;
+  width: 100%;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
+ 
 }
 
-@media (max-width: 640px) {
-  .half-width {
-    width: 100%;
-    padding-left: 0;
-    padding-right: 0; 
-  }
+.block {
+  display: block;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.text-gray-700 {
+  color: #000000;
+}
+
+.text-red-500 {
+  color: #f56565;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+}
+
+.mt-1 {
+  margin-top: 0.25rem;
 }
 
 .mt-6 {
   margin-top: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .half-width {
+    width: 50%;
+  }
+}
+
+@media (max-width: 639px) {
+  .p-8 {
+    padding: 1rem;
+  }
+  
+  .form-row {
+    flex-direction: column;
+  }
+  
+  .half-width {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
