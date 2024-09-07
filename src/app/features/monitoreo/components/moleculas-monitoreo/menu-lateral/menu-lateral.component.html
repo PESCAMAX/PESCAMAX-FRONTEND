@@ -103,15 +103,15 @@
 <!-- En tu archivo de menú -->
 <div class="flex items-center">
   <app-notification></app-notification>
-  <img src="../../../../../assets/icons/userr.png" alt="Perfil" class="w-6 h-6 cursor-pointer hover:opacity-80 transition-opacity" (click)="toggleUserMenu()">
+  <img src="../../../../../assets/icons/userr.png" alt="Perfil" class="w-6 h-6 user-icon cursor-pointer hover:opacity-80" (click)="toggleUserMenu()">
 </div>
 </div>
 
 <!-- Dropdown del menú de usuario -->
-<div *ngIf="isUserMenuVisible" class="absolute right-4 top-16 bg-white shadow-lg rounded-lg overflow-hidden">
-  <a [href]="'/user-config/' + userId" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Perfil</a>
-  <a href="#settings" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Ajustes</a>
-  <button (click)="cerrarSesion()">Cerrar Sesión</button>
+<div *ngIf="isUserMenuVisible" class="absolute right-4 top-16 user-menu">
+  <a [href]="'/user-config/' + userId">Perfil</a>
+  <a href="#settings">Ajustes</a>
+  <button (click)="cerrarSesion()">Cerrar sesión</button>
 </div>
 
 <!-- Contenido principal -->
