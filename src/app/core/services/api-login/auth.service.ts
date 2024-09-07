@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError, BehaviorSubject, of } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -40,7 +40,13 @@ export class AuthService {
 
   changePassword(currentPassword: string, newPassword: string): Observable<any> {
     const userId = this.getUserId();
-    return this.http.post<any>(`${this.apiUrl}/change-password`, { userId, currentPassword, newPassword }).pipe(
+    const token = this.getAuthToken();
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.post<any>(`${this.apiUrl}/change-password`, { userId, currentPassword, newPassword }, { headers }).pipe(
       tap(response => {
         if (response.success) {
           this.setRequirePasswordChange(false);
@@ -68,13 +74,6 @@ export class AuthService {
   }
 
   logout(): Observable<any> {
-    // Si tienes un endpoint de logout en el backend, usa esto:
-    // return this.http.post<any>(`${this.apiUrl}/logout`, {}).pipe(
-    //   tap(() => this.handleLogoutSuccess()),
-    //   catchError(this.handleError)
-    // );
-
-    // Si no tienes un endpoint de logout, puedes usar esto:
     return of(null).pipe(
       tap(() => this.handleLogoutSuccess())
     );
