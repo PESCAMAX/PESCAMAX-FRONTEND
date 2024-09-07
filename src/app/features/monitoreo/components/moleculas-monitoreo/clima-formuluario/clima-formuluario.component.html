@@ -1,8 +1,18 @@
+
 <div class="contenedor-clima">
   
   <div class="encabezado">
     <p class="fecha-actual">{{ obtenerFechaFormateada() }}</p>
     <form (ngSubmit)="buscarCiudad()" class="barra-busqueda">
+
+
+
+
+<div class="weather-container">
+  <div class="header">
+    <h2 class="month">{{ currentDate | date:'MMMM yyyy' }}</h2>
+    <form (ngSubmit)="buscarCiudad()" class="search-bar">
+
       <select [(ngModel)]="ciudad" name="ciudad" required>
         <option value="">Seleccione una</option>
         <option *ngFor="let ciudad of ciudadesColombianas" [value]="ciudad">{{ ciudad }}</option>

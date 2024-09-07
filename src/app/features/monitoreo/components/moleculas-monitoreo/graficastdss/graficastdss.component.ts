@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { ApiService, Monitoreo } from '../../../services/api-form/api.service';
 import { AuthService } from '../../../../../core/services/api-login/auth.service';
 import { ColorType, createChart, IChartApi, LineData, Time } from 'lightweight-charts';
@@ -8,7 +8,7 @@ import { ColorType, createChart, IChartApi, LineData, Time } from 'lightweight-c
   templateUrl: './graficastdss.component.html',
   styleUrls: ['./graficastdss.component.css']
 })
-export class GraficastdssComponent implements OnInit {
+export class GraficastdssComponent implements OnInit, AfterViewInit, OnDestroy {
   public chart: IChartApi | null = null;
   public lotes: number[] = [];
   public selectedLote: number | null = null;
@@ -16,11 +16,25 @@ export class GraficastdssComponent implements OnInit {
   private startDate: Date | null = null;
   private endDate: Date | null = null;
   monitoreoData: Monitoreo[] = [];
+  private resizeObserver: ResizeObserver | null = null;
+  private updateInterval: any;
 
   constructor(private apiService: ApiService, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.loadLotes();
+    this.startDataUpdates();
+  }
+
+  ngAfterViewInit() {
+    this.setupResizeListener();
+  }
+
+  ngOnDestroy() {
+    this.cleanupResizeListener();
+    if (this.updateInterval) {
+      clearInterval(this.updateInterval);
+    }
   }
 
   loadLotes() {
@@ -92,9 +106,9 @@ export class GraficastdssComponent implements OnInit {
       console.error('No se encontró el elemento con id "MyChart"');
       return;
     }
-    
+
     this.chart = createChart(chartContainer, {
-      
+      width: chartContainer.clientWidth,
       height: 400,
       layout: {
         background: { type: ColorType.Solid, color: '#F3F4F6' },
@@ -121,12 +135,11 @@ export class GraficastdssComponent implements OnInit {
         secondsVisible: false
       },
     });
-  
+
     const areaSeries = this.chart.addAreaSeries({
       lineColor: '#4DD0E1',
       topColor: 'rgba(77, 208, 225, 0.4)',
       bottomColor: 'rgba(77, 208, 225, 0.1)',
-    
       priceLineVisible: true,
       lastValueVisible: true,
       priceFormat: {
@@ -135,10 +148,35 @@ export class GraficastdssComponent implements OnInit {
         minMove: 0.01,
       },
     });
-  
+
     areaSeries.setData(data);
-  
+
     // Ajustar el rango visible
     this.chart.timeScale().fitContent();
+  }
+
+  private setupResizeListener() {
+    const chartContainer = document.getElementById('MyChart');
+    if (chartContainer) {
+      this.resizeObserver = new ResizeObserver(entries => {
+        for (let entry of entries) {
+          const { width, height } = entry.contentRect;
+          this.chart?.applyOptions({ width, height });
+        }
+      });
+      this.resizeObserver.observe(chartContainer);
+    }
+  }
+
+  private cleanupResizeListener() {
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+    }
+  }
+
+  startDataUpdates() {
+    this.updateInterval = setInterval(() => {
+      this.loadDataAndCreateChart();
+    },); // Actualiza cada 5 segundos
   }
 }

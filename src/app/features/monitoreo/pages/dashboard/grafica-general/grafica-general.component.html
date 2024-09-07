@@ -1,82 +1,95 @@
-<app-menu-lateral (menuToggled)="onMenuToggle($event)"></app-menu-lateral>
-<div class="flex flex-col w-full h-full">
-  <!-- Contenedor de la alerta -->
-  <div class="alert-container">
-    <app-global-alerta></app-global-alerta>
+
+
+<div class="main-container">
+  <!-- Static header -->
+  <div class="static-header">
+    <app-menu-lateral (menuToggled)="onMenuToggle($event)" class="mobile-menu"></app-menu-lateral>
+    <!-- Add user controls (bell icon and user icon) here if needed -->
   </div>
 
-  <div class="flex-1 p-4 transition-all duration-300" [ngClass]="{'ml-64': isMenuOpen, 'ml-': !isMenuOpen}">
-    <h1 class=" p-4 text-2xl font-bold custom-font custom-color">Control de monitoreo</h1>
-
-    <!-- Selección de Lote -->
-    <div class="mb-4 shadow-md">
-      <app-lotes [monitoreoData]="monitoreoData" (loteSeleccionado)="onLoteChange($event)"></app-lotes>
-
-    </div>
-    <h2 class="text-xl font-semibold text-gray-800 mb-2">Gráfica general</h2>
-    <div class="flex flex-wrap mt-4">
-      <!-- Columna izquierda: Cards (35%) -->
-      <div class="w-full lg:w-[35%] pr-0 lg:pr-4 mb-4 lg:mb-0">
-
-        <div class="grid grid-cols-2 gap-4 mb-4">
-          <app-cards-info
-            title="Temperatura"
-            [value]="temperaturaValue"
-            [trend]="temperaturaTrend"
-            [trendValue]="temperaturaTrendValue"
-            [status]="temperaturaStatus"
-            [isTimeCard]="false">
-          </app-cards-info>
-          <app-cards-info
-            title="TDS"
-            [value]="tdsValue"
-            [trend]="tdsTrend"
-            [trendValue]="tdsTrendValue"
-            [status]="tdsStatus"
-            [isTimeCard]="false">
-          </app-cards-info>
-          <app-cards-info
-            title="pH"
-            [value]="phValue"
-            [trend]="phTrend"
-            [trendValue]="phTrendValue"
-            [status]="phStatus"
-            [isTimeCard]="false">
-          </app-cards-info>         
-          <app-cards-info
-            title="ÚLTIMO REGISTRO"
-            [value]="ultimoRegistroHora"
-            [trendValue]="penultimoRegistroHora"
-            [status]="'unassigned'"
-            [isTimeCard]="true">
-          </app-cards-info>
-          <app-cards-info
-            title="Mortalidad"
-            [value]="mortalidadValue"
-            [trend]="mortalidadTrend"
-            [trendValue]="mortalidadTrendValue"
-            [status]="mortalidadStatus"
-            [isTimeCard]="false">
-          </app-cards-info>
-
-        </div>
+  <!-- Scrollable content -->
+  <div class="scrollable-content content-padding">
+    <div class="flex flex-col w-full h-full">
+      <!-- Contenedor de la alerta -->
+      <div class="alert-container">
+        <app-global-alerta></app-global-alerta>
       </div>
 
-      <!-- Columna derecha: Gráfica General (65%) -->
-      <div class="w-full lg:w-[65%]">
-        <div class="mb-8">
+      <div class="flex-1 p-4 transition-all duration-300" [ngClass]="{'ml-64': isMenuOpen, 'ml-': !isMenuOpen}">
+        <h1 class="p-4 text-2xl font-bold custom-font custom-color">Control de monitoreo</h1>
 
-          <app-grafica [data]="monitoreoDataFiltrada" [selectedLote]="selectedLote"></app-grafica>
+        <!-- Selección de Lote -->
+        <div class="mb-4 shadow-md">
+          <app-lotes [monitoreoData]="monitoreoData" (loteSeleccionado)="onLoteChange($event)"></app-lotes>
+        </div>
+
+        <h2 class="text-xl font-semibold text-gray-800 mb-2">Gráfica general</h2>
+        <div class="flex flex-wrap mt-4 flex-col-mobile">
+          <!-- Columna izquierda: Cards (35%) -->
+          <div class="w-full lg:w-[35%] pr-0 lg:pr-4 mb-4 lg:mb-0 w-full-mobile">
+            <div class="grid grid-cols-2 gap-4 mb-4">
+              <!-- Your app-cards-info components -->
+              <app-cards-info
+                title="Temperatura"
+                [value]="temperaturaValue"
+                [trend]="temperaturaTrend"
+                [trendValue]="temperaturaTrendValue"
+                [status]="temperaturaStatus"
+                [isTimeCard]="false">
+              </app-cards-info>
+              <app-cards-info
+              title="TDS"
+              [value]="tdsValue"
+              [trend]="tdsTrend"
+              [trendValue]="tdsTrendValue"
+              [status]="tdsStatus"
+              [isTimeCard]="false">
+            </app-cards-info>
+            <app-cards-info
+              title="pH"
+              [value]="phValue"
+              [trend]="phTrend"
+              [trendValue]="phTrendValue"
+              [status]="phStatus"
+              [isTimeCard]="false">
+            </app-cards-info>         
+            <app-cards-info
+              title="ÚLTIMO REGISTRO"
+              [value]="ultimoRegistroHora"
+              [trendValue]="penultimoRegistroHora"
+              [status]="'unassigned'"
+              [isTimeCard]="true">
+            </app-cards-info>
+            <app-cards-info
+              title="Mortalidad"
+              [value]="mortalidadValue"
+              [trend]="mortalidadTrend"
+              [trendValue]="mortalidadTrendValue"
+              [status]="mortalidadStatus"
+              [isTimeCard]="false">
+            </app-cards-info>
+              <!-- ... other app-cards-info components ... -->
+            </div>
+          </div>
+
+          <!-- Columna derecha: Gráfica General (65%) -->
+          <div class="w-full lg:w-[65%] w-full-mobile">
+            <div class="mb-8">
+              <app-grafica [data]="monitoreoDataFiltrada" [selectedLote]="selectedLote"></app-grafica>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gráfica de Barras (debajo de las dos columnas) -->
+        <div class="mt-8 lg:w-[65%] flex-wrap w-full-mobile">
+        </div>
+
+        <!-- Historial De Alertas -->
+        <div class="mt-8">
+          <h2 class="text-xl font-semibold text-gray-800 mb-2">Historial de alertas</h2>
+          <app-fechas-mensajes [alertasFiltradas]="alertasFiltradas"></app-fechas-mensajes>
         </div>
       </div>
-    </div>
-    <!-- Gráfica de Barras (debajo de las dos columnas) -->
-    <div class="mt-8 lg:w-[65%] flex-wrap ">
-    </div>
-    <!-- Historial De Alertas -->
-    <div class="mt-8">
-      <h2 class="text-xl font-semibold text-gray-800 mb-2">Historial de alertas</h2>
-      <app-fechas-mensajes [alertasFiltradas]="alertasFiltradas"></app-fechas-mensajes>
     </div>
   </div>
 </div>
