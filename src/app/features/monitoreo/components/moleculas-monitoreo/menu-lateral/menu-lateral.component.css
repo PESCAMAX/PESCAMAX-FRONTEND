@@ -22,6 +22,65 @@
   transition: margin-left 0.3s ease-in-out;
 }
 
+
+
+
+/* menu de icono usuario */ 
+.user-menu {
+  width: 200px;
+  padding: 10px 0;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  font-family: 'Arial', sans-serif;
+}
+
+.user-menu a,
+.user-menu button {
+  display: block;
+  padding: 10px 8px; /* Reducimos el padding izquierdo para pegar más el texto */
+  text-align: left;
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: inherit;
+  font-size: 15px;
+  transition: background-color 0.1s ease;
+  width: calc(100% - 20px);  /* Mantén el ancho completo del contenedor */
+  margin: 0 auto;
+  border-radius: 6px;
+}
+
+.user-menu a:hover,
+.user-menu button:hover {
+  background-color: #f0f0f0;
+}
+
+.user-menu button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+
+.user-icon {
+  border-radius: 50%; /* Asegurar que la imagen sea circular */
+  transition: box-shadow 0.1s ease; /* Transición suave para la sombra */
+}
+
+.user-icon:hover {
+  box-shadow: 0 0 0 5px rgba(192, 192, 192, 1); /* Sombra sólida circular gris claro */
+}
+
+
+
+
+
+
+
+
+
 @media (min-width: 721px) {
   .content-wrapper {
     margin-left: 250px;

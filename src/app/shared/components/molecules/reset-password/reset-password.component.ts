@@ -59,4 +59,8 @@ export class ResetPasswordComponent implements OnInit {
       alert("Por favor complete el formulario correctamente.");
     }
   }
+
+
+
+  
 }
