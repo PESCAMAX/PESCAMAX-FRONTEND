@@ -1,36 +1,36 @@
 .infield {
-    position: relative;
-    margin: 8px 0px;
-    width: 100%;
-  }
-  
-  input {
-    width: 100%; /* Mantiene el ancho al 100% del contenedor padre */
-    max-width: 900px; /* Establece un ancho máximo para hacer el input más ancho */
-    padding: 12px 16px; /* Aumenta el padding lateral para hacerlo más espacioso */
-    border-radius: 4px;
-    outline: none;
-  }
+  position: relative;
+  margin: 8px 0px;
+  width: 100%;
+}
 
-  .infield input {
-    width: 100%;
-    padding: 12px 16px;
-    border-radius: 4px;
-    outline: none;
-  }
-  
-  
-  label {
-    position: absolute;
-    left: 50%;
-    top: 100%;
-    transform: translateX(-50%);
-    height: 2px;
-    width: 0;
-    background: var(--linear-grad);
-    transition: 0.3s;
-  }
-  
-  input:focus ~ label {
-    width: 100%;
-  }
+.infield input {
+  width: 100%; /* Mantiene el ancho al 100% del contenedor padre */
+  max-width: 900px; /* Establece un ancho máximo */
+  padding: 12px 16px;
+  border: 1px solid #c2c8d0;
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.5); /* Fondo blanco transparente */
+  color: black; /* Color del texto */
+  outline: none;
+}
+
+.infield input::placeholder {
+  color: gray; /* Color del placeholder en gris */
+  opacity: 1; /* Asegura que el placeholder sea visible */
+}
+
+label {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  height: 2px;
+  width: 0;
+  background: var(--linear-grad);
+  transition: 0.3s;
+}
+
+input:focus ~ label {
+  width: 100%;
+}
