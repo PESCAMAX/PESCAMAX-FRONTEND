@@ -11,7 +11,7 @@ export class ApiService {
   obtenerLotes() {
     throw new Error('Method not implemented.');
   }
-  private baseUrl = 'http://localhost:6754/api';
+  private baseUrl = 'https://pescamax---a9etcjhwhhe9bee5.eastus-01.azurewebsites.net/api';
 
   constructor(
     private http: HttpClient,
@@ -20,6 +20,9 @@ export class ApiService {
 
   private getHeaders(): HttpHeaders {
     const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('Token not found in localStorage');
+    }
     return new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
@@ -31,20 +34,33 @@ export class ApiService {
   private handleError(error: HttpErrorResponse): Observable<never> {
     console.error('Error occurred:', error);
     let errorMsg = 'An unknown error occurred!';
+    
     if (error.error instanceof ErrorEvent) {
+      // Error del lado del cliente
       errorMsg = `Client-side error: ${error.error.message}`;
     } else if (error.error && typeof error.error === 'object' && 'mensaje' in error.error) {
+      // Error del lado del servidor con mensaje específico
       errorMsg = `Server-side error: ${error.status} - ${error.error.mensaje}`;
     } else if (error.status) {
-      errorMsg = `Server-side error: ${error.status} - ${error.statusText}`;
+      // Error del lado del servidor con código de estado
+      if (error.status === 401) {
+        // Manejo específico para errores 401
+        errorMsg = 'Unauthorized: Please check your credentials or login again.';
+        // Aquí puedes agregar lógica adicional, como redirigir al usuario al login
+      } else {
+        errorMsg = `Server-side error: ${error.status} - ${error.statusText}`;
+      }
     }
+    
     return throwError(() => new Error(errorMsg));
   }
   crearEspecie(userId: string, especieData: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/CrearEspecie/Crear/${userId}`, especieData, { headers: this.getHeaders() });
   }
-  listarEspecies(userId: string): Observable<Especie[]> {
-    return this.http.get<Especie[]>(`${this.baseUrl}/CrearEspecie/Listar/${userId}`).pipe(
+  public listarEspecies(userId: string): Observable<any> {
+    const headers = this.getHeaders();
+    const url = `${this.baseUrl}/CrearEspecie/Listar/${userId}`;
+    return this.http.get(url, { headers }).pipe(
       catchError(this.handleError)
     );
   }

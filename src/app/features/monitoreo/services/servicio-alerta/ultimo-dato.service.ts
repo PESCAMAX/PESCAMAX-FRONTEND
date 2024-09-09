@@ -44,7 +44,7 @@ export class UltimoDatoService {
       const especieId = especiesLotes.find(el => el.LoteId === lote.LoteID)?.EspecieId;
       if (especieId) {
         this.apiService.listarEspecies(userId).subscribe(especies => {
-          const especie = especies.find(e => e.Id === especieId);
+          const especie = especies.find((e: Especie) => e.Id === especieId);
           if (especie) {
             const problemas = this.obtenerProblemas(especie, lote);
             if (problemas.length > 0) {

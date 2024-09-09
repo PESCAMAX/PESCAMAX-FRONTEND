@@ -1,12 +1,14 @@
 {
   "name": "pescamax",
   "version": "0.0.0",
+  
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "deploy":"npm run build && gh-pages -d dist/pescamax "
   },
   "private": true,
   "dependencies": {
@@ -25,6 +27,7 @@
     "chartjs-plugin-annotation": "^3.0.1",
     "flowbite": "^2.3.0",
     "flowbite-datepicker": "^1.2.6",
+    "gh-pages": "^6.1.1",
     "jwt-decode": "^4.0.0",
     "lightweight-charts": "^4.2.0",
     "powerbi-client": "^2.23.1",

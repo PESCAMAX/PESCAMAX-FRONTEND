@@ -1,5 +1,6 @@
 <div class="mx-auto w-full max-w-550px bg-white shadow-lg rounded-lg p-8">
   <app-alert-form [successMessage]="successMessage" [errorMessage]="errorMessage"></app-alert-form>
+
   
   <form [formGroup]="especieForm" (ngSubmit)="onSubmit()">
     <div class="form-field">
@@ -13,12 +14,15 @@
       </div>
     </div>
 
+
     <div class="form-row">
       <div class="form-field half-width">
         <label for="tdsMinimo" class="block mb-2 font-medium text-gray-700">
           TDS ideal mínimo
         </label>
+
         <app-inputs-form formControlName="tdsMinimo"type="text"placeholder="TDS ideal mínimo"></app-inputs-form>
+
         <div *ngIf="especieForm.get('tdsMinimo')?.invalid && especieForm.get('tdsMinimo')?.touched" class="text-red-500 text-sm mt-1">
           {{ getErrorMessage('tdsMinimo') }}
         </div>
@@ -27,7 +31,9 @@
         <label for="tdsMaximo" class="block mb-2 font-medium text-gray-700">
           TDS ideal máximo
         </label>
+
         <app-inputs-form formControlName="tdsMaximo"type="text"placeholder="TDS ideal máximo"></app-inputs-form>
+
         <div *ngIf="especieForm.get('tdsMaximo')?.errors && especieForm.get('tdsMaximo')?.touched" class="text-red-500 text-sm mt-1">
           {{ getErrorMessage('tdsMaximo') }}
         </div>
@@ -39,6 +45,7 @@
         <label for="temperaturaMinimo" class="block mb-2 font-medium text-gray-700">
           Temperatura ideal mínima
         </label>
+
         <app-inputs-form formControlName="temperaturaMinimo" type="text"placeholder="Temperatura ideal mínima" ></app-inputs-form>
         <div *ngIf="especieForm.get('temperaturaMinimo')?.invalid && especieForm.get('temperaturaMinimo')?.touched" class="text-red-500 text-sm mt-1">
           {{ getErrorMessage('temperaturaMinimo') }}
@@ -88,12 +95,28 @@
       </div>
     </div>
 
+
+    <div class="form-field">
+      <label for="cantidad" class="block mb-2 font-medium text-gray-700">
+        Cantidad
+      </label>
+      <app-inputs-form
+        formControlName="cantidad"
+        type="text"
+        placeholder="Cantidad"
+      ></app-inputs-form>
+      <div *ngIf="especieForm.get('cantidad')?.invalid && especieForm.get('cantidad')?.touched" class="text-red-500 text-sm mt-1">
+        {{ getErrorMessage('cantidad') }}
+      </div>
+    </div>
+
     <div class="mt-6">
       <app-button-guardar 
-        type="submit"
-        [texto]="'Guardar'"
-        [customClass]="'w-full py-3 px-8'">
-      </app-button-guardar>
+      type="submit"
+      [texto]="'Guardar'"
+      [customClass]="'w-full py-3 px-8'">
+    </app-button-guardar>
+
     </div>
   </form>
 </div>
