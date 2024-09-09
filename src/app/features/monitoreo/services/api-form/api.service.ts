@@ -11,7 +11,7 @@ export class ApiService {
   obtenerLotes() {
     throw new Error('Method not implemented.');
   }
-  private baseUrl = 'https://pescamax---a9etcjhwhhe9bee5.eastus-01.azurewebsites.net/api';
+  private baseUrl = 'https://pescamaxbueno-cga7gdg8gcbra2e4.eastus-01.azurewebsites.net/api';
 
   constructor(
     private http: HttpClient,
