@@ -1,0 +1,70 @@
+/* Estilos generales */
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden; /* Evitar scroll en toda la página */
+}
+
+body {
+    display: flex;
+    font-family: Arial, sans-serif; /* Fuente global */
+}
+
+/* Menu lateral fijo */
+.fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 50;
+    background-color: #ffffff; /* Ajusta el color de fondo del menú */
+    width: 16rem; /* Ancho del menú */
+}
+
+/* Contenido principal */
+.flex-1 {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Asegura que el contenido ocupe toda la altura de la pantalla */
+    padding-left: 1rem;
+    overflow-y: auto; /* Desplazamiento vertical solo si es necesario */
+    background-color: #f7fafc; /* Fondo suave para el contenido */
+}
+
+.p-4 {
+    padding: 1rem; /* Ajusta el padding */
+}
+
+/* Alerta global */
+app-global-alert {
+    margin-bottom: 1rem; /* Espacio entre alerta y tarjetas */
+}
+
+/* Estilos de las tarjetas de alertas */
+app-card-alerts {
+    display: block;
+    width: 100%;
+    max-width: 56rem; /* Ancho máximo de las tarjetas */
+    margin: 0 auto; /* Centrado horizontal */
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    padding: 2rem; /* Espaciado interno */
+}
+
+/* Media queries para dispositivos móviles y tablets */
+@media (max-width: 768px) {
+  .flex-1 {
+    padding-left: 0.5rem; /* Ajusta el padding para pantallas pequeñas */
+  }
+  
+  app-card-alerts {
+    width: 90%; /* Más ancho en dispositivos más pequeños */
+    max-width: none; /* Sin límite de ancho */
+  }
+}
+
+/* Evitar scroll extra */
+.overflow-hidden {
+    overflow: hidden;
+}

@@ -1,25 +1,89 @@
-/* estilos de titulo */
-.text-center {
-    text-align: center;
+/* Estilos generales */
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden; /* Evitar scroll */
+}
+
+body {
+  display: flex;
+  font-family: Arial, sans-serif;
+}
+
+/* Menu lateral fijo */
+.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  z-index: 50;
+  background-color: #ffffff; /* Ajusta el color de fondo del menú */
+  width: 16rem; /* Ancho del menú */
+}
+
+/* Estilos para contenido principal */
+.flex-1 {
+  flex: 1;
+  padding-left: 1rem;
+  overflow-y: auto;
+  padding-top: 4rem; /* Evitar que el contenido se esconda debajo del menú */
+}
+
+.p-4 {
+  padding: 1rem; /* 16px */
+}
+
+.text-2xl {
+  font-size: 1.5rem; /* 24px */
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
+.custom-font {
+  font-family: Arial, sans-serif;
+}
+
+.custom-color {
+  color: #007bff;
+}
+
+/* Media queries para diferentes tamaños de pantalla */
+
+/* Pantallas pequeñas (móviles) */
+@media (max-width: 639px) {
+  .ml-64 {
+      margin-left: 0; /* Menu escondido en móviles */
   }
-  
-  .p-4 {
-    padding: 1rem; /* 16px */
+
+  .flex-1 {
+      padding-left: 0.5rem; /* Ajustar padding en móviles */
   }
-  
-  .text-2xl {
-    font-size: 1.5rem; /* 24px */
+
+  .fixed {
+      width: 12rem; /* Menú más pequeño en móviles */
   }
-  
-  .font-bold {
-    font-weight: bold;
+}
+
+/* Pantallas medianas (tablets) */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .ml-64 {
+      margin-left: 16rem; /* Menú visible en tablets */
   }
-  
-  .custom-font {
-    font-family: Arial, sans-serif;
+
+  .fixed {
+      width: 14rem; /* Ajustar ancho del menú en tablets */
   }
-  
-  .custom-color {
-    color: #007bff;
+}
+
+/* Pantallas grandes (escritorio) */
+@media (min-width: 1024px) {
+  .ml-64 {
+      margin-left: 16rem; /* Mantener el margen del menú visible */
   }
-  
+
+  .fixed {
+      width: 16rem; /* Ancho del menú para pantallas grandes */
+  }
+}
