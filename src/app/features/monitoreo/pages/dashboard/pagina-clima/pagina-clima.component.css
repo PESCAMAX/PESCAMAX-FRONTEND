@@ -1,6 +1,32 @@
+/* Estilos generales */
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden; /* Evitar scroll en toda la página */
+}
+
+body {
+  display: flex;
+  font-family: Arial, sans-serif;
+}
+
+/* Menu lateral fijo */
+.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  z-index: 50;
+  background-color: #ffffff; /* Ajusta el color de fondo del menú */
+  width: 16rem; /* Ancho del menú */
+}
+
+/* Contenido principal */
 .flex-1 {
   display: flex;
-  min-height: 100vh;
+  min-height: 100vh; /* Asegura que el contenido ocupe toda la altura de la pantalla */
+  padding-left: 1rem;
+  overflow-y: auto; /* Solo contenido desplazable, no toda la página */
 }
 
 .content-container {
@@ -8,29 +34,32 @@
   justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
-  padding: 1rem 0 0 2rem;
+  padding: 1rem 0 0 2rem; /* Asegura que el contenido no esté pegado al borde */
 }
 
+/* Estilos de la tarjeta del clima */
 .weather-card {
-  width: 66.666667%;
-  max-width: 56rem;
+  width: 66.666667%; /* 2/3 del contenedor */
+  max-width: 56rem; /* Máximo ancho */
   background-color: white;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 2rem;
+  border-radius: 0.5rem; /* Bordes redondeados */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  padding: 2rem; /* Espaciado interno */
 }
-/* Evitar scroll */
+
+/* Media queries para dispositivos móviles y tablets */
+@media (max-width: 768px) {
+.weather-card {
+  width: 90%; /* Más ancho en dispositivos más pequeños */
+  max-width: none; /* Sin límite de ancho */
+}
+
+.content-container {
+  padding-left: 1rem; /* Reducir padding en móviles */
+}
+}
+
+/* Evitar scroll en móviles */
 .overflow-hidden {
   overflow: hidden;
-}
-
-@media (max-width: 768px) {
-  .weather-card {
-    width: 90%;
-    max-width: none;
-  }
-  
-  .content-container {
-    padding-left: 1rem;
-  }
 }

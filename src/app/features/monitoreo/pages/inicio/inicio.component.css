@@ -1,172 +1,172 @@
-.hero-container {
-    min-height: 65vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: relative;
-}
+    .hero-container {
+        min-height: 65vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+    }
 
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    background-color: (255, 255, 255, 0.8);
-}
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2rem;
+        background-color: (255, 255, 255, 0.8);
+    }
 
-.logo-container {
-    display: flex;
-    align-items: center;
-}
+    .logo-container {
+        display: flex;
+        align-items: center;
+    }
 
-.logo-img {
-    width: 40px;
-    height: 36px;
-    margin-right: 0.75rem;
-}
+    .logo-img {
+        width: 40px;
+        height: 36px;
+        margin-right: 0.75rem;
+    }
 
-.logo-text {
-    font-size: 1.875rem;
-    font-weight: bold;
-}
+    .logo-text {
+        font-size: 1.875rem;
+        font-weight: bold;
+    }
 
-.producto,
-.noticias {
-    color: whitesmoke;
-    margin-bottom: 0.5rem;
-}
+    .producto,
+    .noticias {
+        color: whitesmoke;
+        margin-bottom: 0.5rem;
+    }
 
-.text-blue {
-    color: #3b82f6;
-}
+    .text-blue {
+        color: #3b82f6;
+    }
 
-.text-black {
-    color: #000000;
-}
+    .text-black {
+        color: #000000;
+    }
 
-.nav-buttons {
-    display: flex;
-    gap: 1rem;
-}
+    .nav-buttons {
+        display: flex;
+        gap: 1rem;
+    }
 
-.btn {
-    padding: 0.5rem 1rem;
-    border-radius: 0.25rem;
-    text-decoration: none;
-    font-weight: bold;
-}
+    .btn {
+        padding: 0.5rem 1rem;
+        border-radius: 0.25rem;
+        text-decoration: none;
+        font-weight: bold;
+    }
 
-.btn-login {
-    background-color: #3b82f6;
-    color: white;
-}
+    .btn-login {
+        background-color: #3b82f6;
+        color: white;
+    }
 
-.btn-register {
-    background-color: white;
-    color: #3b82f6;
-    border: 1px solid #3b82f6;
-}
+    .btn-register {
+        background-color: white;
+        color: #3b82f6;
+        border: 1px solid #3b82f6;
+    }
 
-.main-content {
-    flex-grow: 1;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: white;
-    padding: 0 2rem;
-}
+    .main-content {
+        flex-grow: 1;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+        padding: 0 2rem;
+    }
 
-.left-content {
-    max-width: 50%;
-    text-align: left;
-}
+    .left-content {
+        max-width: 50%;
+        text-align: left;
+    }
 
-.right-content {
-    max-width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
+    .right-content {
+        max-width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
 
-.new-text {
-    font-size: 1.2em;
-    text-align: justify;
-    max-width: 500px;
-    padding: 1rem;
-    background-color:(0, 0, 0, 0.5);
-    border-radius: 0.5rem;
-    color: white;
-}
+    .new-text {
+        font-size: 1.2em;
+        text-align: justify;
+        max-width: 500px;
+        padding: 1rem;
+        background-color:(0, 0, 0, 0.5);
+        border-radius: 0.5rem;
+        color: white;
+    }
 
-.main-title {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-}
+    .main-title {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
 
-.main-subtitle {
-    font-size: 1.25rem;
-    margin-bottom: 1rem;
-}
+    .main-subtitle {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+    }
 
-.start-text {
-    font-size: 1.125rem;
-    margin-bottom: 1rem;
-}
+    .start-text {
+        font-size: 1.125rem;
+        margin-bottom: 1rem;
+    }
 
-.carousel {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-}
+    .carousel {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
 
-.carousel img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-}
+    .carousel img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+    }
 
-.carousel img.active {
-    opacity: 1;
-}
+    .carousel img.active {
+        opacity: 1;
+    }
 
-.about-us, .equipo-tra {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem 1rem;
-    background-color: whitesmoke;
-    height: 40vh;
-}
+    .about-us, .equipo-tra {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 1rem;
+        background-color: whitesmoke;
+        height: 40vh;
+    }
 
-.about-content, .equipo-trabajo {
-    flex: 1;
-    max-width: 800px;
-    padding: 1rem;
-}
+    .about-content, .equipo-trabajo {
+        flex: 1;
+        max-width: 800px;
+        padding: 1rem;
+    }
 
-.about-content h2, .equipo-trabajo h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-}
+    .about-content h2, .equipo-trabajo h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
 
-.about-image {
-    flex: 1;
-    background-image: url('/assets/images/claudio-guglieri-K2RH1QZdLF4-unsplash.jpg');
-    background-size: cover;
-    background-position: center;
-    height: 100%;
-    border-radius: 50%;
-    width: 100%;
-    max-width: 300px;
-    max-height: 300px;
-}
+    .about-image {
+        flex: 1;
+        background-image: url('/assets/images/claudio-guglieri-K2RH1QZdLF4-unsplash.jpg');
+        background-size: cover;
+        background-position: center;
+        height: 100%;
+        border-radius: 50%;
+        width: 100%;
+        max-width: 300px;
+        max-height: 300px;
+    }

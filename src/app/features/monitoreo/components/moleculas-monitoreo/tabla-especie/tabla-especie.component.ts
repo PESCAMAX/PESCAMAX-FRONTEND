@@ -14,9 +14,10 @@ interface Especie {
   TemperaturaMaximo: number;
   PhMinimo: number;
   PhMaximo: number;
-  Cantidad?: number; // Hacer esta propiedad opcional
+  Cantidad?: number;
   UserId: string;
 }
+
 interface AlertState {
   show: boolean;
   type: 'success' | 'danger' | 'warning';
@@ -31,7 +32,8 @@ interface AlertState {
   styleUrls: ['./tabla-especie.component.css']
 })
 export class TablaEspecieComponent implements OnInit {
-  isMenuOpen: boolean = true;
+  
+  isMenuOpen: boolean = false;
   especies: Especie[] = [];
   especiesFiltradas: Especie[] = [];
   searchText: string = '';
@@ -59,7 +61,7 @@ export class TablaEspecieComponent implements OnInit {
       TemperaturaMaximo: ['', Validators.required],
       PhMinimo: ['', Validators.required],
       PhMaximo: ['', Validators.required],
-      Cantidad: ['', Validators.required] // Add Cantidad control
+      Cantidad: ['', Validators.required]
     });
   }
 
@@ -139,7 +141,7 @@ export class TablaEspecieComponent implements OnInit {
 
     setTimeout(() => {
       this.cerrarAlerta();
-    }, 1000);
+    }, 3000);
   }
 
   cerrarAlerta(): void {
@@ -149,13 +151,6 @@ export class TablaEspecieComponent implements OnInit {
   editarEspecie(especie: Especie) {
     this.especieSeleccionada = especie;
     this.especieForm.patchValue(especie);
-
-    setTimeout(() => {
-      const element = document.getElementById('editarEspecieForm');
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }, 100);
   }
 
   onSubmit(): void {
@@ -169,7 +164,7 @@ export class TablaEspecieComponent implements OnInit {
       const especieModificada: Especie = {
         ...this.especieSeleccionada,
         ...this.especieForm.value,
-        UserId: this.authService.getUserId() // Asegúrate de que sea UserId
+        UserId: this.authService.getUserId()
       };
       console.log('Datos de la especie a modificar:', especieModificada);
       this.apiService.modificarEspecie(especieModificada).subscribe(

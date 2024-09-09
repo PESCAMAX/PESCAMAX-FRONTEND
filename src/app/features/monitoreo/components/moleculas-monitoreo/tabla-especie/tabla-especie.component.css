@@ -1,86 +1,54 @@
-.modal-container {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+/* General styles */
+.sidebar {
+  background-color: #f8f9fa;
+  padding: 15px;
+  width: 250px;
+  min-height: 100vh;
+}
+
+.menu-item {
+  margin: 20px 0;
   display: flex;
-  justify-content: center;
   align-items: center;
-  z-index: 1000;
 }
 
-.modal-content {
-  background-color: white;
-  padding: 2rem;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 500px;
+.menu-item i {
+  margin-right: 10px;
 }
 
-.modal-title {
+.parameters {
+  margin-top: 30px;
+}
+
+.parameter-item {
+  background-color: #ffffff;
+  padding: 10px;
+  margin-bottom: 10px;
   text-align: center;
-  margin-bottom: 1.5rem;
-  font-size: 1.5rem;
   font-weight: bold;
-  color: rgb(0, 123, 255);
 }
 
-.form-row {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
+/* Responsive styles */
+/* Small screens */
+@media (max-width: 639px) {
+  .parameters {
+    display: none;
+  }
 }
 
-.form-field {
-  flex: 1;
+/* Medium screens */
+@media (min-width: 640px) and (max-width: 1024px) {
+  .parameters {
+    display: block;
+  }
+  .parameter-item {
+    padding: 5px;
+  }
 }
 
-.full-width {
-  width: 100%;
-  margin-bottom: 1rem;
-}
-
-.form-label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-}
-
-.form-input {
-  width: 100%;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.form-actions {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 1.5rem;
-}
-
-.custom-scrollbar::-webkit-scrollbar {
-  width: 12px; /* Ancho de la barra de desplazamiento */
-}
-
-.custom-scrollbar::-webkit-scrollbar-track {
-  background-color: #f1f1f1; /* Color de fondo de la pista de la barra de desplazamiento */
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #888; /* Color del pulgar de la barra de desplazamiento */
-  border-radius: 6px; /* Radio de borde del pulgar */
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background-color: #555; /* Color del pulgar al pasar el mouse */
-}
-
-.overflow-y-auto {
-  overflow-y: auto;
-}
-.sticky {
-  position: sticky;
-}
-.top-0 {
-  top: 0;
+/* Large screens */
+@media (min-width: 1024px) {
+  .parameters {
+    display: block;
+  }
 }

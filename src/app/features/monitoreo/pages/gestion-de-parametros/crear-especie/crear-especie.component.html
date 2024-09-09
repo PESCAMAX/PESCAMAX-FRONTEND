@@ -1,14 +1,18 @@
-<div class="flex">
+<div class="relative">
     <!-- Menu Lateral -->
-    <app-menu-lateral (menuToggled)="onMenuToggle($event)"></app-menu-lateral>
-</div>
-
-<!-- Contenido Principal -->
-<div class="flex-1 p-4 transition-all duration-300" [ngClass]="{'ml-64': isMenuOpen, 'ml-': !isMenuOpen}">
+    <app-menu-lateral class="fixed z-50" (menuToggled)="onMenuToggle($event)"></app-menu-lateral>
+  </div>
+  
+  <!-- Contenido Principal -->
+  <div class="flex-1 p-4 transition-all duration-300" [ngClass]="{'ml-64': isMenuOpen, 'ml-0': !isMenuOpen}">
     <h1 class="text-center p-4 text-2xl font-bold custom-font custom-color">Registro de especies</h1>
-
+  
     <!-- Componente de alerta global -->
     <app-global-alert></app-global-alert>
+  
+    <!-- Formulario de especie -->
+   
+      <app-form-especie></app-form-especie>
+    </div>
 
-    <app-form-especie></app-form-especie>
-</div>
+  
