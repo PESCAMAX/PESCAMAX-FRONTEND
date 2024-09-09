@@ -23,11 +23,13 @@
         <label for="tdsMinimo" class="block mb-2 font-medium text-gray-700">
           TDS ideal mínimo
         </label>
+
         <app-inputs-form
           formControlName="tdsMinimo"
           type="text"
           placeholder="TDS ideal mínimo"
         ></app-inputs-form>
+
 
         <div *ngIf="especieForm.get('tdsMinimo')?.invalid && especieForm.get('tdsMinimo')?.touched" class="text-red-500 text-sm mt-1">
           {{ getErrorMessage('tdsMinimo') }}
@@ -51,6 +53,7 @@
         <label for="temperaturaMinimo" class="block mb-2 font-medium text-gray-700">
           Temperatura ideal mínima
         </label>
+
         <app-inputs-form formControlName="temperaturaMinimo" type="text"placeholder="Temperatura ideal mínima" ></app-inputs-form>
 
         <div *ngIf="especieForm.get('temperaturaMinimo')?.invalid && especieForm.get('temperaturaMinimo')?.touched" class="text-red-500 text-sm mt-1">
