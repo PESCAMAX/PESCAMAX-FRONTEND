@@ -5,12 +5,25 @@
     margin: 0;
     box-sizing: border-box;
 }
+ 
+/* Estilo de los inputs por defecto */
+input {
+    width: 100%;
+    padding: 12px 8px;
+    background-color: #f3f3f3;
+    border: 2px solid transparent; /* Sin borde visible */
+    border-radius: 6px;
+    outline: none; /* Eliminar el borde predeterminado al hacer foco */
+    transition: border-color 0.1s ease;
+  }
+  
+  /* Estilo al hacer foco (focus) en el input */
+  input:focus {
+    border-color: #3b82f6; /* Borde azul sólido */
+  }
+  
 
-:root {
-    --linear-grad: linear-gradient(to right, #3B82F6, #3B82F6);
-    --grad-clr1: #3B82F6;
-    --grad-clr2: #757171;
-}
+
 
 body {
     height: 100vh;

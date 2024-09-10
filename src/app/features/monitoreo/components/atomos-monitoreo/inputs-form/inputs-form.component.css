@@ -13,6 +13,12 @@
   background-color: rgba(255, 255, 255, 0.5); /* Fondo blanco transparente */
   color: black; /* Color del texto */
   outline: none;
+  transition: border-color 0.1s ease, box-shadow 0.1s ease;
+}
+
+
+.infield input:focus {
+  border-color: #2563eb;
 }
 
 .infield input::placeholder {
