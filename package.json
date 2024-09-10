@@ -1,7 +1,6 @@
 {
   "name": "pescamax",
   "version": "0.0.0",
-  
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -9,7 +8,7 @@
     "prod": "ng build --prod",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "deploy":"npm run build && gh-pages -d dist/pescamax "
+    "deploy": "npm run build && gh-pages -d dist/pescamax "
   },
   "private": true,
   "dependencies": {
