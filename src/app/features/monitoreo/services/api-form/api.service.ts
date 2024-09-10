@@ -10,8 +10,8 @@ import { AuthService } from '../../../../core/services/api-login/auth.service';
 export class ApiService {
   obtenerLotes() {
     throw new Error('Method not implemented.');
-  }
-  private baseUrl = 'https://pescamaxbueno-cga7gdg8gcbra2e4.eastus-01.azurewebsites.net/api';
+  }//https://pescamaxbueno-cga7gdg8gcbra2e4.eastus-01.azurewebsites.net
+  private baseUrl = 'http://localhost:6754/api';
 
   constructor(
     private http: HttpClient,

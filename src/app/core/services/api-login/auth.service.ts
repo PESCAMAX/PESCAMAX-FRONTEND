@@ -9,7 +9,8 @@ import { jwtDecode } from 'jwt-decode';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'https://pescamaxbueno-cga7gdg8gcbra2e4.eastus-01.azurewebsites.net/api/Auth';
+  //https://pescamaxbueno-cga7gdg8gcbra2e4.eastus-01.azurewebsites.net
+  private apiUrl = 'http://localhost:6754/api/Auth';
   private requirePasswordChangeSubject = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient, private router: Router) {}
