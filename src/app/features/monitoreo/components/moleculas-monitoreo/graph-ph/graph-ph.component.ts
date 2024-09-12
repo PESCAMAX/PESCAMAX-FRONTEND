@@ -146,6 +146,7 @@ export class GraphPhComponent implements OnInit, AfterViewInit, OnDestroy {
         precision: 2,
         minMove: 0.01,
       },
+      title: 'pH :',
     });
 
     areaSeries.setData(data);

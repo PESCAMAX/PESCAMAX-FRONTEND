@@ -31,10 +31,15 @@ import { CambiarPageComponent } from './features/monitoreo/pages/home/cambiar-pa
 import { PasswordChangeComponent } from './features/monitoreo/pages/home/password-change/password-change.component';
 import { ConfiguracionUserComponent } from './features/monitoreo/pages/gestion-de-parametros/configuracion-user/configuracion-user.component';
 import { PaginaClimaComponent } from './features/monitoreo/pages/dashboard/pagina-clima/pagina-clima.component';
+import { ResumenPageComponent } from './features/monitoreo/pages/dashboard/resumen-page/resumen-page.component';
 const routes: Routes = [
   {
     path: 'gestion-de-parametros',
     loadChildren: () => import('./features/monitoreo/pages/gestion-de-parametros/gestion-de-parametros.module').then(m => m.GestionDeParametrosModule)
+  },
+  {
+    path: 'pagina-resumen/:userId',
+    component: ResumenPageComponent
   },
   {
     path: 'pagina-clima/:userId',

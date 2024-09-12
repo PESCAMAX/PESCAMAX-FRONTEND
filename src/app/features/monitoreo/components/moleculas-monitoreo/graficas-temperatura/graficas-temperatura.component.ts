@@ -141,7 +141,9 @@ export class GraficasTemperaturaComponent implements OnInit {
         type: 'price',
         precision: 1,
         minMove: 0.1,
+        
       },
+      title: 'Temperatura = °C:'
     });
   
     areaSeries.setData(data);

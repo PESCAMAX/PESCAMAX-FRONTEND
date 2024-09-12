@@ -9,6 +9,7 @@ import { TablaDatosComponent } from '../gestion-de-parametros/tabla-datos/tabla-
 import { GraficaGeneralComponent } from './grafica-general/grafica-general.component';
 import { CardsInfoComponent } from '../../components/atomos-monitoreo/cards-info/cards-info.component';
 import { PaginaClimaComponent } from './pagina-clima/pagina-clima.component';
+import { ResumenPageComponent } from './resumen-page/resumen-page.component';
 @NgModule({
   declarations: [
     GraficaTemperaturaComponent,
@@ -17,7 +18,8 @@ import { PaginaClimaComponent } from './pagina-clima/pagina-clima.component';
     TablaDatosComponent,
     GraficaGeneralComponent,
     CardsInfoComponent,
-    PaginaClimaComponent
+    PaginaClimaComponent,
+    ResumenPageComponent
   ],
   imports: [
     CommonModule,

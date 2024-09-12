@@ -189,7 +189,7 @@ export class GraficaComponent implements OnInit, OnDestroy {
       topColor: 'rgba(253, 161, 114, 0.4)',
       bottomColor: 'rgba(253, 161, 114, 0.1)',
       lineWidth: 2,
-      title: 'Temperatura'
+      title: 'Temperatura = °C:'
     });
 
     const phSeries = this.chart.addAreaSeries({
@@ -197,7 +197,7 @@ export class GraficaComponent implements OnInit, OnDestroy {
       topColor: 'rgba(179, 157, 219, 0.4)',
       bottomColor: 'rgba(179, 157, 219, 0.1)',
       lineWidth: 2,
-      title: 'pH'
+      title: 'pH:'
     });
 
     const tdsSeries = this.chart.addAreaSeries({
@@ -205,7 +205,7 @@ export class GraficaComponent implements OnInit, OnDestroy {
       topColor: 'rgba(77, 208, 225, 0.4)',
       bottomColor: 'rgba(77, 208, 225, 0.1)',
       lineWidth: 2,
-      title: 'TDS',
+      title: 'TDS = PPM:',
       crosshairMarkerVisible: true,
       priceFormat: {
         type: 'volume',

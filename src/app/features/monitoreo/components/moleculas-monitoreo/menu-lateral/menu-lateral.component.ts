@@ -16,6 +16,7 @@ export class MenuLateralComponent implements OnInit {
   userId: string = '';
   isUserMenuVisible: boolean = false;
   isMobileView: boolean = false;
+  
 
   constructor(
     private menuStateService: MenuStateService,

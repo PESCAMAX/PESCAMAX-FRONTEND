@@ -147,6 +147,7 @@ export class GraficastdssComponent implements OnInit, AfterViewInit, OnDestroy {
         precision: 2,
         minMove: 0.01,
       },
+      title: 'TDS = PPM:',
     });
 
     areaSeries.setData(data);
