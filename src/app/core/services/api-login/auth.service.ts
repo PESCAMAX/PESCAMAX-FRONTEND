@@ -9,8 +9,7 @@ import { jwtDecode } from 'jwt-decode';
   providedIn: 'root'
 })
 export class AuthService {
-  //https://pescamaxbueno-cga7gdg8gcbra2e4.eastus-01.azurewebsites.net
-  private apiUrl = 'http://localhost:6754/api/Auth';
+  private apiUrl = 'https://pescamaxbueno-cga7gdg8gcbra2e4.eastus-01.azurewebsites.net/api/Auth';
   private requirePasswordChangeSubject = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient, private router: Router) {}
@@ -30,9 +29,9 @@ export class AuthService {
             }
           } else {
             this.router.navigate(['/crear-especie', response.UserId]);
-          }                 
+          }
         } else {
-          throw new Error('No se recibió la información de autenticación esperada');
+          throw new Error('La respuesta del servidor no contiene la información de autenticación esperada');
         }
       }),
       catchError(this.handleError)
@@ -62,7 +61,7 @@ export class AuthService {
       return jwtDecode(token);
     } catch (error) {
       console.error('Error al decodificar el token:', error);
-      throw error;
+      throw new Error('El token de autenticación no es válido');
     }
   }
 
@@ -97,27 +96,47 @@ export class AuthService {
   }
 
   register(user: any): Observable<any> {
-    console.log('Datos enviados al servidor:', user);
     return this.http.post<any>(`${this.apiUrl}/register`, user).pipe(
-      catchError(error => {
-        console.error('Error en el registro:', error);
-        console.error('Error response:', error.error);
-        return throwError(() => new Error(error.error?.message || 'Ocurrió un error desconocido'));
-      })
+      catchError(this.handleError)
     );
   }
 
   private handleError(error: HttpErrorResponse) {
-    let errorMessage = 'An unknown error occurred!';
+    let errorMessage = 'Ha ocurrido un error inesperado. Por favor, inténtelo de nuevo más tarde.';
+
     if (error.error instanceof ErrorEvent) {
-      errorMessage = `Error: ${error.error.message}`;
+      // Error del lado del cliente
+      errorMessage = 'Hubo un problema con su conexión. Por favor, verifique su conexión a internet e inténtelo de nuevo.';
     } else {
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-      if (error.error) {
-        errorMessage += `\nDetails: ${JSON.stringify(error.error)}`;
+      // Error del lado del servidor
+      switch (error.status) {
+        case 400:
+          errorMessage = 'Los datos proporcionados no son válidos. Por favor, verifique la información e inténtelo de nuevo.';
+          break;
+        case 401:
+          errorMessage = 'No está autorizado para realizar esta acción. Por favor, inicie sesión nuevamente.';
+          this.router.navigate(['/login']);
+          break;
+        case 403:
+          errorMessage = 'No tiene permisos para acceder a este recurso.';
+          break;
+        case 404:
+          errorMessage = 'El recurso solicitado no se encontró. Por favor, verifique la URL e inténtelo de nuevo.';
+          break;
+        case 409:
+          errorMessage = 'Ya existe una cuenta con esta información. Por favor, intente con datos diferentes.';
+          break;
+        case 500:
+          errorMessage = 'Ha ocurrido un error en el servidor. Por favor, inténtelo más tarde o contacte al soporte técnico.';
+          break;
+      }
+
+      if (error.error && error.error.message) {
+        errorMessage = error.error.message;
       }
     }
-    console.error(errorMessage);
+
+    console.error('Error en la operación:', error);
     return throwError(() => new Error(errorMessage));
   }
 
