@@ -53,7 +53,9 @@ export class GraficaGeneralComponent implements OnInit, OnDestroy {
   temperaturaStatus: 'good' | 'bad' | 'unassigned' = 'unassigned';
   tdsStatus: 'good' | 'bad' | 'unassigned' = 'unassigned';
   phStatus: 'good' | 'bad' | 'unassigned' = 'unassigned';
-
+  nombreCiudad: string = '';
+  temperaturaActual: number = 0;
+  estadoMeteoro: string = '';
   private especies: Especie[] = [];
 
   // Nueva propiedad para los items de monitoreo
@@ -107,8 +109,19 @@ export class GraficaGeneralComponent implements OnInit, OnDestroy {
       }
     );
   }
-  
-  
+  cargarDatosClima(): void {
+    this.apiService.obtenerClima(this.userId).subscribe(
+      (response: any) => {
+        const climaData = response;
+        this.nombreCiudad = climaData.NombreCiudad;
+        this.temperaturaActual = climaData.TemperaturaActual;
+        this.estadoMeteoro = climaData.EstadoMeteoro;
+        this.calcularTendencias();
+      },
+      (error: any) => console.error('Error al cargar los datos del clima', error)
+    );
+  }
+  // Removed duplicate calcularTendencias function
   
   iniciarMonitoreoAutomatico() {
     this.monitoreoSubscription = this.ultimoDatoService.iniciarMonitoreo(this.userId).subscribe();

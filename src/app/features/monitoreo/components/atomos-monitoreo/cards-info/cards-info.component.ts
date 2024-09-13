@@ -16,7 +16,9 @@ export class CardsInfoComponent implements OnChanges {
   @Input() mortalidadPorLote: any[] = [];
   @Input() link: string = ''; // Nueva propiedad para el enlace
   @Input() disableLink: boolean = false; // Nueva propiedad para deshabilitar el enlace
-
+  @Input() nombreCiudad: string = ''; // Nueva propiedad para el nombre de la ciudad
+  @Input() temperaturaActual: number = 0; // Nueva propiedad para la temperatura actual
+  @Input() estadoMeteoro: string = ''; // Nueva propiedad para el estado meteorológico
 
   previousValue: number | string = '';
 

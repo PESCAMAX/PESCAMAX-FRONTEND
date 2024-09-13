@@ -72,9 +72,22 @@
               [trend]="mortalidadTrend"
               [trendValue]="mortalidadTrendValue"
               [status]="mortalidadStatus"
-              [isTimeCard]="false">
-
+              [isTimeCard]="false"
+              [disableLink]="true">
             </app-cards-info>
+          <app-cards-info
+          title="Clima"
+          [value]="temperaturaActual"
+          [trend]="temperaturaTrend"
+
+          [status]="temperaturaStatus"
+          [isTimeCard]="false"
+          [link]="'/grafica-clima/?lote='"
+          [disableLink]="true"
+          [nombreCiudad]="nombreCiudad"
+          [temperaturaActual]="temperaturaActual"
+          [estadoMeteoro]="estadoMeteoro">
+        </app-cards-info>
               <!-- ... other app-cards-info components ... -->
             </div>
           </div>

@@ -7,6 +7,15 @@
   <p class="text-sm text-gray-600 mt-2" *ngIf="trendValue">
     {{ isTimeCard ? 'Anterior:' : 'Cambio:' }} {{trendValue}}
   </p>
+  <p class="text-sm text-gray-600 mt-2" *ngIf="nombreCiudad">
+    Ciudad: {{nombreCiudad}}
+  </p>
+  <p class="text-sm text-gray-600 mt-2" *ngIf="temperaturaActual">
+    Temperatura: {{temperaturaActual}}°C
+  </p>
+  <p class="text-sm text-gray-600 mt-2" *ngIf="estadoMeteoro">
+    Estado: {{estadoMeteoro}}
+  </p>
   <a *ngIf="!isTimeCard && !disableLink" [href]="link" class="text-blue-600 hover:text-blue-800 text-sm mt-2 inline-block">Ver reporte →</a>
 </div>
 <!-- Mostrar la tasa de mortalidad por lote -->

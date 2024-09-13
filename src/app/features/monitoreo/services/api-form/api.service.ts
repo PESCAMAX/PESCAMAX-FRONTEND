@@ -54,6 +54,9 @@ export class ApiService {
     
     return throwError(() => new Error(errorMsg));
   }
+  obtenerClima(userId: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/clima/${userId}`);
+  }
   crearEspecie(userId: string, especieData: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/CrearEspecie/Crear/${userId}`, especieData, { headers: this.getHeaders() });
   }
