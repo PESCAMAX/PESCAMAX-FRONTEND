@@ -25,8 +25,8 @@ export class ClimaService {
   }
 
   
-  obtenerClimaPorUsuario(userId: string): Observable<any> {
-    return this.http.get<any>(`${this.backendUrl}/${userId}`);
+  obtenerUltimoClimaPorUsuario(userId: string): Observable<any> {
+    return this.http.get<any>(`${this.backendUrl}/ultimo/${userId}`);
   }
   cargarDatosClima(): void {
     console.log('Cargando datos del clima para el usuario:', this.userId);
