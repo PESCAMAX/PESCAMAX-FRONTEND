@@ -1,14 +1,12 @@
-<div *ngIf="climaData.length > 0">
-  <div *ngFor="let clima of climaData">
-    <app-tarjeta-clima [climaData]="clima"></app-tarjeta-clima>
-  </div>
-  <div class="pagination">
-    <button (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
-    <span>Page {{ currentPage }} of {{ totalPages }}</span>
-    <button (click)="onPageChange(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button>
+<div class="flex">
+  <app-menu-lateral (menuToggled)="onMenuToggle($event)"></app-menu-lateral>
+  
+  <div class="flex-1 p-4 transition-all duration-300" [ngClass]="{'ml-64': isMenuOpen, 'ml-16': !isMenuOpen}">
+    <div class="flex justify-center items-center min-h-screen">
+      <div class="card">
+        
+        <app-clima-formuluario (climaObtenido)="actualizarClima($event)"></app-clima-formuluario>
+      </div>
+    </div>
   </div>
 </div>
-<div *ngIf="climaData.length === 0">
-  <p>No climate data available.</p>
-</div>
-<app-chatbot></app-chatbot>

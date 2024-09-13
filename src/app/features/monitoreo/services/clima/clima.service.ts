@@ -8,8 +8,12 @@ import { Observable } from 'rxjs';
 export class ClimaService {
   private apiKey = '69b7977f88741ecf29f206de6b797ea1';
   private apiUrl = 'https://api.openweathermap.org/data/2.5/weather';
-  private backendUrl = 'http://localhost:6754/api/Clima/';
+  private backendUrl = 'http://localhost:6754/api/Clima';
+  private userId: string = 'defaultUserId'; // Add a default value or fetch it dynamically
+  private climaService: any; // Define the type or import the correct service
+  private climaData: any;
 
+  
   constructor(private http: HttpClient) {}
 
   obtenerClima(ciudad: string, pais: string): Observable<any> {
@@ -20,11 +24,18 @@ export class ClimaService {
     return this.http.post(this.backendUrl, clima);
   }
 
-  obtenerClimaPaginado(userId: string, page: number, pageSize: number): Observable<any> {
-    const params = new HttpParams()
-      .set('userId', userId)
-      .set('page', page.toString())
-      .set('pageSize', pageSize.toString());
-    return this.http.get<any>(`${this.backendUrl}`, { params });
+  
+  obtenerClimaPorUsuario(userId: string): Observable<any> {
+    return this.http.get<any>(`${this.backendUrl}/${userId}`);
+  }
+  cargarDatosClima(): void {
+    console.log('Cargando datos del clima para el usuario:', this.userId);
+    this.climaService.obtenerClimaPorUsuario(this.userId).subscribe(
+      (response: any) => {
+        console.log('Respuesta de la API:', response);
+        this.climaData = response;
+      },
+      (error: any) => console.error('Error al cargar los datos del clima', error)
+    );
   }
 }
