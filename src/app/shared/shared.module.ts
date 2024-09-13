@@ -59,6 +59,7 @@ import { FormularioMortalidadComponent } from '../features/monitoreo/components/
 import { ClimaFormuluarioComponent } from '../features/monitoreo/components/moleculas-monitoreo/clima-formuluario/clima-formuluario.component';
 import { TarjetaClimaComponent } from '../features/monitoreo/components/moleculas-monitoreo/tarjeta-clima/tarjeta-clima.component';
 import { CardsClimaComponent } from '../features/monitoreo/components/atomos-monitoreo/cards-clima/cards-clima.component';
+import {ButtonConfirmarComponent} from '../features/monitoreo/components/atomos-monitoreo/button-confirmar/button-confirmar.component';
 @NgModule({
   declarations: [
     ButtonEnviarComponent,
@@ -111,7 +112,8 @@ import { CardsClimaComponent } from '../features/monitoreo/components/atomos-mon
     FormularioMortalidadComponent,
     ClimaFormuluarioComponent,
     TarjetaClimaComponent,
-    CardsClimaComponent
+    CardsClimaComponent,
+    ButtonConfirmarComponent
   ],
   imports: [
     CommonModule,
@@ -164,7 +166,8 @@ import { CardsClimaComponent } from '../features/monitoreo/components/atomos-mon
     FormularioMortalidadComponent,
     ClimaFormuluarioComponent,
     TarjetaClimaComponent,
-    CardsClimaComponent
+    CardsClimaComponent,
+    ButtonConfirmarComponent
 
 
   ]

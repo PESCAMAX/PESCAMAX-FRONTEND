@@ -19,7 +19,7 @@ import { FormularioMortalidadComponent } from './components/moleculas-monitoreo/
 import { ClimaFormuluarioComponent } from './components/moleculas-monitoreo/clima-formuluario/clima-formuluario.component';
 import { CardsClimaComponent } from './components/atomos-monitoreo/cards-clima/cards-clima.component';
 import { TarjetaClimaComponent } from './components/moleculas-monitoreo/tarjeta-clima/tarjeta-clima.component';
-
+import { ButtonConfirmarComponent } from './components/atomos-monitoreo/button-confirmar/button-confirmar.component';
 
 
 
@@ -45,8 +45,8 @@ import { TarjetaClimaComponent } from './components/moleculas-monitoreo/tarjeta-
           FormularioMortalidadComponent,
           ClimaFormuluarioComponent,
           CardsClimaComponent,
-          TarjetaClimaComponent
-
+          TarjetaClimaComponent,
+          ButtonConfirmarComponent
           
 
 
