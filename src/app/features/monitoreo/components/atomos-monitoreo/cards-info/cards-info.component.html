@@ -1,21 +1,24 @@
 <div class="card {{cardColor}} rounded-lg p-4 shadow-md text-center bg-white shadow-md">
   <h3 class="text-lg font-semibold mb-2 text-gray-700">{{title}}</h3>
   <div class="flex justify-center items-center">
-    <p class="text-3xl font-bold text-gray-800">{{value}}</p>
+    <p class="text-3xl font-bold text-gray-800">
+      {{value}}
+      <span *ngIf="title === 'Clima' || title === 'Temperatura'">°C</span>
+      <span *ngIf="title === 'TDS'">ppm</span>
+    </p>
     <span [ngClass]="trendColor + ' ml-3 text-2xl font-bold'">{{trendIcon}}</span>
   </div>
   <p class="text-sm text-gray-600 mt-2" *ngIf="trendValue">
     {{ isTimeCard ? 'Anterior:' : 'Cambio:' }} {{trendValue}}
   </p>
-  <p class="text-sm text-gray-600 mt-2" *ngIf="nombreCiudad">
-    Ciudad: {{nombreCiudad}}
-  </p>
-  <p class="text-sm text-gray-600 mt-2" *ngIf="temperaturaActual">
-    Temperatura: {{temperaturaActual}}°C
-  </p>
-  <p class="text-sm text-gray-600 mt-2" *ngIf="estadoMeteoro">
-    Estado: {{estadoMeteoro}}
-  </p>
+  <ng-container *ngIf="title === 'Clima'">
+    <p class="text-sm text-gray-600 mt-2" *ngIf="climaData?.NombreCiudad">
+      Ciudad: {{climaData.NombreCiudad}}
+    </p>
+    <p class="text-sm text-gray-600 mt-2" *ngIf="climaData?.EstadoMeteoro">
+      Estado: {{climaData.EstadoMeteoro}}
+    </p>
+  </ng-container>
   <a *ngIf="!isTimeCard && !disableLink" [href]="link" class="text-blue-600 hover:text-blue-800 text-sm mt-2 inline-block">Ver reporte →</a>
 </div>
 <!-- Mostrar la tasa de mortalidad por lote -->
@@ -31,4 +34,3 @@
     </div>
   </div>
 </div>
-<!-- Llamar al componente de la tarjeta de alertas -->

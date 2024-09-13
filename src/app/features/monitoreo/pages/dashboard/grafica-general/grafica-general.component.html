@@ -60,12 +60,12 @@
               [disableLink]="false">
             </app-cards-info>         
             <app-cards-info
-              title="ÚLTIMO REGISTRO"
-              [value]="ultimoRegistroHora"
-              [trendValue]="penultimoRegistroHora"
-              [status]="'unassigned'"
-              [isTimeCard]="true">
-            </app-cards-info>
+            title="ÚLTIMO REGISTRO"
+            [value]="ultimoRegistroHora"
+            [trendValue]="penultimoRegistroHora"
+            [status]="'unassigned'"
+            [isTimeCard]="true">
+          </app-cards-info>
             <app-cards-info
               title="Mortalidad"
               [value]="mortalidadValue"
@@ -78,15 +78,9 @@
           <app-cards-info
           title="Clima"
           [value]="temperaturaActual"
-          [trend]="temperaturaTrend"
-
-          [status]="temperaturaStatus"
           [isTimeCard]="false"
           [link]="'/grafica-clima/?lote='"
-          [disableLink]="true"
-          [nombreCiudad]="nombreCiudad"
-          [temperaturaActual]="temperaturaActual"
-          [estadoMeteoro]="estadoMeteoro">
+          [disableLink]="true">
         </app-cards-info>
               <!-- ... other app-cards-info components ... -->
             </div>
