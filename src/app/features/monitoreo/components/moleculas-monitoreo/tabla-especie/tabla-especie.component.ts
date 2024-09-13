@@ -68,6 +68,10 @@ export class TablaEspecieComponent implements OnInit {
   ngOnInit(): void {
     this.obtenerEspecies();
   }
+  handleConfirm(): void {
+    // Lógica para manejar la confirmación
+    console.log('Confirmación manejada');
+  }
 
   cerrarModal(): void {
     this.especieSeleccionada = null;

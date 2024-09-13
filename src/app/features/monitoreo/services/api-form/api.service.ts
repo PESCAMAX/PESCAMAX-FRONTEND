@@ -32,26 +32,39 @@ export class ApiService {
     return this.authService.getUserId();
   }
   private handleError(error: HttpErrorResponse): Observable<never> {
-    console.error('Error occurred:', error);
-    let errorMsg = 'An unknown error occurred!';
-    
+    let errorMsg = 'Ha ocurrido un error inesperado. Por favor, inténtelo de nuevo más tarde.';
+
     if (error.error instanceof ErrorEvent) {
       // Error del lado del cliente
-      errorMsg = `Client-side error: ${error.error.message}`;
+      errorMsg = 'Hubo un problema con su conexión. Por favor, verifique su conexión a internet e inténtelo de nuevo.';
     } else if (error.error && typeof error.error === 'object' && 'mensaje' in error.error) {
       // Error del lado del servidor con mensaje específico
-      errorMsg = `Server-side error: ${error.status} - ${error.error.mensaje}`;
+      errorMsg = `${error.error.mensaje}`;
     } else if (error.status) {
-      // Error del lado del servidor con código de estado
-      if (error.status === 401) {
-        // Manejo específico para errores 401
-        errorMsg = 'Unauthorized: Please check your credentials or login again.';
-        // Aquí puedes agregar lógica adicional, como redirigir al usuario al login
-      } else {
-        errorMsg = `Server-side error: ${error.status} - ${error.statusText}`;
+      // Errores del lado del servidor con códigos de estado específicos
+      switch (error.status) {
+        case 400:
+          errorMsg = 'La solicitud no es válida. Por favor, verifique los datos ingresados.';
+          break;
+        case 401:
+          errorMsg = 'Su sesión ha expirado. Por favor, inicie sesión nuevamente.';
+          // Aquí puedes agregar lógica para redirigir al usuario al login
+          break;
+        case 403:
+          errorMsg = 'No tiene permiso para realizar esta acción.';
+          break;
+        case 404:
+          errorMsg = 'El recurso solicitado no se encontró. Por favor, verifique la información e inténtelo de nuevo.';
+          break;
+        case 500:
+          errorMsg = 'Ha ocurrido un error en el servidor. Por favor, inténtelo más tarde o contacte al soporte técnico.';
+          break;
+        default:
+          errorMsg = `Error del servidor: ${error.status} - Por favor, inténtelo más tarde.`;
       }
     }
-    
+
+    console.error('Error occurred:', error);
     return throwError(() => new Error(errorMsg));
   }
   obtenerClima(userId: string): Observable<any> {
