@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 * {
     padding: 0;
@@ -517,3 +516,30 @@ p {
         padding: 0 40px;
     }
 }
+
+.overlay-panel-mobile {
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro para mejor contraste */
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .overlay-panel-mobile h1 {
+    color: #ffffff; /* Texto blanco */
+  }
+  
+  .overlay-panel-mobile p {
+    color: #ffffff; /* Texto blanco */
+  }
+  
+  .overlay-panel-mobile button {
+    background-color: #1e40af; /* Azul oscuro */
+    color: #ffffff; /* Texto blanco */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .overlay-panel-mobile button:hover {
+    background-color: #1e3a8a; /* Azul más oscuro al pasar el cursor */
+  }

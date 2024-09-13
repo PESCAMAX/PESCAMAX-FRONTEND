@@ -35,7 +35,9 @@
                 [trend]="temperaturaTrend"
                 [trendValue]="temperaturaTrendValue"
                 [status]="temperaturaStatus"
-                [isTimeCard]="false">
+                [isTimeCard]="false"
+                [link]="'Temperatura/:userId?lote=' + lote"
+                [disableLink]="false">
               </app-cards-info>
               <app-cards-info
               title="TDS"
@@ -43,7 +45,9 @@
               [trend]="tdsTrend"
               [trendValue]="tdsTrendValue"
               [status]="tdsStatus"
-              [isTimeCard]="false">
+              [isTimeCard]="false"
+              [link]="'/grafica-tds/?lote=' + lote"
+              [disableLink]="false">
             </app-cards-info>
             <app-cards-info
               title="pH"
@@ -51,7 +55,9 @@
               [trend]="phTrend"
               [trendValue]="phTrendValue"
               [status]="phStatus"
-              [isTimeCard]="false">
+              [isTimeCard]="false"
+              [link]="'/grafica-ph/?lote=' + lote"
+              [disableLink]="false">
             </app-cards-info>         
             <app-cards-info
               title="ÚLTIMO REGISTRO"
@@ -67,6 +73,7 @@
               [trendValue]="mortalidadTrendValue"
               [status]="mortalidadStatus"
               [isTimeCard]="false">
+
             </app-cards-info>
               <!-- ... other app-cards-info components ... -->
             </div>

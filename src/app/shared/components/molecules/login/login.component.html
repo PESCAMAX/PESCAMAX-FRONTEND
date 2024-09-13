@@ -57,9 +57,9 @@
   <!-- Panel de superposición móvil -->
   <div class="overlay-container-mobile">
     <div class="overlay-panel-mobile">
-      <h1>Bienvenido a <span class="text-lg font-semibold text-white-500">PESCA<span class="text-black text-lg font-semibold">MAX</span></span></h1>
-      <p>{{ isLoginVisible ? 'Ingresa tus datos personales y comienza tu viaje con nosotros' : 'Para mantenerte conectado con nosotros, por favor inicia sesión con tu información personal' }}</p>
-      <button (click)="toggleForm()">{{ isLoginVisible ? 'Registrarse' : 'Iniciar Sesión' }}</button>
+      <h1>Bienvenido a <span class="text-lg font-semibold text-white">PESCA<span class="text-black text-lg font-semibold">MAX</span></span></h1>
+      <p class="text-white">{{ isLoginVisible ? 'Ingresa tus datos personales y comienza tu viaje con nosotros' : 'Para mantenerte conectado con nosotros, por favor inicia sesión con tu información personal' }}</p>
+      <button (click)="toggleForm()" class="bg-blue-500 text-white hover:bg-blue-700">{{ isLoginVisible ? 'Registrarse' : 'Iniciar Sesión' }}</button>
     </div>
   </div>
 </div>

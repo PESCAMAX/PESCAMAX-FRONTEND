@@ -4,14 +4,19 @@
     <main class="flex-1 overflow-x-hidden overflow-y-auto transition-all duration-300"
           [ngClass]="{'ml-': isMenuOpen, 'ml-0': !isMenuOpen}">
       <div class="container mx-auto px-4 py-8">
-        <div class="mm"></div>
         <h1 class="content-title p-4 text-2xl font-bold custom-font custom-color">Gráfica de temperatura</h1>
         <div class="graph-and-card-container">
           <div class="graph-container">
             <app-temperatura></app-temperatura>
           </div>
           <div class="cards">
-            <app-cards-info title="Temperatura" [value]="temperaturaValue" [trend]="temperaturaTrend" [trendValue]="temperaturaTrendValue"></app-cards-info>
+            <app-cards-info
+              title="Temperatura"
+              [value]="temperaturaValue"
+              [trend]="temperaturaTrend"
+              [trendValue]="temperaturaTrendValue"
+              [disableLink]="true">
+            </app-cards-info>
           </div>
         </div>
       </div>

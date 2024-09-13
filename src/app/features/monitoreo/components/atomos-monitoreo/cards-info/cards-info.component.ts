@@ -14,6 +14,9 @@ export class CardsInfoComponent implements OnChanges {
   @Input() isTimeCard: boolean = false;
   @Input() selectedLot: string = '';
   @Input() mortalidadPorLote: any[] = [];
+  @Input() link: string = ''; // Nueva propiedad para el enlace
+  @Input() disableLink: boolean = false; // Nueva propiedad para deshabilitar el enlace
+
 
   previousValue: number | string = '';
 

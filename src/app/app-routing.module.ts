@@ -83,10 +83,6 @@ canActivate: [AuthGuard]
    component: SeleccionarEspecieComponent, 
    canActivate: [AuthGuard] },
 
-  { path: 'temperatura/:userId', component: GraficaTemperaturaComponent, canActivate: [AuthGuard] },
-   
-   
-  
   {
     path: 'home/:userId',
     component: GraficaGeneralComponent
@@ -99,6 +95,10 @@ canActivate: [AuthGuard]
     canActivate: [AuthGuard]
 
   },
+  
+  { path: 'Temperatura/:userId',
+    component: GraficaTemperaturaComponent,
+     canActivate: [AuthGuard] },
 
   {
     path: 'grafica-ph/:userId',

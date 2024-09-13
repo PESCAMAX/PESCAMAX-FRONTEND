@@ -11,7 +11,13 @@
             <app-graficastdss></app-graficastdss>
           </div>
           <div class="cards">
-            <app-cards-info title="TDS" [value]="tdsValue" [trend]="tdsTrend" [trendValue]="tdsTrendValue"></app-cards-info>
+            <app-cards-info 
+            title="TDS" 
+            [value]="tdsValue" 
+            [trend]="tdsTrend" 
+            [trendValue]="tdsTrendValue"
+            [disableLink]="true">
+          </app-cards-info>
           </div>
         </div>
       </div>

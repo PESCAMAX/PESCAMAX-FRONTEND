@@ -11,7 +11,13 @@
             <app-graph-ph></app-graph-ph>
           </div>
           <div class="cards">
-            <app-cards-info title="pH" [value]="phValue" [trend]="phTrend" [trendValue]="tdsTrendValue"></app-cards-info>
+            <app-cards-info 
+            title="pH" 
+            [value]="phValue" 
+            [trend]="phTrend" 
+            [trendValue]="tdsTrendValue"
+            [disableLink]="true">
+          </app-cards-info>
           </div>
         </div>
       </div>

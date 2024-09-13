@@ -13,7 +13,6 @@ export class GraficaTemperaturaComponent implements OnInit, OnDestroy {
   isMenuOpen: boolean = true;
   private monitoreoSubscription: Subscription | undefined;
   private userId: string;
-
   temperaturaValue: number = 0;
   temperaturaTrend: 'up' | 'down' | 'none' = 'none';
   temperaturaTrendValue: string = '';
@@ -60,10 +59,8 @@ export class GraficaTemperaturaComponent implements OnInit, OnDestroy {
       this.resetearTendencias();
       return;
     }
-
     const ultimo = monitoreoData[monitoreoData.length - 1];
     const penultimo = monitoreoData[monitoreoData.length - 2];
-
     this.actualizarTendencia(ultimo.Temperatura, penultimo.Temperatura);
     this.temperaturaValue = ultimo.Temperatura;
   }
