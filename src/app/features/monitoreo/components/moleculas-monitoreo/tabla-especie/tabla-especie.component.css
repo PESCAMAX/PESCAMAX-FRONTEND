@@ -1,25 +1,37 @@
-/* General styles */
-.sidebar {
-  background-color: #f8f9fa;
-  padding: 15px;
-  width: 250px;
-  min-height: 100vh;
+/* Estilos para el contenedor del modal */
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
-.menu-item {
-  margin: 20px 0;
-  display: flex;
+/* Estilos para el contenido del modal */
+.modal-content {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
 
-  gap: 1rem;
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: bold;
   margin-bottom: 1rem;
 }
 
+/* Estilos para los campos del formulario */
 .form-field {
-  flex: 1;
-}
-
-.full-width {
-  width: 100%;
   margin-bottom: 1rem;
 }
 
@@ -32,51 +44,37 @@
 .form-input {
   width: 100%;
   padding: 0.5rem;
-  border: 1px solid #c2c8d0;
-  border-radius: 4px;
-
-  align-items: center;
-
+  border: 1px solid #e2e8f0;
+  border-radius: 0.25rem;
 }
 
-.menu-item i {
-  margin-right: 10px;
+/* Estilos para las filas del formulario */
+.form-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
 }
 
-.parameters {
-  margin-top: 30px;
+.form-row .form-field {
+  flex: 1;
 }
 
-.parameter-item {
-  background-color: #ffffff;
-  padding: 10px;
-  margin-bottom: 10px;
-  text-align: center;
-  font-weight: bold;
+/* Estilos para los botones de acción */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
 /* Responsive styles */
-/* Small screens */
-@media (max-width: 639px) {
-  .parameters {
-    display: none;
+@media (max-width: 640px) {
+  .modal-content {
+    width: 95%;
+    padding: 1rem;
+  }
+  
+  .form-row {
+    flex-direction: column;
   }
 }
-
-/* Medium screens */
-@media (min-width: 640px) and (max-width: 1024px) {
-  .parameters {
-    display: block;
-  }
-  .parameter-item {
-    padding: 5px;
-  }
-}
-
-/* Large screens */
-@media (min-width: 1024px) {
-  .parameters {
-    display: block;
-  }
-}
-
