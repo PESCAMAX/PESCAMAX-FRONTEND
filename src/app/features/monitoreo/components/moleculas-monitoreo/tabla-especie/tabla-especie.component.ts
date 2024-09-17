@@ -145,7 +145,7 @@ export class TablaEspecieComponent implements OnInit {
 
     setTimeout(() => {
       this.cerrarAlerta();
-    }, 3000);
+    }, 500);
   }
 
   cerrarAlerta(): void {

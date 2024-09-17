@@ -11,48 +11,48 @@
     />
   </div>
 
- <!-- Tabla de especies con scroll (visible en pantallas medianas y grandes) -->
-<div class="overflow-x-auto max-h-[80vh] hidden sm:block custom-scrollbar">
-  <table class="w-full border-collapse bg-gray-500 table-auto">
-    <thead class="bg-white sticky top-0">
-      <tr>
-        <th class="p-2 text-left font-bold border border-grey-500 text-sm">ID</th>
-        <th class="p-2 text-left font-bold border border-grey-500 text-sm">Nombre</th>
-        <th class="p-2 text-left font-bold border border-grey-500 text-sm">TDS Mínimo</th>
-        <th class="p-2 text-left font-bold border border-grey-500 text-sm">TDS Máximo</th>
-        <th class="p-2 text-left font-bold border border-grey-500 text-sm">Temp. Mínima</th>
-        <th class="p-2 text-left font-bold border border-grey-500 text-sm">Temp. Máxima</th>
-        <th class="p-2 text-left font-bold border border-grey-500 text-sm">PH Mínimo</th>
-        <th class="p-2 text-left font-bold border border-grey-500 text-sm">PH Máximo</th>
-        <th class="p-2 text-left font-bold border border-grey-500 text-sm">Cantidad</th>
-        <th class="p-2 text-left font-bold border border-grey-500 text-sm">Eliminar</th>
-        <th class="p-2 text-left font-bold border border-grey-500 text-sm">Editar</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="bg-gray-100 border border-grey-500" *ngFor="let especie of especiesFiltradas">
-        <td class="p-2 border bg-white text-left">{{ especie.Id }}</td>
-        <td class="p-2 border bg-white text-left">{{ especie.NombreEspecie }}</td>
-        <td class="p-2 border bg-white text-left">{{ especie.TdsMinimo }}</td>
-        <td class="p-2 border bg-white text-left">{{ especie.TdsMaximo }}</td>
-        <td class="p-2 border bg-white text-left">{{ especie.TemperaturaMinimo }}</td>
-        <td class="p-2 border bg-white text-left">{{ especie.TemperaturaMaximo }}</td>
-        <td class="p-2 border bg-white text-left">{{ especie.PhMinimo }}</td>
-        <td class="p-2 border bg-white text-left">{{ especie.PhMaximo }}</td>
-        <td class="p-2 border bg-white text-left">{{ especie.Cantidad }}</td>
-        <td class="p-2 border bg-white text-left">
-          <app-button-eliminar [id]="especie.Id" (eliminar)="eliminarEspecie($event)"></app-button-eliminar>
-        </td>
-        <td class="p-2 border bg-white text-left">
-          <button (click)="editarEspecie(especie)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded text-xs flex items-center">
-            <img src="./assets/icons/editar.png" alt="Editar Icono" class="w-4 h-4 mr-1">
-            Editar
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+  <!-- Tabla de especies con scroll (visible en pantallas medianas y grandes) -->
+  <div class="overflow-x-auto max-h-[80vh] hidden sm:block custom-scrollbar">
+    <table class="w-full border-collapse bg-gray-500 table-auto">
+      <thead class="bg-white sticky top-0">
+        <tr>
+          <th class="p-2 text-left font-bold border border-grey-500 text-sm">ID</th>
+          <th class="p-2 text-left font-bold border border-grey-500 text-sm">Nombre</th>
+          <th class="p-2 text-left font-bold border border-grey-500 text-sm">TDS Mínimo</th>
+          <th class="p-2 text-left font-bold border border-grey-500 text-sm">TDS Máximo</th>
+          <th class="p-2 text-left font-bold border border-grey-500 text-sm">Temp. Mínima</th>
+          <th class="p-2 text-left font-bold border border-grey-500 text-sm">Temp. Máxima</th>
+          <th class="p-2 text-left font-bold border border-grey-500 text-sm">PH Mínimo</th>
+          <th class="p-2 text-left font-bold border border-grey-500 text-sm">PH Máximo</th>
+          <th class="p-2 text-left font-bold border border-grey-500 text-sm">Cantidad</th>
+          <th class="p-2 text-left font-bold border border-grey-500 text-sm">Eliminar</th>
+          <th class="p-2 text-left font-bold border border-grey-500 text-sm">Editar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="bg-gray-100 border border-grey-500" *ngFor="let especie of especiesFiltradas">
+          <td class="p-2 border bg-white text-left">{{ especie.Id }}</td>
+          <td class="p-2 border bg-white text-left">{{ especie.NombreEspecie }}</td>
+          <td class="p-2 border bg-white text-left">{{ especie.TdsMinimo }}</td>
+          <td class="p-2 border bg-white text-left">{{ especie.TdsMaximo }}</td>
+          <td class="p-2 border bg-white text-left">{{ especie.TemperaturaMinimo }}</td>
+          <td class="p-2 border bg-white text-left">{{ especie.TemperaturaMaximo }}</td>
+          <td class="p-2 border bg-white text-left">{{ especie.PhMinimo }}</td>
+          <td class="p-2 border bg-white text-left">{{ especie.PhMaximo }}</td>
+          <td class="p-2 border bg-white text-left">{{ especie.Cantidad }}</td>
+          <td class="p-2 border bg-white text-left">
+            <app-button-eliminar [id]="especie.Id" (eliminar)="eliminarEspecie($event)"></app-button-eliminar>
+          </td>
+          <td class="p-2 border bg-white text-left">
+            <button (click)="editarEspecie(especie)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded text-xs flex items-center">
+              <img src="./assets/icons/editar.png" alt="Editar Icono" class="w-4 h-4 mr-1">
+              Editar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
   <!-- Vista móvil (visible solo en pantallas pequeñas) -->
   <div class="sm:hidden max-h-[80vh] overflow-y-auto">
@@ -64,7 +64,8 @@
       <p><strong>PH:</strong> {{ especie.PhMinimo }} - {{ especie.PhMaximo }}</p>
       <p><strong>Cantidad:</strong> {{ especie.Cantidad }}</p>
       <div class="mt-4 flex justify-between">
-        <app-button-eliminar (eliminar)="eliminarEspecie(especie.Id)"></app-button-eliminar>        <button (click)="editarEspecie(especie)" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded text-xs flex items-center">
+        <app-button-eliminar (eliminar)="eliminarEspecie(especie.Id)"></app-button-eliminar>
+        <button (click)="editarEspecie(especie)" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded text-xs flex items-center">
           <img src="./assets/icons/editar.png" alt="Editar Icono" class="w-4 h-4 mr-1">
           Editar
         </button>
@@ -73,79 +74,76 @@
   </div>
 
   <!-- Modal para editar especie -->
-  <div *ngIf="especieSeleccionada" class="modal-container">
-    <div class="modal-content">
-      <h3 class="modal-title">Editar especie</h3>
-      <form [formGroup]="especieForm" (ngSubmit)="onSubmit()" id="editarEspecieForm">
-        <div class="form-field full-width">
+  <div *ngIf="especieSeleccionada" class="modal-container fixed inset-0 z-10 flex items-center justify-center">
+    <div class="modal-content bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
+      <h3 class="modal-title px-4 pt-5 pb-4 text-lg font-medium text-gray-900">Editar especie</h3>
+      <form [formGroup]="especieForm" (ngSubmit)="onSubmit()" id="editarEspecieForm" class="px-4 sm:px-6">
+        <div class="form-field full-width mb-4">
           <label for="nombreEspecie" class="form-label">Nombre</label>
-          <input type="text" id="nombreEspecie" formControlName="NombreEspecie" class="form-input" />
+          <input type="text" id="nombreEspecie" formControlName="NombreEspecie" class="form-input w-full" />
         </div>
-        
-        <div class="form-row">
+
+        <div class="form-row mb-4 grid grid-cols-2 gap-4">
           <div class="form-field">
             <label for="tdsMinimo" class="form-label">TDS Mínimo</label>
-            <input type="number" id="tdsMinimo" formControlName="TdsMinimo" class="form-input" />
+            <input type="number" id="tdsMinimo" formControlName="TdsMinimo" class="form-input w-full" />
           </div>
           <div class="form-field">
             <label for="tdsMaximo" class="form-label">TDS Máximo</label>
-            <input type="number" id="tdsMaximo" formControlName="TdsMaximo" class="form-input" />
-          </div>
-        </div>
-  
-        <div class="form-row">
-          <div class="form-field">
-            <label for="temperaturaMinimo" class="form-label">Temperatura Mínima</label>
-            <input type="number" id="TemperaturaMinimo" formControlName="TemperaturaMinimo" class="form-input" />
-          </div>
-          <div class="form-field">
-            <label for="temperaturaMaximo" class="form-label">Temperatura Máxima</label>
-            <input type="number" id="TemperaturaMaximo" formControlName="TemperaturaMaximo" class="form-input" />
-          </div>
-        </div>
-  
-        <div class="form-row">
-          <div class="form-field">
-            <label for="PhMinimo" class="form-label">PH Mínimo</label>
-            <input type="number" id="PhMinimo" formControlName="PhMinimo" class="form-input" />
-          </div>
-          <div class="form-field">
-            <label for="PhMaximo" class="form-label">PH Máximo</label>
-            <input type="number" id="PhMaximo" formControlName="PhMaximo" class="form-input" />
+            <input type="number" id="tdsMaximo" formControlName="TdsMaximo" class="form-input w-full" />
           </div>
         </div>
 
-        <div class="form-field full-width">
-          <label for="cantidad" class="form-label">Cantidad</label>
-          <input type="number" id="cantidad" formControlName="Cantidad" class="form-input" />
+        <div class="form-row mb-4 grid grid-cols-2 gap-4">
+          <div class="form-field">
+            <label for="temperaturaMinimo" class="form-label">Temperatura Mínima</label>
+            <input type="number" id="temperaturaMinimo" formControlName="TemperaturaMinimo" class="form-input w-full" />
+          </div>
+          <div class="form-field">
+            <label for="temperaturaMaximo" class="form-label">Temperatura Máxima</label>
+            <input type="number" id="temperaturaMaximo" formControlName="TemperaturaMaximo" class="form-input w-full" />
+          </div>
         </div>
-  
-        <div class="form-actions">
+
+        <div class="form-row mb-4 grid grid-cols-2 gap-4">
+          <div class="form-field">
+            <label for="PhMinimo" class="form-label">PH Mínimo</label>
+            <input type="number" id="PhMinimo" formControlName="PhMinimo" class="form-input w-full" />
+          </div>
+          <div class="form-field">
+            <label for="PhMaximo" class="form-label">PH Máximo</label>
+            <input type="number" id="PhMaximo" formControlName="PhMaximo" class="form-input w-full" />
+          </div>
+        </div>
+
+        <div class="form-field full-width mb-4">
+          <label for="cantidad" class="form-label">Cantidad</label>
+          <input type="number" id="cantidad" formControlName="Cantidad" class="form-input w-full" />
+        </div>
+
+        <div class="form-actions flex justify-end space-x-2">
           <app-button-guardar
-          type="submit"
-          [texto]="'Guardar'"
-          [color]="'blue'"
-          (click)="onSubmit()"
-        >
-        </app-button-guardar>
-        <app-button-cancelar
-          [texto]="'Cancelar'"
-          [estilo]="'azul'"
-          (cancelar)="cerrarModal()"
-         >
-         </app-button-cancelar>
+            type="submit"
+            [texto]="'Guardar'"
+            [color]="'blue'"
+            (click)="onSubmit()"
+          ></app-button-guardar>
+          <app-button-cancelar
+            [texto]="'Cancelar'"
+            [estilo]="'azul'"
+            (cancelar)="cerrarModal()"
+          ></app-button-cancelar>
         </div>
       </form>
     </div>
   </div>
+
   <!-- Modal de alerta -->
-<div *ngIf="alertState.show" class="fixed z-10 inset-0 overflow-y-auto flex items-center justify-center">
-  <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-    <div class="fixed inset-0 transition-opacity" aria-hidden="true">
-      <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
-    </div>
-    <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-    <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+  <div *ngIf="alertState.show" class="fixed inset-0 z-10 flex items-center justify-center">
+    <div class="fixed inset-0 bg-gray-500 opacity-75"></div>
+    
+    <!-- Contenido de la alerta -->
+    <div class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
       <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
         <div class="sm:flex sm:items-start">
           <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full sm:mx-0 sm:h-10 sm:w-10" [ngClass]="{'bg-green-100': alertState.iconColor === 'green', 'bg-red-100': alertState.iconColor === 'red'}">
@@ -167,15 +165,13 @@
           [texto]="'Confirmar'"
           [customClass]="'mt-3 sm:text-sm'"
           (confirmar)="alertConfirmAction()"
-        >
-        </app-button-confirmar>
+        ></app-button-confirmar>
         <app-button-cancelar
           [texto]="'Cancelar'"
           [estilo]="'blanco'"
           [customClass]="'mt-3 sm:text-sm'"
           (cancelar)="handleAlertCancel()"
-        >
-        </app-button-cancelar>
+        ></app-button-cancelar>
       </div>
     </div>
   </div>
