@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class ClimaService {
   private apiKey = '69b7977f88741ecf29f206de6b797ea1';
   private apiUrl = 'https://api.openweathermap.org/data/2.5/weather';
-  private backendUrl = 'http://localhost:6754/api/Clima';
+  private backendUrl = 'https://pescamaxbueno2-a4dafmg2czhtgyg8.centralus-01.azurewebsites.net/api/Clima';
   private userId: string = 'defaultUserId'; // Add a default value or fetch it dynamically
   private climaService: any; // Define the type or import the correct service
   private climaData: any;
