@@ -4,6 +4,7 @@ import { ApiService } from '../../../services/api-form/api.service';
 import { AlertService } from '../../../services/api-alert/alert.service';
 import { AuthService } from '../../../../../core/services/api-login/auth.service';
 import { Subscription, timer } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-config-user',
@@ -27,7 +28,8 @@ export class ConfigUserComponent implements OnInit, OnDestroy {
     this.userForm = this.fb.group({
       phoneNumber: [''],
       address: [''],
-      farmName: ['']
+      farmName: [''],
+      city: ['']
     });
   }
 
@@ -37,11 +39,8 @@ export class ConfigUserComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.alertSubscription) {
-      this.alertSubscription.unsubscribe();
-    }
+    this.dismissAlert();
   }
-  
 
   @HostListener('document:click')
   @HostListener('document:input')
@@ -50,81 +49,78 @@ export class ConfigUserComponent implements OnInit, OnDestroy {
   }
 
   loadUserData(): void {
-    this.apiService.getCurrentUser().subscribe(
-      (data: any) => {
+    this.apiService.getCurrentUser().pipe(take(1)).subscribe({
+      next: (data: any) => {
         this.originalUserData = {
           phoneNumber: data.phoneNumber || '',
           address: data.address || '',
-          farmName: data.farmName || ''
+          farmName: data.farmName || '',
+          city: data.city || ''
         };
         this.userForm.patchValue(this.originalUserData);
       },
-      (error) => {
+      error: (error) => {
         console.error('Error loading user data', error);
         this.showError('No se pudo cargar la información del usuario');
       }
-    );
+    });
   }
 
   updateUserData(): void {
-    const changedData: any = {};
-    let hasChanges = false;
+    const changedData = this.getChangedData();
 
-    Object.keys(this.userForm.controls).forEach(key => {
-      const currentValue = this.userForm.get(key)?.value;
-      if (currentValue !== this.originalUserData[key] && currentValue !== '') {
-        changedData[key] = currentValue;
-        hasChanges = true;
-      }
-    });
-
-    // Limpiar el formulario inmediatamente después de presionar el botón
-    this.clearForm();
-
-    if (hasChanges) {
-      this.apiService.updateUser(changedData).subscribe(
-        (response) => {
+    if (Object.keys(changedData).length > 0) {
+      this.apiService.updateUser(changedData).pipe(take(1)).subscribe({
+        next: (response) => {
           console.log('User data updated successfully', response);
           this.showSuccess('Datos actualizados correctamente');
           this.loadUserData(); // Recargar los datos actualizados
         },
-        (error) => {
+        error: (error) => {
           console.error('Error updating user data', error);
           this.showError('No se pudieron actualizar los datos');
         }
-      );
+      });
     } else {
       this.showSuccess('No se realizaron cambios');
     }
+    
+    // Limpiar el formulario después de intentar actualizar
+    this.clearForm();
+  }
+
+  private getChangedData(): any {
+    return Object.keys(this.userForm.controls).reduce((acc, key) => {
+      const currentValue = this.userForm.get(key)?.value;
+      if (currentValue !== this.originalUserData[key] && currentValue !== '') {
+        acc[key] = currentValue;
+      }
+      return acc;
+    }, {} as any);
   }
 
   clearForm(): void {
     this.userForm.reset({
       phoneNumber: '',
       address: '',
-      farmName: ''
+      farmName: '',
+      city: ''
     });
   }
 
   showSuccess(message: string): void {
     this.successMessage = message;
-    setTimeout(() => {
-      this.successMessage = '';
-    }, 3000);
+    this.setAlertTimeout();
   }
 
   showError(message: string): void {
     this.errorMessage = message;
-    setTimeout(() => {
-      this.errorMessage = '';
-    }, 3000);
+    this.setAlertTimeout();
   }
 
   setAlertTimeout(): void {
-    if (this.alertSubscription) {
-      this.alertSubscription.unsubscribe();
-    }
-    this.alertSubscription = timer(3000).subscribe(() => {
+    this.dismissAlert();
+    this.alertSubscription = timer(3000).pipe(take(1)).subscribe(() => {
       this.dismissAlert();
     });
   }
@@ -135,6 +131,7 @@ export class ConfigUserComponent implements OnInit, OnDestroy {
     this.alertService.clearAlert();
     if (this.alertSubscription) {
       this.alertSubscription.unsubscribe();
+      this.alertSubscription = null;
     }
   }
 }

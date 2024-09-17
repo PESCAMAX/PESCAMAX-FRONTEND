@@ -26,6 +26,7 @@ export class EspecieFormComponent implements OnInit {
       temperaturaMaximo: ['', [Validators.required, this.numberValidator]],
       phMinimo: ['', [Validators.required, this.numberValidator, Validators.min(0)]],
       phMaximo: ['', [Validators.required, this.numberValidator, Validators.min(0)]],
+      cantidad: ['', [Validators.required, this.numberValidator]],
     }, { validators: [this.minMaxValidator] });
   }
 
@@ -42,7 +43,7 @@ export class EspecieFormComponent implements OnInit {
       this.apiService.crearEspecie(username, this.especieForm.value).subscribe({
         next: (response) => {
           this.showSuccess('Especie guardada exitosamente');
-          this.especieForm.reset();
+          this.resetForm();
         },
         error: (error) => {
           this.showError(error.message || 'Error al guardar la especie');
@@ -52,6 +53,18 @@ export class EspecieFormComponent implements OnInit {
       this.showError('Revise los datos del formulario. Algunos campos tienen errores.');
       this.validateAllFormFields(this.especieForm);
     }
+  }
+
+  resetForm(): void {
+    // Reiniciar todos los campos del formulario
+    this.especieForm.reset();
+    
+    // Marcar todos los campos como no tocados y no sucios
+    Object.keys(this.especieForm.controls).forEach(key => {
+      const control = this.especieForm.get(key);
+      control?.markAsUntouched();
+      control?.markAsPristine();
+    });
   }
 
   showSuccess(message: string): void {
