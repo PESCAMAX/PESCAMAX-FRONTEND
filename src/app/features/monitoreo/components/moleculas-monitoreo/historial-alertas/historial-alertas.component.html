@@ -14,8 +14,8 @@
         <td>{{ alerta.EspecieID }}</td>
         <td>{{ alerta.Nombre }}</td>
         <td>{{ alerta.LoteID }}</td>
-        <td>{{ alerta.Descripcion }}</td>
-        <td>{{ alerta.FechaCreacion | date:'medium' }}</td>
+        <td >{{ alerta.Descripcion }}</td>
+        <td class="descripcion-roja">{{ alerta.FechaCreacion | date:'medium' }}</td>
       </tr>
     </tbody>
   </table>

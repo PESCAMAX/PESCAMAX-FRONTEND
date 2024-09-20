@@ -35,12 +35,8 @@
               Ciudad:
           </label>
           <select class="w-full px-3 py-2 bg-gray-100 text-gray-700 focus:outline-none focus:ring-2" id="city" formControlName="city">
-              <option value="">Seleccione una ciudad</option>
-              <option value="bogota">Bogotá</option>
-              <option value="medellin">Medellín</option>
-              <option value="cali">Cali</option>
-              <option value="barranquilla">Barranquilla</option>
-              <option value="cartagena">Cartagena</option>
+            <option *ngFor="let city of colombianCities" [value]="city">{{ city }}</option>
+
           </select>
         </div>
         <div class="flex items-center justify-center">

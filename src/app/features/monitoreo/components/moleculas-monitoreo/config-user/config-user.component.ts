@@ -124,7 +124,13 @@ export class ConfigUserComponent implements OnInit, OnDestroy {
       this.dismissAlert();
     });
   }
-
+  colombianCities: string[] = [
+    'Arauca', 'Armenia', 'Barranquilla', 'Bogotá', 'Bucaramanga', 'Cali', 'Cartagena', 
+    'Cúcuta', 'Florencia', 'Ibagué', 'Leticia', 'Manizales', 'Medellín', 'Mitú', 'Mocoa', 
+    'Montería', 'Neiva', 'Pasto', 'Pereira', 'Popayán', 'Puerto Carreño', 'Puerto Inírida', 
+    'Quibdó', 'Riohacha', 'San Andrés', 'San José del Guaviare', 'Santa Marta', 'Sincelejo', 
+    'Tunja', 'Valledupar', 'Villavicencio', 'Yopal'
+  ];
   dismissAlert(): void {
     this.successMessage = '';
     this.errorMessage = '';
